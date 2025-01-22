@@ -1,0 +1,276 @@
+:root {
+    --body-font-family: "Operator Mono", consolas, menlo, monaco, "Courier New",
+    monospace;
+    --heading-font-family: "Operator Mono", consolas, menlo, monaco, "Courier New",
+    monospace;
+    --font-size-xs: clamp(0.6rem, 0.17vw + 0.76rem, 0.7rem);
+    --font-size-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
+    --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
+    --font-size-md: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
+    --font-size-lg: clamp(1.56rem, 1vw + 1.31rem, 2.11rem);
+    --font-size-xl: clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem);
+    --font-size-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 3rem);
+    --font-size-xxxl: clamp(3.05rem, 3.54vw + 2.17rem, 5rem);
+
+    --purple-50: #f5f3ff;
+    --purple-100: #eee9fe;
+    --purple-200: #ded6fe;
+    --purple-300: #c6b4fe;
+    --purple-400: #aa8afb;
+    --purple-500: #8f5af8;
+    --purple-600: #8138ef;
+    --purple-700: #7326db;
+    --purple-800: #601fb8;
+    --purple-900: #501c96;
+    --purple-950: #34106d;
+
+    --green-50: #f4f9f5;
+    --green-100: #e5f3e9;
+    --green-200: #cde5d3;
+    --green-300: #a5d0b2;
+    --green-400: #76b288;
+    --green-500: #529566;
+    --green-600: #407951;
+    --green-700: #3b6c4a;
+    --green-800: #2d4e38;
+    --green-900: #27402f;
+    --green-950: #112217;
+
+    --blue-50: #f2f9fd;
+    --blue-100: #e4f1fa;
+    --blue-200: #c4e3f3;
+    --blue-300: #90cde9;
+    --blue-400: #3ea9d7;
+    --blue-500: #2e9ac9;
+    --blue-600: #1f7caa;
+    --blue-700: #1a638a;
+    --blue-800: #1a5472;
+    --blue-900: #1a4660;
+    --blue-950: #122d3f;
+    
+    --brain-block-bg-color: var(--purple-50);
+    --brain-block-border-color: var(--purple-300);
+    --brain-block-title-color: var(--purple-950);
+    --brain-block-content-color: var(--purple-900);
+    --brain-block-date-color: var(--purple-600);
+    
+    --bord-rad: 8px;
+    
+    --spacing-s: 8px;
+    --spacing-m: 16px;
+    --spacing-lg: 32px;
+    --spacing-xl: 48px;
+    --spacing-xxl: 64px;
+
+    --shadow-strength: 10%;
+    --shadow-color: 0 0% 63%;
+    --shadow:
+            0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.2),
+            0.7px 1.3px 1.7px -0.6px hsl(var(--shadow-color) / 0.2),
+            1.3px 2.6px 3.3px -1.2px hsl(var(--shadow-color) / 0.2),
+            2.6px 5.2px 6.5px -1.9px hsl(var(--shadow-color) / 0.2),
+            5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.2);
+}
+
+html {
+    background-color: white;
+    box-sizing: border-box;
+    min-width: 360px;
+    /* scrollbar-gutter: stable; */
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: var(--body-font-family);
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-block: 0.2em;
+    line-height: 1.4;
+    text-wrap: balance;
+    font-family: var(--heading-font-family);
+}
+
+h1 {
+    font-size: var(--font-size-xl);
+}
+
+h2 {
+    font-size: var(--font-size-md);
+}
+
+h3 {
+    font-size: var(--font-size-base);
+}
+
+p {
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    max-width: 60ch;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    margin-top: var(--spacing-xxl);
+    margin-bottom: var(--spacing-xxl);
+    gap: var(--spacing-xxl);
+}
+
+header {
+    align-items: center;
+    text-align: center;
+  
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.content-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: black;
+    padding: var(--spacing-m); 
+}
+
+.fab {
+    position: fixed;
+    right: 60px;
+    bottom: 60px;
+    border-radius: 50%;
+    height: 48px;
+    z-index: 100;
+    overflow: hidden;
+    background-color: var(--purple-700);
+    border: none;
+}
+
+.brain-block-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+.brain-block {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--bord-rad);
+    padding: var(--spacing-m);
+    background-color: var(--brain-block-bg-color);
+    border: solid 1px var(--brain-block-border-color);
+}
+
+.brain-block-title-container {
+    display: flex;
+    justify-content: space-between;
+    color: var(--brain-block-title-color);
+}
+
+.brain-block-content-container {
+    display: flex;
+    color: var(--brain-block-content-color);
+}
+
+.brain-block-date {
+    font-size: var(--font-size-xs);
+    color: var(--brain-block-date-color);
+}
+
+.brain-block-admin-container {
+    display: flex;
+}
+
+.brain-block-admin-container > * + * {
+    margin-left: var(--spacing-s);
+}
+
+.thought-block {
+    --brain-block-bg-color: var(--blue-50);
+    --brain-block-border-color: var(--blue-300);
+    --brain-block-title-color: var(--blue-950);
+    --brain-block-content-color: var(--blue-900);
+    --brain-block-date-color: var(--blue-600);
+}
+
+.question-block {
+    --brain-block-bg-color: var(--green-50);
+    --brain-block-border-color: var(--green-300);
+    --brain-block-title-color: var(--green-950);
+    --brain-block-content-color: var(--green-900);
+    --brain-block-date-color: var(--green-600);
+
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-s);
+}
+
+.input-label {
+    font-size: var(--font-size-sm);
+}
+
+.input {
+    height: var(--spacing-xl);
+    width: 100%;
+    font-size: var(--font-size-base);
+    padding-inline: var(--spacing-s);
+    border-radius: var(--bord-rad);
+}
+
+.validation-text {
+    font-size: var(--font-size-xs);
+    color: red;
+}
+
+.btn-group {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.btn {
+    height: var(--spacing-xl);
+    width: 120px;
+    text-align: center;
+    font-size: var(--font-size-base);
+    border-radius: var(--bord-rad);
+    border: none;
+}
+
+.btn-success {
+    background-color: var(--green-700);
+    color: white;
+}

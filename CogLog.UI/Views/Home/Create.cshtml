@@ -1,0 +1,53 @@
+﻿@using CogLog.UI.Services.Base
+@model CreateBrainBlockVm
+
+@{
+    ViewData["Title"] = "New Brain Block";
+}
+
+<header>
+    <h1>New Brain Block</h1>
+</header>
+
+        <form asp-action="Create" class="form-container">
+            @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+            <div class="input-group">
+                <label asp-for="Title" class="input-label"></label>
+                <input asp-for="Title" class="input" />
+                <span asp-validation-for="Title" class="validation-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="Content" class="input-label"></label>
+                <textarea asp-for="Content" class="input"></textarea>
+                <span asp-validation-for="Content" class="validation-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="AdditionalContext" class="input-label">Additional Context</label>
+                <textarea asp-for="AdditionalContext" class="input"></textarea>
+                <span asp-validation-for="AdditionalContext" class="validation-text"></span>
+            </div>
+            <div class="input-group">
+                <label asp-for="Url" class="input-label"></label>
+                <input asp-for="Url" class="input" type="url" />
+                <span asp-validation-for="Url" class="validation-text"></span>
+            </div>
+            <div class="input-group">
+                <select name="Variant" class="input">
+                    <option selected value="">Learning</option>
+                    <option value="1">Thought</option>
+                    <option value="2">Question</option>
+                </select>
+
+            </div>
+        
+            <div class="btn-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+                    @* <a asp-action="Index">Back</a> *@
+            </div>
+        </form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
