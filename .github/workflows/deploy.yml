@@ -27,14 +27,23 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
-      - name: dotnet publish
-        run: dotnet publish CogLog.UI -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+      - name: dotnet publish UI
+        run: dotnet publish CogLog.UI -c Release -o "${{env.DOTNET_ROOT}}/ui-app"
+        
+      - name: dotnet publish API
+        run: dotnet publish CogLog.API -c Release -o "${{env.DOTNET_ROOT}}/api-app"
 
-      - name: Upload artifact for deployment job
+      - name: Upload UI artifact
         uses: actions/upload-artifact@v4
         with:
-          name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          name: .net-ui-app
+          path: ${{env.DOTNET_ROOT}}/ui-app
+          
+      - name: Upload API artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-api-app
+          path: ${{env.DOTNET_ROOT}}/api-app
 
   deploy:
     runs-on: windows-latest
@@ -47,10 +56,17 @@ jobs:
       contents: read
 
     steps:
-      - name: Download artifact from build job
+      - name: Download UI Artifact
         uses: actions/download-artifact@v4
         with:
-          name: .net-app
+          name: .net-ui-app
+          path: ui-app
+          
+      - name: Download API Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-api-app
+          path: api-app
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -65,5 +81,13 @@ jobs:
         with:
           app-name: 'adamjnav-coglog'
           slot-name: 'Production'
-          package: .
+          package: 'ui-app'
+          
+      - name: Deploy API to Azure
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'coglog-api'
+          slot-name: 'Production'
+          package: 'api-app'
           
