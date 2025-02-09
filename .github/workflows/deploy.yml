@@ -50,7 +50,7 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: ${{ steps.deploy-ui-app.outputs.webapp-url }}
     permissions:
       id-token: write
       contents: read
@@ -76,7 +76,7 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B2576A2DC9A5407FA42D2C98A23C42DF }}
 
       - name: Deploy UI to Azure
-        id: deploy-to-webapp
+        id: deploy-ui-app
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'adamjnav-coglog'
@@ -84,7 +84,7 @@ jobs:
           package: 'ui-app'
           
       - name: Deploy API to Azure
-        id: deploy-to-webapp
+        id: deploy-api-app
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'coglog-api'
