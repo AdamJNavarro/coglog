@@ -7,6 +7,10 @@ on:
       - main
     paths-ignore:
       - 'README.MD'
+    
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   build-and-publish:
