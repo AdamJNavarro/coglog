@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Deploy to Azure
+name: Build, Publish and Deploy
 
 on:
   workflow_dispatch:
@@ -12,82 +9,10 @@ on:
       - 'README.MD'
 
 jobs:
-  build:
-    runs-on: windows-latest
-    permissions:
-      contents: read
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '8.x'
-
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
-
-      - name: dotnet publish UI
-        run: dotnet publish CogLog.UI -c Release -o "${{env.DOTNET_ROOT}}/ui-app"
-        
-      - name: dotnet publish API
-        run: dotnet publish CogLog.API -c Release -o "${{env.DOTNET_ROOT}}/api-app"
-
-      - name: Upload UI artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: .net-ui-app
-          path: ${{env.DOTNET_ROOT}}/ui-app
-          
-      - name: Upload API artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: .net-api-app
-          path: ${{env.DOTNET_ROOT}}/api-app
-
-  deploy:
-    runs-on: windows-latest
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-ui-app.outputs.webapp-url }}
-    permissions:
-      id-token: write
-      contents: read
-
-    steps:
-      - name: Download UI Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: .net-ui-app
-          path: ui-app
-          
-      - name: Download API Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: .net-api-app
-          path: api-app
-      
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_66B319163EED416B990B6EC67AF35CE0 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D769539700A543BC96FAAFE7453B379A }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B2576A2DC9A5407FA42D2C98A23C42DF }}
-
-      - name: Deploy UI to Azure
-        id: deploy-ui-app
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'adamjnav-coglog'
-          slot-name: 'Production'
-          package: 'ui-app'
-          
-      - name: Deploy API to Azure
-        id: deploy-api-app
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'coglog-api'
-          slot-name: 'Production'
-          package: 'api-app'
-          
+  build-and-publish:
+    uses: ./.github/workflows/build-and-publish.yml
+    secrets: inherit
+  deploy-ui:
+    uses: ./.github/workflows/deploy-ui.yml
+    needs: build-and-publish
+    secrets: inherit
