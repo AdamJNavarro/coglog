@@ -20,3 +20,7 @@ jobs:
     uses: ./.github/workflows/deploy-ui.yml
     needs: build-and-publish
     secrets: inherit
+  deploy-api:
+    uses: ./.github/workflows/deploy-api.yml
+    needs: build-and-publish
+    secrets: inherit
