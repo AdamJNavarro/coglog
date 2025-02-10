@@ -14,7 +14,7 @@ jobs:
       contents: read
 
     steps:
-      - name: Download UI Artifact
+      - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
           name: .net-ui-app
@@ -27,7 +27,7 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D769539700A543BC96FAAFE7453B379A }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B2576A2DC9A5407FA42D2C98A23C42DF }}
 
-      - name: Deploy UI to Azure
+      - name: Deploy to Azure
         id: deploy-ui-app
         uses: azure/webapps-deploy@v3
         with:
