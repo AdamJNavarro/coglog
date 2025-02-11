@@ -6,10 +6,19 @@ namespace CogLog.Persistence;
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<BrainBlock> BrainBlocks { get; set; }
+    public DbSet<Topic> Topics { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+
+        modelBuilder
+            .Entity<Topic>()
+            .HasMany(t => t.BrainBlocks)
+            .WithOne(b => b.Topic)
+            .HasForeignKey(b => b.TopicId)
+            .OnDelete(DeleteBehavior.SetNull);
+
         base.OnModelCreating(modelBuilder);
     }
 

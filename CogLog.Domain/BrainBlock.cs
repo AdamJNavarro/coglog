@@ -12,4 +12,8 @@ public class BrainBlock : BaseEntity
     public string? Url { get; set; } = string.Empty;
 
     public BrainBlockVariantEnum Variant { get; set; }
+
+    public Topic? Topic { get; set; }
+
+    public int? TopicId { get; set; }
 }
