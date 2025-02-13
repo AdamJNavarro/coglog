@@ -44,6 +44,9 @@ namespace CogLog.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TopicId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
@@ -51,6 +54,8 @@ namespace CogLog.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TopicId");
 
                     b.ToTable("BrainBlocks");
 
@@ -85,6 +90,64 @@ namespace CogLog.Persistence.Migrations
                             Url = "",
                             Variant = 0
                         });
+                });
+
+            modelBuilder.Entity("CogLog.Domain.Topic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Logo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.ToTable("Topics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Logo = "💻",
+                            Title = "Coding"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Logo = "🇯🇵",
+                            Title = "Japanese"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Logo = "📖",
+                            Title = "Words"
+                        });
+                });
+
+            modelBuilder.Entity("CogLog.Domain.BrainBlock", b =>
+                {
+                    b.HasOne("CogLog.Domain.Topic", "Topic")
+                        .WithMany("BrainBlocks")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Topic");
+                });
+
+            modelBuilder.Entity("CogLog.Domain.Topic", b =>
+                {
+                    b.Navigation("BrainBlocks");
                 });
 #pragma warning restore 612, 618
         }
