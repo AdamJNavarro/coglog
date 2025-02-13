@@ -20,4 +20,6 @@ public class BrainBlockVm : BaseBrainBlockVm
     public string? AdditionalContext { get; set; } = string.Empty;
 
     public string? Url { get; set; } = string.Empty;
+
+    public TopicVm? Topic { get; set; }
 }

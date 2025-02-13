@@ -12,5 +12,6 @@ public class MappingConfig : Profile
         CreateMap<BrainBlockDetailsDto, BrainBlockVm>().ReverseMap();
         CreateMap<CreateBrainBlockCommand, CreateBrainBlockVm>().ReverseMap();
         CreateMap<UpdateBrainBlockCommand, BrainBlockVm>().ReverseMap();
+        // CreateMap<TopicDto, TopicVm>();
     }
 }
