@@ -1,0 +1,20 @@
+{
+  "name": "Cog Log",
+  "version": "1.0.0",
+  "description": "A collection of learnings, thoughts and questions.",
+  "config": {
+    "APP_EF_ARGS": "--startup-project ./CogLog.API --project ./CogLog.Persistence --context AppDbContext",
+    "ID_EF_ARGS": "--startup-project ./CogLog.API --project ./CogLog.Identity --context CogLogIdentityDbContext"
+  },
+  "scripts": {
+    "test": "dotnet build && dotnet test --no-build --verbosity normal",
+    "db:identity:update": "dotnet ef database update $npm_package_config_ID_EF_ARGS",
+    "mig:identity:add": "dotnet ef migrations add $npm_package_config_ID_EF_ARGS",
+    "mig:identity:remove": "dotnet ef migrations remove $npm_package_config_ID_EF_ARGS",
+    "db:app:update": "dotnet ef database update $npm_package_config_APP_EF_ARGS",
+    "mig:app:add": "dotnet ef migrations add $npm_package_config_APP_EF_ARGS",
+    "mig:app:remove": "dotnet ef migrations remove $npm_package_config_APP_EF_ARGS",
+    "client:generate": "dotnet run --project CogLog.ClientGenerator/CogLog.ClientGenerator.csproj"
+  },
+  "author": "Adam Navarro"
+}

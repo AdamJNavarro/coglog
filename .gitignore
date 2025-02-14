@@ -272,3 +272,5 @@ __pycache__/
 CogLog.API/appsettings.Production.json
 CogLog.UI/appsettings.Production.json
 
+# PNPM
+node_modules
