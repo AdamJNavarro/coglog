@@ -1,3 +1,4 @@
+using CogLog.App.Features.Topic.Get;
 using CogLog.Domain;
 
 namespace CogLog.App.Features.BrainBlock.Get;
@@ -15,4 +16,6 @@ public class BrainBlockDto
     public string? Url { get; set; } = string.Empty;
 
     public BrainBlockVariantEnum Variant { get; set; }
+
+    public TopicDto Topic { get; set; }
 }

@@ -1,0 +1,18 @@
+@model IEnumerable<TopicVm>    
+@{
+    ViewData["Title"] = "Topics";
+}
+    
+<header>
+    <h1>Topics</h1>
+</header>
+
+<div>
+    @foreach (var item in Model)
+    {
+        <p>
+            @Html.DisplayFor(modelItem => item.Logo)
+            @Html.DisplayFor(modelItem => item.Title)
+        </p>
+    }
+</div>
