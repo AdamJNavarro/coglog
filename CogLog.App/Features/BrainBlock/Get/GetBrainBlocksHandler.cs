@@ -12,7 +12,7 @@ public class GetBrainBlocksHandler(IMapper mapper, IBrainBlockRepo brainBlockRep
         CancellationToken cancellationToken
     )
     {
-        var brainBlocks = await brainBlockRepo.GetAsync();
+        var brainBlocks = await brainBlockRepo.GetBrainBlocksWithDetails();
         var data = mapper.Map<List<BrainBlockDto>>(brainBlocks);
         return data;
     }
