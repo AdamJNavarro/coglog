@@ -29,6 +29,7 @@ builder.Services.AddHttpClient<IClient, Client>(client =>
     client.BaseAddress = new Uri(builder.Configuration.GetSection("ApiUrl").Value ?? string.Empty)
 );
 builder.Services.AddScoped<IBrainBlockService, BrainBlockService>();
+builder.Services.AddScoped<ITopicService, TopicService>();
 builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
