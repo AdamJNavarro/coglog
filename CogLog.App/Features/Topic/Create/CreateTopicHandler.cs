@@ -9,7 +9,7 @@ public class CreateTopicHandler(IMapper mapper, ITopicRepo topicRepo)
 {
     public async Task<int> Handle(CreateTopicCommand request, CancellationToken cancellationToken)
     {
-        var incomingTopic = mapper.Map<Domain.Topic>(request);
+        var incomingTopic = mapper.Map<Domain.Hierarchy.Topic>(request);
 
         await topicRepo.CreateAsync(incomingTopic);
 

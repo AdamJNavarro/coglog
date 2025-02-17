@@ -1,5 +1,6 @@
 using CogLog.App.Contracts.Persistence;
 using CogLog.Domain;
+using CogLog.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace CogLog.Persistence.Repos;
