@@ -30,12 +30,7 @@ public class CreateBrainBlockHandlerTests
         var handler = new CreateBrainBlockHandler(_mapper, _mockRepo.Object);
 
         await handler.Handle(
-            new CreateBrainBlockCommand(
-                "test",
-                "content that meets required length",
-                null,
-                BrainBlockVariantEnum.Learning
-            ),
+            new CreateBrainBlockCommand("test", "content that meets required length", null, null),
             CancellationToken.None
         );
 

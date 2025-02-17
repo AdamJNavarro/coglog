@@ -16,7 +16,7 @@ public class BrainBlockRepo : GenericRepo<BrainBlock>, IBrainBlockRepo
 
     public async Task<List<BrainBlock>> GetBrainBlocksWithDetails()
     {
-        var brainBlocks = await _context.BrainBlocks.Include(q => q.Topic).ToListAsync();
+        var brainBlocks = await _context.BrainBlocks.ToListAsync();
 
         return brainBlocks;
     }

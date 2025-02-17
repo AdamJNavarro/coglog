@@ -19,7 +19,5 @@ internal class CreateBrainBlockValidator : AbstractValidator<CreateBrainBlockCom
             .NotNull()
             .MinimumLength(16)
             .WithMessage("{PropertyName} must be at least {MinLength} characters");
-
-        RuleFor(x => x.Variant).IsInEnum();
     }
 }
