@@ -15,7 +15,5 @@ public class BrainBlockDto
 
     public string? Url { get; set; } = string.Empty;
 
-    public BrainBlockVariantEnum Variant { get; set; }
-
     public TopicDto Topic { get; set; }
 }

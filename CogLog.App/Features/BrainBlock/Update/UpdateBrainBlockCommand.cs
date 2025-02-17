@@ -13,8 +13,6 @@ public class UpdateBrainBlockCommand : IRequest<Unit>
 
     public string Content { get; set; }
 
-    public BrainBlockVariantEnum Variant { get; set; }
-
     public string? AdditionalContext { get; set; } = string.Empty;
 
     public string? Url { get; set; } = string.Empty;

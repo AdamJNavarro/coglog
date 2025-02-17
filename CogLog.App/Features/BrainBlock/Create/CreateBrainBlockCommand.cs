@@ -6,6 +6,6 @@ namespace CogLog.App.Features.BrainBlock.Create;
 public record CreateBrainBlockCommand(
     string Title,
     string Content,
-    string? AdditionalContext,
-    BrainBlockVariantEnum Variant
+    string? ExtraContent,
+    string? Url
 ) : IRequest<int>;

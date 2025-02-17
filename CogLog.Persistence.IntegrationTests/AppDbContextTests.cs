@@ -25,7 +25,6 @@ public class AppDbContextTests
             Id = 1,
             Title = "Hello World",
             Content = "Hello World",
-            Variant = BrainBlockVariantEnum.Learning,
         };
 
         await _dbContext.BrainBlocks.AddAsync(brainBlock);

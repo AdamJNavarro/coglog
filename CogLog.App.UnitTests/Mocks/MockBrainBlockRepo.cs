@@ -15,14 +15,12 @@ public class MockBrainBlockRepo
                 Id = 1,
                 Title = "Title",
                 Content = "Content",
-                Variant = BrainBlockVariantEnum.Learning,
             },
             new BrainBlock
             {
                 Id = 2,
                 Title = "Title2",
                 Content = "Content2",
-                Variant = BrainBlockVariantEnum.Thought,
             },
         };
 

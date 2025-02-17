@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "dotnet build && dotnet test --no-build --verbosity normal",
+    "db:drop": "dotnet ef database drop --dry-run $npm_package_config_APP_EF_ARGS",
     "db:identity:update": "dotnet ef database update $npm_package_config_ID_EF_ARGS",
     "mig:identity:add": "dotnet ef migrations add $npm_package_config_ID_EF_ARGS",
     "mig:identity:remove": "dotnet ef migrations remove $npm_package_config_ID_EF_ARGS",

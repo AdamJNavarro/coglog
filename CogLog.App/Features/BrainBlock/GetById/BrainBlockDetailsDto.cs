@@ -14,7 +14,5 @@ public class BrainBlockDetailsDto
 
     public string? Url { get; set; } = string.Empty;
 
-    public BrainBlockVariantEnum Variant { get; set; }
-
     public string? AdditionalContext { get; set; }
 }
