@@ -22,7 +22,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasMany(c => c.BrainBlocks)
             .WithOne(b => b.Category)
             .HasForeignKey(b => b.CategoryId)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Category-Subject 1-N
         builder
@@ -38,7 +38,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .HasMany(s => s.BrainBlocks)
             .WithOne(b => b.Subject)
             .HasForeignKey(b => b.SubjectId)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Subject-Topic 1-N
         builder
