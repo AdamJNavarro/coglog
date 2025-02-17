@@ -1,4 +1,5 @@
 using CogLog.Domain;
+using CogLog.Domain.Hierarchy;
 
 namespace CogLog.App.Contracts.Persistence;
 
