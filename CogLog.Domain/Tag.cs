@@ -1,6 +1,6 @@
 using CogLog.Domain.Common;
 
-namespace CogLog.Domain.Hierarchy;
+namespace CogLog.Domain;
 
 public class Tag : BaseEntity
 {
@@ -8,7 +8,7 @@ public class Tag : BaseEntity
 
     public required int SubjectId { get; init; }
 
-    public required Subject Subject { get; init; }
+    public Subject Subject { get; init; }
 
-    public List<BrainBlock> BrainBlocks { get; init; } = [];
+    public List<BrainBlockTag> BrainBlockTags { get; init; } = [];
 }

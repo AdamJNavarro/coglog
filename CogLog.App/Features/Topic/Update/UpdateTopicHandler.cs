@@ -9,7 +9,7 @@ public class UpdateTopicHandler(IMapper mapper, ITopicRepo topicRepo)
 {
     public async Task<Unit> Handle(UpdateTopicCommand request, CancellationToken cancellationToken)
     {
-        var topicToUpdate = mapper.Map<Domain.Hierarchy.Topic>(request);
+        var topicToUpdate = mapper.Map<Domain.Topic>(request);
 
         await topicRepo.UpdateAsync(topicToUpdate);
 

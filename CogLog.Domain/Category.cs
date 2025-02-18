@@ -1,4 +1,6 @@
-namespace CogLog.Domain.Hierarchy;
+using CogLog.Domain.Common;
+
+namespace CogLog.Domain;
 
 public class Category : BaseHierarchy
 {

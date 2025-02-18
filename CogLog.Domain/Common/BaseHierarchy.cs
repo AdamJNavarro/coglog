@@ -1,6 +1,4 @@
-using CogLog.Domain.Common;
-
-namespace CogLog.Domain.Hierarchy;
+namespace CogLog.Domain.Common;
 
 public class BaseHierarchy : BaseEntity
 {
