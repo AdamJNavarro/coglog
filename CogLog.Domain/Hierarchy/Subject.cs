@@ -6,7 +6,7 @@ public class Subject : BaseHierarchy
 
     public required int CategoryId { get; init; }
 
-    public required Category Category { get; init; }
+    public Category Category { get; set; }
 
     public List<Topic> Topics { get; init; } = [];
 

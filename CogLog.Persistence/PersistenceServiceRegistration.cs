@@ -20,7 +20,9 @@ public static class PersistenceServiceRegistration
         services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
         services.AddScoped<IBrainBlockRepo, BrainBlockRepo>();
         services.AddScoped<ITopicRepo, TopicRepo>();
+        services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));
         services.AddScoped<ICategoryRepo, CategoryRepo>();
+        services.AddScoped<ISubjectRepo, SubjectRepo>();
         return services;
     }
 }
