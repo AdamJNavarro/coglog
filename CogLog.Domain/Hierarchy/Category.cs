@@ -6,5 +6,5 @@ public class Category : BaseHierarchy
 
     public List<Subject> Subjects { get; init; } = [];
 
-    public List<BrainBlock> BrainBlocks { get; set; } = [];
+    public List<BrainBlock> BrainBlocks { get; init; } = [];
 }
