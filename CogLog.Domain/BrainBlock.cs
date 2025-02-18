@@ -1,5 +1,4 @@
 using CogLog.Domain.Common;
-using CogLog.Domain.Hierarchy;
 
 namespace CogLog.Domain;
 
@@ -22,7 +21,7 @@ public class BrainBlock : BaseEntity
 
     public int? SubjectId { get; init; }
 
-    public List<Topic> Topics { get; init; } = [];
+    public List<BrainBlockTopic> BrainBlockTopics { get; init; } = [];
 
-    public List<Tag> Tags { get; init; } = [];
+    public List<BrainBlockTag> BrainBlockTags { get; init; } = [];
 }

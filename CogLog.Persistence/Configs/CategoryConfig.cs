@@ -1,4 +1,4 @@
-using CogLog.Domain.Hierarchy;
+using CogLog.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,7 +1,7 @@
 using CogLog.App.Features.Category.Create;
 using CogLog.App.Features.Category.Update;
 using CogLog.App.Features.Subject.Commands;
-using CogLog.Domain.Hierarchy;
+using CogLog.Domain;
 
 namespace CogLog.App.Mapping;
 

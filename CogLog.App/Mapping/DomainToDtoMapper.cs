@@ -1,5 +1,5 @@
 using CogLog.App.Contracts.Data;
-using CogLog.Domain.Hierarchy;
+using CogLog.Domain;
 
 namespace CogLog.App.Mapping;
 

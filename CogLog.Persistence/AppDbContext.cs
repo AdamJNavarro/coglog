@@ -1,5 +1,4 @@
 using CogLog.Domain;
-using CogLog.Domain.Hierarchy;
 using Microsoft.EntityFrameworkCore;
 
 namespace CogLog.Persistence;
@@ -11,6 +10,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Subject> Subjects { get; set; }
     public DbSet<Topic> Topics { get; set; }
     public DbSet<Tag> Tags { get; set; }
+    public DbSet<BrainBlockTopic> BrainBlockTopics { get; set; }
+    public DbSet<BrainBlockTag> BrainBlockTags { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -55,20 +56,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             .WithOne(t => t.Subject)
             .HasForeignKey(t => t.SubjectId)
             .OnDelete(DeleteBehavior.Cascade);
-
-        // BrainBlock-Topic N-N
-        builder
-            .Entity<BrainBlock>()
-            .HasMany(b => b.Topics)
-            .WithMany(t => t.BrainBlocks)
-            .UsingEntity(j => j.ToTable("BrainBlockTopics"));
-
-        // BrainBlock-Tag N-N
-        builder
-            .Entity<BrainBlock>()
-            .HasMany(b => b.Tags)
-            .WithMany(t => t.BrainBlocks)
-            .UsingEntity(j => j.ToTable("BrainBlockTags"));
 
         base.OnModelCreating(builder);
     }
