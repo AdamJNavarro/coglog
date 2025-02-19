@@ -12,6 +12,7 @@
     "mig:identity:add": "dotnet ef migrations add $npm_package_config_ID_EF_ARGS",
     "mig:identity:remove": "dotnet ef migrations remove $npm_package_config_ID_EF_ARGS",
     "db:app:update": "dotnet ef database update $npm_package_config_APP_EF_ARGS",
+    "db:drop": "dotnet ef database drop $npm_package_config_APP_EF_ARGS",
     "mig:app:add": "dotnet ef migrations add $npm_package_config_APP_EF_ARGS",
     "mig:app:remove": "dotnet ef migrations remove $npm_package_config_APP_EF_ARGS",
     "client:generate": "dotnet run --project CogLog.ClientGenerator/CogLog.ClientGenerator.csproj",

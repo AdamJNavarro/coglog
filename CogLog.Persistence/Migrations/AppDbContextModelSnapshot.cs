@@ -22,36 +22,6 @@ namespace CogLog.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BrainBlockTag", b =>
-                {
-                    b.Property<int>("BrainBlocksId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BrainBlocksId", "TagsId");
-
-                    b.HasIndex("TagsId");
-
-                    b.ToTable("BrainBlockTags", (string)null);
-                });
-
-            modelBuilder.Entity("BrainBlockTopic", b =>
-                {
-                    b.Property<int>("BrainBlocksId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TopicsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BrainBlocksId", "TopicsId");
-
-                    b.HasIndex("TopicsId");
-
-                    b.ToTable("BrainBlockTopics", (string)null);
-                });
-
             modelBuilder.Entity("CogLog.Domain.BrainBlock", b =>
                 {
                     b.Property<int>("Id")
@@ -92,7 +62,37 @@ namespace CogLog.Persistence.Migrations
                     b.ToTable("BrainBlocks");
                 });
 
-            modelBuilder.Entity("CogLog.Domain.Hierarchy.Category", b =>
+            modelBuilder.Entity("CogLog.Domain.BrainBlockTag", b =>
+                {
+                    b.Property<int>("BrainBlockId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BrainBlockId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("BrainBlockTags", (string)null);
+                });
+
+            modelBuilder.Entity("CogLog.Domain.BrainBlockTopic", b =>
+                {
+                    b.Property<int>("BrainBlockId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BrainBlockId", "TopicId");
+
+                    b.HasIndex("TopicId");
+
+                    b.ToTable("BrainBlockTopics", (string)null);
+                });
+
+            modelBuilder.Entity("CogLog.Domain.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -119,7 +119,7 @@ namespace CogLog.Persistence.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("CogLog.Domain.Hierarchy.Subject", b =>
+            modelBuilder.Entity("CogLog.Domain.Subject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -150,7 +150,7 @@ namespace CogLog.Persistence.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("CogLog.Domain.Hierarchy.Tag", b =>
+            modelBuilder.Entity("CogLog.Domain.Tag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -171,7 +171,7 @@ namespace CogLog.Persistence.Migrations
                     b.ToTable("Tags");
                 });
 
-            modelBuilder.Entity("CogLog.Domain.Hierarchy.Topic", b =>
+            modelBuilder.Entity("CogLog.Domain.Topic", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -199,44 +199,14 @@ namespace CogLog.Persistence.Migrations
                     b.ToTable("Topics");
                 });
 
-            modelBuilder.Entity("BrainBlockTag", b =>
-                {
-                    b.HasOne("CogLog.Domain.BrainBlock", null)
-                        .WithMany()
-                        .HasForeignKey("BrainBlocksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CogLog.Domain.Hierarchy.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BrainBlockTopic", b =>
-                {
-                    b.HasOne("CogLog.Domain.BrainBlock", null)
-                        .WithMany()
-                        .HasForeignKey("BrainBlocksId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CogLog.Domain.Hierarchy.Topic", null)
-                        .WithMany()
-                        .HasForeignKey("TopicsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("CogLog.Domain.BrainBlock", b =>
                 {
-                    b.HasOne("CogLog.Domain.Hierarchy.Category", "Category")
+                    b.HasOne("CogLog.Domain.Category", "Category")
                         .WithMany("BrainBlocks")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("CogLog.Domain.Hierarchy.Subject", "Subject")
+                    b.HasOne("CogLog.Domain.Subject", "Subject")
                         .WithMany("BrainBlocks")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -246,9 +216,47 @@ namespace CogLog.Persistence.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("CogLog.Domain.Hierarchy.Subject", b =>
+            modelBuilder.Entity("CogLog.Domain.BrainBlockTag", b =>
                 {
-                    b.HasOne("CogLog.Domain.Hierarchy.Category", "Category")
+                    b.HasOne("CogLog.Domain.BrainBlock", "BrainBlock")
+                        .WithMany("BrainBlockTags")
+                        .HasForeignKey("BrainBlockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CogLog.Domain.Tag", "Tag")
+                        .WithMany("BrainBlockTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BrainBlock");
+
+                    b.Navigation("Tag");
+                });
+
+            modelBuilder.Entity("CogLog.Domain.BrainBlockTopic", b =>
+                {
+                    b.HasOne("CogLog.Domain.BrainBlock", "BrainBlock")
+                        .WithMany("BrainBlockTopics")
+                        .HasForeignKey("BrainBlockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CogLog.Domain.Topic", "Topic")
+                        .WithMany("BrainBlockTopics")
+                        .HasForeignKey("TopicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BrainBlock");
+
+                    b.Navigation("Topic");
+                });
+
+            modelBuilder.Entity("CogLog.Domain.Subject", b =>
+                {
+                    b.HasOne("CogLog.Domain.Category", "Category")
                         .WithMany("Subjects")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -257,9 +265,9 @@ namespace CogLog.Persistence.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("CogLog.Domain.Hierarchy.Tag", b =>
+            modelBuilder.Entity("CogLog.Domain.Tag", b =>
                 {
-                    b.HasOne("CogLog.Domain.Hierarchy.Subject", "Subject")
+                    b.HasOne("CogLog.Domain.Subject", "Subject")
                         .WithMany("Tags")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -268,9 +276,9 @@ namespace CogLog.Persistence.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("CogLog.Domain.Hierarchy.Topic", b =>
+            modelBuilder.Entity("CogLog.Domain.Topic", b =>
                 {
-                    b.HasOne("CogLog.Domain.Hierarchy.Subject", "Subject")
+                    b.HasOne("CogLog.Domain.Subject", "Subject")
                         .WithMany("Topics")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -279,20 +287,37 @@ namespace CogLog.Persistence.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("CogLog.Domain.Hierarchy.Category", b =>
+            modelBuilder.Entity("CogLog.Domain.BrainBlock", b =>
+                {
+                    b.Navigation("BrainBlockTags");
+
+                    b.Navigation("BrainBlockTopics");
+                });
+
+            modelBuilder.Entity("CogLog.Domain.Category", b =>
                 {
                     b.Navigation("BrainBlocks");
 
                     b.Navigation("Subjects");
                 });
 
-            modelBuilder.Entity("CogLog.Domain.Hierarchy.Subject", b =>
+            modelBuilder.Entity("CogLog.Domain.Subject", b =>
                 {
                     b.Navigation("BrainBlocks");
 
                     b.Navigation("Tags");
 
                     b.Navigation("Topics");
+                });
+
+            modelBuilder.Entity("CogLog.Domain.Tag", b =>
+                {
+                    b.Navigation("BrainBlockTags");
+                });
+
+            modelBuilder.Entity("CogLog.Domain.Topic", b =>
+                {
+                    b.Navigation("BrainBlockTopics");
                 });
 #pragma warning restore 612, 618
         }

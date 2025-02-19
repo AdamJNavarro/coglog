@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CogLog.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class MigOne : Migration
+    public partial class FirstMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -123,21 +123,21 @@ namespace CogLog.Persistence.Migrations
                 name: "BrainBlockTags",
                 columns: table => new
                 {
-                    BrainBlocksId = table.Column<int>(type: "int", nullable: false),
-                    TagsId = table.Column<int>(type: "int", nullable: false)
+                    BrainBlockId = table.Column<int>(type: "int", nullable: false),
+                    TagId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BrainBlockTags", x => new { x.BrainBlocksId, x.TagsId });
+                    table.PrimaryKey("PK_BrainBlockTags", x => new { x.BrainBlockId, x.TagId });
                     table.ForeignKey(
-                        name: "FK_BrainBlockTags_BrainBlocks_BrainBlocksId",
-                        column: x => x.BrainBlocksId,
+                        name: "FK_BrainBlockTags_BrainBlocks_BrainBlockId",
+                        column: x => x.BrainBlockId,
                         principalTable: "BrainBlocks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BrainBlockTags_Tags_TagsId",
-                        column: x => x.TagsId,
+                        name: "FK_BrainBlockTags_Tags_TagId",
+                        column: x => x.TagId,
                         principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -147,21 +147,21 @@ namespace CogLog.Persistence.Migrations
                 name: "BrainBlockTopics",
                 columns: table => new
                 {
-                    BrainBlocksId = table.Column<int>(type: "int", nullable: false),
-                    TopicsId = table.Column<int>(type: "int", nullable: false)
+                    BrainBlockId = table.Column<int>(type: "int", nullable: false),
+                    TopicId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BrainBlockTopics", x => new { x.BrainBlocksId, x.TopicsId });
+                    table.PrimaryKey("PK_BrainBlockTopics", x => new { x.BrainBlockId, x.TopicId });
                     table.ForeignKey(
-                        name: "FK_BrainBlockTopics_BrainBlocks_BrainBlocksId",
-                        column: x => x.BrainBlocksId,
+                        name: "FK_BrainBlockTopics_BrainBlocks_BrainBlockId",
+                        column: x => x.BrainBlockId,
                         principalTable: "BrainBlocks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BrainBlockTopics_Topics_TopicsId",
-                        column: x => x.TopicsId,
+                        name: "FK_BrainBlockTopics_Topics_TopicId",
+                        column: x => x.TopicId,
                         principalTable: "Topics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -178,14 +178,14 @@ namespace CogLog.Persistence.Migrations
                 column: "SubjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BrainBlockTags_TagsId",
+                name: "IX_BrainBlockTags_TagId",
                 table: "BrainBlockTags",
-                column: "TagsId");
+                column: "TagId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BrainBlockTopics_TopicsId",
+                name: "IX_BrainBlockTopics_TopicId",
                 table: "BrainBlockTopics",
-                column: "TopicsId");
+                column: "TopicId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_Label",
