@@ -15,13 +15,13 @@ public class BrainBlock : BaseEntity
 
     public Category? Category { get; init; }
 
-    public int? CategoryId { get; init; }
+    public int? CategoryId { get; set; }
 
     public Subject? Subject { get; init; }
 
-    public int? SubjectId { get; init; }
+    public int? SubjectId { get; set; }
 
-    public List<BrainBlockTopic> BrainBlockTopics { get; init; } = [];
+    public List<BrainBlockTopic> BrainBlockTopics { get; set; } = [];
 
-    public List<BrainBlockTag> BrainBlockTags { get; init; } = [];
+    public List<BrainBlockTag> BrainBlockTags { get; set; } = [];
 }

@@ -1,62 +1,31 @@
-using CogLog.App.Features.BrainBlock.Create;
-using CogLog.App.Features.BrainBlock.Delete;
-using CogLog.App.Features.BrainBlock.Get;
-using CogLog.App.Features.BrainBlock.GetById;
-using CogLog.App.Features.BrainBlock.Update;
+using CogLog.App.Contracts.Data;
+using CogLog.App.Features.BrainBlock.Commands;
+using CogLog.App.Features.BrainBlock.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/brainblocks")]
     [ApiController]
-    public class BrainBlockController : ControllerBase
+    public class BrainBlockController(IMediator mediator) : ControllerBase
     {
-        private readonly IMediator _mediator;
-
-        public BrainBlockController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         // GET: api/<BrainBlockController>
         [HttpGet]
         public async Task<List<BrainBlockDto>> Get()
         {
-            var brainBlocks = await _mediator.Send(new GetBrainBlocksQuery());
-            return brainBlocks;
-        }
-
-        // GET api/<BrainBlockController>/5
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<BrainBlockDetailsDto>> Get(int id)
-        {
-            var brainBlock = await _mediator.Send(new GetBrainBlockByIdQuery(id));
-            return Ok(brainBlock);
+            return await mediator.Send(new GetBrainBlocksQuery());
         }
 
         // POST api/<BrainBlockController>
-        [Authorize]
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         public async Task<ActionResult> Post(CreateBrainBlockCommand brainBlock)
         {
-            var resp = await _mediator.Send(brainBlock);
+            var resp = await mediator.Send(brainBlock);
             return CreatedAtAction(nameof(Get), new { id = resp });
-        }
-
-        // PUT api/<BrainBlockController>/5
-        [HttpPut("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesDefaultResponseType]
-        public async Task<ActionResult> Put(UpdateBrainBlockCommand brainBlock)
-        {
-            await _mediator.Send(brainBlock);
-            return NoContent();
         }
 
         // DELETE api/<BrainBlockController>/5
@@ -66,8 +35,7 @@ namespace CogLog.API.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(int id)
         {
-            var cmd = new DeleteBrainBlockCommand(id);
-            await _mediator.Send(cmd);
+            await mediator.Send(new DeleteBrainBlockCommand(id));
             return NoContent();
         }
     }

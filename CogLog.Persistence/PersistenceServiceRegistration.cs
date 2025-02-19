@@ -17,12 +17,12 @@ public static class PersistenceServiceRegistration
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
         );
 
-        services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
         services.AddScoped<IBrainBlockRepo, BrainBlockRepo>();
         services.AddScoped<ITopicRepo, TopicRepo>();
         services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));
         services.AddScoped<ICategoryRepo, CategoryRepo>();
         services.AddScoped<ISubjectRepo, SubjectRepo>();
+        services.AddScoped<IBrainBlockTopicRepo, BrainBlockTopicRepo>();
         return services;
     }
 }
