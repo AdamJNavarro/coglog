@@ -10,5 +10,7 @@ public record BrainBlockDto(
     int? CategoryId,
     CategoryDto? Category,
     int? SubjectId,
-    SubjectDto? Subject
+    SubjectDto? Subject,
+    List<TopicDto> Topics,
+    List<TagDto> Tags
 );

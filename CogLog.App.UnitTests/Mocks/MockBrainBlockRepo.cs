@@ -10,13 +10,13 @@ public class MockBrainBlockRepo
     {
         var mockBrainBlocks = new List<BrainBlock>()
         {
-            new BrainBlock
+            new()
             {
                 Id = 1,
                 Title = "Title",
                 Content = "Content",
             },
-            new BrainBlock
+            new()
             {
                 Id = 2,
                 Title = "Title2",
@@ -26,10 +26,10 @@ public class MockBrainBlockRepo
 
         var mockRepo = new Mock<IBrainBlockRepo>();
 
-        mockRepo.Setup(r => r.GetAsync()).ReturnsAsync(mockBrainBlocks);
+        mockRepo.Setup(r => r.GetBrainBlocksAsync()).ReturnsAsync(mockBrainBlocks);
 
         mockRepo
-            .Setup(r => r.CreateAsync(It.IsAny<BrainBlock>()))
+            .Setup(r => r.CreateBrainBlockAsync(It.IsAny<BrainBlock>()))
             .Returns(
                 (BrainBlock brainBlock) =>
                 {

@@ -1,9 +1,6 @@
 using CogLog.App.Contracts.Data;
-using CogLog.App.Features.Category.Create;
-using CogLog.App.Features.Category.Delete;
-using CogLog.App.Features.Category.Get;
+using CogLog.App.Features.Category.Commands;
 using CogLog.App.Features.Category.Queries;
-using CogLog.App.Features.Category.Update;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

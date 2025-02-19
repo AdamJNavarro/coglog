@@ -48,6 +48,11 @@ public static class DomainToDtoMapper
         );
     }
 
+    public static TopicDto ToTopicDto(this Topic topic)
+    {
+        return new TopicDto(topic.Id, topic.Label, topic.Icon, topic.Description, topic.SubjectId);
+    }
+
     public static TagDto ToTagDto(this Tag tag)
     {
         return new TagDto(tag.Id, tag.Label, tag.Icon, tag.SubjectId);
@@ -65,7 +70,14 @@ public static class DomainToDtoMapper
             brainBlock.CategoryId,
             brainBlock.Category?.ToCategoryDto(),
             brainBlock.SubjectId,
-            brainBlock.Subject?.ToSubjectDto()
+            brainBlock.Subject?.ToSubjectDto(),
+            brainBlock.BrainBlockTopics.Select(x => x.Topic.ToTopicDto()).ToList(),
+            brainBlock.BrainBlockTags.Select(x => x.Tag.ToTagDto()).ToList()
         );
+    }
+
+    public static List<BrainBlockDto> ToBrainBlocksDto(this List<BrainBlock> brainBlocks)
+    {
+        return brainBlocks.Select(x => x.ToBrainBlockDto()).ToList();
     }
 }
