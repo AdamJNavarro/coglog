@@ -12,5 +12,5 @@ public class Tag : BaseEntity
 
     public Subject Subject { get; init; }
 
-    public List<BrainBlockTag> BrainBlockTags { get; init; } = [];
+    public List<BlockTag> BlockTags { get; init; } = [];
 }

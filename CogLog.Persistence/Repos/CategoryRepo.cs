@@ -27,7 +27,7 @@ public class CategoryRepo(AppDbContext ctx) : BaseRepo<Category>(ctx), ICategory
     public async Task<Category> GetCategoryWithRelationsAsync(
         int id,
         bool includeSubjects = true,
-        bool includeBrainBlocks = false
+        bool includeBlocks = false
     )
     {
         var q = _ctx.Categories.AsQueryable();
@@ -36,9 +36,9 @@ public class CategoryRepo(AppDbContext ctx) : BaseRepo<Category>(ctx), ICategory
             q = q.Include(qq => qq.Subjects);
         }
 
-        if (includeBrainBlocks)
+        if (includeBlocks)
         {
-            q = q.Include(qq => qq.BrainBlocks);
+            q = q.Include(qq => qq.Blocks);
         }
         return await q.SingleAsync(qq => qq.Id == id);
     }

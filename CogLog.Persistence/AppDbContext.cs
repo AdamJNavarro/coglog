@@ -5,13 +5,13 @@ namespace CogLog.Persistence;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
-    public DbSet<BrainBlock> BrainBlocks { get; set; }
+    public DbSet<Block> Blocks { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Subject> Subjects { get; set; }
     public DbSet<Topic> Topics { get; set; }
     public DbSet<Tag> Tags { get; set; }
-    public DbSet<BrainBlockTopic> BrainBlockTopics { get; set; }
-    public DbSet<BrainBlockTag> BrainBlockTags { get; set; }
+    public DbSet<BlockTopic> BlockTopics { get; set; }
+    public DbSet<BlockTag> BlockTags { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -24,7 +24,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     {
         foreach (
             var entry in base
-                .ChangeTracker.Entries<BrainBlock>()
+                .ChangeTracker.Entries<Block>()
                 .Where(q => q.State == EntityState.Added)
         )
         {

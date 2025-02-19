@@ -10,9 +10,9 @@ public class SubjectConfig : IEntityTypeConfiguration<Subject>
     {
         builder.HasIndex(s => s.Label).IsUnique();
 
-        // Subject-BrainBlock 1-N
+        // Subject-Block 1-N
         builder
-            .HasMany(s => s.BrainBlocks)
+            .HasMany(s => s.Blocks)
             .WithOne(b => b.Subject)
             .HasForeignKey(b => b.SubjectId)
             .OnDelete(DeleteBehavior.NoAction);

@@ -24,7 +24,7 @@ public class SubjectRepo(AppDbContext ctx) : BaseRepo<Subject>(ctx), ISubjectRep
         bool includeCategory,
         bool includeTopics,
         bool includeTags,
-        bool includeBrainBlocks
+        bool includeBlocks
     )
     {
         var query = _ctx.Subjects.AsQueryable();
@@ -43,9 +43,9 @@ public class SubjectRepo(AppDbContext ctx) : BaseRepo<Subject>(ctx), ISubjectRep
             query = query.Include(x => x.Tags);
         }
 
-        if (includeBrainBlocks)
+        if (includeBlocks)
         {
-            query = query.Include(x => x.BrainBlocks);
+            query = query.Include(x => x.Blocks);
         }
 
         return await query.SingleAsync(q => q.Id == id);

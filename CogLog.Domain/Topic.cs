@@ -10,5 +10,5 @@ public class Topic : BaseHierarchy
 
     public Subject Subject { get; init; }
 
-    public List<BrainBlockTopic> BrainBlockTopics { get; init; } = [];
+    public List<BlockTopic> BlockTopics { get; init; } = [];
 }
