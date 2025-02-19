@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CogLog.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250219161841_FirstMig")]
+    [Migration("20250219174102_FirstMig")]
     partial class FirstMig
     {
         /// <inheritdoc />
@@ -162,6 +162,10 @@ namespace CogLog.Persistence.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Label")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SubjectId")

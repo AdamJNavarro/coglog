@@ -4,6 +4,8 @@ namespace CogLog.Domain;
 
 public class Tag : BaseEntity
 {
+    public string Label { get; init; }
+
     public string? Icon { get; init; }
 
     public required int SubjectId { get; init; }
