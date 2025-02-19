@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.API.Controllers;
 
-[Route("api/category")]
+[Route("api/categories")]
 [ApiController]
 public class CategoryController(IMediator mediator) : ControllerBase
 {
@@ -21,9 +21,16 @@ public class CategoryController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("{id:int}/subjects")]
-    public async Task<ActionResult<CategoryWithSubjectsDto>> Get(int id)
+    public async Task<ActionResult<CategoryWithSubjectsDto>> GetWithSubjects(int id)
     {
         var data = await mediator.Send(new GetCategoryWithSubjectsQuery(id));
+        return Ok(data);
+    }
+
+    [HttpGet("{id:int}/brainblocks")]
+    public async Task<ActionResult<CategoryWithSubjectsDto>> GetWithCategories(int id)
+    {
+        var data = await mediator.Send(new GetCategoryWithBrainBlocksQuery(id));
         return Ok(data);
     }
 

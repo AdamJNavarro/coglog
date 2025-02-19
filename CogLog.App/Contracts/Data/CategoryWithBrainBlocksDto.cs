@@ -1,9 +1,9 @@
 namespace CogLog.App.Contracts.Data;
 
-public record CategoryWithSubjectsDto(
+public record CategoryWithBrainBlocksDto(
     int Id,
     string Label,
     string Icon,
     string? Description,
-    List<SubjectDto> Subjects
+    List<BrainBlockDto> BrainBlocks
 );

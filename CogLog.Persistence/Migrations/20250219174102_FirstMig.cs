@@ -83,6 +83,7 @@ namespace CogLog.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Label = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubjectId = table.Column<int>(type: "int", nullable: false)
                 },
