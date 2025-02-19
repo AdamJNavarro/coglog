@@ -17,46 +17,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     {
         builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 
-        // Category-BrainBlock 1-N
-        builder
-            .Entity<Category>()
-            .HasMany(c => c.BrainBlocks)
-            .WithOne(b => b.Category)
-            .HasForeignKey(b => b.CategoryId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        // Category-Subject 1-N
-        builder
-            .Entity<Category>()
-            .HasMany(c => c.Subjects)
-            .WithOne(s => s.Category)
-            .HasForeignKey(s => s.CategoryId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        // Subject-BrainBlock 1-N
-        builder
-            .Entity<Subject>()
-            .HasMany(s => s.BrainBlocks)
-            .WithOne(b => b.Subject)
-            .HasForeignKey(b => b.SubjectId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        // Subject-Topic 1-N
-        builder
-            .Entity<Subject>()
-            .HasMany(s => s.Topics)
-            .WithOne(t => t.Subject)
-            .HasForeignKey(t => t.SubjectId)
-            .OnDelete(DeleteBehavior.Cascade);
-
-        // Subject-Tag 1-N
-        builder
-            .Entity<Subject>()
-            .HasMany(s => s.Tags)
-            .WithOne(t => t.Subject)
-            .HasForeignKey(t => t.SubjectId)
-            .OnDelete(DeleteBehavior.Cascade);
-
         base.OnModelCreating(builder);
     }
 
