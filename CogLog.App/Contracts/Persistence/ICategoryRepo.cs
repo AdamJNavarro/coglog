@@ -10,11 +10,7 @@ public interface ICategoryRepo : IBaseRepo<Category>
 
     Task<Category?> GetCategoryAsync(int id);
 
-    Task<Category> GetCategoryWithRelationsAsync(
-        int id,
-        bool includeSubjects,
-        bool includeBrainBlocks
-    );
+    Task<Category> GetCategoryWithRelationsAsync(int id, bool includeSubjects, bool includeBlocks);
 
     Task UpdateCategoryAsync(Category category);
     Task DeleteCategoryAsync(Category category);

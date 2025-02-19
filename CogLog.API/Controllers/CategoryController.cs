@@ -1,4 +1,5 @@
 using CogLog.App.Contracts.Data;
+using CogLog.App.Contracts.Data.Category;
 using CogLog.App.Features.Category.Commands;
 using CogLog.App.Features.Category.Queries;
 using MediatR;
@@ -17,17 +18,17 @@ public class CategoryController(IMediator mediator) : ControllerBase
         return await mediator.Send(new GetCategoriesQuery());
     }
 
+    [HttpGet("{id:int}/blocks")]
+    public async Task<ActionResult<CategoryWithSubjectsDto>> GetWithBlocks(int id)
+    {
+        var data = await mediator.Send(new GetCategoryWithBlocksQuery(id));
+        return Ok(data);
+    }
+
     [HttpGet("{id:int}/subjects")]
     public async Task<ActionResult<CategoryWithSubjectsDto>> GetWithSubjects(int id)
     {
         var data = await mediator.Send(new GetCategoryWithSubjectsQuery(id));
-        return Ok(data);
-    }
-
-    [HttpGet("{id:int}/brainblocks")]
-    public async Task<ActionResult<CategoryWithSubjectsDto>> GetWithCategories(int id)
-    {
-        var data = await mediator.Send(new GetCategoryWithBrainBlocksQuery(id));
         return Ok(data);
     }
 

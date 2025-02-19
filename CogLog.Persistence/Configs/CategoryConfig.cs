@@ -10,9 +10,9 @@ public class CategoryConfig : IEntityTypeConfiguration<Category>
     {
         builder.HasIndex(c => c.Label).IsUnique();
 
-        // Category-BrainBlock 1-N
+        // Category-Block 1-N
         builder
-            .HasMany(c => c.BrainBlocks)
+            .HasMany(c => c.Blocks)
             .WithOne(b => b.Category)
             .HasForeignKey(b => b.CategoryId)
             .OnDelete(DeleteBehavior.NoAction);

@@ -20,16 +20,16 @@ public class AppDbContextTests
     [Fact]
     public async void DateAdded_Set_DuringSave()
     {
-        var brainBlock = new BrainBlock
+        var block = new Block
         {
             Id = 1,
             Title = "Hello World",
             Content = "Hello World",
         };
 
-        await _dbContext.BrainBlocks.AddAsync(brainBlock);
+        await _dbContext.Blocks.AddAsync(block);
         await _dbContext.SaveChangesAsync();
 
-        brainBlock.DateAdded.ShouldBeOfType<DateTime>();
+        block.DateAdded.ShouldBeOfType<DateTime>();
     }
 }

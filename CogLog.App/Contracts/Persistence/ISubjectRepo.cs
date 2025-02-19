@@ -12,7 +12,7 @@ public interface ISubjectRepo : IBaseRepo<Subject>
         bool includeCategory,
         bool includeTopics,
         bool includeTags,
-        bool includeBrainBlocks
+        bool includeBlocks
     );
     Task UpdateSubjectAsync(Subject subject);
     Task DeleteSubjectAsync(Subject subject);

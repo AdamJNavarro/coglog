@@ -1,4 +1,5 @@
 using CogLog.App.Contracts.Data;
+using CogLog.App.Contracts.Data.Category;
 using CogLog.App.Contracts.Persistence;
 using CogLog.App.Mapping;
 using MediatR;
@@ -14,6 +15,6 @@ public class GetCategoriesHandler(ICategoryRepo repo)
     )
     {
         var categories = await repo.GetCategoriesAsync();
-        return categories.ToCategoryDtos();
+        return categories.ToCategoriesDto();
     }
 }
