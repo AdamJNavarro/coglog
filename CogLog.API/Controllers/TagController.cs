@@ -1,14 +1,12 @@
-using CogLog.App.Contracts.Data;
-using CogLog.App.Features.Subject.Commands;
-using CogLog.App.Features.Subject.Queries;
+using CogLog.App.Features.Tag.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.API.Controllers;
 
-[Route("api/subjects")]
+[Route("api/tags")]
 [ApiController]
-public class SubjectController(IMediator mediator) : ControllerBase
+public class TagController(IMediator mediator) : ControllerBase
 {
     // GET
     [HttpGet]
@@ -17,18 +15,11 @@ public class SubjectController(IMediator mediator) : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{id:int}/blocks")]
-    public async Task<ActionResult<SubjectWithBlocksDto>> GetWithBlocks(int id)
-    {
-        var data = await mediator.Send(new GetSubjectWithBlocksQuery(id));
-        return Ok(data);
-    }
-
     // POST
     [HttpPost]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
-    public async Task<ActionResult> Post(CreateSubjectCommand command)
+    public async Task<ActionResult> Post(CreateTagCommand command)
     {
         var resp = await mediator.Send(command);
         return CreatedAtAction(nameof(Get), new { id = resp });
@@ -40,7 +31,7 @@ public class SubjectController(IMediator mediator) : ControllerBase
     [ProducesResponseType(400)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult> Put(UpdateSubjectCommand command)
+    public async Task<ActionResult> Put(UpdateTagCommand command)
     {
         await mediator.Send(command);
         return NoContent();
@@ -53,7 +44,7 @@ public class SubjectController(IMediator mediator) : ControllerBase
     [ProducesDefaultResponseType]
     public async Task<ActionResult> Delete(int id)
     {
-        await mediator.Send(new DeleteSubjectCommand(id));
+        await mediator.Send(new DeleteTagCommand(id));
         return NoContent();
     }
 }
