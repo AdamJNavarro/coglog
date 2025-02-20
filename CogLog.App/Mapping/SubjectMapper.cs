@@ -38,4 +38,16 @@ public static class SubjectMapper
             CategoryId = request.CategoryId,
         };
     }
+
+    public static Subject ToSubject(this UpdateSubjectCommand request)
+    {
+        return new Subject
+        {
+            Id = request.Id,
+            Label = request.Label,
+            Icon = request.Icon,
+            Description = request.Description,
+            CategoryId = request.CategoryId,
+        };
+    }
 }

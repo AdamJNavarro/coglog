@@ -1,4 +1,3 @@
-using AutoMapper;
 using CogLog.App.Contracts.Persistence;
 using CogLog.App.Exceptions;
 using CogLog.App.Mapping;
@@ -19,6 +18,7 @@ public class CreateTopicHandler(ITopicRepo topicRepo, ISubjectRepo subjectRepo)
         }
 
         var incomingTopic = request.ToTopic();
+        await topicRepo.CreateTopicAsync(incomingTopic);
 
         return incomingTopic.Id;
     }

@@ -1,4 +1,3 @@
-using AutoMapper;
 using CogLog.App.Contracts.Persistence;
 using CogLog.App.Exceptions;
 using MediatR;

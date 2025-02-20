@@ -20,4 +20,15 @@ public static class TagMapper
             SubjectId = request.SubjectId,
         };
     }
+
+    public static Tag ToTag(this UpdateTagCommand request)
+    {
+        return new Tag
+        {
+            Id = request.Id,
+            Label = request.Label,
+            Icon = request.Icon,
+            SubjectId = request.SubjectId,
+        };
+    }
 }

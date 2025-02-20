@@ -1,4 +1,3 @@
-using CogLog.App.Contracts.Data;
 using CogLog.App.Contracts.Data.Block;
 using CogLog.App.Features.Block.Commands;
 using CogLog.App.Features.Block.Queries;
