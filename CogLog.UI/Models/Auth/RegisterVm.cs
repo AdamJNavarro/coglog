@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CogLog.UI.Models;
+namespace CogLog.UI.Models.Auth;
 
 public class RegisterVm
 {

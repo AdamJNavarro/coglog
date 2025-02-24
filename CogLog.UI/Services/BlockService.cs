@@ -1,38 +1,37 @@
 using AutoMapper;
 using CogLog.UI.Contracts;
 using CogLog.UI.Models;
+using CogLog.UI.Models.Block;
 using CogLog.UI.Services.Base;
 
 namespace CogLog.UI.Services;
 
-public class BrainBlockService(
-    IClient client,
-    IMapper mapper,
-    ILocalStorageService localStorageService
-) : BaseHttpService(client, localStorageService), IBrainBlockService
+public class BlockService(IClient client, IMapper mapper, ILocalStorageService localStorageService)
+    : BaseHttpService(client, localStorageService),
+        IBlockService
 {
     private readonly IClient _client = client;
 
-    public async Task<List<BrainBlockVm>> GetBrainBlocks()
+    public async Task<List<BlockVm>> GetBlocks()
     {
         AddBearerToken();
         var brainBlocks = await _client.BrainBlockAllAsync();
-        return mapper.Map<List<BrainBlockVm>>(brainBlocks);
+        return mapper.Map<List<BlockVm>>(brainBlocks);
     }
 
-    public async Task<BrainBlockVm> GetBrainBlockById(int id)
+    public async Task<BlockVm> GetBlockById(int id)
     {
         var brainBlock = await _client.BrainBlockGETAsync(id);
-        return mapper.Map<BrainBlockVm>(brainBlock);
+        return mapper.Map<BlockVm>(brainBlock);
     }
 
-    public async Task<Response<Guid>> CreateBrainBlock(CreateBrainBlockVm brainBlock)
+    public async Task<Response<Guid>> CreateBlock(CreateBlockVm block)
     {
         try
         {
             AddBearerToken();
 
-            var createLeaveTypeCommand = mapper.Map<CreateBrainBlockCommand>(brainBlock);
+            var createLeaveTypeCommand = mapper.Map<CreateBrainBlockCommand>(block);
             await _client.BrainBlockPOSTAsync(createLeaveTypeCommand);
             return new Response<Guid>() { Success = true };
         }
@@ -42,11 +41,11 @@ public class BrainBlockService(
         }
     }
 
-    public async Task<Response<Guid>> EditBrainBlock(int id, BrainBlockVm brainBlock)
+    public async Task<Response<Guid>> EditBlock(int id, BlockVm block)
     {
         try
         {
-            var updateBrainBlockCommand = mapper.Map<UpdateBrainBlockCommand>(brainBlock);
+            var updateBrainBlockCommand = mapper.Map<UpdateBrainBlockCommand>(block);
             await _client.BrainBlockPUTAsync(id.ToString(), updateBrainBlockCommand);
             return new Response<Guid>() { Success = true };
         }
@@ -56,7 +55,7 @@ public class BrainBlockService(
         }
     }
 
-    public async Task<Response<Guid>> DeleteBrainBlock(int id)
+    public async Task<Response<Guid>> DeleteBlock(int id)
     {
         try
         {

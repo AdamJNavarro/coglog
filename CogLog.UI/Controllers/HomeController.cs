@@ -1,18 +1,19 @@
 using System.Diagnostics;
 using CogLog.UI.Contracts;
 using CogLog.UI.Models;
+using CogLog.UI.Models.Block;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.UI.Controllers;
 
-public class HomeController(IBrainBlockService brainBlockService, ILogger<HomeController> _logger)
+public class HomeController(IBlockService blockService, ILogger<HomeController> _logger)
     : Controller
 {
     // INDEX - GET
     public async Task<IActionResult> Index()
     {
-        var data = await brainBlockService.GetBrainBlocks();
+        var data = await blockService.GetBrainBlocks();
         var sortedData = data.OrderByDescending(x => x.DateAdded).ToList();
         return View(sortedData);
     }
@@ -20,7 +21,7 @@ public class HomeController(IBrainBlockService brainBlockService, ILogger<HomeCo
     // DETAILS - GET
     public async Task<IActionResult> Details(int id)
     {
-        var brainBlock = await brainBlockService.GetBrainBlockById(id);
+        var brainBlock = await blockService.GetBrainBlockById(id);
 
         return View(brainBlock);
     }
@@ -34,35 +35,35 @@ public class HomeController(IBrainBlockService brainBlockService, ILogger<HomeCo
     // CREATE - POST
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(CreateBrainBlockVm createBrainBlock)
+    public async Task<IActionResult> Create(CreateBlockVm createBlock)
     {
-        await brainBlockService.CreateBrainBlock(createBrainBlock);
+        await blockService.CreateBrainBlock(createBlock);
         return RedirectToAction(nameof(Index));
     }
 
     // EDIT - GET
     public async Task<IActionResult> Edit(int id)
     {
-        var brainBlock = await brainBlockService.GetBrainBlockById(id);
+        var brainBlock = await blockService.GetBrainBlockById(id);
         return View(brainBlock);
     }
 
     // EDIT - POST
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, BrainBlockVm brainBlock)
+    public async Task<IActionResult> Edit(int id, BlockVm block)
     {
-        if (id != brainBlock.Id)
+        if (id != block.Id)
         {
             return NotFound();
         }
-        var response = await brainBlockService.EditBrainBlock(id, brainBlock);
+        var response = await blockService.EditBrainBlock(id, block);
         Console.WriteLine(response.ToString());
         if (response.Success)
         {
             return RedirectToAction(nameof(Index));
         }
-        return View(brainBlock);
+        return View(block);
     }
 
     // DELETE - POST
@@ -70,7 +71,7 @@ public class HomeController(IBrainBlockService brainBlockService, ILogger<HomeCo
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int id)
     {
-        var response = await brainBlockService.DeleteBrainBlock(id);
+        var response = await blockService.DeleteBrainBlock(id);
         if (response.Success)
         {
             // show toast

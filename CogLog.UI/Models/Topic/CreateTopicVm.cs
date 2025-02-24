@@ -1,4 +1,4 @@
-namespace CogLog.UI.Models;
+namespace CogLog.UI.Models.Topic;
 
 public class CreateTopicVm
 {
