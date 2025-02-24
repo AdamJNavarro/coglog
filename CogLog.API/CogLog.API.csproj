@@ -19,7 +19,6 @@
     <ItemGroup>
       <ProjectReference Include="..\CogLog.App\CogLog.App.csproj" />
       <ProjectReference Include="..\CogLog.Identity\CogLog.Identity.csproj" />
-      <ProjectReference Include="..\CogLog.Infra\CogLog.Infra.csproj" />
       <ProjectReference Include="..\CogLog.Persistence\CogLog.Persistence.csproj" />
     </ItemGroup>
 

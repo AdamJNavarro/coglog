@@ -1,7 +1,5 @@
-using CogLog.API.Middleware;
 using CogLog.App;
 using CogLog.Identity;
-using CogLog.Infra;
 using CogLog.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddAppServices();
-builder.Services.AddInfraServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 
