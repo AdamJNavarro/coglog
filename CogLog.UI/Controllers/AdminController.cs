@@ -1,5 +1,6 @@
 using CogLog.UI.Contracts;
 using CogLog.UI.Models;
+using CogLog.UI.Models.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.UI.Controllers;

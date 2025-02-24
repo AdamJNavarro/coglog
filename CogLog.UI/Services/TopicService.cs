@@ -1,6 +1,7 @@
 using AutoMapper;
 using CogLog.UI.Contracts;
 using CogLog.UI.Models;
+using CogLog.UI.Models.Topic;
 using CogLog.UI.Services.Base;
 using Exception = System.Exception;
 
