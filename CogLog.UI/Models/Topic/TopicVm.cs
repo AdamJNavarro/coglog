@@ -1,10 +1,16 @@
+using System.ComponentModel.DataAnnotations;
+using CogLog.UI.Models.Common;
+
 namespace CogLog.UI.Models.Topic;
 
-public class TopicVm
+public class TopicVm : BaseHierarchyVm
 {
-    public int Id { get; init; }
+    public string? Icon { get; init; }
 
-    public string Title { get; set; }
+    [Required]
+    public required int SubjectId { get; init; }
 
-    public string? Logo { get; set; }
+    // SubjectVm
+
+    // List BlockTopicVm
 }

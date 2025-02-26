@@ -7,13 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.UI.Controllers;
 
-public class HomeController(IBlockService blockService, ILogger<HomeController> _logger)
-    : Controller
+public class HomeController(IBlockService blockService) : Controller
 {
     // INDEX - GET
     public async Task<IActionResult> Index()
     {
-        var data = await blockService.GetBrainBlocks();
+        var data = await blockService.GetBlocksAsync();
         var sortedData = data.OrderByDescending(x => x.DateAdded).ToList();
         return View(sortedData);
     }
@@ -21,7 +20,7 @@ public class HomeController(IBlockService blockService, ILogger<HomeController> 
     // DETAILS - GET
     public async Task<IActionResult> Details(int id)
     {
-        var brainBlock = await blockService.GetBrainBlockById(id);
+        var brainBlock = await blockService.GetBlockAsync(id);
 
         return View(brainBlock);
     }
@@ -37,14 +36,14 @@ public class HomeController(IBlockService blockService, ILogger<HomeController> 
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CreateBlockVm createBlock)
     {
-        await blockService.CreateBrainBlock(createBlock);
+        await blockService.CreateBlockAsync(createBlock);
         return RedirectToAction(nameof(Index));
     }
 
     // EDIT - GET
     public async Task<IActionResult> Edit(int id)
     {
-        var brainBlock = await blockService.GetBrainBlockById(id);
+        var brainBlock = await blockService.GetBlockAsync(id);
         return View(brainBlock);
     }
 
@@ -57,8 +56,7 @@ public class HomeController(IBlockService blockService, ILogger<HomeController> 
         {
             return NotFound();
         }
-        var response = await blockService.EditBrainBlock(id, block);
-        Console.WriteLine(response.ToString());
+        var response = await blockService.EditBlockAsync(id, block);
         if (response.Success)
         {
             return RedirectToAction(nameof(Index));
@@ -71,7 +69,7 @@ public class HomeController(IBlockService blockService, ILogger<HomeController> 
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int id)
     {
-        var response = await blockService.DeleteBrainBlock(id);
+        var response = await blockService.DeleteBlockAsync(id);
         if (response.Success)
         {
             // show toast

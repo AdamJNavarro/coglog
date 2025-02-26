@@ -8,7 +8,7 @@ public class TopicController(ITopicService topicService) : Controller
     // INDEX
     public async Task<IActionResult> Index()
     {
-        var data = await topicService.GetTopics();
+        var data = await topicService.GetTopicsAsync();
         return View(data);
     }
 }

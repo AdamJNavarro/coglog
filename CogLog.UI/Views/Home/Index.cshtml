@@ -15,10 +15,9 @@
     @foreach (var item in Model)
     {
       
-        <div class="brain-block @(@item.Variant == BrainBlockVariantEnum._2 ? "thought-block" : @item.Variant == BrainBlockVariantEnum._1 ? "question-block" : "")">
+        <div class="brain-block">
             <div class="brain-block-title-container">
                 <h3>
-                    @Html.DisplayFor(modelItem => item.Topic!.Logo)
                     @Html.DisplayFor(modelItem => item.Title)
                 </h3>
                 @if (User.IsInRole("Administrator"))

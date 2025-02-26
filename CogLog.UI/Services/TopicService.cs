@@ -13,20 +13,20 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
 {
     private readonly IClient _client = client;
 
-    public async Task<List<TopicVm>> GetTopics()
+    public async Task<List<TopicVm>> GetTopicsAsync()
     {
         AddBearerToken();
         var topics = await _client.TopicAllAsync();
         return mapper.Map<List<TopicVm>>(topics);
     }
 
-    public async Task<TopicVm> GetTopicById(int id)
+    public async Task<TopicVm> GetTopicAsync(int id)
     {
         var topic = await _client.TopicGETAsync(id);
         return mapper.Map<TopicVm>(topic);
     }
 
-    public async Task<Response<Guid>> CreateTopic(CreateTopicVm topic)
+    public async Task<Response<Guid>> CreateTopicAsync(CreateTopicVm topic)
     {
         try
         {
@@ -42,7 +42,7 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
         }
     }
 
-    public async Task<Response<Guid>> EditTopic(int id, TopicVm topic)
+    public async Task<Response<Guid>> EditTopicAsync(int id, TopicVm topic)
     {
         try
         {
@@ -56,7 +56,7 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
         }
     }
 
-    public async Task<Response<Guid>> DeleteTopic(int id)
+    public async Task<Response<Guid>> DeleteTopicAsync(int id)
     {
         try
         {

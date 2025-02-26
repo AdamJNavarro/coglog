@@ -12,20 +12,20 @@ public class BlockService(IClient client, IMapper mapper, ILocalStorageService l
 {
     private readonly IClient _client = client;
 
-    public async Task<List<BlockVm>> GetBlocks()
+    public async Task<List<BlockVm>> GetBlocksAsync()
     {
         AddBearerToken();
         var brainBlocks = await _client.BrainBlockAllAsync();
         return mapper.Map<List<BlockVm>>(brainBlocks);
     }
 
-    public async Task<BlockVm> GetBlockById(int id)
+    public async Task<BlockVm> GetBlockAsync(int id)
     {
         var brainBlock = await _client.BrainBlockGETAsync(id);
         return mapper.Map<BlockVm>(brainBlock);
     }
 
-    public async Task<Response<Guid>> CreateBlock(CreateBlockVm block)
+    public async Task<Response<Guid>> CreateBlockAsync(CreateBlockVm block)
     {
         try
         {
@@ -41,7 +41,7 @@ public class BlockService(IClient client, IMapper mapper, ILocalStorageService l
         }
     }
 
-    public async Task<Response<Guid>> EditBlock(int id, BlockVm block)
+    public async Task<Response<Guid>> EditBlockAsync(int id, BlockVm block)
     {
         try
         {
@@ -55,7 +55,7 @@ public class BlockService(IClient client, IMapper mapper, ILocalStorageService l
         }
     }
 
-    public async Task<Response<Guid>> DeleteBlock(int id)
+    public async Task<Response<Guid>> DeleteBlockAsync(int id)
     {
         try
         {

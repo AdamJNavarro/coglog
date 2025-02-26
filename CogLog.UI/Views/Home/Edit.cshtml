@@ -12,7 +12,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="DateAdded" />
-            <input type="hidden" asp-for="Variant" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -26,9 +25,9 @@
             </div>
             <br />
             <div class="form-group">
-                <label asp-for="AdditionalContext" class="control-label">Additional Context</label>
-                <textarea asp-for="AdditionalContext" class="form-control"></textarea>
-                <span asp-validation-for="AdditionalContext" class="text-danger"></span>
+                <label asp-for="ExtraContent" class="control-label">Additional Context</label>
+                <textarea asp-for="ExtraContent" class="form-control"></textarea>
+                <span asp-validation-for="ExtraContent" class="text-danger"></span>
             </div>
             <br/>
             <div class="form-group">

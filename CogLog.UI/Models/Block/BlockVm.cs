@@ -16,4 +16,16 @@ public class BlockVm : BaseBlockVm
     public string? ExtraContent { get; init; }
 
     public string? Url { get; init; }
+
+    public int? CategoryId { get; set; }
+
+    // Category - VM
+
+    public int? SubjectId { get; set; }
+
+    // Subject - VM
+
+    // BlockTopics VM
+
+    // BlockTags VM
 }

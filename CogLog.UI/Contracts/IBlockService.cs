@@ -6,12 +6,12 @@ namespace CogLog.UI.Contracts;
 
 public interface IBlockService
 {
-    Task<List<BlockVm>> GetBlocks();
+    Task<List<BlockVm>> GetBlocksAsync();
 
-    Task<BlockVm> GetBlockById(int id);
-    Task<Response<Guid>> CreateBlock(CreateBlockVm block);
+    Task<BlockVm> GetBlockAsync(int id);
+    Task<Response<Guid>> CreateBlockAsync(CreateBlockVm block);
 
-    Task<Response<Guid>> EditBlock(int id, BlockVm block);
+    Task<Response<Guid>> EditBlockAsync(int id, BlockVm block);
 
-    Task<Response<Guid>> DeleteBlock(int id);
+    Task<Response<Guid>> DeleteBlockAsync(int id);
 }
