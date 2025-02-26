@@ -6,13 +6,13 @@ namespace CogLog.UI.Contracts;
 
 public interface ITopicService
 {
-    Task<List<TopicVm>> GetTopics();
+    Task<List<TopicVm>> GetTopicsAsync();
 
-    Task<TopicVm> GetTopicById(int id);
+    Task<TopicVm> GetTopicAsync(int id);
 
-    Task<Response<Guid>> CreateTopic(CreateTopicVm topic);
+    Task<Response<Guid>> CreateTopicAsync(CreateTopicVm topic);
 
-    Task<Response<Guid>> EditTopic(int id, TopicVm topic);
+    Task<Response<Guid>> EditTopicAsync(int id, TopicVm topic);
 
-    Task<Response<Guid>> DeleteTopic(int id);
+    Task<Response<Guid>> DeleteTopicAsync(int id);
 }

@@ -15,11 +15,5 @@
 
     </ItemGroup>
     
-    <ItemGroup>
-      <Folder Include="Models\Category\" />
-      <Folder Include="Models\Subject\" />
-      <Folder Include="Models\Tag\" />
-    </ItemGroup>
-    
 
 </Project>
