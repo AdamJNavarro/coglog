@@ -17,11 +17,11 @@ public class BlockVm : BaseBlockVm
 
     public string? Url { get; init; }
 
-    public int? CategoryId { get; set; }
+    public int? CategoryId { get; init; }
 
     // Category - VM
 
-    public int? SubjectId { get; set; }
+    public int? SubjectId { get; init; }
 
     // Subject - VM
 
