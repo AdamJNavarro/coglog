@@ -16,6 +16,7 @@
     </ItemGroup>
     
     <ItemGroup>
+      <Folder Include="Views\Blocks\" />
       <Folder Include="Views\Categories\" />
       <Folder Include="Views\Subjects\" />
       <Folder Include="Views\Tags\" />
