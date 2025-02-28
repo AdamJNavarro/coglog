@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.API.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/auth")]
 [ApiController]
 public class AuthController(IAuthService authenticationService) : ControllerBase
 {

@@ -13,19 +13,6 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
 {
     private readonly IClient _client = client;
 
-    public async Task<List<TopicVm>> GetTopicsAsync()
-    {
-        AddBearerToken();
-        var topics = await _client.TopicAllAsync();
-        return mapper.Map<List<TopicVm>>(topics);
-    }
-
-    public async Task<TopicVm> GetTopicAsync(int id)
-    {
-        var topic = await _client.TopicGETAsync(id);
-        return mapper.Map<TopicVm>(topic);
-    }
-
     public async Task<Response<Guid>> CreateTopicAsync(CreateTopicVm topic)
     {
         try
@@ -33,7 +20,7 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
             AddBearerToken();
 
             var createTopicCommand = mapper.Map<CreateTopicCommand>(topic);
-            await _client.TopicPOSTAsync(createTopicCommand);
+            await _client.TopicsPOSTAsync(createTopicCommand);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)
@@ -47,7 +34,7 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
         try
         {
             var updateCommand = mapper.Map<UpdateTopicCommand>(topic);
-            await _client.TopicPUTAsync(id.ToString(), updateCommand);
+            await _client.TopicsPUTAsync(id.ToString(), updateCommand);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)
@@ -60,7 +47,7 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
     {
         try
         {
-            await _client.TopicDELETEAsync(id);
+            await _client.TopicsDELETEAsync(id);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)

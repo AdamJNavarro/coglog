@@ -9,10 +9,8 @@ public class MappingConfig : Profile
 {
     public MappingConfig()
     {
-        CreateMap<BrainBlockDto, BlockVm>().ReverseMap();
-        CreateMap<BrainBlockDetailsDto, BlockVm>().ReverseMap();
-        CreateMap<CreateBrainBlockCommand, CreateBlockVm>().ReverseMap();
-        CreateMap<UpdateBrainBlockCommand, BlockVm>().ReverseMap();
+        CreateMap<BlockDto, BlockVm>().ReverseMap();
+        CreateMap<CreateBlockCommand, CreateBlockVm>().ReverseMap();
         CreateMap<TopicDto, TopicVm>().ReverseMap();
         CreateMap<CreateTopicCommand, CreateTopicVm>().ReverseMap();
         CreateMap<UpdateTopicCommand, TopicVm>().ReverseMap();

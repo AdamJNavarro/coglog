@@ -15,13 +15,13 @@ public class BlockService(IClient client, IMapper mapper, ILocalStorageService l
     public async Task<List<BlockVm>> GetBlocksAsync()
     {
         AddBearerToken();
-        var brainBlocks = await _client.BrainBlockAllAsync();
+        var brainBlocks = await _client.BlocksAllAsync();
         return mapper.Map<List<BlockVm>>(brainBlocks);
     }
 
     public async Task<BlockVm> GetBlockAsync(int id)
     {
-        var brainBlock = await _client.BrainBlockGETAsync(id);
+        var brainBlock = await _client.BlocksGETAsync(id);
         return mapper.Map<BlockVm>(brainBlock);
     }
 
@@ -31,22 +31,8 @@ public class BlockService(IClient client, IMapper mapper, ILocalStorageService l
         {
             AddBearerToken();
 
-            var createLeaveTypeCommand = mapper.Map<CreateBrainBlockCommand>(block);
-            await _client.BrainBlockPOSTAsync(createLeaveTypeCommand);
-            return new Response<Guid>() { Success = true };
-        }
-        catch (ApiException ex)
-        {
-            return ConvertApiExceptions<Guid>(ex);
-        }
-    }
-
-    public async Task<Response<Guid>> EditBlockAsync(int id, BlockVm block)
-    {
-        try
-        {
-            var updateBrainBlockCommand = mapper.Map<UpdateBrainBlockCommand>(block);
-            await _client.BrainBlockPUTAsync(id.ToString(), updateBrainBlockCommand);
+            var createLeaveTypeCommand = mapper.Map<CreateBlockCommand>(block);
+            await _client.BlocksPOSTAsync(createLeaveTypeCommand);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)
@@ -59,7 +45,7 @@ public class BlockService(IClient client, IMapper mapper, ILocalStorageService l
     {
         try
         {
-            await _client.BrainBlockDELETEAsync(id);
+            await _client.BlocksDELETEAsync(id);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)

@@ -48,21 +48,21 @@ public class HomeController(IBlockService blockService) : Controller
     }
 
     // EDIT - POST
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, BlockVm block)
-    {
-        if (id != block.Id)
-        {
-            return NotFound();
-        }
-        var response = await blockService.EditBlockAsync(id, block);
-        if (response.Success)
-        {
-            return RedirectToAction(nameof(Index));
-        }
-        return View(block);
-    }
+    // [HttpPost]
+    // [ValidateAntiForgeryToken]
+    // public async Task<IActionResult> Edit(int id, BlockVm block)
+    // {
+    //     if (id != block.Id)
+    //     {
+    //         return NotFound();
+    //     }
+    //     var response = await blockService.EditBlockAsync(id, block);
+    //     if (response.Success)
+    //     {
+    //         return RedirectToAction(nameof(Index));
+    //     }
+    //     return View(block);
+    // }
 
     // DELETE - POST
     [HttpPost]
