@@ -5,9 +5,9 @@ namespace CogLog.UI.Contracts;
 
 public interface ITopicService
 {
-    Task<List<TopicVm>> GetTopicsAsync();
-
-    Task<TopicVm> GetTopicAsync(int id);
+    // Task<List<TopicVm>> GetTopicsAsync();
+    //
+    // Task<TopicVm> GetTopicAsync(int id);
 
     Task<Response<Guid>> CreateTopicAsync(CreateTopicVm topic);
 
