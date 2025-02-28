@@ -1,5 +1,4 @@
 using AutoMapper;
-using CogLog.UI.Models;
 using CogLog.UI.Models.Block;
 using CogLog.UI.Models.Topic;
 using CogLog.UI.Services.Base;
