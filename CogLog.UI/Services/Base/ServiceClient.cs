@@ -99,21 +99,21 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<CategoryWithSubjectsDto> BlocksGETAsync(int id);
+        System.Threading.Tasks.Task<CategoryWithBlocksDto> CategoryWithBlocksGETAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<CategoryWithSubjectsDto> BlocksGETAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<CategoryWithBlocksDto> CategoryWithBlocksGETAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<CategoryWithSubjectsDto> SubjectsGETAsync(int id);
+        System.Threading.Tasks.Task<CategoryWithSubjectsDto> CategoryWithSubjectsGETAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<CategoryWithSubjectsDto> SubjectsGETAsync(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<CategoryWithSubjectsDto> CategoryWithSubjectsGETAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -126,12 +126,12 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task SubjectsGET2Async();
+        System.Threading.Tasks.Task SubjectsGETAsync();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task SubjectsGET2Async(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task SubjectsGETAsync(System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -153,12 +153,12 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<SubjectWithBlocksDto> BlocksGET2Async(int id);
+        System.Threading.Tasks.Task<SubjectWithBlocksDto> SubjectWithBlocksGETAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<SubjectWithBlocksDto> BlocksGET2Async(int id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<SubjectWithBlocksDto> SubjectWithBlocksGETAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -951,15 +951,15 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CategoryWithSubjectsDto> BlocksGETAsync(int id)
+        public virtual System.Threading.Tasks.Task<CategoryWithBlocksDto> CategoryWithBlocksGETAsync(int id)
         {
-            return BlocksGETAsync(id, System.Threading.CancellationToken.None);
+            return CategoryWithBlocksGETAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CategoryWithSubjectsDto> BlocksGETAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CategoryWithBlocksDto> CategoryWithBlocksGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1005,7 +1005,7 @@ namespace CogLog.UI.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<CategoryWithSubjectsDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<CategoryWithBlocksDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1034,15 +1034,15 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<CategoryWithSubjectsDto> SubjectsGETAsync(int id)
+        public virtual System.Threading.Tasks.Task<CategoryWithSubjectsDto> CategoryWithSubjectsGETAsync(int id)
         {
-            return SubjectsGETAsync(id, System.Threading.CancellationToken.None);
+            return CategoryWithSubjectsGETAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<CategoryWithSubjectsDto> SubjectsGETAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<CategoryWithSubjectsDto> CategoryWithSubjectsGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1221,15 +1221,15 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task SubjectsGET2Async()
+        public virtual System.Threading.Tasks.Task SubjectsGETAsync()
         {
-            return SubjectsGET2Async(System.Threading.CancellationToken.None);
+            return SubjectsGETAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task SubjectsGET2Async(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task SubjectsGETAsync(System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1471,15 +1471,15 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SubjectWithBlocksDto> BlocksGET2Async(int id)
+        public virtual System.Threading.Tasks.Task<SubjectWithBlocksDto> SubjectWithBlocksGETAsync(int id)
         {
-            return BlocksGET2Async(id, System.Threading.CancellationToken.None);
+            return SubjectWithBlocksGETAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SubjectWithBlocksDto> BlocksGET2Async(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SubjectWithBlocksDto> SubjectWithBlocksGETAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2557,6 +2557,27 @@ namespace CogLog.UI.Services.Base
 
         [System.Text.Json.Serialization.JsonPropertyName("description")]
         public string Description { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CategoryWithBlocksDto
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public int Id { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("label")]
+        public string Label { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("icon")]
+        public string Icon { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("description")]
+        public string Description { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("blocks")]
+        public System.Collections.Generic.ICollection<BlockDto> Blocks { get; set; }
 
     }
 

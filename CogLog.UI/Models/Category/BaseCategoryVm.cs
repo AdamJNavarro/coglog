@@ -3,12 +3,8 @@ using CogLog.UI.Models.Common;
 
 namespace CogLog.UI.Models.Category;
 
-public class CategoryVm : BaseHierarchyVm
+public class BaseCategoryVm : BaseHierarchyVm
 {
     [Required]
     public required string Icon { get; init; }
-
-    // List SubjectVM
-
-    // List BlockVM??
 }

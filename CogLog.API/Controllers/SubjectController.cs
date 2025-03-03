@@ -17,7 +17,8 @@ public class SubjectController(IMediator mediator) : ControllerBase
         return Ok();
     }
 
-    [HttpGet("{id:int}/blocks")]
+    [HttpGet]
+    [Route("{id:int}/blocks", Name = "SubjectWithBlocksGET")]
     public async Task<ActionResult<SubjectWithBlocksDto>> GetWithBlocks(int id)
     {
         var data = await mediator.Send(new GetSubjectWithBlocksQuery(id));

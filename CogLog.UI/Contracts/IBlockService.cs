@@ -8,7 +8,7 @@ public interface IBlockService
 {
     Task<List<BlockVm>> GetBlocksAsync();
 
-    Task<BlockVm> GetBlockAsync(int id);
+    // Task<BlockVm> GetBlockAsync(int id);
     Task<Response<Guid>> CreateBlockAsync(CreateBlockVm block);
 
     Task<Response<Guid>> DeleteBlockAsync(int id);

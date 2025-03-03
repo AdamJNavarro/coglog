@@ -30,7 +30,8 @@ builder.Services.AddHttpClient<IClient, Client>(client =>
 );
 builder.Services.AddScoped<IBlockService, BlockService>();
 
-// builder.Services.AddScoped<ICategoryService, CategoryService>)();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 // builder.Services.AddScoped<ISubjectService, SubjectService>();
 builder.Services.AddScoped<ITopicService, TopicService>();
 
@@ -57,6 +58,6 @@ app.UseAuthorization();
 app.UseCookiePolicy();
 app.UseAuthentication();
 
-app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Blocks}/{action=Index}/{id?}");
 
 app.Run();
