@@ -18,12 +18,12 @@ public class HomeController(IBlockService blockService) : Controller
     }
 
     // DETAILS - GET
-    public async Task<IActionResult> Details(int id)
-    {
-        var brainBlock = await blockService.GetBlockAsync(id);
-
-        return View(brainBlock);
-    }
+    // public async Task<IActionResult> Details(int id)
+    // {
+    //     var brainBlock = await blockService.GetBlockAsync(id);
+    //
+    //     return View(brainBlock);
+    // }
 
     // CREATE - GET
     public IActionResult Create()
@@ -41,11 +41,11 @@ public class HomeController(IBlockService blockService) : Controller
     }
 
     // EDIT - GET
-    public async Task<IActionResult> Edit(int id)
-    {
-        var brainBlock = await blockService.GetBlockAsync(id);
-        return View(brainBlock);
-    }
+    // public async Task<IActionResult> Edit(int id)
+    // {
+    //     var brainBlock = await blockService.GetBlockAsync(id);
+    //     return View(brainBlock);
+    // }
 
     // EDIT - POST
     // [HttpPost]

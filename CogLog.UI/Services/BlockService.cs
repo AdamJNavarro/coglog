@@ -19,11 +19,11 @@ public class BlockService(IClient client, IMapper mapper, ILocalStorageService l
         return mapper.Map<List<BlockVm>>(brainBlocks);
     }
 
-    public async Task<BlockVm> GetBlockAsync(int id)
-    {
-        var brainBlock = await _client.BlocksGETAsync(id);
-        return mapper.Map<BlockVm>(brainBlock);
-    }
+    // public async Task<BlockVm> GetBlockAsync(int id)
+    // {
+    //     var brainBlock = await _client.BlocksGETAsync(id);
+    //     return mapper.Map<BlockVm>(brainBlock);
+    // }
 
     public async Task<Response<Guid>> CreateBlockAsync(CreateBlockVm block)
     {
