@@ -1,4 +1,3 @@
-using CogLog.App.Contracts.Data;
 using CogLog.App.Contracts.Data.Category;
 using CogLog.App.Features.Category.Commands;
 using CogLog.App.Features.Category.Queries;
@@ -16,6 +15,14 @@ public class CategoryController(IMediator mediator) : ControllerBase
     public async Task<List<CategoryDto>> Get()
     {
         return await mediator.Send(new GetCategoriesQuery());
+    }
+
+    [HttpGet]
+    [Route("{id:int}", Name = "CategoryGET")]
+    public async Task<ActionResult<CategoryDto>> GetOne(int id)
+    {
+        var category = await mediator.Send(new GetCategoryQuery(id));
+        return Ok(category);
     }
 
     [HttpGet]

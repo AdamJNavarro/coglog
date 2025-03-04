@@ -19,7 +19,8 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
 
     public async Task<BaseCategoryVm> GetCategoryAsync(int id)
     {
-        throw new NotImplementedException();
+        var category = await _client.CategoryGETAsync(id);
+        return category.ToBaseCategoryVm();
     }
 
     public async Task<CategoryWithSubjectsVm> GetCategoryWithSubjectsAsync(int id)
@@ -28,9 +29,18 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
         return data.ToCategoryWithSubjectsVm();
     }
 
-    public async Task<Response<Guid>> CreateCategoryAsync(BaseCategoryVm category)
+    public async Task<Response<Guid>> CreateCategoryAsync(CreateCategoryVm category)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var cmd = category.ToCreateCategoryCommand();
+            await _client.CategoriesPOSTAsync(cmd);
+            return new Response<Guid>() { Success = true };
+        }
+        catch (ApiException ex)
+        {
+            return ConvertApiExceptions<Guid>(ex);
+        }
     }
 
     public async Task<Response<Guid>> UpdateCategoryAsync(BaseCategoryVm category)
@@ -40,6 +50,14 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
 
     public async Task<Response<Guid>> DeleteCategoryAsync(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await _client.CategoriesDELETEAsync(id);
+            return new Response<Guid>() { Success = true };
+        }
+        catch (ApiException ex)
+        {
+            return ConvertApiExceptions<Guid>(ex);
+        }
     }
 }

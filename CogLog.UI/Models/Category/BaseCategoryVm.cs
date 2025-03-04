@@ -5,6 +5,5 @@ namespace CogLog.UI.Models.Category;
 
 public class BaseCategoryVm : BaseHierarchyVm
 {
-    [Required]
     public required string Icon { get; init; }
 }

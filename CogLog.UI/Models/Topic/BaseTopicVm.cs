@@ -1,12 +1,10 @@
+using CogLog.UI.Models.Common;
+
 namespace CogLog.UI.Models.Topic;
 
-public class CreateTopicVm
+public class BaseTopicVm : BaseHierarchyVm
 {
-    public required string Label { get; init; }
-
     public string? Icon { get; init; }
-
-    public string? Description { get; init; }
 
     public required int SubjectId { get; init; }
 }

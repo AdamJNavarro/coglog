@@ -32,7 +32,7 @@ builder.Services.AddScoped<IBlockService, BlockService>();
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
-// builder.Services.AddScoped<ISubjectService, SubjectService>();
+builder.Services.AddScoped<ISubjectService, SubjectService>();
 builder.Services.AddScoped<ITopicService, TopicService>();
 
 // builder.Services.AddScoped<ITagService, TagService>();
@@ -59,5 +59,4 @@ app.UseCookiePolicy();
 app.UseAuthentication();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Blocks}/{action=Index}/{id?}");
-
 app.Run();

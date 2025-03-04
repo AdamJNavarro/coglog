@@ -1,12 +1,14 @@
-namespace CogLog.UI.Models.Topic;
+using CogLog.UI.Models.Common;
 
-public class CreateTopicVm
+namespace CogLog.UI.Models.Tag;
+
+public class BaseTagVm
 {
+    public required int Id { get; init; }
+
     public required string Label { get; init; }
 
     public string? Icon { get; init; }
-
-    public string? Description { get; init; }
 
     public required int SubjectId { get; init; }
 }

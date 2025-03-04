@@ -35,4 +35,14 @@ public static class CategoryViewMapper
         };
         return vm;
     }
+
+    public static CreateCategoryCommand ToCreateCategoryCommand(this CreateCategoryVm category)
+    {
+        return new CreateCategoryCommand
+        {
+            Label = category.Label,
+            Icon = category.Icon,
+            Description = category.Description,
+        };
+    }
 }

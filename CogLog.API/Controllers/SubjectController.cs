@@ -1,4 +1,5 @@
 using CogLog.App.Contracts.Data;
+using CogLog.App.Contracts.Data.Subject;
 using CogLog.App.Features.Subject.Commands;
 using CogLog.App.Features.Subject.Queries;
 using MediatR;
@@ -15,6 +16,14 @@ public class SubjectController(IMediator mediator) : ControllerBase
     public async Task<ActionResult> Get()
     {
         return Ok();
+    }
+
+    [HttpGet]
+    [Route("{id:int}/topics", Name = "SubjectWithCategoryTopicsGET")]
+    public async Task<ActionResult<SubjectWithCategoryTopicsDto>> Get(int id)
+    {
+        var data = await mediator.Send(new GetSubjectWithCategoryTopicsQuery(id));
+        return Ok(data);
     }
 
     [HttpGet]

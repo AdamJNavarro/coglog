@@ -1,3 +1,4 @@
+using CogLog.API.Middleware;
 using CogLog.App;
 using CogLog.Identity;
 using CogLog.Persistence;
@@ -23,7 +24,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,3 +1,5 @@
+using CogLog.App.Contracts.Data.Subject;
+
 namespace CogLog.App.Contracts.Data.Category;
 
 public record CategoryWithSubjectsDto(

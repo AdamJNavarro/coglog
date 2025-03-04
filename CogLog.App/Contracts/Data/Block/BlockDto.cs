@@ -1,4 +1,5 @@
 using CogLog.App.Contracts.Data.Category;
+using CogLog.App.Contracts.Data.Subject;
 using CogLog.App.Contracts.Data.Tag;
 
 namespace CogLog.App.Contracts.Data.Block;

@@ -1,4 +1,5 @@
 using CogLog.App.Contracts.Data;
+using CogLog.App.Contracts.Data.Subject;
 using CogLog.App.Features.Subject.Commands;
 using CogLog.Domain;
 
@@ -14,6 +15,19 @@ public static class SubjectMapper
             subject.Icon,
             subject.Description,
             subject.Blocks.Select(x => x.ToBlockDto()).ToList()
+        );
+    }
+
+    public static SubjectWithCategoryTopicsDto ToSubjectWithCategoryTopicsDto(this Subject subject)
+    {
+        return new SubjectWithCategoryTopicsDto(
+            subject.Id,
+            subject.Label,
+            subject.Icon,
+            subject.Description,
+            subject.CategoryId,
+            subject.Category.ToCategoryDto(),
+            subject.Topics.Select(x => x.ToTopicDto()).ToList()
         );
     }
 

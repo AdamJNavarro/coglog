@@ -1,4 +1,5 @@
 using CogLog.UI.Contracts;
+using CogLog.UI.Mapping;
 using CogLog.UI.Models.Subject;
 using CogLog.UI.Services.Base;
 
@@ -20,9 +21,25 @@ public class SubjectService(IClient client, ILocalStorageService localStorageSer
         throw new NotImplementedException();
     }
 
-    public async Task CreateSubjectAsync(SubjectVm subjectVm)
+    public async Task<SubjectWithCategoryTopicsVm> GetSubjectWithCategoryTopicsAsync(int id)
     {
-        throw new NotImplementedException();
+        var data = await _client.SubjectWithCategoryTopicsGETAsync(id);
+        return data.ToSubjectWithCategoryTopicsVm();
+    }
+
+    public async Task<Response<Guid>> CreateSubjectAsync(CreateSubjectVm subject)
+    {
+        try
+        {
+            var cmd = subject.ToCreateSubjectCommand();
+            await _client.SubjectsPOSTAsync(cmd);
+            return new Response<Guid>() { Success = true };
+        }
+        catch (ApiException ex)
+        {
+            Console.WriteLine(ex.Message);
+            return ConvertApiExceptions<Guid>(ex);
+        }
     }
 
     public async Task UpdateSubjectAsync(SubjectVm subjectVm)
