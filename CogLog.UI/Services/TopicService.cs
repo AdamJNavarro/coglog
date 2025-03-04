@@ -1,5 +1,6 @@
 using AutoMapper;
 using CogLog.UI.Contracts;
+using CogLog.UI.Mapping;
 using CogLog.UI.Models;
 using CogLog.UI.Models.Topic;
 using CogLog.UI.Services.Base;
@@ -17,10 +18,10 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
     {
         try
         {
-            AddBearerToken();
+            // AddBearerToken();
 
-            var createTopicCommand = mapper.Map<CreateTopicCommand>(topic);
-            await _client.TopicsPOSTAsync(createTopicCommand);
+            var cmd = topic.ToCreateTopicCommand();
+            await _client.TopicsPOSTAsync(cmd);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)

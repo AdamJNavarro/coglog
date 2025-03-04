@@ -16,7 +16,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Folder Include="Views\Subjects\" />
       <Folder Include="Views\Tags\" />
     </ItemGroup>
     

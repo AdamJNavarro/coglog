@@ -4,18 +4,14 @@ using CogLog.App.Exceptions;
 
 namespace CogLog.API.Middleware;
 
-public class ExceptionMiddleware
+public class ExceptionMiddleware(RequestDelegate next)
 {
-    private readonly RequestDelegate _next;
-
-    public ExceptionMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
-
     public async Task InvokeAsync(HttpContext context)
     {
-        try { }
+        try
+        {
+            await next(context);
+        }
         catch (Exception ex)
         {
             await HandleExceptionAsync(context, ex);

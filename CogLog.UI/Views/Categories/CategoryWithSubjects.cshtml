@@ -1,14 +1,14 @@
-@model IEnumerable<CogLog.UI.Models.Category.BaseCategoryVm>    
+@model CogLog.UI.Models.Category.CategoryWithSubjectsVm;
 @{
-    ViewData["Title"] = "Categories";
+    ViewData["Title"] = "Category with Subjects";
 }
     
 <header>
-    <h1>Categories</h1>
+    <h1>Category With Subjects</h1>
 </header>
 
 <div>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Subjects)
     {
         <p>
             @Html.DisplayFor(modelItem => item.Icon)

@@ -1,0 +1,38 @@
+@model CogLog.UI.Models.Category.CreateCategoryVm;
+@{
+    ViewData["Title"] = "Create Category";
+}
+    
+<header>
+    <h1>Create Category</h1>
+</header>
+
+<form asp-action="Create" class="form-container">
+    @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+    <div class="input-group">
+        <label asp-for="Label" class="input-label"></label>
+        <input asp-for="Label" class="input" />
+        <span asp-validation-for="Label" class="validation-text"></span>
+    </div>
+    <div class="input-group">
+        <label asp-for="Icon" class="input-label"></label>
+        <textarea asp-for="Icon" class="input"></textarea>
+        <span asp-validation-for="Icon" class="validation-text"></span>
+    </div>
+    <div class="input-group">
+        <label asp-for="Description" class="input-label"></label>
+        <textarea asp-for="Description" class="input"></textarea>
+        <span asp-validation-for="Description" class="validation-text"></span>
+    </div>
+        
+    <div class="btn-group">
+        <input type="submit" value="Create" class="btn btn-success" />
+        @* <a asp-action="Index">Back</a> *@
+    </div>
+</form>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -24,6 +24,7 @@ var settings = new CSharpClientGeneratorSettings
         Namespace = "CogLog.UI.Services.Base",
         JsonLibrary = CSharpJsonLibrary.SystemTextJson,
         DateTimeType = "System.DateTime",
+        GenerateNativeRecords = true,
     },
 };
 

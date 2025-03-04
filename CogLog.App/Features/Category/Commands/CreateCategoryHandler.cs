@@ -1,4 +1,5 @@
 using CogLog.App.Contracts.Persistence;
+using CogLog.App.Exceptions;
 using CogLog.App.Mapping;
 using MediatR;
 
@@ -11,6 +12,14 @@ public class CreateCategoryHandler(ICategoryRepo repo) : IRequestHandler<CreateC
         CancellationToken cancellationToken
     )
     {
+        var validator = new CreateCategoryValidator();
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (validationResult.Errors.Any())
+        {
+            throw new BadRequestException("Invalid Category", validationResult);
+        }
+
         var incomingCategory = request.ToCategory();
 
         await repo.CreateCategoryAsync(incomingCategory);

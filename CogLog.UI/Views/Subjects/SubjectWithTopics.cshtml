@@ -1,0 +1,19 @@
+@model CogLog.UI.Models.Subject.SubjectWithCategoryTopicsVm;
+@{
+    ViewData["Title"] = "Subject with Topics";
+}
+    
+<header>
+    <h1>@ViewData["Title"]</h1>
+    <h3>Category: @Html.DisplayFor(x => x.Category.Label)</h3>
+</header>
+
+<div>
+    @foreach (var item in Model.Topics)
+    {
+        <p>
+            @Html.DisplayFor(modelItem => item.Icon)
+            @Html.DisplayFor(modelItem => item.Label)
+        </p>
+    }
+</div>
