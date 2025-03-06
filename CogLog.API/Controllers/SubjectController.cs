@@ -18,6 +18,12 @@ public class SubjectController(IMediator mediator) : ControllerBase
         return Ok();
     }
 
+    [HttpGet("{categoryId:int}", Name = "SubjectsByCategoryGET")]
+    public async Task<List<SubjectDto>> GetByCategory(int categoryId)
+    {
+        return await mediator.Send(new GetSubjectsByCategoryQuery(categoryId));
+    }
+
     [HttpGet]
     [Route("{id:int}/topics", Name = "SubjectWithCategoryTopicsGET")]
     public async Task<ActionResult<SubjectWithCategoryTopicsDto>> Get(int id)

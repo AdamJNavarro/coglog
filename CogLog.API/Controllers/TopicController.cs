@@ -1,4 +1,6 @@
+using CogLog.App.Contracts.Data;
 using CogLog.App.Features.Topic.Commands;
+using CogLog.App.Features.Topic.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +15,12 @@ public class TopicController(IMediator mediator) : ControllerBase
     public async Task<ActionResult> Get()
     {
         return Ok();
+    }
+
+    [HttpGet("{subjectId:int}", Name = "TopicsBySubjectGET")]
+    public async Task<List<TopicDto>> GetBySubject(int subjectId)
+    {
+        return await mediator.Send(new GetTopicsBySubjectQuery(subjectId));
     }
 
     // POST

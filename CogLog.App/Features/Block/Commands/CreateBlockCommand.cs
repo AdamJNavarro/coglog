@@ -9,5 +9,6 @@ public record CreateBlockCommand(
     string? Url,
     int? CategoryId,
     int? SubjectId,
-    List<int> TopicIds
+    List<int> TopicIds,
+    List<int> TagIds
 ) : IRequest<int>;

@@ -14,6 +14,12 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
 {
     private readonly IClient _client = client;
 
+    public async Task<List<BaseTopicVm>> GetTopicsBySubjectAsync(int subjectId)
+    {
+        var data = await _client.TopicsBySubjectGETAsync(subjectId);
+        return data.Select(x => x.ToBaseTopicVm()).ToList();
+    }
+
     public async Task<Response<Guid>> CreateTopicAsync(CreateTopicVm topic)
     {
         try

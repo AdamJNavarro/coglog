@@ -19,6 +19,14 @@ public class SubjectRepo(AppDbContext ctx) : BaseRepo<Subject>(ctx), ISubjectRep
         return await _ctx.Subjects.AsNoTracking().ToListAsync();
     }
 
+    public async Task<List<Subject>> GetSubjectsByCategoryAsync(int categoryId)
+    {
+        return await _ctx
+            .Subjects.AsNoTracking()
+            .Where(s => s.CategoryId == categoryId)
+            .ToListAsync();
+    }
+
     public async Task<Subject> GetSubjectWithRelationsAsync(
         int id,
         bool includeCategory,

@@ -8,4 +8,5 @@ public interface ITagRepo : IBaseRepo<Tag>
     Task UpdateTagAsync(Tag tag);
     Task DeleteTagAsync(Tag tag);
     Task<Tag?> GetTagAsync(int id);
+    Task<List<Tag>> GetTagsBySubjectAsync(int subjectId);
 }

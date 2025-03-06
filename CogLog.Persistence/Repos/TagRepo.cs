@@ -30,4 +30,9 @@ public class TagRepo(AppDbContext ctx) : BaseRepo<Tag>(ctx), ITagRepo
     {
         return await _ctx.Tags.AsNoTracking().SingleOrDefaultAsync(t => t.Id == id);
     }
+
+    public async Task<List<Tag>> GetTagsBySubjectAsync(int subjectId)
+    {
+        return await _ctx.Tags.AsNoTracking().Where(t => t.SubjectId == subjectId).ToListAsync();
+    }
 }

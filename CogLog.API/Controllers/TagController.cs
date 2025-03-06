@@ -1,4 +1,6 @@
+using CogLog.App.Contracts.Data.Tag;
 using CogLog.App.Features.Tag.Commands;
+using CogLog.App.Features.Tag.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +15,12 @@ public class TagController(IMediator mediator) : ControllerBase
     public async Task<ActionResult> Get()
     {
         return Ok();
+    }
+
+    [HttpGet("{subjectId:int}", Name = "TagsBySubjectGET")]
+    public async Task<List<TagDto>> GetBySubject(int subjectId)
+    {
+        return await mediator.Send(new GetTagsBySubjectQuery(subjectId));
     }
 
     // POST

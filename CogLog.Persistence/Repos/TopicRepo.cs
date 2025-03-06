@@ -8,6 +8,11 @@ public class TopicRepo(AppDbContext ctx) : BaseRepo<Topic>(ctx), ITopicRepo
 {
     private readonly AppDbContext _ctx = ctx;
 
+    public async Task<List<Topic>> GetTopicsBySubjectAsync(int subjectId)
+    {
+        return await _ctx.Topics.AsNoTracking().Where(x => x.SubjectId == subjectId).ToListAsync();
+    }
+
     public async Task CreateTopicAsync(Topic topic)
     {
         await _ctx.Topics.AddAsync(topic);

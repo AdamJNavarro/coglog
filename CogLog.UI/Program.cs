@@ -35,7 +35,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubjectService, SubjectService>();
 builder.Services.AddScoped<ITopicService, TopicService>();
 
-// builder.Services.AddScoped<ITagService, TagService>();
+builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

@@ -1,0 +1,177 @@
+@model CogLog.UI.Models.Block.CreateBlockVm
+@{
+    ViewData["Title"] = "Create Block";
+}
+    
+<header>
+    <h1>Create Block</h1>
+</header>
+
+<form asp-controller="Blocks" asp-action="Create">
+    <div class="input-group">
+        <label asp-for="Title" class="input-label"></label>
+        <input asp-for="Title" class="input" />
+        <span asp-validation-for="Title" class="validation-text"></span>
+    </div>
+    <div class="input-group">
+        <label asp-for="Content" class="input-label"></label>
+        <textarea asp-for="Content" class="input"></textarea>
+        <span asp-validation-for="Content" class="validation-text"></span>
+    </div>
+    <div class="input-group">
+        <label asp-for="ExtraContent" class="input-label">Additional Context</label>
+        <textarea asp-for="ExtraContent" class="input"></textarea>
+        <span asp-validation-for="ExtraContent" class="validation-text"></span>
+    </div>
+    <div class="input-group">
+        <label asp-for="Url" class="input-label"></label>
+        <input asp-for="Url" class="input" type="url" />
+        <span asp-validation-for="Url" class="validation-text"></span>
+    </div>
+    
+    <div class="form-group">
+        <label asp-for="CategoryId" class="control-label">Category</label>
+        <select asp-for="CategoryId" id="category-select" class="form-control" asp-items="Model.Categories">
+            <option value="">-- Select Category --</option>
+            @if (Model.CategoryId.HasValue)
+            {
+                <option value="@Model.CategoryId" selected>
+                    @Model.Categories.FirstOrDefault(c => c.Value == Model.CategoryId.ToString())?.Text
+                </option>
+            }
+        </select>
+    </div>
+
+
+    <div class="form-group" id="subject-group" style="display: none;">
+        <label asp-for="SubjectId" class="control-label">Subject</label>
+        <select asp-for="SubjectId" id="subject-select" class="form-control">
+            <option value="">-- Select Subject --</option>
+            @if (Model.Subjects != null)
+            {
+                @foreach (var subject in Model.Subjects)
+                {
+                    <option value="@subject.Value" selected="@(Model.SubjectId.ToString() == subject.Value)">
+                        @subject.Text
+                    </option>
+                }
+            }
+        </select>
+    </div>
+
+    <div id="topic-tag-group" style="display: @(Model.SubjectId.HasValue ? "block" : "none");">
+
+        <div class="form-group">
+            <label asp-for="SelectedTopicIds" class="control-label">Topics (Optional)</label>
+            <select asp-for="SelectedTopicIds" id="topic-ids-select" class="form-control" multiple>
+                @if (Model.Topics != null)
+                {
+                    @foreach (var topic in Model.Topics)
+                    {
+                        <option value="@topic.Value" selected="@(Model.SelectedTopicIds.Contains(int.Parse(topic.Value)))">
+                            @topic.Text
+                        </option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SelectedTagIds" class="control-label">Tags (Optional)</label>
+            <select asp-for="SelectedTagIds" id="tag-ids-select" class="form-control" multiple>
+                @if (Model.Tags != null)
+                {
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <option value="@tag.Value" selected="@(Model.SelectedTagIds.Contains(int.Parse(tag.Value)))">
+                            @tag.Text
+                        </option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+        <input type="submit" value="Create" class="btn btn-success" />
+    
+
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function() {
+            // Handle category selection change
+            $('#category-select').change(function() {
+                console.log('Cat OC Called')
+                var categoryId = $(this).val();
+
+                if (categoryId) {
+                    // Show author dropdown and load authors for the selected category
+                    $('#subject-group').show();
+
+                    // Clear current options
+                    $('#subject-select').empty().append('<option value="">-- Select Subject --</option>');
+
+                    
+                    $.getJSON('@Url.Action("GetSubjectsByCategory", "Blocks")?categoryId=' + categoryId, function(subjects) {
+                        $.each(subjects, function(index, subject) {
+                            $('#subject-select').append($('<option></option>')
+                                .attr('value', subject.value)
+                                .text(subject.text));
+                        });
+                    });
+
+                    $('#topic-tag-group').hide();
+                    $('#topic-ids-select').empty()
+                    $('#tag-ids-select').empty()
+                } else {
+                    // Hide author dropdown if no category is selected
+                    $('#subject-group').hide();
+                    $('#subject-select').val('');
+                    $('#topic-tag-group').hide();
+                    $('#topic-ids-select').empty()
+                    $('#tag-ids-select').empty()
+                }
+            });
+
+            // Trigger change event if a category is already selected (e.g., on form validation failure)
+            if ($('#category-select').val()) {
+                $('#category-select').trigger('change');
+            }
+
+            // Handle subject selection change
+            $('#subject-select').change(function() {
+                var subjectId = $(this).val();
+
+                if (subjectId) {
+                    // Show tag dropdown and load tags for the selected author
+                    $('#topic-tag-group').show();
+
+                    // Clear current options
+                    $('#topic-ids-select').empty()
+                    $('#tag-ids-select').empty()
+
+                    // Load tags via AJAX
+                    $.getJSON('@Url.Action("GetTopicsBySubject", "Blocks")?subjectId=' + subjectId, function(topics) {
+                        $.each(topics, function(index, topic) {
+                            $('#topic-ids-select').append($('<option></option>')
+                                .attr('value', topic.value)
+                                .text(topic.text));
+                        });
+
+                        // Reselect any previously selected tags
+                        const selectedTopics = @Html.Raw(Json.Serialize(Model.SelectedTagIds));
+                        $('#topic-ids-select').val(selectedTopics);
+                    });
+                } else {
+                    // Hide tag dropdown if no author is selected
+                    $('#topic-tag-group').hide();
+                    $('#topic-ids-select').empty()
+                    $('#tag-ids-select').empty()
+                }
+            });
+        });
+    </script>
+}

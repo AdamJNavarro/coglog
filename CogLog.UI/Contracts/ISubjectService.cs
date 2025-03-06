@@ -6,6 +6,7 @@ namespace CogLog.UI.Contracts;
 public interface ISubjectService
 {
     Task<List<SubjectVm>> GetSubjectsAsync();
+    Task<List<BaseSubjectVm>> GetSubjectsByCategoryAsync(int categoryId);
     Task<SubjectVm> GetSubjectAsync(int id);
     Task<SubjectWithCategoryTopicsVm> GetSubjectWithCategoryTopicsAsync(int id);
     Task<Response<Guid>> CreateSubjectAsync(CreateSubjectVm subject);
