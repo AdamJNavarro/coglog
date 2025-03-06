@@ -8,6 +8,8 @@ public interface IBlockService
 {
     Task<List<BlockVm>> GetBlocksAsync();
 
+    Task<List<BlockByDayVm>> GetBlocksByDayAsync();
+
     // Task<BlockVm> GetBlockAsync(int id);
     Task<Response<Guid>> CreateBlockAsync(CreateBlockVm block);
 

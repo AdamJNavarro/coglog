@@ -1,4 +1,5 @@
 using CogLog.App.Contracts.Data;
+using CogLog.App.Contracts.Data.Topic;
 using CogLog.App.Contracts.Persistence;
 using CogLog.App.Mapping;
 using MediatR;

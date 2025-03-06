@@ -15,15 +15,15 @@ public static class BlockMapper
             block.ExtraContent,
             block.Url,
             block.CategoryId,
-            block.Category?.ToCategoryDto(),
+            block.Category?.ToCategoryMinimalDto(),
             block.SubjectId,
-            block.Subject?.ToSubjectDto(),
-            block.BlockTopics.Select(x => x.Topic.ToTopicDto()).ToList(),
-            block.BlockTags.Select(x => x.Tag.ToTagDto()).ToList()
+            block.Subject?.ToSubjectMinimalDto(),
+            block.BlockTopics.Select(x => x.Topic.ToTopicMinimalDto()).ToList(),
+            block.BlockTags.Select(x => x.Tag.ToTagMinimalDto()).ToList()
         );
     }
 
-    public static List<BlockDto> ToBlocksDto(this List<Block> blocks)
+    public static List<BlockDto> ToBlockDtoList(this List<Block> blocks)
     {
         return blocks.Select(x => x.ToBlockDto()).ToList();
     }

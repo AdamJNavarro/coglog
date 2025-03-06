@@ -13,6 +13,6 @@ public class GetBlocksHandler(IBlockRepo repo) : IRequestHandler<GetBlocksQuery,
     )
     {
         var blocks = await repo.GetBlocksWithRelationsAsync(true, true, true, true);
-        return blocks.ToBlocksDto();
+        return blocks.ToBlockDtoList();
     }
 }

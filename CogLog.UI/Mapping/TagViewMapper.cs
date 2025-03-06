@@ -5,6 +5,16 @@ namespace CogLog.UI.Mapping;
 
 public static class TagViewMapper
 {
+    public static TagMinimalVm ToTagMinimalVm(this TagMinimalDto topic)
+    {
+        return new TagMinimalVm
+        {
+            Id = topic.Id,
+            Label = topic.Label,
+            Icon = topic.Icon,
+        };
+    }
+
     public static BaseTagVm BaseTagVm(this TagDto topic)
     {
         return new BaseTagVm

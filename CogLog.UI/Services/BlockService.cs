@@ -1,13 +1,11 @@
-using AutoMapper;
 using CogLog.UI.Contracts;
 using CogLog.UI.Mapping;
-using CogLog.UI.Models;
 using CogLog.UI.Models.Block;
 using CogLog.UI.Services.Base;
 
 namespace CogLog.UI.Services;
 
-public class BlockService(IClient client, IMapper mapper, ILocalStorageService localStorageService)
+public class BlockService(IClient client, ILocalStorageService localStorageService)
     : BaseHttpService(client, localStorageService),
         IBlockService
 {
@@ -16,8 +14,14 @@ public class BlockService(IClient client, IMapper mapper, ILocalStorageService l
     public async Task<List<BlockVm>> GetBlocksAsync()
     {
         AddBearerToken();
-        var brainBlocks = await _client.BlocksAllAsync();
-        return mapper.Map<List<BlockVm>>(brainBlocks);
+        var data = await _client.BlocksAllAsync();
+        return data.Select(x => x.ToBlockVm()).ToList();
+    }
+
+    public async Task<List<BlockByDayVm>> GetBlocksByDayAsync()
+    {
+        var data = await _client.BlocksByDayGETAsync();
+        return data.ToBlockByDayVmList();
     }
 
     // public async Task<BlockVm> GetBlockAsync(int id)

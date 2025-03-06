@@ -92,6 +92,8 @@ body {
     text-rendering: optimizeLegibility;
     font-family: var(--body-font-family);
     line-height: 1.5;
+    background-color: #f5f5f5;
+
 }
 
 h1,
@@ -169,6 +171,142 @@ a {
     overflow: hidden;
     background-color: var(--purple-700);
     border: none;
+}
+
+
+.card-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+/* Card container */
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+}
+
+/* First row */
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.circle-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0f2fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0284c7;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.external-link {
+    color: #64748b;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+
+.external-link:hover {
+    color: #0284c7;
+}
+
+/* Second row */
+.card-content {
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* Third row */
+.badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.badge {
+    background-color: rgba(255, 255, 255, 0.6);
+    color: #475569;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+.badge:hover {
+    background-color: #e2e8f0;
+}
+
+/* Fourth row - Collapsible section */
+.collapsible-container {
+    /*border-top: 1px solid #e2e8f0;*/
+    padding-top: 1rem;
+}
+
+.collapsible-toggle {
+    background: none;
+    border: none;
+    color: #0284c7;
+    font-size: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0;
+}
+
+.collapsible-toggle:hover {
+    color: #0369a1;
+}
+
+.collapsible-toggle .icon {
+    transition: transform 0.3s ease;
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+/* Hidden checkbox to toggle the collapsible content */
+#collapsible-checkbox {
+    display: none;
+}
+
+#collapsible-checkbox:checked ~ .collapsible-content {
+    max-height: 500px; /* Arbitrary large value */
+}
+
+#collapsible-checkbox:checked ~ .collapsible-toggle .icon {
+    transform: rotate(180deg);
 }
 
 .brain-block-list {

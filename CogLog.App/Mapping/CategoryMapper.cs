@@ -6,6 +6,16 @@ namespace CogLog.App.Mapping;
 
 public static class CategoryMapper
 {
+    public static CategoryMinimalDto ToCategoryMinimalDto(this Category category)
+    {
+        return new CategoryMinimalDto(category.Id, category.Label, category.Icon);
+    }
+
+    public static List<CategoryMinimalDto> ToCategoryMinimalDtoList(this List<Category> categories)
+    {
+        return categories.Select(x => x.ToCategoryMinimalDto()).ToList();
+    }
+
     public static CategoryDto ToCategoryDto(this Category category)
     {
         return new CategoryDto(category.Id, category.Label, category.Icon, category.Description);

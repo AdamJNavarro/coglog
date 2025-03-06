@@ -1,4 +1,5 @@
 using CogLog.App.Contracts.Data;
+using CogLog.App.Contracts.Data.Topic;
 using MediatR;
 
 namespace CogLog.App.Features.Topic.Queries;

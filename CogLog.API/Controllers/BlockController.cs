@@ -18,6 +18,13 @@ namespace CogLog.API.Controllers
             return await mediator.Send(new GetBlocksQuery());
         }
 
+        [HttpGet]
+        [Route("by-day", Name = "BlocksByDayGET")]
+        public async Task<List<BlocksByDayDto>> GetBlocksByDay()
+        {
+            return await mediator.Send(new GetBlocksByDayQuery());
+        }
+
         // POST api/<BlockController>
         [HttpPost]
         [ProducesResponseType(201)]

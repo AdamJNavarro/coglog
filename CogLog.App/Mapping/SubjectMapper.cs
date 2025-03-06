@@ -31,6 +31,16 @@ public static class SubjectMapper
         );
     }
 
+    public static SubjectMinimalDto ToSubjectMinimalDto(this Subject subject)
+    {
+        return new SubjectMinimalDto(subject.Id, subject.Label, subject.Icon);
+    }
+
+    public static List<SubjectMinimalDto> ToSubjectMinimalDtoList(this List<Subject> subjects)
+    {
+        return subjects.Select(x => x.ToSubjectMinimalDto()).ToList();
+    }
+
     public static SubjectDto ToSubjectDto(this Subject subject)
     {
         return new SubjectDto(

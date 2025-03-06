@@ -5,6 +5,18 @@ namespace CogLog.UI.Mapping;
 
 public static class CategoryViewMapper
 {
+    public static CategoryMinimalVm ToCategoryMinimalVm(this CategoryMinimalDto category)
+    {
+        var categoryVm = new CategoryMinimalVm
+        {
+            Id = category.Id,
+            Label = category.Label,
+            Icon = category.Icon,
+        };
+
+        return categoryVm;
+    }
+
     public static BaseCategoryVm ToBaseCategoryVm(this CategoryDto category)
     {
         var categoryVm = new BaseCategoryVm
