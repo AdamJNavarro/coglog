@@ -5,6 +5,7 @@ namespace CogLog.UI.Contracts;
 
 public interface ITagService
 {
+    Task<List<BaseTagVm>> GetTagsBySubjectAsync(int subjectId);
     Task<List<TagVm>> GetTagsAsync();
     Task<TagVm> GetTagAsync(int id);
     Task<Response<Guid>> CreateTagAsync(TagVm tagVm);

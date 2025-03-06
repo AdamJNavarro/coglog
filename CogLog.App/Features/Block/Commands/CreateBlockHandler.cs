@@ -19,41 +19,30 @@ public class CreateBlockHandler(
             Content = request.Content,
             ExtraContent = request.ExtraContent,
             Url = request.Url,
+            CategoryId = request.CategoryId,
+            SubjectId = request.SubjectId,
         };
-
-        if (request.CategoryId.HasValue)
-        {
-            var categoryExists = await categoryRepo.EntityExistsAsync((int)request.CategoryId);
-            if (categoryExists)
-            {
-                block.CategoryId = (int)request.CategoryId;
-            }
-        }
-
-        if (request.SubjectId.HasValue)
-        {
-            var subjectExists = await subjectRepo.EntityExistsAsync((int)request.SubjectId);
-            if (subjectExists)
-            {
-                block.SubjectId = (int)request.SubjectId;
-            }
-        }
 
         if (request.TopicIds.Count > 0)
         {
-            List<BlockTopic> blockTopics = new List<BlockTopic>();
-            // check if topics exist
-            // create BlockTopic entities
+            List<BlockTopic> blockTopics = [];
+
             foreach (var topicId in request.TopicIds)
             {
-                var topicExists = await topicRepo.EntityExistsAsync((int)topicId);
-                if (topicExists)
-                {
-                    blockTopics.Add(new BlockTopic { BlockId = block.Id, TopicId = (int)topicId });
-                }
+                blockTopics.Add(new BlockTopic { BlockId = block.Id, TopicId = (int)topicId });
             }
 
             block.BlockTopics = blockTopics;
+        }
+
+        if (request.TagIds.Count > 0)
+        {
+            List<BlockTag> blockTags = [];
+            foreach (var tagId in request.TagIds)
+            {
+                blockTags.Add(new BlockTag { BlockId = block.Id, TagId = (int)tagId });
+            }
+            block.BlockTags = blockTags;
         }
 
         await blockRepo.CreateBlockAsync(block);

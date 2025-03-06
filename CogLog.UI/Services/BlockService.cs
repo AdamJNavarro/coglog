@@ -1,5 +1,6 @@
 using AutoMapper;
 using CogLog.UI.Contracts;
+using CogLog.UI.Mapping;
 using CogLog.UI.Models;
 using CogLog.UI.Models.Block;
 using CogLog.UI.Services.Base;
@@ -29,14 +30,15 @@ public class BlockService(IClient client, IMapper mapper, ILocalStorageService l
     {
         try
         {
-            AddBearerToken();
+            // AddBearerToken();
 
-            var createLeaveTypeCommand = mapper.Map<CreateBlockCommand>(block);
-            await _client.BlocksPOSTAsync(createLeaveTypeCommand);
+            await _client.BlocksPOSTAsync(block.ToCreateBlockCommand());
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)
         {
+            Console.WriteLine("CBA EX");
+            Console.WriteLine(ex.Message);
             return ConvertApiExceptions<Guid>(ex);
         }
     }

@@ -16,6 +16,12 @@ public class SubjectService(IClient client, ILocalStorageService localStorageSer
         throw new NotImplementedException();
     }
 
+    public async Task<List<BaseSubjectVm>> GetSubjectsByCategoryAsync(int categoryId)
+    {
+        var data = await _client.SubjectsByCategoryGETAsync(categoryId);
+        return data.Select(x => x.ToBaseSubjectVm()).ToList();
+    }
+
     public async Task<SubjectVm> GetSubjectAsync(int id)
     {
         throw new NotImplementedException();

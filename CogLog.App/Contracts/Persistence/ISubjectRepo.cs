@@ -6,7 +6,7 @@ public interface ISubjectRepo : IBaseRepo<Subject>
 {
     Task CreateSubjectAsync(Subject subject);
     Task<List<Subject>> GetSubjectsAsync();
-
+    Task<List<Subject>> GetSubjectsByCategoryAsync(int categoryId);
     Task<Subject> GetSubjectWithRelationsAsync(
         int id,
         bool includeCategory,
