@@ -8,3 +8,29 @@
     <h1>Adam's Cog Log</h1>
     <p>A collection of learnings, questions and thoughts.</p>
 </header>
+
+<div class="brain-block-list">
+
+    @foreach (var item in Model)
+    {
+
+        <div class="brain-block">
+            <div class="brain-block-title-container">
+                <h3>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </h3>
+
+            </div>
+            <div class="brain-block-content-container">
+                <p>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </p>
+             
+            </div>
+            <div class="brain-block-date">@DateOnly.FromDateTime(@item.DateAdded)</div>
+
+        </div>
+    }
+
+
+</div>

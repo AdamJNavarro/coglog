@@ -5,6 +5,16 @@ namespace CogLog.UI.Mapping;
 
 public static class TopicViewMapper
 {
+    public static TopicMinimalVm ToTopicMinimalVm(this TopicMinimalDto topic)
+    {
+        return new TopicMinimalVm
+        {
+            Id = topic.Id,
+            Label = topic.Label,
+            Icon = topic.Icon,
+        };
+    }
+
     public static BaseTopicVm ToBaseTopicVm(this TopicDto topic)
     {
         return new BaseTopicVm

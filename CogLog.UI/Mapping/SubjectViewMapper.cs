@@ -5,6 +5,16 @@ namespace CogLog.UI.Mapping;
 
 public static class SubjectViewMapper
 {
+    public static SubjectMinimalVm ToSubjectMinimalVm(this SubjectMinimalDto subject)
+    {
+        return new SubjectMinimalVm
+        {
+            Id = subject.Id,
+            Label = subject.Label,
+            Icon = subject.Icon,
+        };
+    }
+
     public static BaseSubjectVm ToBaseSubjectVm(this SubjectDto subject)
     {
         return new BaseSubjectVm

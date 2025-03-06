@@ -1,6 +1,7 @@
 using CogLog.App.Contracts.Data.Category;
 using CogLog.App.Contracts.Data.Subject;
 using CogLog.App.Contracts.Data.Tag;
+using CogLog.App.Contracts.Data.Topic;
 
 namespace CogLog.App.Contracts.Data.Block;
 
@@ -12,9 +13,9 @@ public record BlockDto(
     string? ExtraContent,
     string? Url,
     int? CategoryId,
-    CategoryDto? Category,
+    CategoryMinimalDto? Category,
     int? SubjectId,
-    SubjectDto? Subject,
-    List<TopicDto> Topics,
-    List<TagDto> Tags
+    SubjectMinimalDto? Subject,
+    List<TopicMinimalDto> Topics,
+    List<TagMinimalDto> Tags
 );

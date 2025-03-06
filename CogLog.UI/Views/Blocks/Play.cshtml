@@ -1,0 +1,83 @@
+@model IEnumerable<CogLog.UI.Models.Block.BlockByDayVm>
+
+@{
+    ViewData["Title"] = "Play";
+}
+
+@foreach (var group in Model)
+{
+    <div>
+        <h1>@DateOnly.FromDateTime(@group.Day)</h1>
+
+        <div class="card-list">
+            @foreach (var block in @group.Blocks)
+            {
+                <div class="card">
+                    <!-- First row -->
+                    <div class="card-header">
+                        <div class="title-container">
+                            @* <div class="circle-icon"> *@
+                            @*   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> *@
+                            @*     <path d="M12 2L2 7l10 5 10-5-10-5z"></path> *@
+                            @*     <path d="M2 17l10 5 10-5"></path> *@
+                            @*     <path d="M2 12l10 5 10-5"></path> *@
+                            @*   </svg> *@
+                            @* </div> *@
+                            <h2 class="card-title">@block.Title</h2>
+                        </div>
+                        @if (!string.IsNullOrEmpty(block.Url))
+                        {
+                            <a href="https://example.com" class="external-link" target="_blank">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                    <polyline points="15 3 21 3 21 9"></polyline>
+                                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                                </svg>
+                            </a>
+                        }
+                    </div>
+
+                    <!-- Second row -->
+                    <div class="card-content">
+                        <p>@block.Content</p>
+                    </div>
+
+                    <!-- Third row -->
+                    @if (block.Topics.Count > 0 || block.Tags.Count > 0)
+                    {
+                        <div class="badge-container">
+
+                            <a href="#" class="badge">HTML</a>
+                            <a href="#" class="badge">CSS</a>
+                            <a href="#" class="badge">Flexbox</a>
+                            <a href="#" class="badge">Component</a>
+
+                        </div>
+                    }
+
+
+                    <!-- Fourth row - Collapsible section -->
+                    @if (!string.IsNullOrEmpty(block.ExtraContent))
+                    {
+                        <div class="collapsible-container">
+                            <input type="checkbox" id="collapsible-checkbox">
+                            <label for="collapsible-checkbox" class="collapsible-toggle">
+                                <span>Show more</span>
+                                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                </svg>
+                            </label>
+                            <div class="collapsible-content">
+                                <p class="card-content">
+                                    @block.ExtraContent
+                                </p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            }
+        </div>
+       
+    </div>
+}

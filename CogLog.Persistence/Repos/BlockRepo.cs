@@ -1,4 +1,6 @@
+using CogLog.App.Contracts.Data.Block;
 using CogLog.App.Contracts.Persistence;
+using CogLog.App.Mapping;
 using CogLog.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +31,22 @@ public class BlockRepo(AppDbContext ctx) : BaseRepo<Block>(ctx), IBlockRepo
     public async Task<List<Block>> GetBlocksAsync()
     {
         return await _ctx.Blocks.AsNoTracking().ToListAsync();
+    }
+
+    public async Task<List<BlocksByDayDto>> GetBlocksByDayAsync()
+    {
+        var blocks = await _ctx.Blocks.AsNoTracking().ToListAsync();
+
+        var blocksByDay = blocks
+            .GroupBy(b => b.DateAdded?.Date)
+            .Select(group => new BlocksByDayDto(
+                (DateTime)group.Key!,
+                group.Count(),
+                group.ToList().Select(x => x.ToBlockDto()).ToList()
+            ))
+            .OrderByDescending(b => b.Day)
+            .ToList();
+        return blocksByDay;
     }
 
     public async Task<List<Block>> GetBlocksWithRelationsAsync(

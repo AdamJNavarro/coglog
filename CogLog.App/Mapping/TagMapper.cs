@@ -6,6 +6,11 @@ namespace CogLog.App.Mapping;
 
 public static class TagMapper
 {
+    public static TagMinimalDto ToTagMinimalDto(this Tag tag)
+    {
+        return new TagMinimalDto(tag.Id, tag.Label, tag.Icon);
+    }
+
     public static TagDto ToTagDto(this Tag tag)
     {
         return new TagDto(tag.Id, tag.Label, tag.Icon, tag.SubjectId);

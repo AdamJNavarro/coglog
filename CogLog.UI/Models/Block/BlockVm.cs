@@ -1,4 +1,8 @@
 using System.ComponentModel.DataAnnotations;
+using CogLog.UI.Models.Category;
+using CogLog.UI.Models.Subject;
+using CogLog.UI.Models.Tag;
+using CogLog.UI.Models.Topic;
 
 namespace CogLog.UI.Models.Block;
 
@@ -19,13 +23,13 @@ public class BlockVm : BaseBlockVm
 
     public int? CategoryId { get; init; }
 
-    // Category - VM
+    public CategoryMinimalVm? Category { get; init; }
 
     public int? SubjectId { get; init; }
 
-    // Subject - VM
+    public SubjectMinimalVm? Subject { get; init; }
 
-    // BlockTopics VM
+    public List<TopicMinimalVm>? Topics { get; init; }
 
-    // BlockTags VM
+    public List<TagMinimalVm>? Tags { get; init; }
 }
