@@ -10,7 +10,7 @@ public static class TopicViewMapper
         return new TopicMinimalVm
         {
             Id = topic.Id,
-            Label = topic.Label,
+            Name = topic.Name,
             Icon = topic.Icon,
         };
     }
@@ -20,8 +20,7 @@ public static class TopicViewMapper
         return new BaseTopicVm
         {
             Id = topic.Id,
-            Label = topic.Label,
-            Description = topic.Description,
+            Name = topic.Name,
             SubjectId = topic.SubjectId,
         };
     }
@@ -35,7 +34,7 @@ public static class TopicViewMapper
     {
         return new CreateTopicCommand
         {
-            Label = topic.Label,
+            Name = topic.Name,
             Description = topic.Description,
             SubjectId = topic.SubjectId,
         };

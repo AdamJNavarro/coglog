@@ -1,4 +1,4 @@
-namespace CogLog.Domain.Common;
+namespace CogLog.Domain.Shared;
 
 public abstract class BaseEntity
 {

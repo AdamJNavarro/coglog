@@ -8,7 +8,7 @@ public class SubjectConfig : IEntityTypeConfiguration<Subject>
 {
     public void Configure(EntityTypeBuilder<Subject> builder)
     {
-        builder.HasIndex(s => s.Label).IsUnique();
+        builder.HasIndex(s => s.Name).IsUnique();
 
         // Subject-Block 1-N
         builder

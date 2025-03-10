@@ -10,7 +10,7 @@ public class TagsController(ITagService tagService) : Controller
     public async Task<IActionResult> GetTagsBySubject(int subjectId)
     {
         var data = await tagService.GetTagsBySubjectAsync(subjectId);
-        var tags = data.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Label });
+        var tags = data.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name });
         return Json(tags);
     }
 }

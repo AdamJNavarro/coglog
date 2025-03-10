@@ -1,3 +1,4 @@
+using CogLog.App.Contracts.Data.Block;
 using CogLog.UI.Contracts;
 using CogLog.UI.Models.Block;
 using Microsoft.AspNetCore.Mvc;
@@ -13,14 +14,16 @@ public class BlocksController(
 ) : Controller
 {
     // INDEX - GET
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index([FromQuery] BlocksQueryParameters parameters)
     {
-        var data = await blockService.GetBlocksAsync();
-        var sortedData = data.OrderByDescending(x => x.DateAdded).ToList();
-        // Console.WriteLine("SD");
-        // Console.WriteLine(sortedData);
-        // Console.WriteLine(sortedData.ToString());
-        return View(sortedData);
+        if (parameters == null)
+        {
+            parameters = new BlocksQueryParameters();
+        }
+
+        var data = await blockService.GetBlocksAsync(parameters);
+
+        return View(data);
     }
 
     public async Task<IActionResult> Play()
@@ -37,7 +40,7 @@ public class BlocksController(
         var vm = new CreateBlockVm
         {
             Categories = categories
-                .Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Label })
+                .Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name })
                 .ToList(),
         };
 
@@ -51,31 +54,5 @@ public class BlocksController(
     {
         await blockService.CreateBlockAsync(vm);
         return RedirectToAction(nameof(Index));
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> GetSubjectsByCategory(int categoryId)
-    {
-        var data = await subjectService.GetSubjectsByCategoryAsync(categoryId);
-        var subjects = data.Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.Label,
-            })
-            .ToList();
-
-        return Json(subjects);
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> GetTopicsBySubject(int subjectId)
-    {
-        var data = await topicService.GetTopicsBySubjectAsync(subjectId);
-        var topics = data.Select(x => new SelectListItem
-        {
-            Value = x.Id.ToString(),
-            Text = x.Label,
-        });
-        return Json(topics);
     }
 }

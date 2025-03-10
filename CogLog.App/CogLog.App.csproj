@@ -16,4 +16,8 @@
       <PackageReference Include="mediatr" Version="12.4.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Contracts\Data\Shared\Pagination\" />
+    </ItemGroup>
+
 </Project>

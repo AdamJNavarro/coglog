@@ -1,6 +1,7 @@
 using CogLog.App.Contracts.Data.Block;
 using CogLog.App.Features.Block.Commands;
 using CogLog.App.Features.Block.Queries;
+using CogLog.App.Models.Pagination;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,12 @@ namespace CogLog.API.Controllers
     [ApiController]
     public class BlockController(IMediator mediator) : ControllerBase
     {
-        // GET: api/<BlockController>
         [HttpGet]
-        public async Task<List<BlockDto>> Get()
+        public async Task<ActionResult<PaginationResponse<BlockDto>>> Get(
+            [FromQuery] BlocksQueryParameters parameters
+        )
         {
-            return await mediator.Send(new GetBlocksQuery());
+            return await mediator.Send(new GetBlocksQuery(parameters));
         }
 
         [HttpGet]

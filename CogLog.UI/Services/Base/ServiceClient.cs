@@ -45,12 +45,12 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BlockDto>> BlocksAllAsync();
+        System.Threading.Tasks.Task<BlockDtoPaginationResponse> BlocksGETAsync(int? page, int? perPage, string searchTerm, string categoryName, string subjectName);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BlockDto>> BlocksAllAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<BlockDtoPaginationResponse> BlocksGETAsync(int? page, int? perPage, string searchTerm, string categoryName, string subjectName, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -495,15 +495,15 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BlockDto>> BlocksAllAsync()
+        public virtual System.Threading.Tasks.Task<BlockDtoPaginationResponse> BlocksGETAsync(int? page, int? perPage, string searchTerm, string categoryName, string subjectName)
         {
-            return BlocksAllAsync(System.Threading.CancellationToken.None);
+            return BlocksGETAsync(page, perPage, searchTerm, categoryName, subjectName, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<BlockDto>> BlocksAllAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<BlockDtoPaginationResponse> BlocksGETAsync(int? page, int? perPage, string searchTerm, string categoryName, string subjectName, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -518,6 +518,28 @@ namespace CogLog.UI.Services.Base
                 
                     // Operation Path: "api/blocks"
                     urlBuilder_.Append("api/blocks");
+                    urlBuilder_.Append('?');
+                    if (page != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("Page")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(page, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (perPage != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("PerPage")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(perPage, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (searchTerm != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("SearchTerm")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(searchTerm, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (categoryName != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("CategoryName")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(categoryName, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (subjectName != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("SubjectName")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(subjectName, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -544,7 +566,7 @@ namespace CogLog.UI.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<BlockDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<BlockDtoPaginationResponse>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -3086,6 +3108,18 @@ namespace CogLog.UI.Services.Base
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record BlockDtoPaginationResponse
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("pagination")]
+        public PaginationMetadata Pagination { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("data")]
+        public System.Collections.Generic.ICollection<BlockDto> Data { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial record BlocksByDayDto
     {
 
@@ -3107,8 +3141,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3125,8 +3159,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3140,8 +3174,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3161,8 +3195,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3209,8 +3243,8 @@ namespace CogLog.UI.Services.Base
     public partial record CreateCategoryCommand
     {
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3224,8 +3258,8 @@ namespace CogLog.UI.Services.Base
     public partial record CreateSubjectCommand
     {
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3242,11 +3276,14 @@ namespace CogLog.UI.Services.Base
     public partial record CreateTagCommand
     {
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("description")]
+        public string Description { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("subjectId")]
         public int SubjectId { get; set; }
@@ -3257,8 +3294,8 @@ namespace CogLog.UI.Services.Base
     public partial record CreateTopicCommand
     {
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3268,6 +3305,30 @@ namespace CogLog.UI.Services.Base
 
         [System.Text.Json.Serialization.JsonPropertyName("subjectId")]
         public int SubjectId { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial record PaginationMetadata
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("totalItems")]
+        public int TotalItems { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("totalPages")]
+        public int TotalPages { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("page")]
+        public int Page { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("perPage")]
+        public int PerPage { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("hasPrevious")]
+        public bool HasPrevious { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("hasNext")]
+        public bool HasNext { get; set; }
 
     }
 
@@ -3332,8 +3393,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3353,8 +3414,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3368,8 +3429,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3389,8 +3450,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3416,11 +3477,14 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("description")]
+        public string Description { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("subjectId")]
         public int SubjectId { get; set; }
@@ -3434,8 +3498,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3449,8 +3513,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3470,8 +3534,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3485,8 +3549,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3503,8 +3567,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
@@ -3524,11 +3588,14 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("description")]
+        public string Description { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("subjectId")]
         public int SubjectId { get; set; }
@@ -3542,8 +3609,8 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("label")]
-        public string Label { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+        public string Name { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("icon")]
         public string Icon { get; set; }

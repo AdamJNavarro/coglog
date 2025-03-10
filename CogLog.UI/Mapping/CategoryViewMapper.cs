@@ -10,7 +10,7 @@ public static class CategoryViewMapper
         var categoryVm = new CategoryMinimalVm
         {
             Id = category.Id,
-            Label = category.Label,
+            Name = category.Name,
             Icon = category.Icon,
         };
 
@@ -22,7 +22,7 @@ public static class CategoryViewMapper
         var categoryVm = new BaseCategoryVm
         {
             Id = category.Id,
-            Label = category.Label,
+            Name = category.Name,
             Icon = category.Icon,
         };
 
@@ -41,7 +41,7 @@ public static class CategoryViewMapper
         var vm = new CategoryWithSubjectsVm
         {
             Id = category.Id,
-            Label = category.Label,
+            Name = category.Name,
             Icon = category.Icon,
             Subjects = category.Subjects.ToBaseSubjectVmList(),
         };
@@ -52,7 +52,7 @@ public static class CategoryViewMapper
     {
         return new CreateCategoryCommand
         {
-            Label = category.Label,
+            Name = category.Name,
             Icon = category.Icon,
             Description = category.Description,
         };

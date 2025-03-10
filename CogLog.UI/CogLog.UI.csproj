@@ -25,5 +25,9 @@
       <_ContentIncludedByDefault Remove="Views\Blocks\Create\Classify.cshtml" />
     </ItemGroup>
     
+    <ItemGroup>
+      <ProjectReference Include="..\CogLog.App\CogLog.App.csproj" />
+    </ItemGroup>
+    
 
 </Project>

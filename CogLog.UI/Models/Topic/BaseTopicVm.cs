@@ -1,10 +1,8 @@
-using CogLog.UI.Models.Common;
+using CogLog.UI.Models.Shared.Hierarchy;
 
 namespace CogLog.UI.Models.Topic;
 
-public class BaseTopicVm : BaseHierarchyVm
+public class BaseTopicVm : HierarchyBaseMinimalVm
 {
-    public string? Icon { get; init; }
-
     public required int SubjectId { get; init; }
 }

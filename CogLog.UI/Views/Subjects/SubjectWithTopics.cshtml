@@ -5,7 +5,7 @@
     
 <header>
     <h1>@ViewData["Title"]</h1>
-    <h3>Category: @Html.DisplayFor(x => x.Category.Label)</h3>
+    <h3>Category: @Html.DisplayFor(x => x.Category.Name)</h3>
 </header>
 
 <div>
@@ -13,7 +13,7 @@
     {
         <p>
             @Html.DisplayFor(modelItem => item.Icon)
-            @Html.DisplayFor(modelItem => item.Label)
+            @Html.DisplayFor(modelItem => item.Name)
         </p>
     }
 </div>

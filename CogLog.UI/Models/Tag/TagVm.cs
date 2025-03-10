@@ -1,17 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using CogLog.UI.Models.Shared.Hierarchy;
 
 namespace CogLog.UI.Models.Tag;
 
-public class TagVm
+public class TagVm : HierarchyBaseMinimalVm
 {
-    [Required]
-    public required int Id { get; init; }
-
-    [Required]
-    public string Label { get; init; }
-
-    public string? Icon { get; init; }
-
     [Required]
     public required int SubjectId { get; init; }
 

@@ -1,6 +1,8 @@
+using CogLog.App.Contracts.Data.Block;
 using CogLog.UI.Contracts;
 using CogLog.UI.Mapping;
 using CogLog.UI.Models.Block;
+using CogLog.UI.Models.Shared.Pagination;
 using CogLog.UI.Services.Base;
 
 namespace CogLog.UI.Services;
@@ -11,11 +13,16 @@ public class BlockService(IClient client, ILocalStorageService localStorageServi
 {
     private readonly IClient _client = client;
 
-    public async Task<List<BlockVm>> GetBlocksAsync()
+    public async Task<PaginationResponseVm<BlockVm>> GetBlocksAsync(BlocksQueryParameters fp)
     {
-        AddBearerToken();
-        var data = await _client.BlocksAllAsync();
-        return data.Select(x => x.ToBlockVm()).ToList();
+        var data = await _client.BlocksGETAsync(
+            fp.Page,
+            fp.PerPage,
+            fp.SearchTerm,
+            fp.CategoryName,
+            fp.SubjectName
+        );
+        return data.ToPaginationBlockVm();
     }
 
     public async Task<List<BlockByDayVm>> GetBlocksByDayAsync()

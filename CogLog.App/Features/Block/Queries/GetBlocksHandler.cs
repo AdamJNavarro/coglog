@@ -1,18 +1,19 @@
 using CogLog.App.Contracts.Data.Block;
 using CogLog.App.Contracts.Persistence;
-using CogLog.App.Mapping;
+using CogLog.App.Models.Pagination;
 using MediatR;
 
 namespace CogLog.App.Features.Block.Queries;
 
-public class GetBlocksHandler(IBlockRepo repo) : IRequestHandler<GetBlocksQuery, List<BlockDto>>
+public class GetBlocksHandler(IBlockRepo repo)
+    : IRequestHandler<GetBlocksQuery, PaginationResponse<BlockDto>>
 {
-    public async Task<List<BlockDto>> Handle(
+    public async Task<PaginationResponse<BlockDto>> Handle(
         GetBlocksQuery request,
         CancellationToken cancellationToken
     )
     {
-        var blocks = await repo.GetBlocksWithRelationsAsync(true, true, true, true);
-        return blocks.ToBlockDtoList();
+        var data = await repo.GetBlocksAsync(request.Parameters);
+        return data;
     }
 }

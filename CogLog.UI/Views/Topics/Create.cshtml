@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Create Topic";
+}
+
+<div class="form-container">
+    <h1 class="form-title">Contact Form</h1>
+    
+    <form asp-action="SubmitForm" asp-controller="Home" method="post">
+        <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="message" class="form-label">Message</label>
+            <textarea id="message" name="message" class="form-control" placeholder="Enter your message" required></textarea>
+            <span class="helper-text">Please provide as much detail as possible</span>
+        </div>
+        
+        <div class="form-group">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" name="category" class="form-control" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="general">General Inquiry</option>
+                <option value="support">Technical Support</option>
+                <option value="billing">Billing Question</option>
+                <option value="feedback">Feedback</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="interests" class="form-label">Interests</label>
+            <select id="interests" name="interests" class="form-control" multiple required>
+                <option value="web">Web Development</option>
+                <option value="mobile">Mobile Development</option>
+                <option value="desktop">Desktop Applications</option>
+                <option value="cloud">Cloud Services</option>
+                <option value="ai">Artificial Intelligence</option>
+                <option value="data">Data Science</option>
+            </select>
+            <span class="helper-text">Hold Ctrl (or Cmd on Mac) to select multiple options</span>
+        </div>
+        
+        <button type="submit" class="bttn">Submit</button>
+    </form>
+</div>

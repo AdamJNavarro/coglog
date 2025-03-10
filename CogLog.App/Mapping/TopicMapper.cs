@@ -9,7 +9,7 @@ public static class TopicMapper
 {
     public static TopicMinimalDto ToTopicMinimalDto(this Topic topic)
     {
-        return new TopicMinimalDto(topic.Id, topic.Label, topic.Icon);
+        return new TopicMinimalDto(topic.Id, topic.Name, topic.Icon);
     }
 
     public static List<TopicMinimalDto> ToTopicMinimalDtoList(this List<Topic> topics)
@@ -19,14 +19,14 @@ public static class TopicMapper
 
     public static TopicDto ToTopicDto(this Topic topic)
     {
-        return new TopicDto(topic.Id, topic.Label, topic.Icon, topic.Description, topic.SubjectId);
+        return new TopicDto(topic.Id, topic.Name, topic.Icon, topic.Description, topic.SubjectId);
     }
 
     public static Topic ToTopic(this CreateTopicCommand request)
     {
         return new Topic
         {
-            Label = request.Label,
+            Name = request.Name,
             Icon = request.Icon,
             Description = request.Description,
             SubjectId = request.SubjectId,

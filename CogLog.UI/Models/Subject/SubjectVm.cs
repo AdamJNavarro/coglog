@@ -1,12 +1,10 @@
 using System.ComponentModel.DataAnnotations;
 using CogLog.UI.Models.Category;
-using CogLog.UI.Models.Common;
+using CogLog.UI.Models.Shared.Hierarchy;
 
 namespace CogLog.UI.Models.Subject;
 
-public class SubjectVm : BaseHierarchyVm
+public class SubjectVm : HierarchyBaseMinimalVm
 {
-    public string? Icon { get; init; }
-
     public required BaseCategoryVm Category { get; init; }
 }
