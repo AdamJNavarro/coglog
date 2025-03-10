@@ -4,7 +4,7 @@ namespace CogLog.App.Contracts.Data;
 
 public record SubjectWithBlocksDto(
     int Id,
-    string Label,
+    string Name,
     string? Icon,
     string? Description,
     List<BlockDto> Blocks

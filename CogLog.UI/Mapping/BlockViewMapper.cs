@@ -1,4 +1,5 @@
 using CogLog.UI.Models.Block;
+using CogLog.UI.Models.Shared.Pagination;
 using CogLog.UI.Services.Base;
 
 namespace CogLog.UI.Mapping;
@@ -21,6 +22,17 @@ public static class BlockViewMapper
             Subject = block.Subject?.ToSubjectMinimalVm(),
             Topics = block.Topics.Select(x => x.ToTopicMinimalVm()).ToList(),
             Tags = block.Tags.Select(x => x.ToTagMinimalVm()).ToList(),
+        };
+    }
+
+    public static PaginationResponseVm<BlockVm> ToPaginationBlockVm(
+        this BlockDtoPaginationResponse resp
+    )
+    {
+        return new PaginationResponseVm<BlockVm>
+        {
+            Pagination = resp.Pagination.ToPaginationMetadataVm(),
+            Data = resp.Data.Select(x => x.ToBlockVm()).ToList(),
         };
     }
 

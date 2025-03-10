@@ -2,7 +2,7 @@ namespace CogLog.UI.Models.Topic;
 
 public class CreateTopicVm
 {
-    public required string Label { get; init; }
+    public required string Name { get; init; }
 
     public string? Icon { get; init; }
 

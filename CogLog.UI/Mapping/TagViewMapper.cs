@@ -10,7 +10,7 @@ public static class TagViewMapper
         return new TagMinimalVm
         {
             Id = topic.Id,
-            Label = topic.Label,
+            Name = topic.Name,
             Icon = topic.Icon,
         };
     }
@@ -20,7 +20,7 @@ public static class TagViewMapper
         return new BaseTagVm
         {
             Id = topic.Id,
-            Label = topic.Label,
+            Name = topic.Name,
             SubjectId = topic.SubjectId,
         };
     }

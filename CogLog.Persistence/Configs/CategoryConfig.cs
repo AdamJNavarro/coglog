@@ -8,7 +8,7 @@ public class CategoryConfig : IEntityTypeConfiguration<Category>
 {
     public void Configure(EntityTypeBuilder<Category> builder)
     {
-        builder.HasIndex(c => c.Label).IsUnique();
+        builder.HasIndex(c => c.Name).IsUnique();
 
         // Category-Block 1-N
         builder

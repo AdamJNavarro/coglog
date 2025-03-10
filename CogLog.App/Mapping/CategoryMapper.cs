@@ -8,7 +8,7 @@ public static class CategoryMapper
 {
     public static CategoryMinimalDto ToCategoryMinimalDto(this Category category)
     {
-        return new CategoryMinimalDto(category.Id, category.Label, category.Icon);
+        return new CategoryMinimalDto(category.Id, category.Name, category.Icon);
     }
 
     public static List<CategoryMinimalDto> ToCategoryMinimalDtoList(this List<Category> categories)
@@ -18,7 +18,7 @@ public static class CategoryMapper
 
     public static CategoryDto ToCategoryDto(this Category category)
     {
-        return new CategoryDto(category.Id, category.Label, category.Icon, category.Description);
+        return new CategoryDto(category.Id, category.Name, category.Icon, category.Description);
     }
 
     public static List<CategoryDto> ToCategoriesDto(this List<Category> categories)
@@ -30,7 +30,7 @@ public static class CategoryMapper
     {
         return new CategoryWithSubjectsDto(
             category.Id,
-            category.Label,
+            category.Name,
             category.Icon,
             category.Description,
             category.Subjects.Select(x => x.ToSubjectDto()).ToList()
@@ -41,7 +41,7 @@ public static class CategoryMapper
     {
         return new CategoryWithBlocksDto(
             category.Id,
-            category.Label,
+            category.Name,
             category.Icon,
             category.Description,
             category.Blocks.Select(x => x.ToBlockDto()).ToList()
@@ -52,7 +52,7 @@ public static class CategoryMapper
     {
         return new Category
         {
-            Label = request.Label,
+            Name = request.Name,
             Icon = request.Icon,
             Description = request.Description,
         };
@@ -63,7 +63,7 @@ public static class CategoryMapper
         return new Category
         {
             Id = request.Id,
-            Label = request.Label,
+            Name = request.Name,
             Icon = request.Icon,
             Description = request.Description,
         };

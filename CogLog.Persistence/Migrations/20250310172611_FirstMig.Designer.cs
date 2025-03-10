@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CogLog.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250219215745_FirstMig")]
+    [Migration("20250310172611_FirstMig")]
     partial class FirstMig
     {
         /// <inheritdoc />
@@ -107,16 +107,15 @@ namespace CogLog.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Icon")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Label")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Label")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Categories");
@@ -139,7 +138,7 @@ namespace CogLog.Persistence.Migrations
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Label")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -147,7 +146,7 @@ namespace CogLog.Persistence.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("Label")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Subjects");
@@ -161,10 +160,13 @@ namespace CogLog.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Label")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -192,7 +194,7 @@ namespace CogLog.Persistence.Migrations
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Label")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

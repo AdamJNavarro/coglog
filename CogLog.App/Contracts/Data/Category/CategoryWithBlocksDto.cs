@@ -4,8 +4,8 @@ namespace CogLog.App.Contracts.Data.Category;
 
 public record CategoryWithBlocksDto(
     int Id,
-    string Label,
-    string Icon,
+    string Name,
+    string? Icon,
     string? Description,
     List<BlockDto> Blocks
 );

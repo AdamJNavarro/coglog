@@ -11,7 +11,7 @@ public static class SubjectMapper
     {
         return new SubjectWithBlocksDto(
             subject.Id,
-            subject.Label,
+            subject.Name,
             subject.Icon,
             subject.Description,
             subject.Blocks.Select(x => x.ToBlockDto()).ToList()
@@ -22,7 +22,7 @@ public static class SubjectMapper
     {
         return new SubjectWithCategoryTopicsDto(
             subject.Id,
-            subject.Label,
+            subject.Name,
             subject.Icon,
             subject.Description,
             subject.CategoryId,
@@ -33,7 +33,7 @@ public static class SubjectMapper
 
     public static SubjectMinimalDto ToSubjectMinimalDto(this Subject subject)
     {
-        return new SubjectMinimalDto(subject.Id, subject.Label, subject.Icon);
+        return new SubjectMinimalDto(subject.Id, subject.Name, subject.Icon);
     }
 
     public static List<SubjectMinimalDto> ToSubjectMinimalDtoList(this List<Subject> subjects)
@@ -45,7 +45,7 @@ public static class SubjectMapper
     {
         return new SubjectDto(
             subject.Id,
-            subject.Label,
+            subject.Name,
             subject.Icon,
             subject.Description,
             subject.CategoryId
@@ -56,7 +56,7 @@ public static class SubjectMapper
     {
         return new Subject
         {
-            Label = request.Label,
+            Name = request.Name,
             Icon = request.Icon,
             Description = request.Description,
             CategoryId = request.CategoryId,
@@ -68,7 +68,7 @@ public static class SubjectMapper
         return new Subject
         {
             Id = request.Id,
-            Label = request.Label,
+            Name = request.Name,
             Icon = request.Icon,
             Description = request.Description,
             CategoryId = request.CategoryId,

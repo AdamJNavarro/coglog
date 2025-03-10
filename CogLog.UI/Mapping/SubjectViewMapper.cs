@@ -10,7 +10,7 @@ public static class SubjectViewMapper
         return new SubjectMinimalVm
         {
             Id = subject.Id,
-            Label = subject.Label,
+            Name = subject.Name,
             Icon = subject.Icon,
         };
     }
@@ -20,7 +20,7 @@ public static class SubjectViewMapper
         return new BaseSubjectVm
         {
             Id = subject.Id,
-            Label = subject.Label,
+            Name = subject.Name,
             Icon = subject.Icon,
             CategoryId = subject.CategoryId,
         };
@@ -38,7 +38,7 @@ public static class SubjectViewMapper
         return new SubjectWithCategoryTopicsVm
         {
             Id = subject.Id,
-            Label = subject.Label,
+            Name = subject.Name,
             Icon = subject.Icon,
             CategoryId = subject.CategoryId,
             Category = subject.Category.ToBaseCategoryVm(),
@@ -50,7 +50,7 @@ public static class SubjectViewMapper
     {
         return new CreateSubjectCommand
         {
-            Label = subject.Label,
+            Name = subject.Name,
             Icon = subject.Icon,
             Description = subject.Description,
             CategoryId = subject.CategoryId,

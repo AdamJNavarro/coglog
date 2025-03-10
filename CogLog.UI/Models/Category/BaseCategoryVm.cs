@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
-using CogLog.UI.Models.Common;
+using CogLog.UI.Models.Shared.Hierarchy;
 
 namespace CogLog.UI.Models.Category;
 
-public class BaseCategoryVm : BaseHierarchyVm
+public class BaseCategoryVm : HierarchyBaseMinimalVm
 {
-    public required string Icon { get; init; }
+    public string? Icon { get; init; }
 }

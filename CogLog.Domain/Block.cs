@@ -1,4 +1,4 @@
-using CogLog.Domain.Common;
+using CogLog.Domain.Shared;
 
 namespace CogLog.Domain;
 

@@ -1,12 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-using CogLog.UI.Models.Common;
+using CogLog.UI.Models.Shared.Hierarchy;
 
 namespace CogLog.UI.Models.Topic;
 
-public class TopicVm : BaseHierarchyVm
+public class TopicVm : HierarchyBaseMinimalVm
 {
-    public string? Icon { get; init; }
-
     [Required]
     public required int SubjectId { get; init; }
 

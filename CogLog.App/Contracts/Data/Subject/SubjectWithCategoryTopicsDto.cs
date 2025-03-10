@@ -5,7 +5,7 @@ namespace CogLog.App.Contracts.Data.Subject;
 
 public record SubjectWithCategoryTopicsDto(
     int Id,
-    string Label,
+    string Name,
     string? Icon,
     string? Description,
     int CategoryId,

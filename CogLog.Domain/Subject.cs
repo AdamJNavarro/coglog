@@ -1,11 +1,9 @@
-using CogLog.Domain.Common;
+using CogLog.Domain.Shared;
 
 namespace CogLog.Domain;
 
 public class Subject : BaseHierarchy
 {
-    public string? Icon { get; init; }
-
     public required int CategoryId { get; init; }
 
     public Category Category { get; set; }

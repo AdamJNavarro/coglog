@@ -92,7 +92,6 @@ body {
     text-rendering: optimizeLegibility;
     font-family: var(--body-font-family);
     line-height: 1.5;
-    background-color: #f5f5f5;
 
 }
 
@@ -173,6 +172,12 @@ a {
     border: none;
 }
 
+.block-group-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
 
 .card-list {
     display: flex;
@@ -185,11 +190,11 @@ a {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+    background: white;
     border-radius: 8px;
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    /*max-width: 500px;*/
 }
 
 /* First row */
@@ -249,7 +254,7 @@ a {
 }
 
 .badge {
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: #f1f5f9;
     color: #475569;
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
@@ -309,61 +314,6 @@ a {
     transform: rotate(180deg);
 }
 
-.brain-block-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xl);
-}
-
-.brain-block {
-    display: flex;
-    flex-direction: column;
-    border-radius: var(--bord-rad);
-    padding: var(--spacing-m);
-    background-color: var(--brain-block-bg-color);
-    border: solid 1px var(--brain-block-border-color);
-}
-
-.brain-block-title-container {
-    display: flex;
-    justify-content: space-between;
-    color: var(--brain-block-title-color);
-}
-
-.brain-block-content-container {
-    display: flex;
-    color: var(--brain-block-content-color);
-}
-
-.brain-block-date {
-    font-size: var(--font-size-xs);
-    color: var(--brain-block-date-color);
-}
-
-.brain-block-admin-container {
-    display: flex;
-}
-
-.brain-block-admin-container > * + * {
-    margin-left: var(--spacing-s);
-}
-
-.thought-block {
-    --brain-block-bg-color: var(--blue-50);
-    --brain-block-border-color: var(--blue-300);
-    --brain-block-title-color: var(--blue-950);
-    --brain-block-content-color: var(--blue-900);
-    --brain-block-date-color: var(--blue-600);
-}
-
-.question-block {
-    --brain-block-bg-color: var(--green-50);
-    --brain-block-border-color: var(--green-300);
-    --brain-block-title-color: var(--green-950);
-    --brain-block-content-color: var(--green-900);
-    --brain-block-date-color: var(--green-600);
-
-}
 
 .form-container {
     display: flex;
@@ -412,3 +362,101 @@ a {
     background-color: var(--green-700);
     color: white;
 }
+
+
+.form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    margin-bottom: 25px;
+    color: #2c3e50;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Form group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+/* Form controls */
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+select[multiple].form-control {
+    height: auto;
+    min-height: 120px;
+    background-image: none;
+    padding-right: 12px;
+}
+
+/* Button */
+.bttn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.bttn:hover {
+    background-color: #2980b9;
+}
+
+.bttn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);
+}
+
+/* Helper text */
+.helper-text {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    color: #7f8c8d;
+}
+

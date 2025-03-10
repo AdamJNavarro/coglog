@@ -1,13 +1,9 @@
-using CogLog.Domain.Common;
+using CogLog.Domain.Shared;
 
 namespace CogLog.Domain;
 
-public class Tag : BaseEntity
+public class Tag : BaseHierarchy
 {
-    public string Label { get; init; }
-
-    public string? Icon { get; init; }
-
     public required int SubjectId { get; init; }
 
     public Subject Subject { get; init; }
