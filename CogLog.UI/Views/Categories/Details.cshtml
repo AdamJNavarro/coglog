@@ -1,0 +1,24 @@
+@model CategoryDetailsVm
+
+@{
+    ViewData["Title"] = "Category Details";
+}
+    
+<header>
+    <h1>@Model.Name Category Details</h1>
+</header>
+
+<a asp-action="Edit" asp-route-id="@Model.Id">
+    Edit
+</a>
+
+<a asp-controller="Subjects" asp-action="Create" asp-route-categoryId="@Model.Id">New Subject</a>
+
+<div>
+    @foreach (var item in Model.Subjects)
+    {
+        <p>
+            @Html.DisplayFor(modelItem => item.Name)
+        </p>
+    }
+</div>

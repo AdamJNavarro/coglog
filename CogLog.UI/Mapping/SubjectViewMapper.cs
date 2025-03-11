@@ -15,6 +15,13 @@ public static class SubjectViewMapper
         };
     }
 
+    public static List<SubjectMinimalVm> ToSubjectMinimalVmList(
+        this IEnumerable<SubjectMinimalDto> subjects
+    )
+    {
+        return subjects.Select(x => x.ToSubjectMinimalVm()).ToList();
+    }
+
     public static BaseSubjectVm ToBaseSubjectVm(this SubjectDto subject)
     {
         return new BaseSubjectVm

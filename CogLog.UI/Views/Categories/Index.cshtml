@@ -10,9 +10,8 @@
 <div>
     @foreach (var item in Model)
     {
-        <p>
-            @Html.DisplayFor(modelItem => item.Icon)
+        <a asp-action="Details" asp-route-id="@item.Id">
             @Html.DisplayFor(modelItem => item.Name)
-        </p>
+        </a>
     }
 </div>

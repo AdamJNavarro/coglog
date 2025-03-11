@@ -9,7 +9,6 @@ namespace CogLog.UI.Controllers;
 public class CategoriesController(ICategoryService categoryService, ISubjectService subjectService)
     : Controller
 {
-    // INDEX - GET
     public async Task<IActionResult> Index()
     {
         var data = await categoryService.GetCategoriesAsync();
@@ -27,6 +26,13 @@ public class CategoriesController(ICategoryService categoryService, ISubjectServ
     {
         await categoryService.CreateCategoryAsync(category);
         return RedirectToAction(nameof(Index));
+    }
+
+    [Route("categories/{id:int}")]
+    public async Task<IActionResult> Details(int id)
+    {
+        var data = await categoryService.GetCategoryDetailsAsync(id);
+        return View(data);
     }
 
     [Route("categories/{id:int}/edit", Name = "EditCategory")]
@@ -81,30 +87,7 @@ public class CategoriesController(ICategoryService categoryService, ISubjectServ
             // show toast
             return RedirectToAction(nameof(Index));
         }
-        else
-        {
-            return RedirectToAction(nameof(Edit));
-        }
-    }
 
-    [Route("categories/{id:int}/subjects", Name = "CategoryWithSubjects")]
-    public async Task<IActionResult> CategoryWithSubjects(int id)
-    {
-        var data = await categoryService.GetCategoryWithSubjectsAsync(id);
-        return View(data);
-    }
-
-    [Route("categories/{id:int}/subjects/create")]
-    public IActionResult CreateSubject(int id)
-    {
-        return View();
-    }
-
-    [HttpPost("categories/{id:int}/subjects/create", Name = "CreateSubject")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateSubject(SubjectCreateVm subject, int id)
-    {
-        await subjectService.CreateSubjectAsync(subject);
-        return RedirectToRoute("CategoryWithSubjects", new { id });
+        return RedirectToAction(nameof(Edit));
     }
 }

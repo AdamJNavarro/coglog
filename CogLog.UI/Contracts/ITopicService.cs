@@ -11,7 +11,7 @@ public interface ITopicService
 
     Task<List<BaseTopicVm>> GetTopicsBySubjectAsync(int subjectId);
 
-    Task<Response<Guid>> CreateTopicAsync(CreateTopicVm topic);
+    Task<Response<Guid>> CreateTopicAsync(TopicCreateVm topic);
 
     Task<Response<Guid>> EditTopicAsync(int id, TopicVm topic);
 

@@ -30,11 +30,12 @@ public static class TopicViewMapper
         return topics.Select(x => x.ToBaseTopicVm()).ToList();
     }
 
-    public static CreateTopicCommand ToCreateTopicCommand(this CreateTopicVm topic)
+    public static CreateTopicCommand ToCreateTopicCommand(this TopicCreateVm topic)
     {
         return new CreateTopicCommand
         {
             Name = topic.Name,
+            Icon = topic.Icon,
             Description = topic.Description,
             SubjectId = topic.SubjectId,
         };

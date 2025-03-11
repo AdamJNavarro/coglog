@@ -12,7 +12,7 @@ public class MappingConfig : Profile
         CreateMap<BlockDto, BlockVm>().ReverseMap();
         CreateMap<CreateBlockCommand, CreateBlockVm>().ReverseMap();
         CreateMap<TopicDto, TopicVm>().ReverseMap();
-        CreateMap<CreateTopicCommand, CreateTopicVm>().ReverseMap();
+        CreateMap<CreateTopicCommand, TopicCreateVm>().ReverseMap();
         CreateMap<UpdateTopicCommand, TopicVm>().ReverseMap();
     }
 }
