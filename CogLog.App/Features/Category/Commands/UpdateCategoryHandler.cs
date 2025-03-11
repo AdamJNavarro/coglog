@@ -13,11 +13,19 @@ public class UpdateCategoryHandler(ICategoryRepo repo)
         CancellationToken cancellationToken
     )
     {
-        var existingCategory = await repo.GetCategoryAsync(request.Id);
+        // var existingCategory = await repo.GetCategoryAsync(request.Id);
+        //
+        // if (existingCategory is null)
+        // {
+        //     throw new NotFoundException(nameof(Category), request.Id);
+        // }
 
-        if (existingCategory is null)
+        var validator = new UpdateCategoryValidator(repo);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (validationResult.Errors.Any())
         {
-            throw new NotFoundException(nameof(Category), request.Id);
+            throw new BadRequestException("Invalid Category", validationResult);
         }
 
         var category = request.ToCategory();

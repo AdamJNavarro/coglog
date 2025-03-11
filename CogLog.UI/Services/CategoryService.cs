@@ -29,7 +29,7 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
         return data.ToCategoryWithSubjectsVm();
     }
 
-    public async Task<Response<Guid>> CreateCategoryAsync(CreateCategoryVm category)
+    public async Task<Response<Guid>> CreateCategoryAsync(CategoryCreateVm category)
     {
         try
         {
@@ -43,9 +43,18 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
         }
     }
 
-    public async Task<Response<Guid>> UpdateCategoryAsync(BaseCategoryVm category)
+    public async Task<Response<Guid>> UpdateCategoryAsync(CategoryEditVm category)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var cmd = category.ToUpdateCategoryCommand();
+            await _client.CategoriesPUTAsync(category.Id.ToString(), cmd);
+            return new Response<Guid>() { Success = true };
+        }
+        catch (ApiException ex)
+        {
+            return ConvertApiExceptions<Guid>(ex);
+        }
     }
 
     public async Task<Response<Guid>> DeleteCategoryAsync(int id)

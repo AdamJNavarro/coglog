@@ -1,11 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+using CogLog.App.Constants;
 
 namespace CogLog.UI.Models.Category;
 
-public class CreateCategoryVm
+public class CategoryCreateVm
 {
-    [Required(ErrorMessage = "Name is required!")]
-    public required string Name { get; init; }
+    [Required]
+    [MinLength(ValidationConstants.Category.NameMinLength)]
+    public string Name { get; init; }
 
     public string? Icon { get; init; }
 

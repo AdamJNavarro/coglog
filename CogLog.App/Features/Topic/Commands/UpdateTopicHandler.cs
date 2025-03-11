@@ -1,21 +1,24 @@
 using CogLog.App.Contracts.Persistence;
 using CogLog.App.Exceptions;
+using CogLog.App.Mapping;
 using MediatR;
 
 namespace CogLog.App.Features.Topic.Commands;
 
-public class UpdateTopicHandler(ITopicRepo topicRepo) : IRequestHandler<UpdateTopicCommand, Unit>
+public class UpdateTopicHandler(ITopicRepo topicRepo, ISubjectRepo subjectRepo)
+    : IRequestHandler<UpdateTopicCommand, Unit>
 {
     public async Task<Unit> Handle(UpdateTopicCommand request, CancellationToken cancellationToken)
     {
-        var existingTopic = await topicRepo.GetTopicAsync(request.Id);
+        var validator = new UpdateTopicValidator(topicRepo, subjectRepo);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
-        if (existingTopic is null)
+        if (validationResult.Errors.Any())
         {
-            throw new NotFoundException(nameof(Topic), request.Id);
+            throw new BadRequestException("Invalid Topic", validationResult);
         }
 
-        await topicRepo.UpdateTopicAsync(existingTopic);
+        await topicRepo.UpdateTopicAsync(request.ToTopic());
 
         return Unit.Value;
     }

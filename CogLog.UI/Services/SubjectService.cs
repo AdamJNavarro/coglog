@@ -22,9 +22,10 @@ public class SubjectService(IClient client, ILocalStorageService localStorageSer
         return data.Select(x => x.ToBaseSubjectVm()).ToList();
     }
 
-    public async Task<SubjectVm> GetSubjectAsync(int id)
+    public async Task<BaseSubjectVm> GetSubjectAsync(int id)
     {
-        throw new NotImplementedException();
+        var subject = await _client.SubjectsGetOneAsync(id);
+        return subject.ToBaseSubjectVm();
     }
 
     public async Task<SubjectWithCategoryTopicsVm> GetSubjectWithCategoryTopicsAsync(int id)
@@ -33,7 +34,7 @@ public class SubjectService(IClient client, ILocalStorageService localStorageSer
         return data.ToSubjectWithCategoryTopicsVm();
     }
 
-    public async Task<Response<Guid>> CreateSubjectAsync(CreateSubjectVm subject)
+    public async Task<Response<Guid>> CreateSubjectAsync(SubjectCreateVm subject)
     {
         try
         {

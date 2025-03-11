@@ -10,10 +10,12 @@ public class CreateTagHandler(ITagRepo tagRepo, ISubjectRepo subjectRepo)
 {
     public async Task<int> Handle(CreateTagCommand request, CancellationToken cancellationToken)
     {
-        var subjectExists = await subjectRepo.EntityExistsAsync(request.SubjectId);
-        if (!subjectExists)
+        var validator = new CreateTagValidator(subjectRepo);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (validationResult.Errors.Any())
         {
-            throw new NotFoundException(nameof(Subject), request.SubjectId);
+            throw new BadRequestException("Invalid Tag", validationResult);
         }
 
         var incomingTag = request.ToTag();

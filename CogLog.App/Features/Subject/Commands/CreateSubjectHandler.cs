@@ -10,11 +10,12 @@ public class CreateSubjectHandler(ISubjectRepo subjectRepo, ICategoryRepo catego
 {
     public async Task<int> Handle(CreateSubjectCommand request, CancellationToken cancellationToken)
     {
-        var categoryExists = await categoryRepo.EntityExistsAsync(request.CategoryId);
+        var validator = new CreateSubjectValidator(categoryRepo);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
-        if (!categoryExists)
+        if (validationResult.Errors.Any())
         {
-            throw new NotFoundException(nameof(Category), request.CategoryId);
+            throw new BadRequestException("Invalid Subject", validationResult);
         }
 
         var incomingSubject = request.ToSubject();

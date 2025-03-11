@@ -1,4 +1,4 @@
-@model CogLog.UI.Models.Category.CreateCategoryVm;
+@model CogLog.UI.Models.Category.CategoryCreateVm;
 @{
     ViewData["Title"] = "Create Category";
 }
@@ -16,7 +16,7 @@
     </div>
     <div class="input-group">
         <label asp-for="Icon" class="input-label"></label>
-        <textarea asp-for="Icon" class="input"></textarea>
+        <input asp-for="Icon" class="input" />
         <span asp-validation-for="Icon" class="validation-text"></span>
     </div>
     <div class="input-group">

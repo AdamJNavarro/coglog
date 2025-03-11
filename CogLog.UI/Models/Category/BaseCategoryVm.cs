@@ -5,5 +5,5 @@ namespace CogLog.UI.Models.Category;
 
 public class BaseCategoryVm : HierarchyBaseMinimalVm
 {
-    public string? Icon { get; init; }
+    public string? Description { get; set; }
 }
