@@ -465,3 +465,10 @@ select[multiple].form-control {
     color: #7f8c8d;
 }
 
+.validation-helper-text {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    color: red;
+}
+

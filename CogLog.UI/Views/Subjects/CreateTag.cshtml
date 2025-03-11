@@ -1,12 +1,13 @@
-@model SubjectCreateVm
+@model TagCreateVm
+
 @{
-    ViewData["Title"] = "New Subject";
+    ViewData["Title"] = "New Tag";
 }
 
 <div class="form-container">
-    <h1 class="form-title">New Subject</h1>
+    <h1 class="form-title">New Tag</h1>
     
-    <form asp-action="Create">
+    <form asp-action="CreateTag">
         <div class="form-group">
             <label asp-for="Name" class="form-label"></label>
             <input asp-for="Name" type="text" id="name" class="form-control" required>
@@ -25,19 +26,7 @@
             <span asp-validation-for="Description" class="validation-helper-text"></span>
         </div>
 
-        <div class="form-group">
-            <label asp-for="CategoryId" class="form-label">Category</label>
-            <select id="categoryId" name="CategoryId" class="form-control" required>
-                <option value="">-- Select Category --</option>
-                @foreach (var category in Model.CategorySelectItems)
-                {
-                    <option value="@category.Value" selected="@(Model.CategoryId.ToString() == category.Value)">
-                        @category.Text
-                    </option>
-                }
-            </select>
-        </div>
-
+        <input type="hidden" asp-for="SubjectId" value="@Url.ActionContext.RouteData.Values["id"]" />
 
         <button type="submit" class="bttn" >Create</button>
 

@@ -6,15 +6,15 @@ using MediatR;
 
 namespace CogLog.App.Features.Category.Queries;
 
-public class GetCategoryWithSubjectsHandler(ICategoryRepo repo)
-    : IRequestHandler<GetCategoryWithSubjectsQuery, CategoryWithSubjectsDto>
+public class GetCategoryDetailsHandler(ICategoryRepo repo)
+    : IRequestHandler<GetCategoryDetailsQuery, CategoryDetailsDto>
 {
-    public async Task<CategoryWithSubjectsDto> Handle(
-        GetCategoryWithSubjectsQuery request,
+    public async Task<CategoryDetailsDto> Handle(
+        GetCategoryDetailsQuery request,
         CancellationToken cancellationToken
     )
     {
         var category = await repo.GetCategoryWithRelationsAsync(request.Id, true, false);
-        return category.ToCategoryWithSubjectsDto();
+        return category.ToCategoryDetailsDto();
     }
 }

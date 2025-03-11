@@ -2,6 +2,7 @@ using CogLog.UI.Contracts;
 using CogLog.UI.Mapping;
 using CogLog.UI.Models.Category;
 using CogLog.UI.Services.Base;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CogLog.UI.Services;
 
@@ -13,20 +14,20 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
 
     public async Task<List<BaseCategoryVm>> GetCategoriesAsync()
     {
-        var categories = await _client.CategoriesAllAsync();
+        var categories = await _client.CategoriesGetAsync();
         return categories.ToBaseCategoriesVm();
     }
 
     public async Task<BaseCategoryVm> GetCategoryAsync(int id)
     {
-        var category = await _client.CategoryGETAsync(id);
+        var category = await _client.CategoryGetAsync(id);
         return category.ToBaseCategoryVm();
     }
 
-    public async Task<CategoryWithSubjectsVm> GetCategoryWithSubjectsAsync(int id)
+    public async Task<CategoryDetailsVm> GetCategoryDetailsAsync(int id)
     {
-        var data = await _client.CategoryWithSubjectsGETAsync(id);
-        return data.ToCategoryWithSubjectsVm();
+        var data = await _client.CategoryGetDetailsAsync(id);
+        return data.ToCategoryDetailsVm();
     }
 
     public async Task<Response<Guid>> CreateCategoryAsync(CategoryCreateVm category)
@@ -34,7 +35,7 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
         try
         {
             var cmd = category.ToCreateCategoryCommand();
-            await _client.CategoriesPOSTAsync(cmd);
+            await _client.CategoryCreateAsync(cmd);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)
@@ -48,7 +49,7 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
         try
         {
             var cmd = category.ToUpdateCategoryCommand();
-            await _client.CategoriesPUTAsync(category.Id.ToString(), cmd);
+            await _client.CategoryUpdateAsync(category.Id.ToString(), cmd);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)
@@ -61,12 +62,21 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
     {
         try
         {
-            await _client.CategoriesDELETEAsync(id);
+            await _client.CategoryDeleteAsync(id);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)
         {
             return ConvertApiExceptions<Guid>(ex);
         }
+    }
+
+    public async Task<List<SelectListItem>> GetSelectListAsync()
+    {
+        var categories = await _client.CategoriesGetAsync();
+        ;
+        return categories
+            .Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name })
+            .ToList();
     }
 }

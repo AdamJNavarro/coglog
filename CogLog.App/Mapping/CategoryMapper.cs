@@ -26,14 +26,14 @@ public static class CategoryMapper
         return categories.Select(x => x.ToCategoryDto()).ToList();
     }
 
-    public static CategoryWithSubjectsDto ToCategoryWithSubjectsDto(this Category category)
+    public static CategoryDetailsDto ToCategoryDetailsDto(this Category category)
     {
-        return new CategoryWithSubjectsDto(
+        return new CategoryDetailsDto(
             category.Id,
             category.Name,
             category.Icon,
             category.Description,
-            category.Subjects.Select(x => x.ToSubjectDto()).ToList()
+            category.Subjects.Select(x => x.ToSubjectMinimalDto()).ToList()
         );
     }
 

@@ -27,9 +27,19 @@ public class TagService(IClient client, ILocalStorageService localStorageService
         throw new NotImplementedException();
     }
 
-    public async Task<Response<Guid>> CreateTagAsync(TagVm tagVm)
+    public async Task<Response<Guid>> CreateTagAsync(TagCreateVm tag)
     {
-        throw new NotImplementedException();
+        try
+        {
+            // AddBearerToken();
+
+            await _client.TagsPOSTAsync(tag.ToCreateTagCommand());
+            return new Response<Guid>() { Success = true };
+        }
+        catch (ApiException ex)
+        {
+            return ConvertApiExceptions<Guid>(ex);
+        }
     }
 
     public async Task<Response<Guid>> UpdateTagAsync(TagVm tagVm)

@@ -35,18 +35,16 @@ public static class CategoryViewMapper
         return categories.Select(x => x.ToBaseCategoryVm()).ToList();
     }
 
-    public static CategoryWithSubjectsVm ToCategoryWithSubjectsVm(
-        this CategoryWithSubjectsDto category
-    )
+    public static CategoryDetailsVm ToCategoryDetailsVm(this CategoryDetailsDto category)
     {
-        var vm = new CategoryWithSubjectsVm
+        return new CategoryDetailsVm
         {
             Id = category.Id,
             Name = category.Name,
             Icon = category.Icon,
-            Subjects = category.Subjects.ToBaseSubjectVmList(),
+            Description = category.Description,
+            Subjects = category.Subjects.ToSubjectMinimalVmList(),
         };
-        return vm;
     }
 
     public static CreateCategoryCommand ToCreateCategoryCommand(this CategoryCreateVm category)

@@ -20,7 +20,7 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
         return data.Select(x => x.ToBaseTopicVm()).ToList();
     }
 
-    public async Task<Response<Guid>> CreateTopicAsync(CreateTopicVm topic)
+    public async Task<Response<Guid>> CreateTopicAsync(TopicCreateVm topic)
     {
         try
         {

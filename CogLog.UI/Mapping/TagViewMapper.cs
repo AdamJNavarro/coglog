@@ -29,4 +29,15 @@ public static class TagViewMapper
     {
         return tags.Select(x => x.BaseTagVm()).ToList();
     }
+
+    public static CreateTagCommand ToCreateTagCommand(this TagCreateVm tag)
+    {
+        return new CreateTagCommand
+        {
+            Name = tag.Name,
+            Icon = tag.Icon,
+            Description = tag.Description,
+            SubjectId = tag.SubjectId,
+        };
+    }
 }
