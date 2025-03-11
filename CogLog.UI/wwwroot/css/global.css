@@ -363,6 +363,11 @@ a {
     color: white;
 }
 
+.btn-danger {
+    background-color: red;
+    color: white;
+}
+
 
 .form-wrapper {
     max-width: 600px;

@@ -24,6 +24,7 @@ public static class CategoryViewMapper
             Id = category.Id,
             Name = category.Name,
             Icon = category.Icon,
+            Description = category.Description,
         };
 
         return categoryVm;
@@ -48,10 +49,21 @@ public static class CategoryViewMapper
         return vm;
     }
 
-    public static CreateCategoryCommand ToCreateCategoryCommand(this CreateCategoryVm category)
+    public static CreateCategoryCommand ToCreateCategoryCommand(this CategoryCreateVm category)
     {
         return new CreateCategoryCommand
         {
+            Name = category.Name,
+            Icon = category.Icon,
+            Description = category.Description,
+        };
+    }
+
+    public static UpdateCategoryCommand ToUpdateCategoryCommand(this CategoryEditVm category)
+    {
+        return new UpdateCategoryCommand
+        {
+            Id = category.Id,
             Name = category.Name,
             Icon = category.Icon,
             Description = category.Description,

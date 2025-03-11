@@ -17,6 +17,13 @@ public class TagController(IMediator mediator) : ControllerBase
         return Ok();
     }
 
+    [HttpGet("{id:int}", Name = "TagsGetOne")]
+    public async Task<ActionResult<TagDto>> Get(int id)
+    {
+        var tag = await mediator.Send(new GetTagQuery(id));
+        return Ok(tag);
+    }
+
     [HttpGet("{subjectId:int}", Name = "TagsBySubjectGET")]
     public async Task<List<TagDto>> GetBySubject(int subjectId)
     {

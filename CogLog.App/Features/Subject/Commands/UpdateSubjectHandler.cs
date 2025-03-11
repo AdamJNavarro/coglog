@@ -13,13 +13,13 @@ public class UpdateSubjectHandler(ISubjectRepo subjectRepo, ICategoryRepo catego
         CancellationToken cancellationToken
     )
     {
-        var subjectExists = await subjectRepo.EntityExistsAsync(request.Id);
-        if (subjectExists == false)
+        var validator = new UpdateSubjectValidator(subjectRepo, categoryRepo);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+        if (validationResult.Errors.Any())
         {
-            throw new NotFoundException(nameof(Subject), request.Id);
+            throw new BadRequestException("Invalid Subject", validationResult);
         }
 
-        // if updating categoryId, check for category existence
         var updatedSubject = request.ToSubject();
         await subjectRepo.UpdateSubjectAsync(updatedSubject);
 

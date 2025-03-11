@@ -46,7 +46,7 @@ public static class SubjectViewMapper
         };
     }
 
-    public static CreateSubjectCommand ToCreateSubjectCommand(this CreateSubjectVm subject)
+    public static CreateSubjectCommand ToCreateSubjectCommand(this SubjectCreateVm subject)
     {
         return new CreateSubjectCommand
         {

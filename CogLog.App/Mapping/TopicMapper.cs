@@ -32,4 +32,15 @@ public static class TopicMapper
             SubjectId = request.SubjectId,
         };
     }
+
+    public static Topic ToTopic(this UpdateTopicCommand request)
+    {
+        return new Topic
+        {
+            Name = request.Name,
+            Icon = request.Icon,
+            Description = request.Description,
+            SubjectId = request.SubjectId,
+        };
+    }
 }

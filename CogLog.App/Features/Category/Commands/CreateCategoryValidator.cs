@@ -1,3 +1,4 @@
+using CogLog.App.Constants;
 using FluentValidation;
 
 namespace CogLog.App.Features.Category.Commands;
@@ -6,6 +7,11 @@ public class CreateCategoryValidator : AbstractValidator<CreateCategoryCommand>
 {
     public CreateCategoryValidator()
     {
-        RuleFor(c => c.Name).NotEmpty().NotNull().WithMessage("Name needed noob.");
+        RuleFor(p => p.Name)
+            .NotEmpty()
+            .WithMessage("{PropertyName} is required")
+            .NotNull()
+            .MinimumLength(ValidationConstants.Category.NameMinLength)
+            .WithMessage("{PropertyName} must be at least {MinLength} characters");
     }
 }

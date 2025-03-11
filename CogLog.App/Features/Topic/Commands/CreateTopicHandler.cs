@@ -10,11 +10,12 @@ public class CreateTopicHandler(ITopicRepo topicRepo, ISubjectRepo subjectRepo)
 {
     public async Task<int> Handle(CreateTopicCommand request, CancellationToken cancellationToken)
     {
-        var subjectExists = await subjectRepo.EntityExistsAsync(request.SubjectId);
+        var validator = new CreateTopicValidator(subjectRepo);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
-        if (!subjectExists)
+        if (validationResult.Errors.Any())
         {
-            throw new NotFoundException(nameof(Subject), request.SubjectId);
+            throw new BadRequestException("Invalid Topic", validationResult);
         }
 
         var incomingTopic = request.ToTopic();
