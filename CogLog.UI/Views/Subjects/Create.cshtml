@@ -3,47 +3,24 @@
     ViewData["Title"] = "New Subject";
 }
 
-<div class="form-container">
+<div class="form-wrapper">
     <h1 class="form-title">New Subject</h1>
-    
+
     <form asp-action="Create">
-        <div class="form-group">
-            <label asp-for="Name" class="form-label"></label>
-            <input asp-for="Name" type="text" id="name" class="form-control" required>
-            <span asp-validation-for="Name" class="validation-helper-text"></span>
-        </div>
         
-        <div class="form-group" style="display: none;">
-            <label asp-for="Icon" class="form-label"></label>
-            <input asp-for="Icon" type="text" id="icon" class="form-control">
-            <span asp-validation-for="Icon" class="validation-helper-text"></span>
+        @await Component.InvokeAsync("HierarchyFormGroups", Model)
+        
+        @await Component.InvokeAsync("CategorySelector", new {categoryId = Model.CategoryId})
+
+        
+        <div class="form-button-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
         </div>
-
-        <div class="form-group">
-            <label asp-for="Description" class="form-label"></label>
-            <textarea asp-for="Description" id="description" class="form-control"></textarea>
-            <span asp-validation-for="Description" class="validation-helper-text"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="CategoryId" class="form-label">Category</label>
-            <select id="categoryId" name="CategoryId" class="form-control" required>
-                <option value="">-- Select Category --</option>
-                @foreach (var category in Model.CategorySelectItems)
-                {
-                    <option value="@category.Value" selected="@(Model.CategoryId.ToString() == category.Value)">
-                        @category.Text
-                    </option>
-                }
-            </select>
-        </div>
-
-
-        <button type="submit" class="bttn" >Create</button>
 
     </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

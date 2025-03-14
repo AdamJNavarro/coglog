@@ -1,0 +1,22 @@
+@model IEnumerable<TagMinimalVm>    
+@{
+    ViewData["Title"] = "Tags";
+}
+    
+<header>
+    <h1>Tags</h1>
+<a asp-action="Create">Create</a>
+</header>
+
+
+
+<ul class="hierarchy-list">
+    @foreach (var item in Model)
+    {
+        <li class="hierarchy-item">
+            <a class="hierarchy-link" asp-action="Details" asp-route-id="@item.Id">
+                @item.Name
+            </a>
+        </li>
+    }
+</ul>

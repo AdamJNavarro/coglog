@@ -6,7 +6,7 @@ using MediatR;
 
 namespace CogLog.App.Features.Category.Queries;
 
-public class GetCategoriesHandler(ICategoryRepo repo)
+public class GetCategoriesHandler(ICategoryRepo categoryRepo)
     : IRequestHandler<GetCategoriesQuery, List<CategoryDto>>
 {
     public async Task<List<CategoryDto>> Handle(
@@ -14,7 +14,7 @@ public class GetCategoriesHandler(ICategoryRepo repo)
         CancellationToken cancellationToken
     )
     {
-        var categories = await repo.GetCategoriesAsync();
+        var categories = await categoryRepo.GetCategoriesAsync();
         return categories.ToCategoriesDto();
     }
 }

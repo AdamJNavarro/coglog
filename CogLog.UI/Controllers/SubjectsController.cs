@@ -1,25 +1,32 @@
+using CogLog.App.Contracts.Data.Subject;
 using CogLog.UI.Contracts;
 using CogLog.UI.Models.Subject;
-using CogLog.UI.Models.Tag;
-using CogLog.UI.Models.Topic;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CogLog.UI.Controllers;
 
-public class SubjectsController(
-    ISubjectService subjectService,
-    ICategoryService categoryService,
-    ITopicService topicService,
-    ITagService tagService
-) : Controller
+public class SubjectsController(ISubjectService subjectService, ICategoryService categoryService)
+    : Controller
 {
-    public async Task<IActionResult> Create([FromQuery] string? categoryId)
+    public async Task<IActionResult> Index([FromQuery] SubjectQueryParameters? parameters)
     {
-        var vm = new SubjectCreateVm()
+        parameters ??= new SubjectQueryParameters();
+
+        var data = await subjectService.GetPaginatedSubjectsAsync(parameters);
+
+        var vm = new SubjectPaginationVm()
         {
+            Data = data.Data,
+            Pagination = data.Pagination,
             CategorySelectItems = await categoryService.GetSelectListAsync(),
         };
+
+        return View(vm);
+    }
+
+    public async Task<IActionResult> Create([FromQuery] string? categoryId)
+    {
+        var vm = new SubjectCreateVm() { };
 
         if (!string.IsNullOrWhiteSpace(categoryId))
         {
@@ -34,55 +41,72 @@ public class SubjectsController(
     public async Task<IActionResult> Create(SubjectCreateVm subject)
     {
         await subjectService.CreateSubjectAsync(subject);
-        return RedirectToAction("Index", "Blocks");
+        return RedirectToAction(nameof(Index));
     }
 
-    [Route("subjects/{id:int}/topics", Name = "SubjectWithTopics")]
-    public async Task<IActionResult> SubjectWithTopics(int id)
+    [Route("subjects/{id:int}")]
+    public async Task<IActionResult> Details(int id)
     {
-        var data = await subjectService.GetSubjectWithCategoryTopicsAsync(id);
+        var data = await subjectService.GetSubjectDetailsAsync(id);
         return View(data);
+    }
+
+    [Route("subjects/{id:int}/edit", Name = "EditSubject")]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var subject = await subjectService.GetSubjectDetailsAsync(id);
+
+        var vm = new SubjectEditVm()
+        {
+            Id = subject.Id,
+            Name = subject.Name,
+            Icon = subject.Icon,
+            Description = subject.Description,
+            CategoryId = subject.CategoryId,
+        };
+        return View(vm);
+    }
+
+    [HttpPost]
+    [Route("subjects/{id:int}/edit", Name = "EditSubject")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, SubjectEditVm subject)
+    {
+        if (id != subject.Id)
+        {
+            return NotFound();
+        }
+
+        var resp = await subjectService.UpdateSubjectAsync(subject);
+
+        if (resp.Success)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        else
+        {
+            return View(subject);
+        }
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var response = await subjectService.DeleteSubjectAsync(id);
+
+        if (response.Success)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+
+        return RedirectToAction(nameof(Details));
     }
 
     [HttpGet]
     public async Task<IActionResult> GetSubjectsByCategory(int categoryId)
     {
-        var data = await subjectService.GetSubjectsByCategoryAsync(categoryId);
-        var subjects = data.Select(x => new SelectListItem
-            {
-                Value = x.Id.ToString(),
-                Text = x.Name,
-            })
-            .ToList();
-
-        return Json(subjects);
-    }
-
-    [HttpGet("subjects/{id:int}/topics/create")]
-    public IActionResult CreateTopic(int id)
-    {
-        return View();
-    }
-
-    [HttpPost("subjects/{id:int}/topics/create", Name = "CreateTopic")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateTopic(TopicCreateVm topic, int id)
-    {
-        await topicService.CreateTopicAsync(topic);
-        return RedirectToRoute("SubjectWithTopics", new { id });
-    }
-
-    [HttpGet("subjects/{id:int}/tags/create")]
-    public IActionResult CreateTag(int id)
-    {
-        return View();
-    }
-
-    [HttpPost("subjects/{id:int}/tags/create", Name = "CreateTag")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateTag(TagCreateVm tag, int id)
-    {
-        await tagService.CreateTagAsync(tag);
-        return RedirectToRoute("Index");
+        var data = await subjectService.GetSelectListAsync(categoryId);
+        return Json(data);
     }
 }

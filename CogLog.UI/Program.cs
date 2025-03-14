@@ -60,5 +60,5 @@ app.UseAuthorization();
 app.UseCookiePolicy();
 app.UseAuthentication();
 
-app.MapControllerRoute(name: "default", pattern: "{controller=Blocks}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Categories}/{action=Index}/{id?}");
 app.Run();

@@ -1,4 +1,6 @@
+using CogLog.App.Contracts.Data.Tag;
 using CogLog.App.Contracts.Persistence;
+using CogLog.App.Mapping;
 using CogLog.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,13 +28,23 @@ public class TagRepo(AppDbContext ctx) : BaseRepo<Tag>(ctx), ITagRepo
         await _ctx.SaveChangesAsync();
     }
 
-    public async Task<Tag?> GetTagAsync(int id)
+    public async Task<TagDetailsDto?> GetTagDetailsAsync(int id)
     {
-        return await _ctx.Tags.AsNoTracking().SingleOrDefaultAsync(t => t.Id == id);
+        var data = await _ctx.Tags.Include(x => x.Subject).SingleOrDefaultAsync(x => x.Id == id);
+        return data.ToTagDetailsDto();
     }
 
-    public async Task<List<Tag>> GetTagsBySubjectAsync(int subjectId)
+    public async Task<List<TagMinimalDto>> GetAllTagsAsync(int? subjectId = null)
     {
-        return await _ctx.Tags.AsNoTracking().Where(t => t.SubjectId == subjectId).ToListAsync();
+        var query = _ctx.Tags.AsNoTracking();
+
+        if (subjectId.HasValue)
+        {
+            query = query.Where(x => x.SubjectId == subjectId.Value);
+        }
+
+        var tags = await query.ToListAsync();
+
+        return tags.ToTagMinimalDtoList();
     }
 }

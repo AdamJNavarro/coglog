@@ -1,20 +1,18 @@
+using CogLog.App.Contracts.Data.Subject;
+using CogLog.App.Models.Pagination;
 using CogLog.Domain;
 
 namespace CogLog.App.Contracts.Persistence;
 
 public interface ISubjectRepo : IBaseRepo<Subject>
 {
-    Task CreateSubjectAsync(Subject subject);
-    Task<List<Subject>> GetSubjectsAsync();
-    Task<Subject?> GetSubjectAsync(int id);
-    Task<List<Subject>> GetSubjectsByCategoryAsync(int categoryId);
-    Task<Subject> GetSubjectWithRelationsAsync(
-        int id,
-        bool includeCategory,
-        bool includeTopics,
-        bool includeTags,
-        bool includeBlocks
+    Task<List<SubjectMinimalDto>> GetAllSubjectsAsync(int? categoryId);
+    Task<PaginationResponse<SubjectPaginatedDto>> GetPaginatedSubjectsAsync(
+        SubjectQueryParameters parameters
     );
+    Task<SubjectDetailsDto?> GetSubjectDetailsAsync(int id);
+
+    Task CreateSubjectAsync(Subject subject);
     Task UpdateSubjectAsync(Subject subject);
-    Task DeleteSubjectAsync(Subject subject);
+    Task DeleteSubjectAsync(int id);
 }

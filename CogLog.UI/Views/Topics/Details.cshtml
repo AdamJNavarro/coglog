@@ -1,0 +1,13 @@
+@model TopicDetailsVm
+@{
+    ViewData["Title"] = "Topic Details";
+}
+
+<header>
+    <h1>@Model.Name Topic Details</h1>
+    <h3>in @Model.Subject.Name subject</h3>
+</header>
+
+<a asp-action="Edit" asp-route-id="@Model.Id">
+    Edit
+</a>

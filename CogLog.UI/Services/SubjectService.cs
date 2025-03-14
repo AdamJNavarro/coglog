@@ -1,7 +1,9 @@
+using CogLog.App.Contracts.Data.Subject;
 using CogLog.UI.Contracts;
 using CogLog.UI.Mapping;
 using CogLog.UI.Models.Subject;
 using CogLog.UI.Services.Base;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CogLog.UI.Services;
 
@@ -11,27 +13,27 @@ public class SubjectService(IClient client, ILocalStorageService localStorageSer
 {
     private readonly IClient _client = client;
 
-    public async Task<List<SubjectVm>> GetSubjectsAsync()
+    public async Task<SubjectDetailsVm> GetSubjectDetailsAsync(int id)
     {
-        throw new NotImplementedException();
+        var subject = await _client.SubjectGetDetailsAsync(id);
+        return subject.ToSubjectDetailsVm();
     }
 
-    public async Task<List<BaseSubjectVm>> GetSubjectsByCategoryAsync(int categoryId)
+    public async Task<SubjectPaginationVm> GetPaginatedSubjectsAsync(SubjectQueryParameters qp)
     {
-        var data = await _client.SubjectsByCategoryGETAsync(categoryId);
-        return data.Select(x => x.ToBaseSubjectVm()).ToList();
+        var data = await _client.SubjectsGetPaginatedAsync(
+            qp.Page,
+            qp.PerPage,
+            qp.Category,
+            qp.Name
+        );
+        return data.ToSubjectPaginationVm();
     }
 
-    public async Task<BaseSubjectVm> GetSubjectAsync(int id)
+    public async Task<List<SubjectMinimalVm>> GetSubjectsAllAsync(int? categoryId)
     {
-        var subject = await _client.SubjectsGetOneAsync(id);
-        return subject.ToBaseSubjectVm();
-    }
-
-    public async Task<SubjectWithCategoryTopicsVm> GetSubjectWithCategoryTopicsAsync(int id)
-    {
-        var data = await _client.SubjectWithCategoryTopicsGETAsync(id);
-        return data.ToSubjectWithCategoryTopicsVm();
+        var subjects = await _client.SubjectsGetAllAsync(categoryId);
+        return subjects.ToSubjectMinimalVmList();
     }
 
     public async Task<Response<Guid>> CreateSubjectAsync(SubjectCreateVm subject)
@@ -39,7 +41,7 @@ public class SubjectService(IClient client, ILocalStorageService localStorageSer
         try
         {
             var cmd = subject.ToCreateSubjectCommand();
-            await _client.SubjectsPOSTAsync(cmd);
+            await _client.SubjectCreateAsync(cmd);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)
@@ -49,13 +51,39 @@ public class SubjectService(IClient client, ILocalStorageService localStorageSer
         }
     }
 
-    public async Task UpdateSubjectAsync(SubjectVm subjectVm)
+    public async Task<Response<Guid>> UpdateSubjectAsync(SubjectEditVm subject)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var cmd = subject.ToUpdateSubjectCommand();
+            await _client.SubjectUpdateAsync(subject.Id.ToString(), cmd);
+            return new Response<Guid>() { Success = true };
+        }
+        catch (ApiException ex)
+        {
+            return ConvertApiExceptions<Guid>(ex);
+        }
     }
 
-    public async Task DeleteSubjectAsync(int id)
+    public async Task<Response<Guid>> DeleteSubjectAsync(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await _client.SubjectDeleteAsync(id);
+            return new Response<Guid>() { Success = true };
+        }
+        catch (ApiException ex)
+        {
+            return ConvertApiExceptions<Guid>(ex);
+        }
+    }
+
+    public async Task<List<SelectListItem>> GetSelectListAsync(int? categoryId)
+    {
+        var subjects = await _client.SubjectsGetAllAsync(categoryId);
+
+        return subjects
+            .Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name })
+            .ToList();
     }
 }

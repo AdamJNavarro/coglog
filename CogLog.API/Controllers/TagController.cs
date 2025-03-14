@@ -12,22 +12,22 @@ public class TagController(IMediator mediator) : ControllerBase
 {
     // GET
     [HttpGet]
-    public async Task<ActionResult> Get()
+    public async Task<List<TagMinimalDto>> Get()
     {
-        return Ok();
+        return await mediator.Send(new GetAllTagsQuery(null));
     }
 
-    [HttpGet("{id:int}", Name = "TagsGetOne")]
-    public async Task<ActionResult<TagDto>> Get(int id)
+    [HttpGet("{id:int}", Name = "TagGetDetails")]
+    public async Task<ActionResult<TagDetailsDto>> GetDetails(int id)
     {
-        var tag = await mediator.Send(new GetTagQuery(id));
+        var tag = await mediator.Send(new GetTagDetailsQuery(id));
         return Ok(tag);
     }
 
-    [HttpGet("{subjectId:int}", Name = "TagsBySubjectGET")]
-    public async Task<List<TagDto>> GetBySubject(int subjectId)
+    [HttpGet("all", Name = "TagsGetAll")]
+    public async Task<List<TagMinimalDto>> GetAll([FromQuery] int? subjectId)
     {
-        return await mediator.Send(new GetTagsBySubjectQuery(subjectId));
+        return await mediator.Send(new GetAllTagsQuery(subjectId));
     }
 
     // POST

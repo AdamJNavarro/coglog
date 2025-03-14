@@ -22,34 +22,41 @@ public static class SubjectViewMapper
         return subjects.Select(x => x.ToSubjectMinimalVm()).ToList();
     }
 
-    public static BaseSubjectVm ToBaseSubjectVm(this SubjectDto subject)
+    public static SubjectPaginatedVm ToSubjectPaginatedVm(this SubjectPaginatedDto subject)
     {
-        return new BaseSubjectVm
+        return new SubjectPaginatedVm
         {
             Id = subject.Id,
             Name = subject.Name,
             Icon = subject.Icon,
             CategoryId = subject.CategoryId,
+            Category = subject.Category.ToCategoryMinimalVm(),
         };
     }
 
-    public static List<BaseSubjectVm> ToBaseSubjectVmList(this IEnumerable<SubjectDto> subjects)
-    {
-        return subjects.Select(x => x.ToBaseSubjectVm()).ToList();
-    }
-
-    public static SubjectWithCategoryTopicsVm ToSubjectWithCategoryTopicsVm(
-        this SubjectWithCategoryTopicsDto subject
+    public static SubjectPaginationVm ToSubjectPaginationVm(
+        this SubjectPaginatedDtoPaginationResponse resp
     )
     {
-        return new SubjectWithCategoryTopicsVm
+        return new SubjectPaginationVm
+        {
+            Pagination = resp.Pagination.ToPaginationMetadataVm(),
+            Data = resp.Data.Select(x => x.ToSubjectPaginatedVm()).ToList(),
+        };
+    }
+
+    public static SubjectDetailsVm ToSubjectDetailsVm(this SubjectDetailsDto subject)
+    {
+        return new SubjectDetailsVm
         {
             Id = subject.Id,
             Name = subject.Name,
             Icon = subject.Icon,
+            Description = subject.Description,
             CategoryId = subject.CategoryId,
-            Category = subject.Category.ToBaseCategoryVm(),
-            Topics = subject.Topics.Select(x => x.ToBaseTopicVm()).ToList(),
+            Category = subject.Category.ToCategoryMinimalVm(),
+            Topics = subject.Topics.ToTopicMinimalVmList(),
+            Tags = subject.Tags.ToTagMinimalVmList(),
         };
     }
 
@@ -57,6 +64,18 @@ public static class SubjectViewMapper
     {
         return new CreateSubjectCommand
         {
+            Name = subject.Name,
+            Icon = subject.Icon,
+            Description = subject.Description,
+            CategoryId = subject.CategoryId,
+        };
+    }
+
+    public static UpdateSubjectCommand ToUpdateSubjectCommand(this SubjectEditVm subject)
+    {
+        return new UpdateSubjectCommand
+        {
+            Id = subject.Id,
             Name = subject.Name,
             Icon = subject.Icon,
             Description = subject.Description,

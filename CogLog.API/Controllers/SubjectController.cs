@@ -1,7 +1,7 @@
-using CogLog.App.Contracts.Data;
 using CogLog.App.Contracts.Data.Subject;
 using CogLog.App.Features.Subject.Commands;
 using CogLog.App.Features.Subject.Queries;
+using CogLog.App.Models.Pagination;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,44 +11,29 @@ namespace CogLog.API.Controllers;
 [ApiController]
 public class SubjectController(IMediator mediator) : ControllerBase
 {
-    // GET
-    [HttpGet]
-    public async Task<ActionResult> Get()
+    [HttpGet(Name = "SubjectsGetPaginated")]
+    public async Task<ActionResult<PaginationResponse<SubjectPaginatedDto>>> Get(
+        [FromQuery] SubjectQueryParameters parameters
+    )
     {
-        return Ok();
+        return await mediator.Send(new GetPaginatedSubjectsQuery(parameters));
     }
 
-    [HttpGet("{id:int}", Name = "SubjectsGetOne")]
-    public async Task<ActionResult<SubjectDto>> GetOne(int id)
+    [HttpGet("all", Name = "SubjectsGetAll")]
+    public async Task<List<SubjectMinimalDto>> Get([FromQuery] int? categoryId)
     {
-        var topic = await mediator.Send(new GetSubjectQuery(id));
+        return await mediator.Send(new GetAllSubjectsQuery(categoryId));
+    }
+
+    [HttpGet("{id:int}", Name = "SubjectGetDetails")]
+    public async Task<ActionResult<SubjectDetailsDto>> GetDetails(int id)
+    {
+        var topic = await mediator.Send(new GetSubjectDetailsQuery(id));
         return Ok(topic);
     }
 
-    [HttpGet("{categoryId:int}", Name = "SubjectsByCategoryGET")]
-    public async Task<List<SubjectDto>> GetByCategory(int categoryId)
-    {
-        return await mediator.Send(new GetSubjectsByCategoryQuery(categoryId));
-    }
-
-    [HttpGet]
-    [Route("{id:int}/topics", Name = "SubjectWithCategoryTopicsGET")]
-    public async Task<ActionResult<SubjectWithCategoryTopicsDto>> Get(int id)
-    {
-        var data = await mediator.Send(new GetSubjectWithCategoryTopicsQuery(id));
-        return Ok(data);
-    }
-
-    [HttpGet]
-    [Route("{id:int}/blocks", Name = "SubjectWithBlocksGET")]
-    public async Task<ActionResult<SubjectWithBlocksDto>> GetWithBlocks(int id)
-    {
-        var data = await mediator.Send(new GetSubjectWithBlocksQuery(id));
-        return Ok(data);
-    }
-
     // POST
-    [HttpPost]
+    [HttpPost(Name = "SubjectCreate")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
     public async Task<ActionResult> Post(CreateSubjectCommand command)
@@ -58,7 +43,7 @@ public class SubjectController(IMediator mediator) : ControllerBase
     }
 
     // PUT
-    [HttpPut("{id:int}")]
+    [HttpPut("{id:int}", Name = "SubjectUpdate")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(400)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -70,7 +55,7 @@ public class SubjectController(IMediator mediator) : ControllerBase
     }
 
     // DELETE
-    [HttpDelete]
+    [HttpDelete(Name = "SubjectDelete")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]

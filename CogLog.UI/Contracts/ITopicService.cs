@@ -1,15 +1,16 @@
 using CogLog.UI.Models.Topic;
 using CogLog.UI.Services.Base;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CogLog.UI.Contracts;
 
 public interface ITopicService
 {
-    // Task<List<TopicVm>> GetTopicsAsync();
-    //
-    // Task<TopicVm> GetTopicAsync(int id);
+    Task<List<TopicMinimalVm>> GetTopicsAsync();
 
-    Task<List<BaseTopicVm>> GetTopicsBySubjectAsync(int subjectId);
+    Task<TopicDetailsVm> GetTopicDetailsAsync(int id);
+
+    Task<List<SelectListItem>> GetSelectListAsync(int? subjectId = null);
 
     Task<Response<Guid>> CreateTopicAsync(TopicCreateVm topic);
 

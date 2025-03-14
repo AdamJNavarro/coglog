@@ -82,12 +82,13 @@ public class CategoriesController(ICategoryService categoryService, ISubjectServ
     public async Task<IActionResult> Delete(int id)
     {
         var response = await categoryService.DeleteCategoryAsync(id);
+
         if (response.Success)
         {
             // show toast
             return RedirectToAction(nameof(Index));
         }
 
-        return RedirectToAction(nameof(Edit));
+        return RedirectToAction(nameof(Details));
     }
 }

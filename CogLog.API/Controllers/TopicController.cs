@@ -13,22 +13,22 @@ public class TopicController(IMediator mediator) : ControllerBase
 {
     // GET
     [HttpGet]
-    public async Task<ActionResult> Get()
+    public async Task<List<TopicMinimalDto>> Get()
     {
-        return Ok();
+        return await mediator.Send(new GetAllTopicsQuery(null));
     }
 
-    [HttpGet("{id:int}", Name = "TopicsGetOne")]
-    public async Task<ActionResult<TopicDto>> GetOne(int id)
+    [HttpGet("{id:int}", Name = "TopicGetDetails")]
+    public async Task<ActionResult<TopicDetailsDto>> GetDetails(int id)
     {
-        var topic = await mediator.Send(new GetTopicQuery(id));
+        var topic = await mediator.Send(new GetTopicDetailsQuery(id));
         return Ok(topic);
     }
 
-    [HttpGet("{subjectId:int}", Name = "TopicsBySubjectGET")]
-    public async Task<List<TopicDto>> GetBySubject(int subjectId)
+    [HttpGet("all", Name = "TopicsGetAll")]
+    public async Task<List<TopicMinimalDto>> GetAll([FromQuery] int? subjectId)
     {
-        return await mediator.Send(new GetTopicsBySubjectQuery(subjectId));
+        return await mediator.Send(new GetAllTopicsQuery(subjectId));
     }
 
     // POST

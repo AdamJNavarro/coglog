@@ -11,18 +11,7 @@ public class DeleteSubjectHandler(ISubjectRepo repo) : IRequestHandler<DeleteSub
         CancellationToken cancellationToken
     )
     {
-        var subjectToDelete = await repo.GetSubjectWithRelationsAsync(
-            request.Id,
-            false,
-            false,
-            false,
-            true
-        );
-        if (subjectToDelete == null)
-        {
-            throw new NotFoundException(nameof(Subject), request.Id);
-        }
-        await repo.DeleteSubjectAsync(subjectToDelete);
+        await repo.DeleteSubjectAsync(request.Id);
         return Unit.Value;
     }
 }

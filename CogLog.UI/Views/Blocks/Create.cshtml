@@ -3,100 +3,67 @@
     ViewData["Title"] = "Create Block";
 }
     
-<header>
-    <h1>Create Block</h1>
-</header>
+<div class="form-wrapper">
+    <h1 class="form-title">New Block</h1>
+    <form asp-controller="Blocks" asp-action="Create">
+        @* <div asp-validation-summary="ModelOnly" class="validation-helper-text"></div> *@
+        <div class="form-group">
+            <label asp-for="Title" class="form-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="validation-helper-text"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Content" class="form-label"></label>
+            <textarea asp-for="Content" class="form-control"></textarea>
+            <span asp-validation-for="Content" class="validation-helper-text"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ExtraContent" class="form-label">Additional Context</label>
+            <textarea asp-for="ExtraContent" class="form-control"></textarea>
+            <span asp-validation-for="ExtraContent" class="validation-helper-text"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Url" class="form-label"></label>
+            <input asp-for="Url" class="form-control" type="url" />
+            <span asp-validation-for="Url" class="validation-helper-text"></span>
+        </div>
 
-<form asp-controller="Blocks" asp-action="Create" class="form-container">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="input-group">
-        <label asp-for="Title" class="input-label"></label>
-        <input asp-for="Title" class="input" />
-        <span asp-validation-for="Title" class="validation-text"></span>
-    </div>
-    <div class="input-group">
-        <label asp-for="Content" class="input-label"></label>
-        <textarea asp-for="Content" class="input"></textarea>
-        <span asp-validation-for="Content" class="validation-text"></span>
-    </div>
-    <div class="input-group">
-        <label asp-for="ExtraContent" class="input-label">Additional Context</label>
-        <textarea asp-for="ExtraContent" class="input"></textarea>
-        <span asp-validation-for="ExtraContent" class="validation-text"></span>
-    </div>
-    <div class="input-group">
-        <label asp-for="Url" class="input-label"></label>
-        <input asp-for="Url" class="input" type="url" />
-        <span asp-validation-for="Url" class="validation-text"></span>
-    </div>
-    
-    <div class="input-group">
-        <label asp-for="CategoryId" class="input-label">Category</label>
-        <select asp-for="CategoryId" id="category-select" class="input" asp-items="Model.Categories">
-            <option value="">-- Select Category --</option>
-            @if (Model.CategoryId.HasValue)
-            {
-                <option value="@Model.CategoryId" selected>
-                    @Model.Categories.FirstOrDefault(c => c.Value == Model.CategoryId.ToString())?.Text
-                </option>
-            }
-        </select>
-    </div>
+        @await Component.InvokeAsync("CategorySelector", new {categoryId = Model.CategoryId})
 
-
-    <div class="input-group" id="subject-group" style="display: none;">
-        <label asp-for="SubjectId" class="input-label">Subject</label>
-        <select asp-for="SubjectId" id="subject-select" class="input">
-            <option value="">-- Select Subject --</option>
-            @if (Model.Subjects != null)
-            {
-                @foreach (var subject in Model.Subjects)
-                {
-                    <option value="@subject.Value" selected="@(Model.SubjectId.ToString() == subject.Value)">
-                        @subject.Text
-                    </option>
-                }
-            }
-        </select>
-    </div>
-
-    <div id="topic-tag-group" style="display: @(Model.SubjectId.HasValue ? "block" : "none");">
-
-        <div class="input-group">
-            <label asp-for="SelectedTopicIds" class="input-label">Topics (Optional)</label>
-            <select name="SelectedTopicIds" id="topic-ids-select" class="input" multiple>
-                @if (Model.Topics != null)
-                {
-                    @foreach (var topic in Model.Topics)
-                    {
-                        <option value="@topic.Value" selected="@(Model.SelectedTopicIds.Contains(int.Parse(topic.Value)))">
-                            @topic.Text
-                        </option>
-                    }
-                }
+        <div class="form-group" id="subject-form-group" style="display: none;">
+            <label asp-for="SubjectId" class="form-label">Subject</label>
+            <select id="subject-select" name="SubjectId" class="form-control">
+                <option value="">-- Select Subject --</option>
             </select>
         </div>
 
-        <div class="input-group">
-            <label asp-for="SelectedTagIds" class="input-label">Tags (Optional)</label>
-            <select name="SelectedTagIds" id="tag-ids-select" class="input" multiple>
-                @if (Model.Tags != null)
-                {
-                    @foreach (var tag in Model.Tags)
-                    {
-                        <option value="@tag.Value" selected="@(Model.SelectedTagIds.Contains(int.Parse(tag.Value)))">
-                            @tag.Text
-                        </option>
-                    }
-                }
+
+
+
+        <div class="form-group" id="topics-form-group"  style="display: @(Model.SubjectId.HasValue ? "block" : "none");">
+            <label asp-for="SelectedTopicIds" class="form-label">Topics</label>
+            <select name="SelectedTopicIds" id="topics-select" class="form-control" multiple>
+
             </select>
         </div>
-    </div>
 
-        <input type="submit" value="Create" class="btn btn-success" />
+        <div class="form-group" id="tags-form-group"  style="display: @(Model.SubjectId.HasValue ? "block" : "none");">
+            <label asp-for="SelectedTagIds" class="form-label">Tags</label>
+            <select name="SelectedTagIds" id="tags-select" class="form-control" multiple>
+
+            </select>
+        </div>
+
+        <div class="form-button-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+
+    </form>
     
+</div>
 
-</form>
+
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -108,8 +75,8 @@
                 var categoryId = $(this).val();
     
                 if (categoryId) {
-                    // Show author dropdown and load authors for the selected category
-                    $('#subject-group').show();
+                    // Show subjects dropdown and load data for the selected category
+                    $('#subject-form-group').show();
     
                     // Clear current options
                     $('#subject-select').empty().append('<option value="">-- Select Subject --</option>');
@@ -123,16 +90,18 @@
                         });
                     });
     
-                    //$('#topic-tag-group').hide();
-                    //$('#topic-ids-select').empty()
-                    //$('#tag-ids-select').empty()
+                    $('#topics-form-group').hide();
+                    $('#topics-select').empty()
+                    $('#tags-form-group').hide();
+                    $('#tags-select').empty()
                 } else {
-                    // Hide author dropdown if no category is selected
-                    $('#subject-group').hide();
+                    // Hide subject dropdown if no category is selected
+                    $('#subject-form-group').hide();
                     $('#subject-select').val('');
-                    //$('#topic-tag-group').hide();
-                    //$('#topic-ids-select').empty()
-                    //$('#tag-ids-select').empty()
+                    $('#topics-form-group').hide();
+                    $('#topics-select').empty()
+                    $('#tags-form-group').hide();
+                    $('#tags-select').empty()
                 }
             });
     
@@ -144,19 +113,20 @@
             // Handle subject selection change
             $('#subject-select').change(function() {
                 var subjectId = $(this).val();
-    
+        console.log('SID', subjectId)
                 if (subjectId) {
-                    // Show tag dropdown and load tags for the selected author
-                    $('#topic-tag-group').show();
-    
-                    // Clear current options
-                    $('#topic-ids-select').empty()
-                    $('#tag-ids-select').empty()
-    
+                    // Show topics and tags dropdown and empty
+                
+                    $('#topics-form-group').show();
+                    $('#topics-select').empty()
+                    $('#tags-form-group').show();
+                    $('#tags-select').empty()
+                    
                     // Load tags via AJAX
                     $.getJSON('@Url.Action("GetTopicsBySubject", "Topics")?subjectId=' + subjectId, function(topics) {
+
                         $.each(topics, function(index, topic) {
-                            $('#topic-ids-select').append($('<option></option>')
+                            $('#topics-select').append($('<option></option>')
                                 .attr('value', topic.value)
                                 .text(topic.text));
                         });
@@ -168,17 +138,19 @@
                     });
 
                     $.getJSON('@Url.Action("GetTagsBySubject", "Tags")?subjectId=' + subjectId, function(tags) {
+                        console.log("tags data", tags);
                         $.each(tags, function (index, tag) {
-                            $('#tag-ids-select').append($('<option></option>')
+                            $('#tags-select').append($('<option></option>')
                                 .attr('value', tag.value)
                                 .text(tag.text));
                         });
                     });
                 } else {
-                    // Hide tag dropdown if no subject is selected
-                    $('#topic-tag-group').hide();
-                    $('#topic-ids-select').empty()
-                    $('#tag-ids-select').empty()
+                    // Hide topic and tag dropdown if no subject is selected
+                    $('#topics-form-group').hide();
+                    $('#topics-select').empty()
+                    $('#tags-form-group').hide();
+                    $('#tags-select').empty()
                 }
             });
         });

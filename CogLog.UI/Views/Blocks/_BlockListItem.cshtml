@@ -23,23 +23,30 @@
             </a>
         }
     </div>
+    
+    
+        <div class="badge-container" style="display: @(Model.Topics.Count > 0 || Model.Tags.Count > 0 ? "block" : "none");">
+
+            @if (Model.Topics.Count > 0)
+            {
+                @foreach (var item in Model.Topics)
+                {
+                    <a asp-controller="Topics" asp-action="Details" asp-route-id="@item.Id" class="badge">@item.Name</a>
+                }
+            }
+
+            @if (Model.Tags.Count > 0)
+            {
+                @foreach (var item in Model.Tags)
+                {
+                    <a asp-controller="Tags" asp-action="Details" asp-route-id="@item.Id" class="badge">@item.Name</a>
+                }
+            }
+        </div>
 
     <div class="card-content">
         <p>@Model.Content</p>
     </div>
-
-    @if (@Model.Topics.Count > 0 || @Model.Tags.Count > 0)
-    {
-        <div class="badge-container">
-
-            <a href="#" class="badge">HTML</a>
-            <a href="#" class="badge">CSS</a>
-            <a href="#" class="badge">Flexbox</a>
-            <a href="#" class="badge">Component</a>
-
-        </div>
-    }
-
 
     @if (!string.IsNullOrEmpty(@Model.ExtraContent))
     {

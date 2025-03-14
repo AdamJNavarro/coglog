@@ -1,4 +1,4 @@
-@model IEnumerable<CogLog.UI.Models.Category.BaseCategoryVm>    
+@model IEnumerable<BaseCategoryVm>    
 @{
     ViewData["Title"] = "Categories";
 }
@@ -7,11 +7,27 @@
     <h1>Categories</h1>
 </header>
 
-<div>
+
+
+<ul class="hierarchy-list">
     @foreach (var item in Model)
     {
-        <a asp-action="Details" asp-route-id="@item.Id">
-            @Html.DisplayFor(modelItem => item.Name)
-        </a>
+        <li class="hierarchy-item">
+            <a class="hierarchy-link" asp-action="Details" asp-route-id="@item.Id">
+                @item.Name
+            </a>
+        </li>
     }
-</div>
+</ul>
+
+<button class="fab">
+    <a asp-action="Create">
+        <svg width="30" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M8.75 2.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z"
+                fill="var(--purple-50)"/>
+        </svg>
+    </a>
+</button>

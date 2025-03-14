@@ -1,4 +1,3 @@
-using CogLog.App.Contracts.Data;
 using CogLog.App.Contracts.Data.Subject;
 using CogLog.App.Features.Subject.Commands;
 using CogLog.Domain;
@@ -7,33 +6,9 @@ namespace CogLog.App.Mapping;
 
 public static class SubjectMapper
 {
-    public static SubjectWithBlocksDto ToSubjectWithBlocksDto(this Subject subject)
-    {
-        return new SubjectWithBlocksDto(
-            subject.Id,
-            subject.Name,
-            subject.Icon,
-            subject.Description,
-            subject.Blocks.Select(x => x.ToBlockDto()).ToList()
-        );
-    }
-
-    public static SubjectWithCategoryTopicsDto ToSubjectWithCategoryTopicsDto(this Subject subject)
-    {
-        return new SubjectWithCategoryTopicsDto(
-            subject.Id,
-            subject.Name,
-            subject.Icon,
-            subject.Description,
-            subject.CategoryId,
-            subject.Category.ToCategoryDto(),
-            subject.Topics.Select(x => x.ToTopicDto()).ToList()
-        );
-    }
-
     public static SubjectMinimalDto ToSubjectMinimalDto(this Subject subject)
     {
-        return new SubjectMinimalDto(subject.Id, subject.Name, subject.Icon);
+        return new SubjectMinimalDto(subject.Id, subject.Name, subject.Icon, subject.CategoryId);
     }
 
     public static List<SubjectMinimalDto> ToSubjectMinimalDtoList(this List<Subject> subjects)
@@ -41,14 +16,33 @@ public static class SubjectMapper
         return subjects.Select(x => x.ToSubjectMinimalDto()).ToList();
     }
 
-    public static SubjectDto ToSubjectDto(this Subject subject)
+    public static SubjectPaginatedDto ToSubjectPaginatedDto(this Subject subject)
     {
-        return new SubjectDto(
+        return new SubjectPaginatedDto(
+            subject.Id,
+            subject.Name,
+            subject.Icon,
+            subject.CategoryId,
+            subject.Category.ToCategoryMinimalDto()
+        );
+    }
+
+    public static List<SubjectPaginatedDto> ToSubjectPaginatedDtoList(this List<Subject> subjects)
+    {
+        return subjects.Select(x => x.ToSubjectPaginatedDto()).ToList();
+    }
+
+    public static SubjectDetailsDto ToSubjectDetailsDto(this Subject subject)
+    {
+        return new SubjectDetailsDto(
             subject.Id,
             subject.Name,
             subject.Icon,
             subject.Description,
-            subject.CategoryId
+            subject.CategoryId,
+            subject.Category.ToCategoryMinimalDto(),
+            subject.Topics.ToTopicMinimalDtoList(),
+            subject.Tags.ToTagMinimalDtoList()
         );
     }
 
