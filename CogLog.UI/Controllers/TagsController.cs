@@ -6,11 +6,16 @@ namespace CogLog.UI.Controllers;
 
 public class TagsController(ITagService tagService) : Controller
 {
+    public async Task<IActionResult> Index()
+    {
+        var data = await tagService.GetTagsAsync();
+        return View(data);
+    }
+
     [HttpGet]
     public async Task<IActionResult> GetTagsBySubject(int subjectId)
     {
-        var data = await tagService.GetTagsBySubjectAsync(subjectId);
-        var tags = data.Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name });
-        return Json(tags);
+        var data = await tagService.GetSelectListAsync(subjectId);
+        return Json(data);
     }
 }

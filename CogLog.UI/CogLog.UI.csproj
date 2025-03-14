@@ -16,10 +16,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Folder Include="Views\Tags\" />
-    </ItemGroup>
-    
-    <ItemGroup>
       <_ContentIncludedByDefault Remove="Views\Shared\Hierarchy\_SubjectSelectPartial.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Shared\Components\BlockClassificationSelector\Default.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Blocks\Create\Classify.cshtml" />

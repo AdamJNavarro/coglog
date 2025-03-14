@@ -4,6 +4,7 @@ using CogLog.UI.Mapping;
 using CogLog.UI.Models;
 using CogLog.UI.Models.Topic;
 using CogLog.UI.Services.Base;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Exception = System.Exception;
 
 namespace CogLog.UI.Services;
@@ -14,10 +15,25 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
 {
     private readonly IClient _client = client;
 
-    public async Task<List<BaseTopicVm>> GetTopicsBySubjectAsync(int subjectId)
+    public async Task<List<TopicMinimalVm>> GetTopicsAsync()
     {
-        var data = await _client.TopicsBySubjectGETAsync(subjectId);
-        return data.Select(x => x.ToBaseTopicVm()).ToList();
+        var data = await _client.TopicsGetAllAsync(null);
+        return data.ToTopicMinimalVmList();
+    }
+
+    public async Task<TopicDetailsVm> GetTopicDetailsAsync(int id)
+    {
+        var topic = await _client.TopicGetDetailsAsync(id);
+        return topic.ToTopicDetailsVm();
+    }
+
+    public async Task<List<SelectListItem>> GetSelectListAsync(int? subjectId = null)
+    {
+        var topics = await _client.TopicsGetAllAsync(subjectId);
+
+        return topics
+            .Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name })
+            .ToList();
     }
 
     public async Task<Response<Guid>> CreateTopicAsync(TopicCreateVm topic)

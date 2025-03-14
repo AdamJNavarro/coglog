@@ -1,0 +1,73 @@
+@model SubjectPaginationVm
+@{
+    ViewData["Title"] = "Subjects";
+}
+
+<a asp-action="Create">Create</a>
+
+
+@* <form method="get"> *@
+@*     <div class="form-group"> *@
+@*        *@
+@*         <input type="text" class="form-control" id="name-input" name="Name" *@
+@*                value="@(Context.Request.Query["Name"])"> *@
+@* *@
+@*     </div> *@
+@*     <div class="form-group"> *@
+@*         <label for="Category" class="form-label">Category</label> *@
+@*         <select id="category" name="Category" class="form-control"> *@
+@*             <option value="">-- Select Category --</option> *@
+@*             @foreach (var category in Model.CategorySelectItems) *@
+@*             { *@
+@*                 <option value="@category.Text" selected="@(Context.Request.Query["Category"] == category.Text)"> *@
+@*                     @category.Text *@
+@*                 </option> *@
+@*             } *@
+@*         </select> *@
+@*     </div> *@
+@* </form> *@
+
+@await Component.InvokeAsync("Pagination", new
+{
+    pagination = Model.Pagination,
+    routeValues = new Dictionary<string, object>
+    {
+        { "category", Context.Request.Query["Category"] },
+        { "name", Context.Request.Query["Name"] },
+    }
+})
+
+<ul class="hierarchy-list">
+    @foreach (var item in Model.Data)
+    {
+        <li class="hierarchy-item">
+            <a class="hierarchy-link" asp-action="Details" asp-route-id="@item.Id">
+                @item.Name
+            </a>
+        </li>
+    }
+</ul>
+
+@section Scripts {
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const inputs = this.querySelectorAll('input, select, textarea');
+
+            inputs.forEach(input => {
+                if (input.value === '') {
+                    input.disabled = true; // Temporarily disable empty fields
+                }
+            });
+
+            // Form submits without the disabled fields
+
+            // Re-enable fields after submission (important for back button behavior)
+            setTimeout(() => {
+                inputs.forEach(input => {
+                    input.disabled = false;
+                });
+            }, 100);
+        });
+    </script>
+}

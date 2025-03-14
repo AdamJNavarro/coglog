@@ -14,13 +14,7 @@ public class CreateBlockVm
 
     public int? CategoryId { get; set; }
 
-    public IEnumerable<SelectListItem> Categories { get; set; } = [];
-
     public int? SubjectId { get; set; }
     public List<int> SelectedTopicIds { get; set; } = new List<int>();
     public List<int> SelectedTagIds { get; set; } = new List<int>();
-
-    public IEnumerable<SelectListItem> Subjects { get; set; } = [];
-    public IEnumerable<SelectListItem> Topics { get; set; } = [];
-    public IEnumerable<SelectListItem> Tags { get; set; } = [];
 }

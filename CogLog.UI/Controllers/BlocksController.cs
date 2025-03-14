@@ -6,12 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CogLog.UI.Controllers;
 
-public class BlocksController(
-    IBlockService blockService,
-    ICategoryService categoryService,
-    ISubjectService subjectService,
-    ITopicService topicService
-) : Controller
+public class BlocksController(IBlockService blockService) : Controller
 {
     // INDEX - GET
     public async Task<IActionResult> Index([FromQuery] BlocksQueryParameters parameters)
@@ -36,13 +31,7 @@ public class BlocksController(
     // CREATE - GET
     public async Task<IActionResult> Create()
     {
-        var categories = await categoryService.GetCategoriesAsync();
-        var vm = new CreateBlockVm
-        {
-            Categories = categories
-                .Select(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name })
-                .ToList(),
-        };
+        var vm = new CreateBlockVm { };
 
         return View(vm);
     }

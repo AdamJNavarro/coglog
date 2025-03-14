@@ -1,18 +1,22 @@
-@model IEnumerable<CogLog.UI.Models.Topic.TopicVm>    
+@model IEnumerable<TopicMinimalVm>    
 @{
     ViewData["Title"] = "Topics";
 }
     
 <header>
     <h1>Topics</h1>
+<a asp-action="Create">Create</a>
 </header>
 
-<div>
+
+
+<ul class="hierarchy-list">
     @foreach (var item in Model)
     {
-        <p>
-            @Html.DisplayFor(modelItem => item.Icon)
-            @Html.DisplayFor(modelItem => item.Name)
-        </p>
+        <li class="hierarchy-item">
+            <a class="hierarchy-link" asp-action="Details" asp-route-id="@item.Id">
+                @item.Name
+            </a>
+        </li>
     }
-</div>
+</ul>

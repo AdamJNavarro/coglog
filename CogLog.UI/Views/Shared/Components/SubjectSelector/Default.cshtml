@@ -1,0 +1,14 @@
+@model CogLog.UI.Models.Shared.Hierarchy.SubjectSelectorVm
+
+<div class="form-group" id="subject-form-group">
+    <label asp-for="SubjectId" class="form-label">Subject</label>
+    <select id="subject-select" name="SubjectId" class="form-control" required>
+        <option value="">-- Select Subject --</option>
+        @foreach (var subject in Model.SubjectSelectItems)
+        {
+            <option value="@subject.Value" selected="@(Model.SubjectId.ToString() == subject.Value)">
+                @subject.Text
+            </option>
+        }
+    </select>
+</div>

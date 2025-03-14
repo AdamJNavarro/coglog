@@ -1,0 +1,36 @@
+@model SubjectDetailsVm
+@{
+    ViewData["Title"] = "Subject Details";
+}
+
+<header>
+    <h1>@Model.Name Subject Details</h1>
+    <h3>in @Model.Category.Name category</h3>
+</header>
+
+<a asp-action="Edit" asp-route-id="@Model.Id">
+    Edit
+</a>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <input type="submit" value="Delete" class="btn btn-danger" />
+</form>
+
+<div>
+    @foreach (var item in Model.Topics)
+    {
+        <p>
+            @Html.DisplayFor(modelItem => item.Name)
+        </p>
+    }
+</div>
+
+<div>
+    @foreach (var item in Model.Tags)
+    {
+        <p>
+            @Html.DisplayFor(modelItem => item.Name)
+        </p>
+    }
+</div>

@@ -1,0 +1,12 @@
+@model CogLog.UI.Models.Shared.Hierarchy.HierarchyListVm
+
+<ul class="hierarchy-list">
+    @foreach (var item in Model.Items)
+    {
+        <li class="hierarchy-item">
+            <a class="hierarchy-link" asp-controller="@Model.Controller" asp-action="@Model.Action" asp-route-id="@item.Id">
+                @item.Name
+            </a>
+        </li>
+    }
+</ul>

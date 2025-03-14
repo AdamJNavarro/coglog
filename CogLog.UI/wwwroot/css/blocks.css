@@ -1,0 +1,125 @@
+.card-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+}
+
+/* Card container */
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-m);
+    background: white;
+    border-radius: var(--bord-rad);
+    padding: var(--spacing-m);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-m);
+    flex: 1;
+}
+
+.circle-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0f2fe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0284c7;
+}
+
+.card-title {
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.external-link {
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+}
+
+.external-link:hover {
+    color: #0284c7;
+}
+
+.card-content {
+    color: #64748b;
+}
+
+.badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-s);
+}
+
+.badge {
+    background-color: #f1f5f9;
+    color: #475569;
+    padding: var(--spacing-xs) var(--spacing-s);
+    border-radius: 9999px;
+    font-size: var(--font-size-xs);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.badge:hover {
+    background-color: #e2e8f0;
+}
+
+.collapsible-container {
+
+}
+
+.collapsible-toggle {
+    background: none;
+    border: none;
+    color: #0284c7;
+    font-size: 0.875rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0;
+}
+
+.collapsible-toggle:hover {
+    color: #0369a1;
+}
+
+.collapsible-toggle .icon {
+    transition: transform 0.3s ease;
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+/* Hidden checkbox to toggle the collapsible content */
+#collapsible-checkbox {
+    display: none;
+}
+
+#collapsible-checkbox:checked ~ .collapsible-content {
+    max-height: 500px; /* Arbitrary large value */
+}
+
+#collapsible-checkbox:checked ~ .collapsible-toggle .icon {
+    transform: rotate(180deg);
+}

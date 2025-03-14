@@ -1,20 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using CogLog.App.Constants;
+using CogLog.UI.Models.Shared.Hierarchy;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CogLog.UI.Models.Subject;
 
-public class SubjectEditVm
+public class SubjectEditVm : HierarchyBaseEditVm
 {
-    public int Id { get; init; }
-
     [Required]
-    [MinLength(ValidationConstants.Subject.NameMinLength)]
-    public string Name { get; init; }
-
-    public string? Icon { get; init; }
-
-    public string? Description { get; init; }
-
-    [Required]
-    public int CategoryId { get; init; }
+    public int CategoryId { get; set; }
 }

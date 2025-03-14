@@ -1,0 +1,29 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model SubjectEditVm
+@{
+    ViewData["Title"] = "Edit Subject";
+}
+
+<div class="form-wrapper">
+    <h1 class="form-title">Edit Subject</h1>
+
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+
+        @await Component.InvokeAsync("HierarchyFormGroups", Model)
+
+        @await Component.InvokeAsync("CategorySelector", new {categoryId = Model.CategoryId})
+
+
+        <div class="form-button-group">
+            <input type="submit" value="Update" class="btn btn-primary" />
+            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

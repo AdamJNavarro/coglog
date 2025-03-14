@@ -3,21 +3,11 @@
 @{
     ViewData["Title"] = "Cog Log";
 
-    string GetPaginationUrl(int page)
-    {
-        return @Url.Action("Index", new
-        { 
-            page,
-            perPage = Model.Pagination.PerPage,
-            SearchTerm = Context.Request.Query["SearchTerm"]
-        })!;
-    }
-
 }
 
 <header>
-    <h1>Adam's Cog Log</h1>
-    <p>A collection of learnings, questions and thoughts.</p>
+    <h1>Blocks</h1>
+    <a asp-action="Create">Create</a>
 </header>
 
 
@@ -26,48 +16,6 @@
     @foreach (var block in Model.Data)
     {
         @await Html.PartialAsync("_BlockListItem", block)
-
     }
     
 </div>
-
-@if (Model.Pagination.TotalPages > 1)
-{
-    <nav aria-label="Page navigation" class="mt-4">
-        <ul class="pagination justify-content-center">
-            @if (Model.Pagination.Page > 1)
-            {
-                <li class="page-item">
-                    <a class="page-link"  href="@GetPaginationUrl(Model.Pagination.Page - 1)">Previous</a>
-                </li>
-            }
-            else
-            {
-                <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
-                </li>
-            }
-                
-            @* @for (int i = Math.Max(1, Model.Pagination.Page - 2); *@
-            @*       i <= Math.Min(Model.Pagination.TotalPages, Model.Pagination.Page + 2); i++) *@
-            @* { *@
-            @*     <li class="page-item @(i == Model.Pagination.Page ? "active" : "")"> *@
-            @*         <a class="page-link" href="@GetPaginationUrl(i)">@i</a> *@
-            @*     </li> *@
-            @* } *@
-                
-            @if (Model.Pagination.Page < Model.Pagination.TotalPages)
-            {
-                <li class="page-item">
-                    <a class="page-link" href="@GetPaginationUrl(Model.Pagination.Page + 1)">Next</a>
-                </li>
-            }
-            else
-            {
-                <li class="page-item disabled">
-                    <span class="page-link">Next</span>
-                </li>
-            }
-        </ul>
-    </nav>
-}

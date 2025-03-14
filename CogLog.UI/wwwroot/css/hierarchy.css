@@ -1,0 +1,34 @@
+.hierarchy-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: var(--spacing-m);
+}
+
+.hierarchy-item {
+    margin: 0;
+}
+
+.hierarchy-link {
+    display: inline-block;
+    padding: var(--spacing-s) var(--spacing-m);
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    border-radius: var(--bord-rad);
+    font-family: Arial, sans-serif;
+    font-size: var(--font-size-sm);
+    transition: all 0.2s ease;
+}
+
+.hierarchy-link:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hierarchy-link:active {
+    transform: translateY(0);
+}

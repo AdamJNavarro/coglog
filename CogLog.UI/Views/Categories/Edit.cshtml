@@ -1,42 +1,25 @@
 @model CategoryEditVm
 
-<header>
-    <h1>Edit Category</h1>
-</header>
 
-<form asp-action="Edit" class="form-wrapper">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" />
-    <div class="input-group">
-        <label asp-for="Name" class="input-label"></label>
-        <input asp-for="Name" class="input" />
-        <span asp-validation-for="Name" class="validation-text"></span>
-    </div>
-    <div class="input-group">
-        <label asp-for="Icon" class="input-label"></label>
-        <input asp-for="Icon" class="input"></input>
-        <span asp-validation-for="Icon" class="validation-text"></span>
-    </div>
-    <div class="input-group">
-        <label asp-for="Description" class="input-label"></label>
-        <textarea asp-for="Description" class="input"></textarea>
-        <span asp-validation-for="Description" class="validation-text"></span>
-    </div>
+<div class="form-wrapper">
+    <h1 class="form-title">Edit Category</h1>
+
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+
+        @await Component.InvokeAsync("HierarchyFormGroups", Model)
         
-    <div class="btn-group">
-        <input type="submit" value="Save" class="btn btn-success" />
-       
-        <a asp-action="Details" asp-route-id="@Model.Id">Back</a>
-    </div>
-</form>
 
-<form asp-action="Delete" method="post">
-    <input type="hidden" asp-for="Id" />
-    <input type="submit" value="Delete" class="btn btn-danger" />
-</form>
+        <div class="form-button-group">
+            <input type="submit" value="Update" class="btn btn-primary" />
+            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+        </div>
 
+    </form>
+</div>
 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
 }

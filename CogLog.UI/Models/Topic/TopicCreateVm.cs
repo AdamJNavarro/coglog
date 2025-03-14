@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using CogLog.App.Constants;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CogLog.UI.Models.Topic;
 
@@ -17,5 +18,7 @@ public class TopicCreateVm
     public string? Description { get; init; }
 
     [Required]
-    public int SubjectId { get; init; }
+    public int SubjectId { get; set; }
+
+    public IEnumerable<SelectListItem> SubjectSelectItems { get; init; } = [];
 }

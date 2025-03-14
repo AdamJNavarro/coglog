@@ -1,5 +1,4 @@
 using CogLog.App.Contracts.Data.Block;
-using CogLog.UI.Models;
 using CogLog.UI.Models.Block;
 using CogLog.UI.Models.Shared.Pagination;
 using CogLog.UI.Services.Base;

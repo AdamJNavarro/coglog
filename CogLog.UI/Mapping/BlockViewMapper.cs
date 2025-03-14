@@ -25,11 +25,9 @@ public static class BlockViewMapper
         };
     }
 
-    public static PaginationResponseVm<BlockVm> ToPaginationBlockVm(
-        this BlockDtoPaginationResponse resp
-    )
+    public static BlockPaginationVm ToPaginationBlockVm(this BlockDtoPaginationResponse resp)
     {
-        return new PaginationResponseVm<BlockVm>
+        return new BlockPaginationVm
         {
             Pagination = resp.Pagination.ToPaginationMetadataVm(),
             Data = resp.Data.Select(x => x.ToBlockVm()).ToList(),

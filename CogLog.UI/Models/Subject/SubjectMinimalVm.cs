@@ -9,4 +9,6 @@ public class SubjectMinimalVm
     public string Name { get; init; }
 
     public string? Icon { get; init; }
+
+    public int CategoryId { get; init; }
 }

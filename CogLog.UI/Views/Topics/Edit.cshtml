@@ -1,0 +1,27 @@
+@model TopicEditVm
+@{
+    ViewData["Title"] = "Edit Topic";
+}
+
+<div class="form-wrapper">
+    <h1 class="form-title">Edit Topic</h1>
+
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+
+        @await Component.InvokeAsync("HierarchyFormGroups", Model)
+
+        @await Component.InvokeAsync("SubjectSelector", new {subjectId = Model.SubjectId})
+
+
+        <div class="form-button-group">
+            <input type="submit" value="Update" class="btn btn-primary" />
+            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

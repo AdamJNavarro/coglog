@@ -1,0 +1,20 @@
+@model CogLog.UI.Models.Shared.Hierarchy.HierarchyBaseWriteVm
+
+
+<div class="form-group">
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" type="text" id="name" class="form-control" required>
+    <span asp-validation-for="Name" class="validation-helper-text"></span>
+</div>
+
+<div class="form-group" style="display: none;">
+    <label asp-for="Icon" class="form-label"></label>
+    <input asp-for="Icon" type="text" id="icon" class="form-control">
+    <span asp-validation-for="Icon" class="validation-helper-text"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Description" class="form-label"></label>
+    <textarea asp-for="Description" id="description" class="form-control"></textarea>
+    <span asp-validation-for="Description" class="validation-helper-text"></span>
+</div>
