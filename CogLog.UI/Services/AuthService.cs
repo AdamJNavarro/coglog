@@ -11,11 +11,9 @@ namespace CogLog.UI.Services;
 public class AuthService(
     IClient client,
     ILocalStorageService localStorage,
-    IHttpContextAccessor httpContextAccessor,
-    IMapper mapper
+    IHttpContextAccessor httpContextAccessor
 ) : BaseHttpService(client, localStorage), IAuthService
 {
-    private readonly IMapper _mapper = mapper;
     private readonly JwtSecurityTokenHandler _tokenHandler = new();
     private readonly IClient _client = client;
 

@@ -19,7 +19,6 @@ public class CreateBlockHandler(
             Content = request.Content,
             ExtraContent = request.ExtraContent,
             Url = request.Url,
-            CategoryId = request.CategoryId,
             SubjectId = request.SubjectId,
         };
 

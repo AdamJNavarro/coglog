@@ -7,8 +7,7 @@ public interface ITopicRepo : IBaseRepo<Topic>
 {
     Task CreateTopicAsync(Topic topic);
     Task UpdateTopicAsync(Topic topic);
-    Task DeleteTopicAsync(Topic topic);
-
+    Task DeleteTopicAsync(int id);
     Task<TopicDetailsDto?> GetTopicDetailsAsync(int id);
     Task<List<TopicMinimalDto>> GetAllTopicsAsync(int? subjectId = null);
 }

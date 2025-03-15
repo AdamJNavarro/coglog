@@ -6,8 +6,5 @@ namespace CogLog.UI.Models.Subject;
 
 public class SubjectCreateVm : HierarchyBaseWriteVm
 {
-    [Required]
-    public int CategoryId { get; set; }
-
-    // public IEnumerable<SelectListItem> CategorySelectItems { get; init; } = [];
+    public int? CategoryId { get; set; }
 }

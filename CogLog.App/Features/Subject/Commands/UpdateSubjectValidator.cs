@@ -19,10 +19,10 @@ public class UpdateSubjectValidator : AbstractValidator<UpdateSubjectCommand>
             .MustAsync(SubjectMustExist)
             .WithMessage("Subject does not exist!");
 
-        RuleFor(x => x.CategoryId)
-            .NotNull()
-            .MustAsync(CategoryMustExist)
-            .WithMessage("Category does not exist!");
+        // RuleFor(x => x.CategoryId)
+        //     .NotNull()
+        //     .MustAsync(CategoryMustExist)
+        //     .WithMessage("Category does not exist!");
 
         RuleFor(p => p.Name)
             .NotEmpty()

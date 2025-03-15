@@ -1,6 +1,7 @@
 using CogLog.App.Contracts.Data;
 using CogLog.App.Contracts.Data.Category;
 using CogLog.App.Contracts.Persistence;
+using CogLog.App.Exceptions;
 using CogLog.App.Mapping;
 using MediatR;
 
@@ -14,7 +15,12 @@ public class GetCategoryDetailsHandler(ICategoryRepo repo)
         CancellationToken cancellationToken
     )
     {
-        var category = await repo.GetCategoryWithRelationsAsync(request.Id, true, false);
-        return category.ToCategoryDetailsDto();
+        var category = await repo.GetCategoryDetailsAsync(request.Id);
+        if (category is null)
+        {
+            throw new NotFoundException(nameof(Category), request.Id);
+        }
+
+        return category;
     }
 }

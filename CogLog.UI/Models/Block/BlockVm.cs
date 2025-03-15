@@ -21,10 +21,6 @@ public class BlockVm : BaseBlockVm
 
     public string? Url { get; init; }
 
-    public int? CategoryId { get; init; }
-
-    public CategoryMinimalVm? Category { get; init; }
-
     public int? SubjectId { get; init; }
 
     public SubjectMinimalVm? Subject { get; init; }

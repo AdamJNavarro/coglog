@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <Folder Include="Contracts\Data\Shared\Pagination\" />
+      <Folder Include="Features\Shared\" />
     </ItemGroup>
 
 </Project>

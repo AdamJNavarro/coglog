@@ -28,18 +28,9 @@
             <span asp-validation-for="Url" class="validation-helper-text"></span>
         </div>
 
-        @await Component.InvokeAsync("CategorySelector", new {categoryId = Model.CategoryId})
-
-        <div class="form-group" id="subject-form-group" style="display: none;">
-            <label asp-for="SubjectId" class="form-label">Subject</label>
-            <select id="subject-select" name="SubjectId" class="form-control">
-                <option value="">-- Select Subject --</option>
-            </select>
-        </div>
-
-
-
-
+        @await Component.InvokeAsync("SubjectSelector", new {subjectId = Model.SubjectId})
+        
+        
         <div class="form-group" id="topics-form-group"  style="display: @(Model.SubjectId.HasValue ? "block" : "none");">
             <label asp-for="SelectedTopicIds" class="form-label">Topics</label>
             <select name="SelectedTopicIds" id="topics-select" class="form-control" multiple>
@@ -70,41 +61,7 @@
 
     <script>
         $(document).ready(function() {
-            // Handle category selection change
-            $('#category-select').change(function() {
-                var categoryId = $(this).val();
-    
-                if (categoryId) {
-                    // Show subjects dropdown and load data for the selected category
-                    $('#subject-form-group').show();
-    
-                    // Clear current options
-                    $('#subject-select').empty().append('<option value="">-- Select Subject --</option>');
-    
-    
-                    $.getJSON('@Url.Action("GetSubjectsByCategory", "Subjects")?categoryId=' + categoryId, function(subjects) {
-                        $.each(subjects, function(index, subject) {
-                            $('#subject-select').append($('<option></option>')
-                                .attr('value', subject.value)
-                                .text(subject.text));
-                        });
-                    });
-    
-                    $('#topics-form-group').hide();
-                    $('#topics-select').empty()
-                    $('#tags-form-group').hide();
-                    $('#tags-select').empty()
-                } else {
-                    // Hide subject dropdown if no category is selected
-                    $('#subject-form-group').hide();
-                    $('#subject-select').val('');
-                    $('#topics-form-group').hide();
-                    $('#topics-select').empty()
-                    $('#tags-form-group').hide();
-                    $('#tags-select').empty()
-                }
-            });
-    
+            
             // Trigger change event if a category is already selected (e.g., on form validation failure)
             //if ($('#category-select').val()) {
               //  $('#category-select').trigger('change');
@@ -113,7 +70,6 @@
             // Handle subject selection change
             $('#subject-select').change(function() {
                 var subjectId = $(this).val();
-        console.log('SID', subjectId)
                 if (subjectId) {
                     // Show topics and tags dropdown and empty
                 

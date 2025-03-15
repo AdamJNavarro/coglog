@@ -10,7 +10,7 @@ public class SubjectPaginatedVm
 
     public string? Icon { get; init; }
 
-    public int CategoryId { get; init; }
+    public int? CategoryId { get; init; }
 
-    public CategoryMinimalVm Category { get; init; }
+    public CategoryMinimalVm? Category { get; init; }
 }

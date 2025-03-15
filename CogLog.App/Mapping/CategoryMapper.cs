@@ -37,17 +37,6 @@ public static class CategoryMapper
         );
     }
 
-    public static CategoryWithBlocksDto ToCategoryWithBlocksDto(this Category category)
-    {
-        return new CategoryWithBlocksDto(
-            category.Id,
-            category.Name,
-            category.Icon,
-            category.Description,
-            category.Blocks.Select(x => x.ToBlockDto()).ToList()
-        );
-    }
-
     public static Category ToCategory(this CreateCategoryCommand request)
     {
         return new Category

@@ -32,7 +32,7 @@ public class TopicController(IMediator mediator) : ControllerBase
     }
 
     // POST
-    [HttpPost]
+    [HttpPost(Name = "TopicCreate")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
     public async Task<ActionResult> Post(CreateTopicCommand command)
@@ -42,7 +42,7 @@ public class TopicController(IMediator mediator) : ControllerBase
     }
 
     // PUT
-    [HttpPut("{id:int}")]
+    [HttpPut("{id:int}", Name = "TopicUpdate")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(400)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -54,7 +54,7 @@ public class TopicController(IMediator mediator) : ControllerBase
     }
 
     // DELETE
-    [HttpDelete]
+    [HttpDelete(Name = "TopicDelete")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]

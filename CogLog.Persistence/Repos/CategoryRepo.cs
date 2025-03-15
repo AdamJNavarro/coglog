@@ -1,4 +1,6 @@
+using CogLog.App.Contracts.Data.Category;
 using CogLog.App.Contracts.Persistence;
+using CogLog.App.Mapping;
 using CogLog.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,23 +26,12 @@ public class CategoryRepo(AppDbContext ctx) : BaseRepo<Category>(ctx), ICategory
         return await _ctx.Categories.AsNoTracking().SingleOrDefaultAsync(q => q.Id == id);
     }
 
-    public async Task<Category> GetCategoryWithRelationsAsync(
-        int id,
-        bool includeSubjects = true,
-        bool includeBlocks = false
-    )
+    public async Task<CategoryDetailsDto?> GetCategoryDetailsAsync(int id)
     {
-        var q = _ctx.Categories.AsQueryable();
-        if (includeSubjects)
-        {
-            q = q.Include(qq => qq.Subjects);
-        }
-
-        if (includeBlocks)
-        {
-            q = q.Include(qq => qq.Blocks);
-        }
-        return await q.SingleAsync(qq => qq.Id == id);
+        var category = await _ctx
+            .Categories.Include(x => x.Subjects)
+            .SingleOrDefaultAsync(x => x.Id == id);
+        return category.ToCategoryDetailsDto();
     }
 
     public async Task UpdateCategoryAsync(Category category)
