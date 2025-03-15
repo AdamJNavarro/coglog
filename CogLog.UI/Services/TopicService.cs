@@ -1,15 +1,12 @@
-using AutoMapper;
 using CogLog.UI.Contracts;
 using CogLog.UI.Mapping;
-using CogLog.UI.Models;
 using CogLog.UI.Models.Topic;
 using CogLog.UI.Services.Base;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Exception = System.Exception;
 
 namespace CogLog.UI.Services;
 
-public class TopicService(IClient client, IMapper mapper, ILocalStorageService localStorageService)
+public class TopicService(IClient client, ILocalStorageService localStorageService)
     : BaseHttpService(client, localStorageService),
         ITopicService
 {
@@ -43,7 +40,7 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
             // AddBearerToken();
 
             var cmd = topic.ToCreateTopicCommand();
-            await _client.TopicsPOSTAsync(cmd);
+            await _client.TopicCreateAsync(cmd);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)
@@ -52,12 +49,12 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
         }
     }
 
-    public async Task<Response<Guid>> EditTopicAsync(int id, TopicVm topic)
+    public async Task<Response<Guid>> EditTopicAsync(TopicEditVm topic)
     {
         try
         {
-            var updateCommand = mapper.Map<UpdateTopicCommand>(topic);
-            await _client.TopicsPUTAsync(id.ToString(), updateCommand);
+            var updateCommand = topic.ToUpdateTopicCommand();
+            await _client.TopicUpdateAsync(topic.Id.ToString(), updateCommand);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)
@@ -70,7 +67,7 @@ public class TopicService(IClient client, IMapper mapper, ILocalStorageService l
     {
         try
         {
-            await _client.TopicsDELETEAsync(id);
+            await _client.TopicDeleteAsync(id);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)

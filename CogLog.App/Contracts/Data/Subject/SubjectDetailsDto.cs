@@ -9,8 +9,8 @@ public record SubjectDetailsDto(
     string Name,
     string? Icon,
     string? Description,
-    int CategoryId,
-    CategoryMinimalDto Category,
+    int? CategoryId,
+    CategoryMinimalDto? Category,
     List<TopicMinimalDto> Topics,
     List<TagMinimalDto> Tags
 );

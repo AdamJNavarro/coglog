@@ -45,38 +45,6 @@ public class BlockRepo(AppDbContext ctx) : BaseRepo<Block>(ctx), IBlockRepo
         return blocksByDay;
     }
 
-    public async Task<List<Block>> GetBlocksWithRelationsAsync(
-        bool includeCategory = true,
-        bool includeSubject = true,
-        bool includeTopics = true,
-        bool includeTags = true
-    )
-    {
-        var q = _ctx.Blocks.AsQueryable();
-
-        if (includeCategory)
-        {
-            q = q.Include(qq => qq.Category);
-        }
-
-        if (includeSubject)
-        {
-            q = q.Include(qq => qq.Subject);
-        }
-
-        if (includeTopics)
-        {
-            q = q.Include(qq => qq.BlockTopics).ThenInclude(bt => bt.Topic);
-        }
-
-        if (includeTags)
-        {
-            q = q.Include(qq => qq.BlockTags).ThenInclude(bt => bt.Tag);
-        }
-
-        return await q.ToListAsync();
-    }
-
     public async Task<Block?> GetBlockAsync(int id)
     {
         return await _ctx.Blocks.AsNoTracking().SingleOrDefaultAsync(q => q.Id == id);
@@ -99,7 +67,6 @@ public class BlockRepo(AppDbContext ctx) : BaseRepo<Block>(ctx), IBlockRepo
         var totalPages = (int)Math.Ceiling(totalItems / (double)parameters.PerPage);
 
         var blocks = await query
-            .Include(b => b.Category)
             .Include(b => b.Subject)
             .Include(b => b.BlockTopics)
             .ThenInclude(bt => bt.Topic)
@@ -129,12 +96,12 @@ public class BlockRepo(AppDbContext ctx) : BaseRepo<Block>(ctx), IBlockRepo
         BlocksQueryParameters parameters
     )
     {
-        if (!string.IsNullOrWhiteSpace(parameters.CategoryName))
-        {
-            query = query.Where(p =>
-                p.Category != null && p.Category.Name.Contains(parameters.CategoryName)
-            );
-        }
+        // if (!string.IsNullOrWhiteSpace(parameters.CategoryName))
+        // {
+        //     query = query.Where(p =>
+        //         p.Category != null && p.Category.Name.Contains(parameters.CategoryName)
+        //     );
+        // }
 
         if (!string.IsNullOrWhiteSpace(parameters.SubjectName))
         {

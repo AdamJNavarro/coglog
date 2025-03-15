@@ -1,3 +1,4 @@
+using CogLog.App.Contracts.Data.Category;
 using CogLog.Domain;
 
 namespace CogLog.App.Contracts.Persistence;
@@ -10,7 +11,7 @@ public interface ICategoryRepo : IBaseRepo<Category>
 
     Task<Category?> GetCategoryAsync(int id);
 
-    Task<Category> GetCategoryWithRelationsAsync(int id, bool includeSubjects, bool includeBlocks);
+    Task<CategoryDetailsDto?> GetCategoryDetailsAsync(int id);
 
     Task UpdateCategoryAsync(Category category);
     Task DeleteCategoryAsync(Category category);

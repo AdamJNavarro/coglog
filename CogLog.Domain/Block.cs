@@ -13,10 +13,6 @@ public class Block : BaseEntity
 
     public string? Url { get; init; }
 
-    public Category? Category { get; init; }
-
-    public int? CategoryId { get; set; }
-
     public Subject? Subject { get; init; }
 
     public int? SubjectId { get; set; }

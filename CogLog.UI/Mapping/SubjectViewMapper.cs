@@ -30,7 +30,7 @@ public static class SubjectViewMapper
             Name = subject.Name,
             Icon = subject.Icon,
             CategoryId = subject.CategoryId,
-            Category = subject.Category.ToCategoryMinimalVm(),
+            Category = subject.Category?.ToCategoryMinimalVm(),
         };
     }
 
@@ -54,7 +54,7 @@ public static class SubjectViewMapper
             Icon = subject.Icon,
             Description = subject.Description,
             CategoryId = subject.CategoryId,
-            Category = subject.Category.ToCategoryMinimalVm(),
+            Category = subject.Category?.ToCategoryMinimalVm(),
             Topics = subject.Topics.ToTopicMinimalVmList(),
             Tags = subject.Tags.ToTagMinimalVmList(),
         };

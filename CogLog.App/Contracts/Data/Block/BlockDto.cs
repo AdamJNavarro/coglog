@@ -12,8 +12,6 @@ public record BlockDto(
     string Content,
     string? ExtraContent,
     string? Url,
-    int? CategoryId,
-    CategoryMinimalDto? Category,
     int? SubjectId,
     SubjectMinimalDto? Subject,
     List<TopicMinimalDto> Topics,

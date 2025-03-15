@@ -60,4 +60,16 @@ public static class TopicViewMapper
             SubjectId = topic.SubjectId,
         };
     }
+
+    public static UpdateTopicCommand ToUpdateTopicCommand(this TopicEditVm topic)
+    {
+        return new UpdateTopicCommand()
+        {
+            Id = topic.Id,
+            Name = topic.Name,
+            Icon = topic.Icon,
+            Description = topic.Description,
+            SubjectId = topic.SubjectId,
+        };
+    }
 }

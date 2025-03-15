@@ -7,5 +7,5 @@ public record UpdateSubjectCommand(
     string Name,
     string? Icon,
     string? Description,
-    int CategoryId
+    int? CategoryId
 ) : IRequest<Unit>;

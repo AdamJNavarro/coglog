@@ -23,7 +23,7 @@ public static class SubjectMapper
             subject.Name,
             subject.Icon,
             subject.CategoryId,
-            subject.Category.ToCategoryMinimalDto()
+            subject.Category?.ToCategoryMinimalDto()
         );
     }
 
@@ -40,7 +40,7 @@ public static class SubjectMapper
             subject.Icon,
             subject.Description,
             subject.CategoryId,
-            subject.Category.ToCategoryMinimalDto(),
+            subject.Category?.ToCategoryMinimalDto(),
             subject.Topics.ToTopicMinimalDtoList(),
             subject.Tags.ToTagMinimalDtoList()
         );

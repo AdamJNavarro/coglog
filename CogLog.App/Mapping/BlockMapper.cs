@@ -14,8 +14,6 @@ public static class BlockMapper
             block.Content,
             block.ExtraContent,
             block.Url,
-            block.CategoryId,
-            block.Category?.ToCategoryMinimalDto(),
             block.SubjectId,
             block.Subject?.ToSubjectMinimalDto(),
             block.BlockTopics.Select(x => x.Topic.ToTopicMinimalDto()).ToList(),

@@ -1,4 +1,3 @@
-using System.Reflection;
 using CogLog.UI.Contracts;
 using CogLog.UI.Services;
 using CogLog.UI.Services.Base;
@@ -39,7 +38,8 @@ builder.Services.AddScoped<ITopicService, TopicService>();
 
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+// builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
@@ -52,7 +52,19 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseStaticFiles(
+    new StaticFileOptions
+    {
+        OnPrepareResponse = ctx =>
+        {
+            // Cache SVG files for 7 days
+            if (ctx.File.Name.EndsWith(".svg", StringComparison.OrdinalIgnoreCase))
+            {
+                ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=604800");
+            }
+        },
+    }
+);
 
 app.UseRouting();
 
@@ -60,5 +72,5 @@ app.UseAuthorization();
 app.UseCookiePolicy();
 app.UseAuthentication();
 
-app.MapControllerRoute(name: "default", pattern: "{controller=Categories}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Blocks}/{action=Index}/{id?}");
 app.Run();

@@ -2,7 +2,7 @@
 
 <div class="form-group" id="category-form-group">
     <label asp-for="CategoryId" class="form-label">Category</label>
-    <select id="category-select" name="CategoryId" class="form-control" required>
+    <select id="category-select" name="CategoryId" class="form-control">
         <option value="">-- Select Category --</option>
         @foreach (var category in Model.CategorySelectItems)
         {

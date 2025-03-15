@@ -14,9 +14,9 @@ public class SubjectDetailsVm
 
     public string? Description { get; init; }
 
-    public int CategoryId { get; init; }
+    public int? CategoryId { get; init; }
 
-    public CategoryMinimalVm Category { get; init; }
+    public CategoryMinimalVm? Category { get; init; }
 
     public List<TopicMinimalVm> Topics { get; init; }
 

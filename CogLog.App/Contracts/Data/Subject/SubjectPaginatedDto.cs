@@ -6,6 +6,6 @@ public record SubjectPaginatedDto(
     int Id,
     string Name,
     string? Icon,
-    int CategoryId,
-    CategoryMinimalDto Category
+    int? CategoryId,
+    CategoryMinimalDto? Category
 );

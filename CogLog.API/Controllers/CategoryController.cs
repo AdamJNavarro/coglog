@@ -23,14 +23,6 @@ public class CategoryController(IMediator mediator) : ControllerBase
         return Ok(category);
     }
 
-    // [HttpGet]
-    // [Route("{id:int}/blocks", Name = "CategoryWithBlocksGET")]
-    // public async Task<ActionResult<CategoryWithBlocksDto>> WithBlocks(int id)
-    // {
-    //     var data = await mediator.Send(new GetCategoryWithBlocksQuery(id));
-    //     return Ok(data);
-    // }
-
     [HttpGet("{id:int}/details", Name = "CategoryGetDetails")]
     public async Task<ActionResult<CategoryDetailsDto>> CategoryGetDetails(int id)
     {

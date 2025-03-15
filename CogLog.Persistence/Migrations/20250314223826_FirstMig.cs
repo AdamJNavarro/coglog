@@ -32,7 +32,7 @@ namespace CogLog.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Icon = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -45,7 +45,7 @@ namespace CogLog.Persistence.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -59,17 +59,11 @@ namespace CogLog.Persistence.Migrations
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ExtraContent = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
                     SubjectId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Blocks", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Blocks_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Blocks_Subjects_SubjectId",
                         column: x => x.SubjectId,
@@ -168,11 +162,6 @@ namespace CogLog.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Blocks_CategoryId",
-                table: "Blocks",
-                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Blocks_SubjectId",

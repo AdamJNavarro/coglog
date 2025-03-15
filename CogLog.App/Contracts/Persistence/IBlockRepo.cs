@@ -10,12 +10,6 @@ public interface IBlockRepo : IBaseRepo<Block>
     Task UpdateBlockAsync(Block block);
     Task DeleteBlockAsync(Block block);
     Task<List<BlocksByDayDto>> GetBlocksByDayAsync();
-    Task<List<Block>> GetBlocksWithRelationsAsync(
-        bool includeCategory,
-        bool includeSubject,
-        bool includeTopics,
-        bool includeTags
-    );
     Task<Block?> GetBlockAsync(int id);
     Task<PaginationResponse<BlockDto>> GetBlocksAsync(BlocksQueryParameters parameters);
 }

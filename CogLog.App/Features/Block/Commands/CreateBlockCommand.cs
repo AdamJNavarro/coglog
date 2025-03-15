@@ -7,7 +7,6 @@ public record CreateBlockCommand(
     string Content,
     string? ExtraContent,
     string? Url,
-    int? CategoryId,
     int? SubjectId,
     List<int> TopicIds,
     List<int> TagIds

@@ -243,30 +243,30 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TopicMinimalDto>> TopicsAllAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TopicMinimalDto>> TopicsAsync();
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TopicMinimalDto>> TopicsAllAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TopicMinimalDto>> TopicsAsync(System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task TopicsPOSTAsync(CreateTopicCommand body);
+        System.Threading.Tasks.Task TopicCreateAsync(CreateTopicCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task TopicsPOSTAsync(CreateTopicCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task TopicCreateAsync(CreateTopicCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task TopicsDELETEAsync(int? id);
+        System.Threading.Tasks.Task TopicDeleteAsync(int? id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task TopicsDELETEAsync(int? id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task TopicDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -279,12 +279,12 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task TopicsPUTAsync(string id, UpdateTopicCommand body);
+        System.Threading.Tasks.Task TopicUpdateAsync(string id, UpdateTopicCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task TopicsPUTAsync(string id, UpdateTopicCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task TopicUpdateAsync(string id, UpdateTopicCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -2444,15 +2444,15 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TopicMinimalDto>> TopicsAllAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TopicMinimalDto>> TopicsAsync()
         {
-            return TopicsAllAsync(System.Threading.CancellationToken.None);
+            return TopicsAsync(System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TopicMinimalDto>> TopicsAllAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TopicMinimalDto>> TopicsAsync(System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2522,15 +2522,15 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task TopicsPOSTAsync(CreateTopicCommand body)
+        public virtual System.Threading.Tasks.Task TopicCreateAsync(CreateTopicCommand body)
         {
-            return TopicsPOSTAsync(body, System.Threading.CancellationToken.None);
+            return TopicCreateAsync(body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task TopicsPOSTAsync(CreateTopicCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task TopicCreateAsync(CreateTopicCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2608,15 +2608,15 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task TopicsDELETEAsync(int? id)
+        public virtual System.Threading.Tasks.Task TopicDeleteAsync(int? id)
         {
-            return TopicsDELETEAsync(id, System.Threading.CancellationToken.None);
+            return TopicDeleteAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task TopicsDELETEAsync(int? id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task TopicDeleteAsync(int? id, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -2782,15 +2782,15 @@ namespace CogLog.UI.Services.Base
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task TopicsPUTAsync(string id, UpdateTopicCommand body)
+        public virtual System.Threading.Tasks.Task TopicUpdateAsync(string id, UpdateTopicCommand body)
         {
-            return TopicsPUTAsync(id, body, System.Threading.CancellationToken.None);
+            return TopicUpdateAsync(id, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task TopicsPUTAsync(string id, UpdateTopicCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task TopicUpdateAsync(string id, UpdateTopicCommand body, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -3126,12 +3126,6 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("url")]
         public string Url { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("categoryId")]
-        public int? CategoryId { get; set; }
-
-        [System.Text.Json.Serialization.JsonPropertyName("category")]
-        public CategoryMinimalDto Category { get; set; }
-
         [System.Text.Json.Serialization.JsonPropertyName("subjectId")]
         public int? SubjectId { get; set; }
 
@@ -3243,9 +3237,6 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("url")]
         public string Url { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("categoryId")]
-        public int? CategoryId { get; set; }
-
         [System.Text.Json.Serialization.JsonPropertyName("subjectId")]
         public int? SubjectId { get; set; }
 
@@ -3286,7 +3277,7 @@ namespace CogLog.UI.Services.Base
         public string Description { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("categoryId")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
     }
 
@@ -3421,7 +3412,7 @@ namespace CogLog.UI.Services.Base
         public string Description { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("categoryId")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("category")]
         public CategoryMinimalDto Category { get; set; }
@@ -3448,7 +3439,7 @@ namespace CogLog.UI.Services.Base
         public string Icon { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("categoryId")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
     }
 
@@ -3466,7 +3457,7 @@ namespace CogLog.UI.Services.Base
         public string Icon { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("categoryId")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("category")]
         public CategoryMinimalDto Category { get; set; }
@@ -3604,7 +3595,7 @@ namespace CogLog.UI.Services.Base
         public string Description { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("categoryId")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
     }
 

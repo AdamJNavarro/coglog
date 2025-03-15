@@ -1,4 +1,3 @@
-using CogLog.App.Contracts.Data;
 using CogLog.App.Contracts.Data.Topic;
 using CogLog.App.Features.Topic.Commands;
 using CogLog.Domain;
@@ -15,11 +14,6 @@ public static class TopicMapper
     public static List<TopicMinimalDto> ToTopicMinimalDtoList(this List<Topic> topics)
     {
         return topics.Select(x => x.ToTopicMinimalDto()).ToList();
-    }
-
-    public static TopicDto ToTopicDto(this Topic topic)
-    {
-        return new TopicDto(topic.Id, topic.Name, topic.Icon, topic.Description, topic.SubjectId);
     }
 
     public static TopicDetailsDto ToTopicDetailsDto(this Topic topic)

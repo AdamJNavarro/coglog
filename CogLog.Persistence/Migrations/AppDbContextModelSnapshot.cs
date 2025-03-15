@@ -30,9 +30,6 @@ namespace CogLog.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -54,8 +51,6 @@ namespace CogLog.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("SubjectId");
 
@@ -126,7 +121,7 @@ namespace CogLog.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -207,17 +202,10 @@ namespace CogLog.Persistence.Migrations
 
             modelBuilder.Entity("CogLog.Domain.Block", b =>
                 {
-                    b.HasOne("CogLog.Domain.Category", "Category")
-                        .WithMany("Blocks")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.HasOne("CogLog.Domain.Subject", "Subject")
                         .WithMany("Blocks")
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Category");
 
                     b.Navigation("Subject");
                 });
@@ -265,8 +253,7 @@ namespace CogLog.Persistence.Migrations
                     b.HasOne("CogLog.Domain.Category", "Category")
                         .WithMany("Subjects")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Category");
                 });
@@ -302,8 +289,6 @@ namespace CogLog.Persistence.Migrations
 
             modelBuilder.Entity("CogLog.Domain.Category", b =>
                 {
-                    b.Navigation("Blocks");
-
                     b.Navigation("Subjects");
                 });
 
