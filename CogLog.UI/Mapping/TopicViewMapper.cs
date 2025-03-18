@@ -35,21 +35,6 @@ public static class TopicViewMapper
         };
     }
 
-    // public static BaseTopicVm ToBaseTopicVm(this TopicDto topic)
-    // {
-    //     return new BaseTopicVm
-    //     {
-    //         Id = topic.Id,
-    //         Name = topic.Name,
-    //         SubjectId = topic.SubjectId,
-    //     };
-    // }
-    //
-    // public static List<BaseTopicVm> ToBaseTopicVmList(this IEnumerable<TopicDto> topics)
-    // {
-    //     return topics.Select(x => x.ToBaseTopicVm()).ToList();
-    // }
-
     public static CreateTopicCommand ToCreateTopicCommand(this TopicCreateVm topic)
     {
         return new CreateTopicCommand

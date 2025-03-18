@@ -39,6 +39,8 @@ builder.Services.AddScoped<ITopicService, TopicService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
 
+// builder.Services.AddScoped<IHierarchyIconService, HierarchyIconService>();
+
 // builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

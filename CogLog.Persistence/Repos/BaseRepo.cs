@@ -11,4 +11,9 @@ public class BaseRepo<T>(AppDbContext ctx) : IBaseRepo<T>
     {
         return await ctx.Set<T>().AnyAsync(q => q.Id == id);
     }
+
+    public async Task<T?> GetEntityAsync(int id)
+    {
+        return await ctx.Set<T>().AsNoTracking().SingleOrDefaultAsync(q => q.Id == id);
+    }
 }

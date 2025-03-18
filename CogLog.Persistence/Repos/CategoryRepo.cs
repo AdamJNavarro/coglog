@@ -21,11 +21,6 @@ public class CategoryRepo(AppDbContext ctx) : BaseRepo<Category>(ctx), ICategory
         return await _ctx.Categories.AsNoTracking().ToListAsync();
     }
 
-    public async Task<Category?> GetCategoryAsync(int id)
-    {
-        return await _ctx.Categories.AsNoTracking().SingleOrDefaultAsync(q => q.Id == id);
-    }
-
     public async Task<CategoryDetailsDto?> GetCategoryDetailsAsync(int id)
     {
         var category = await _ctx

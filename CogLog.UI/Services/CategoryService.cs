@@ -12,16 +12,10 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
 {
     private readonly IClient _client = client;
 
-    public async Task<List<BaseCategoryVm>> GetCategoriesAsync()
+    public async Task<List<CategoryMinimalVm>> GetCategoriesAsync()
     {
         var categories = await _client.CategoriesGetAsync();
-        return categories.ToBaseCategoriesVm();
-    }
-
-    public async Task<BaseCategoryVm> GetCategoryAsync(int id)
-    {
-        var category = await _client.CategoryGetAsync(id);
-        return category.ToBaseCategoryVm();
+        return categories.ToCategoryMinimalVmList();
     }
 
     public async Task<CategoryDetailsVm> GetCategoryDetailsAsync(int id)

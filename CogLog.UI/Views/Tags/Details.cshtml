@@ -1,11 +1,11 @@
-@model TopicDetailsVm
+@model TagDetailsVm
 @{
-    ViewData["Title"] = "Topic Details";
+    ViewData["Title"] = "Tag Details";
 }
 
 <header>
     <h1>@Model.CapitalizedName</h1>
 </header>
 
-
 @await Component.InvokeAsync("FloatingActionButton", new {actionName = "Edit", routeId = Model.Id})
+

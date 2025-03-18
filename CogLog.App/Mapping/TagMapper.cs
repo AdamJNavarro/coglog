@@ -16,11 +16,6 @@ public static class TagMapper
         return tags.Select(ToTagMinimalDto).ToList();
     }
 
-    public static TagDto ToTagDto(this Tag tag)
-    {
-        return new TagDto(tag.Id, tag.Name, tag.Icon, tag.Description, tag.SubjectId);
-    }
-
     public static TagDetailsDto ToTagDetailsDto(this Tag tag)
     {
         return new TagDetailsDto(

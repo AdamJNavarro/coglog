@@ -20,21 +20,6 @@ public static class TagViewMapper
         return tags.Select(x => x.ToTagMinimalVm()).ToList();
     }
 
-    // public static BaseTagVm BaseTagVm(this TagDto topic)
-    // {
-    //     return new BaseTagVm
-    //     {
-    //         Id = topic.Id,
-    //         Name = topic.Name,
-    //         SubjectId = topic.SubjectId,
-    //     };
-    // }
-    //
-    // public static List<BaseTagVm> ToBaseTagVmList(this IEnumerable<TagDto> tags)
-    // {
-    //     return tags.Select(x => x.BaseTagVm()).ToList();
-    // }
-
     public static TagDetailsVm ToTagDetailsVm(this TagDetailsDto tag)
     {
         return new TagDetailsVm()
@@ -52,6 +37,18 @@ public static class TagViewMapper
     {
         return new CreateTagCommand
         {
+            Name = tag.Name,
+            Icon = tag.Icon,
+            Description = tag.Description,
+            SubjectId = tag.SubjectId,
+        };
+    }
+
+    public static UpdateTagCommand ToUpdateTagCommand(this TagEditVm tag)
+    {
+        return new UpdateTagCommand
+        {
+            Id = tag.Id,
             Name = tag.Name,
             Icon = tag.Icon,
             Description = tag.Description,

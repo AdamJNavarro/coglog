@@ -14,7 +14,7 @@ public interface ITopicService
 
     Task<Response<Guid>> CreateTopicAsync(TopicCreateVm topic);
 
-    Task<Response<Guid>> EditTopicAsync(TopicEditVm topic);
+    Task<Response<Guid>> UpdateTopicAsync(TopicEditVm topic);
 
     Task<Response<Guid>> DeleteTopicAsync(int id);
 }

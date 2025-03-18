@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CogLog.UI.Controllers;
 
-public class CategoriesController(ICategoryService categoryService, ISubjectService subjectService)
-    : Controller
+public class CategoriesController(ICategoryService categoryService) : Controller
 {
     public async Task<IActionResult> Index()
     {
@@ -38,7 +37,7 @@ public class CategoriesController(ICategoryService categoryService, ISubjectServ
     [Route("categories/{id:int}/edit", Name = "EditCategory")]
     public async Task<IActionResult> Edit(int id)
     {
-        var category = await categoryService.GetCategoryAsync(id);
+        var category = await categoryService.GetCategoryDetailsAsync(id);
 
         if (category == null)
         {
@@ -71,10 +70,8 @@ public class CategoriesController(ICategoryService categoryService, ISubjectServ
         {
             return RedirectToAction(nameof(Index));
         }
-        else
-        {
-            return View(category);
-        }
+
+        return View(category);
     }
 
     [HttpPost]
@@ -89,6 +86,6 @@ public class CategoriesController(ICategoryService categoryService, ISubjectServ
             return RedirectToAction(nameof(Index));
         }
 
-        return RedirectToAction(nameof(Details));
+        return RedirectToAction(nameof(Edit));
     }
 }

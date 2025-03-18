@@ -25,7 +25,7 @@ public class UpdateTopicValidator : AbstractValidator<UpdateTopicCommand>
             .NotEmpty()
             .WithMessage("{PropertyName} is required")
             .NotNull()
-            .MinimumLength(ValidationConstants.Topic.NameMinLength)
+            .MinimumLength(ValidationConstants.Hierarchy.NameMinLength)
             .WithMessage("{PropertyName} must be at least {MinLength} characters");
     }
 

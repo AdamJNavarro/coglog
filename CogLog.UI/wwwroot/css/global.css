@@ -47,9 +47,14 @@
     --blue-800: #1a5472;
     --blue-900: #1a4660;
     --blue-950: #122d3f;
+
+    --white: oklch(100% none none);
+    --black: oklch(0% none none);
     
-    
-    --bord-rad: 4px;
+    --border-radius: 4px;
+    --border-radius-max: 9999px;
+    --border-radius-half: 50%;
+    --border-size: 1.5px;
     
     --spacing-xs: 4px;
     --spacing-s: 8px;
@@ -120,15 +125,25 @@ p {
     line-height: 1.6;
 }
 
+.content-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: black;
+    padding: var(--spacing-m);
+}
+
 main {
     display: flex;
     flex-direction: column;
     max-width: 60ch;
+    min-height: 100vh;
     width: 100%;
-    margin: var(--spacing-m) auto var(--spacing-xxl);
+    margin: var(--spacing-m) auto 0;
     gap: var(--spacing-lg);
-    /*border-left: lightgray 1px solid;*/
-    /*border-right: lightgray 1px solid;*/
+    position: relative;
+    /*background-color: coral;*/
 }
 
 header {
@@ -146,22 +161,12 @@ a {
 }
 
 
-.content-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: black;
-    padding: var(--spacing-m);
-    
-}
-
 .fab {
-    position: fixed;
-    right: 60px;
-    bottom: 60px;
-    border-radius: 50%;
-    height: 48px;
+    position: absolute;
+    right: var(--spacing-xl);
+    bottom: var(--spacing-xl);
+    border-radius: var(--border-radius-half);
+    height: var(--spacing-xl);
     z-index: 100;
     overflow: hidden;
     background-color: var(--purple-700);
@@ -186,26 +191,26 @@ a {
 .btn {
     display: inline-block;
     border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 500;
-    border-radius: 4px;
+    padding: var(--spacing-s) var(--spacing-m);
+    font-size: var(--font-size-base);
+    border-radius: var(--border-radius);
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #3498db;
+    color: var(--white);
+    background-color: var(--purple-700);
 }
 
 .btn-secondary {
-    color: #fff;
-    background-color: var(--purple-500);
+    color: var(--purple-700);
+    background-color: transparent;
+    border: var(--border-size) var(--purple-700) solid;
 }
 
 .btn-danger {
-    color: #fff;
+    color: var(--white);
     background-color: red;
 }
 
@@ -215,7 +220,7 @@ a {
 
 .btn:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);
+    /*box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);*/
 }
 
 .navbar {

@@ -19,6 +19,14 @@ public class SvgIconTagHelper : TagHelper
 
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
+        // If no icon name or invalid icon, suppress output completely
+        // if (string.IsNullOrEmpty(IconName) || !iconService.IsValidIcon(IconName))
+        // {
+        //     output.SuppressOutput();
+        //     return;
+        // }
+
+
         output.TagName = "svg";
         output.Attributes.SetAttribute("class", CssClass ?? "icon");
         output.Attributes.SetAttribute("width", Width);

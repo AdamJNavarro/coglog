@@ -10,7 +10,7 @@
     flex-direction: column;
     gap: var(--spacing-m);
     background: white;
-    border-radius: var(--bord-rad);
+    border-radius: var(--border-radius);
     padding: var(--spacing-m);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -26,17 +26,6 @@
     align-items: center;
     gap: var(--spacing-m);
     flex: 1;
-}
-
-.circle-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #e0f2fe;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #0284c7;
 }
 
 .card-title {
@@ -58,6 +47,8 @@
 
 .card-content {
     color: #64748b;
+    font-size: var(--font-size-sm);
+
 }
 
 .badge-container {
@@ -70,7 +61,7 @@
     background-color: #f1f5f9;
     color: #475569;
     padding: var(--spacing-xs) var(--spacing-s);
-    border-radius: 9999px;
+    border-radius: var(--border-radius-max);
     font-size: var(--font-size-xs);
     cursor: pointer;
     transition: background-color 0.2s;

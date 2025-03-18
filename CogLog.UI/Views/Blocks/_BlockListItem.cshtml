@@ -4,15 +4,7 @@
     <div class="card-header">
         <div class="title-container">
 
-            <div class="circle-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                    <path d="M2 17l10 5 10-5"></path>
-                    <path d="M2 12l10 5 10-5"></path>
-                </svg>
-            </div>
-
-            <h2 class="card-title">@Model.Title</h2>
+            <div class="card-title">@Model.Title</div>
         </div>
         @if (!string.IsNullOrEmpty(@Model.Url))
         {
@@ -48,7 +40,7 @@
         </div>
 
     <div class="card-content">
-        <p>@Model.Content</p>
+        @Model.Content
     </div>
 
     @if (!string.IsNullOrEmpty(@Model.ExtraContent))
@@ -63,9 +55,9 @@
                 </svg>
             </label>
             <div class="collapsible-content">
-                <p class="card-content">
+                <div class="card-content">
                     @Model.ExtraContent
-                </p>
+                </div>
             </div>
         </div>
     }

@@ -23,14 +23,10 @@ public class TopicRepo(AppDbContext ctx) : BaseRepo<Topic>(ctx), ITopicRepo
         ;
     }
 
-    public async Task DeleteTopicAsync(int id)
+    public async Task DeleteTopicAsync(Topic topic)
     {
-        var topic = await _ctx.Topics.FindAsync(id);
-        if (topic != null)
-        {
-            _ctx.Topics.Remove(topic);
-            await _ctx.SaveChangesAsync();
-        }
+        _ctx.Topics.Remove(topic);
+        await _ctx.SaveChangesAsync();
     }
 
     public async Task<TopicDetailsDto?> GetTopicDetailsAsync(int id)

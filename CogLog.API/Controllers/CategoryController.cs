@@ -11,16 +11,9 @@ namespace CogLog.API.Controllers;
 public class CategoryController(IMediator mediator) : ControllerBase
 {
     [HttpGet(Name = "CategoriesGet")]
-    public async Task<List<CategoryDto>> Get()
+    public async Task<List<CategoryMinimalDto>> Get()
     {
         return await mediator.Send(new GetCategoriesQuery());
-    }
-
-    [HttpGet("{id:int}", Name = "CategoryGet")]
-    public async Task<ActionResult<CategoryDto>> GetOne(int id)
-    {
-        var category = await mediator.Send(new GetCategoryQuery(id));
-        return Ok(category);
     }
 
     [HttpGet("{id:int}/details", Name = "CategoryGetDetails")]

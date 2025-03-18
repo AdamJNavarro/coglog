@@ -31,7 +31,7 @@ public class TagController(IMediator mediator) : ControllerBase
     }
 
     // POST
-    [HttpPost]
+    [HttpPost(Name = "TagCreate")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
     public async Task<ActionResult> Post(CreateTagCommand command)
@@ -41,7 +41,7 @@ public class TagController(IMediator mediator) : ControllerBase
     }
 
     // PUT
-    [HttpPut("{id:int}")]
+    [HttpPut("{id:int}", Name = "TagUpdate")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(400)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -53,7 +53,7 @@ public class TagController(IMediator mediator) : ControllerBase
     }
 
     // DELETE
-    [HttpDelete]
+    [HttpDelete(Name = "TagDelete")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]

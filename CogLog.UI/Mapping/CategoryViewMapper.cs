@@ -17,22 +17,11 @@ public static class CategoryViewMapper
         return categoryVm;
     }
 
-    public static BaseCategoryVm ToBaseCategoryVm(this CategoryDto category)
+    public static List<CategoryMinimalVm> ToCategoryMinimalVmList(
+        this IEnumerable<CategoryMinimalDto> categories
+    )
     {
-        var categoryVm = new BaseCategoryVm
-        {
-            Id = category.Id,
-            Name = category.Name,
-            Icon = category.Icon,
-            Description = category.Description,
-        };
-
-        return categoryVm;
-    }
-
-    public static List<BaseCategoryVm> ToBaseCategoriesVm(this ICollection<CategoryDto> categories)
-    {
-        return categories.Select(x => x.ToBaseCategoryVm()).ToList();
+        return categories.Select(x => x.ToCategoryMinimalVm()).ToList();
     }
 
     public static CategoryDetailsVm ToCategoryDetailsVm(this CategoryDetailsDto category)
