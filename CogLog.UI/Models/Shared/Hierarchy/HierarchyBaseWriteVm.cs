@@ -7,7 +7,7 @@ public abstract class HierarchyBaseWriteVm
 {
     [Required]
     [MinLength(
-        ValidationConstants.Subject.NameMinLength,
+        ValidationConstants.Hierarchy.NameMinLength,
         ErrorMessage = "{0} must be {1}+ characters long."
     )]
     public string Name { get; init; }

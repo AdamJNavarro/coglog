@@ -9,8 +9,6 @@ public interface ICategoryRepo : IBaseRepo<Category>
 
     Task<List<Category>> GetCategoriesAsync();
 
-    Task<Category?> GetCategoryAsync(int id);
-
     Task<CategoryDetailsDto?> GetCategoryDetailsAsync(int id);
 
     Task UpdateCategoryAsync(Category category);

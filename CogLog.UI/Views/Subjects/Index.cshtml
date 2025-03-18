@@ -3,8 +3,6 @@
     ViewData["Title"] = "Subjects";
 }
 
-<a asp-action="Create">Create</a>
-
 
 @* <form method="get"> *@
 @*     <div class="form-group"> *@
@@ -47,6 +45,9 @@
         </li>
     }
 </ul>
+
+@await Component.InvokeAsync("FloatingActionButton", new {actionName = "Create"})
+
 
 @section Scripts {
 

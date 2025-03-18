@@ -43,6 +43,7 @@ public static class TopicMapper
     {
         return new Topic
         {
+            Id = request.Id,
             Name = request.Name,
             Icon = request.Icon,
             Description = request.Description,

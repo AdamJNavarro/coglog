@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CogLog.UI.Controllers;
 
-public class TopicsController(ITopicService topicService, ISubjectService subjectService)
-    : Controller
+public class TopicsController(ITopicService topicService) : Controller
 {
     // INDEX
     public async Task<IActionResult> Index()
@@ -25,10 +24,7 @@ public class TopicsController(ITopicService topicService, ISubjectService subjec
 
     public async Task<IActionResult> Create([FromQuery] string? subjectId)
     {
-        var vm = new TopicCreateVm
-        {
-            SubjectSelectItems = await subjectService.GetSelectListAsync(null),
-        };
+        var vm = new TopicCreateVm();
 
         if (!string.IsNullOrWhiteSpace(subjectId))
         {
@@ -62,27 +58,29 @@ public class TopicsController(ITopicService topicService, ISubjectService subjec
         return View(vm);
     }
 
-    // [HttpPost]
-    // [Route("topics/{id:int}/edit", Name = "EditTopic")]
-    // [ValidateAntiForgeryToken]
-    // public async Task<IActionResult> Edit(int id, TopicEditVm topic)
-    // {
-    //     if (id != topic.Id)
-    //     {
-    //         return NotFound();
-    //     }
-    //
-    //     var resp = await topicService.UpdateTopicAsync(topic);
-    //
-    //     if (resp.Success)
-    //     {
-    //         return RedirectToAction(nameof(Index));
-    //     }
-    //     else
-    //     {
-    //         return View(topic);
-    //     }
-    // }
+    [HttpPost]
+    [Route("topics/{id:int}/edit", Name = "EditTopic")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, TopicEditVm topic)
+    {
+        if (id != topic.Id)
+        {
+            return NotFound();
+        }
+
+        var resp = await topicService.UpdateTopicAsync(topic);
+
+        return resp.Success ? RedirectToAction(nameof(Index)) : View(topic);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var response = await topicService.DeleteTopicAsync(id);
+
+        return RedirectToAction(response.Success ? nameof(Index) : nameof(Edit));
+    }
 
     [HttpGet]
     public async Task<IActionResult> GetTopicsBySubject(int subjectId)

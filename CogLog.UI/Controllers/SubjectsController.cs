@@ -83,10 +83,8 @@ public class SubjectsController(ISubjectService subjectService, ICategoryService
         {
             return RedirectToAction(nameof(Index));
         }
-        else
-        {
-            return View(subject);
-        }
+
+        return View(subject);
     }
 
     [HttpPost]
@@ -100,7 +98,7 @@ public class SubjectsController(ISubjectService subjectService, ICategoryService
             return RedirectToAction(nameof(Index));
         }
 
-        return RedirectToAction(nameof(Details));
+        return RedirectToAction(nameof(Edit));
     }
 
     [HttpGet]

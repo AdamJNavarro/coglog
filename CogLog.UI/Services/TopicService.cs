@@ -49,7 +49,7 @@ public class TopicService(IClient client, ILocalStorageService localStorageServi
         }
     }
 
-    public async Task<Response<Guid>> EditTopicAsync(TopicEditVm topic)
+    public async Task<Response<Guid>> UpdateTopicAsync(TopicEditVm topic)
     {
         try
         {

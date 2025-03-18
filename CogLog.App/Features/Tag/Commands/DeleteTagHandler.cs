@@ -8,13 +8,14 @@ public class DeleteTagHandler(ITagRepo tagRepo) : IRequestHandler<DeleteTagComma
 {
     public async Task<Unit> Handle(DeleteTagCommand request, CancellationToken cancellationToken)
     {
-        // var tagToDelete = await tagRepo.GetTagAsync(request.Id);
-        //
-        // if (tagToDelete == null)
-        // {
-        //     throw new NotFoundException(nameof(Tag), request.Id);
-        // }
-        // await tagRepo.DeleteTagAsync(tagToDelete);
+        var tagToDelete = await tagRepo.GetEntityAsync(request.Id);
+
+        if (tagToDelete == null)
+        {
+            throw new NotFoundException(nameof(Tag), request.Id);
+        }
+
+        await tagRepo.DeleteTagAsync(tagToDelete);
         return Unit.Value;
     }
 }

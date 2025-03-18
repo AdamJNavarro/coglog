@@ -5,7 +5,7 @@ using MediatR;
 
 namespace CogLog.App.Features.Category.Commands;
 
-public class UpdateCategoryHandler(ICategoryRepo repo)
+public class UpdateCategoryHandler(ICategoryRepo categoryRepo)
     : IRequestHandler<UpdateCategoryCommand, Unit>
 {
     public async Task<Unit> Handle(
@@ -13,14 +13,7 @@ public class UpdateCategoryHandler(ICategoryRepo repo)
         CancellationToken cancellationToken
     )
     {
-        // var existingCategory = await repo.GetCategoryAsync(request.Id);
-        //
-        // if (existingCategory is null)
-        // {
-        //     throw new NotFoundException(nameof(Category), request.Id);
-        // }
-
-        var validator = new UpdateCategoryValidator(repo);
+        var validator = new UpdateCategoryValidator(categoryRepo);
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (validationResult.Errors.Any())
@@ -29,7 +22,7 @@ public class UpdateCategoryHandler(ICategoryRepo repo)
         }
 
         var category = request.ToCategory();
-        await repo.UpdateCategoryAsync(category);
+        await categoryRepo.UpdateCategoryAsync(category);
         return Unit.Value;
     }
 }

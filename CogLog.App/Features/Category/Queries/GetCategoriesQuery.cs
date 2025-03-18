@@ -4,4 +4,4 @@ using MediatR;
 
 namespace CogLog.App.Features.Category.Queries;
 
-public record GetCategoriesQuery : IRequest<List<CategoryDto>>;
+public record GetCategoriesQuery : IRequest<List<CategoryMinimalDto>>;

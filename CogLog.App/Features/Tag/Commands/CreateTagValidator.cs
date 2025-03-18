@@ -21,7 +21,7 @@ public class CreateTagValidator : AbstractValidator<CreateTagCommand>
             .NotEmpty()
             .WithMessage("{PropertyName} is required")
             .NotNull()
-            .MinimumLength(ValidationConstants.Tag.NameMinLength)
+            .MinimumLength(ValidationConstants.Hierarchy.NameMinLength)
             .WithMessage("{PropertyName} must be at least {MinLength} characters");
     }
 

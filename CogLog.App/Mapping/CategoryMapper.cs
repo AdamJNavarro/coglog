@@ -16,16 +16,6 @@ public static class CategoryMapper
         return categories.Select(x => x.ToCategoryMinimalDto()).ToList();
     }
 
-    public static CategoryDto ToCategoryDto(this Category category)
-    {
-        return new CategoryDto(category.Id, category.Name, category.Icon, category.Description);
-    }
-
-    public static List<CategoryDto> ToCategoriesDto(this List<Category> categories)
-    {
-        return categories.Select(x => x.ToCategoryDto()).ToList();
-    }
-
     public static CategoryDetailsDto ToCategoryDetailsDto(this Category category)
     {
         return new CategoryDetailsDto(

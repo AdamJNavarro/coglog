@@ -8,7 +8,14 @@ public class DeleteTopicHandler(ITopicRepo topicRepo) : IRequestHandler<DeleteTo
 {
     public async Task<Unit> Handle(DeleteTopicCommand request, CancellationToken cancellationToken)
     {
-        await topicRepo.DeleteTopicAsync(request.Id);
+        var topic = await topicRepo.GetEntityAsync(request.Id);
+
+        if (topic == null)
+        {
+            throw new NotFoundException(nameof(Topic), request.Id);
+        }
+
+        await topicRepo.DeleteTopicAsync(topic);
 
         return Unit.Value;
     }

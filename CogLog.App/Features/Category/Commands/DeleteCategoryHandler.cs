@@ -12,7 +12,7 @@ public class DeleteCategoryHandler(ICategoryRepo repo)
         CancellationToken cancellationToken
     )
     {
-        var categoryToDelete = await repo.GetCategoryAsync(request.Id);
+        var categoryToDelete = await repo.GetEntityAsync(request.Id);
 
         if (categoryToDelete == null)
         {

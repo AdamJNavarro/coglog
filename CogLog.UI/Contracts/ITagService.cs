@@ -10,6 +10,6 @@ public interface ITagService
     Task<TagDetailsVm> GetTagDetailsAsync(int id);
     Task<List<SelectListItem>> GetSelectListAsync(int? subjectId = null);
     Task<Response<Guid>> CreateTagAsync(TagCreateVm tag);
-    Task<Response<Guid>> UpdateTagAsync(TagVm tagVm);
+    Task<Response<Guid>> UpdateTagAsync(TagEditVm tagVm);
     Task<Response<Guid>> DeleteTagAsync(int id);
 }

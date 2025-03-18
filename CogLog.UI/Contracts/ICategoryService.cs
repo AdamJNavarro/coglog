@@ -6,9 +6,7 @@ namespace CogLog.UI.Contracts;
 
 public interface ICategoryService
 {
-    Task<List<BaseCategoryVm>> GetCategoriesAsync();
-
-    Task<BaseCategoryVm> GetCategoryAsync(int id);
+    Task<List<CategoryMinimalVm>> GetCategoriesAsync();
 
     Task<CategoryDetailsVm> GetCategoryDetailsAsync(int id);
 
