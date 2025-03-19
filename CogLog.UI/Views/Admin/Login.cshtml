@@ -4,28 +4,28 @@
     ViewData["Title"] = "Login";
 }
 
-<header>
-    <h1>Log-in</h1>
-</header>
-
-<form asp-action="Login" class="form-container">
-    <div asp-validation-summary="ModelOnly" class="validation-text"></div>
-    <div class="input-group">
-        <label asp-for="Email" class="input-label"></label>
-        <input asp-for="Email" type="email" class="input" />
-        <span asp-validation-for="Email" class="validation-text"></span>
-    </div><div class="input-group">
-        <label asp-for="Password" class="input-label"></label>
-        <input asp-for="Password" type="password" class="input" />
-        <span asp-validation-for="Password" class="validation-text"></span>
+<div class="form-wrapper">
+<h1 class="form-title">Log In</h1>
+<form asp-action="Login">
+    <div class="form-group">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" type="email" class="form-control" />
+        <span asp-validation-for="Email" class="validation-helper-text"></span>
     </div>
-    <div class="btn-group">
-        <input type="submit" value="Login" class="btn btn-success" />
+    <div class="form-group">
+        <label asp-for="Password" class="form-label"></label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="validation-helper-text"></span>
     </div>
-    
+    <div class="form-button-group">
+        <input type="submit" value="Log In" class="btn btn-primary" />
+    </div>
 </form>
+</div>
 
 
-    @section Scripts {
+
+
+@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

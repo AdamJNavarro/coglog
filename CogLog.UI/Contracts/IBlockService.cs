@@ -11,8 +11,11 @@ public interface IBlockService
 
     Task<List<BlockByDayVm>> GetBlocksByDayAsync();
 
-    // Task<BlockVm> GetBlockAsync(int id);
-    Task<Response<Guid>> CreateBlockAsync(CreateBlockVm block);
+    Task<BlockDetailsVm> GetBlockDetailsAsync(int id);
+
+    Task<Response<Guid>> CreateBlockAsync(BlockCreateVm block);
+
+    Task<Response<Guid>> UpdateBlockAsync(BlockEditVm block);
 
     Task<Response<Guid>> DeleteBlockAsync(int id);
 }

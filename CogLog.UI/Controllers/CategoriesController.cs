@@ -1,8 +1,6 @@
 using CogLog.UI.Contracts;
 using CogLog.UI.Models.Category;
-using CogLog.UI.Models.Subject;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CogLog.UI.Controllers;
 

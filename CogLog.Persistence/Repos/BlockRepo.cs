@@ -45,9 +45,36 @@ public class BlockRepo(AppDbContext ctx) : BaseRepo<Block>(ctx), IBlockRepo
         return blocksByDay;
     }
 
-    public async Task<Block?> GetBlockAsync(int id)
+    public async Task<Block?> GetBlockAsync(
+        int id,
+        bool includeTopics = false,
+        bool includeTags = false
+    )
     {
-        return await _ctx.Blocks.AsNoTracking().SingleOrDefaultAsync(q => q.Id == id);
+        var query = _ctx.Blocks.AsNoTracking();
+        if (includeTopics)
+        {
+            query = query.Include(q => q.BlockTopics);
+        }
+
+        if (includeTags)
+        {
+            query = query.Include(q => q.BlockTags);
+        }
+
+        return await query.SingleOrDefaultAsync(q => q.Id == id);
+    }
+
+    public async Task<BlockDetailsDto?> GetBlockDetailsAsync(int id)
+    {
+        var block = await _ctx
+            .Blocks.Include(b => b.Subject)
+            .Include(b => b.BlockTopics)
+            .ThenInclude(bt => bt.Topic)
+            .Include(b => b.BlockTags)
+            .ThenInclude(bt => bt.Tag)
+            .SingleOrDefaultAsync(q => q.Id == id);
+        return block.ToBlockDetailsDto();
     }
 
     public async Task<PaginationResponse<BlockDto>> GetBlocksAsync(BlocksQueryParameters parameters)

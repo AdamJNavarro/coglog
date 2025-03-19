@@ -3,6 +3,7 @@ using CogLog.App.Features.Subject.Commands;
 using CogLog.App.Features.Subject.Queries;
 using CogLog.App.Models.Pagination;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.API.Controllers;
@@ -33,6 +34,7 @@ public class SubjectController(IMediator mediator) : ControllerBase
     }
 
     // POST
+    [Authorize]
     [HttpPost(Name = "SubjectCreate")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
@@ -43,6 +45,7 @@ public class SubjectController(IMediator mediator) : ControllerBase
     }
 
     // PUT
+    [Authorize]
     [HttpPut("{id:int}", Name = "SubjectUpdate")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(400)]
@@ -55,6 +58,7 @@ public class SubjectController(IMediator mediator) : ControllerBase
     }
 
     // DELETE
+    [Authorize]
     [HttpDelete(Name = "SubjectDelete")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

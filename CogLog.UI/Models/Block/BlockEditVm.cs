@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Mvc.Rendering;
-
 namespace CogLog.UI.Models.Block;
 
-public class CreateBlockVm
+public class BlockEditVm
 {
+    public int Id { get; init; }
+
     public string Title { get; set; }
 
     public string Content { get; set; }
@@ -11,8 +11,6 @@ public class CreateBlockVm
     public string? ExtraContent { get; set; }
 
     public string? Url { get; set; }
-
-    public int? CategoryId { get; set; }
 
     public int? SubjectId { get; set; }
     public List<int> SelectedTopicIds { get; set; } = new List<int>();
