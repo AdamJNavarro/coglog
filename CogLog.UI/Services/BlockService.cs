@@ -15,7 +15,7 @@ public class BlockService(IClient client, ILocalStorageService localStorageServi
 
     public async Task<PaginationResponseVm<BlockVm>> GetBlocksAsync(BlocksQueryParameters fp)
     {
-        var data = await _client.BlocksGETAsync(
+        var data = await _client.BlocksAsync(
             fp.Page,
             fp.PerPage,
             fp.SearchTerm,
@@ -31,25 +31,36 @@ public class BlockService(IClient client, ILocalStorageService localStorageServi
         return data.ToBlockByDayVmList();
     }
 
-    // public async Task<BlockVm> GetBlockAsync(int id)
-    // {
-    //     var brainBlock = await _client.BlocksGETAsync(id);
-    //     return mapper.Map<BlockVm>(brainBlock);
-    // }
+    public async Task<BlockDetailsVm> GetBlockDetailsAsync(int id)
+    {
+        var block = await _client.BlockGetDetailsAsync(id);
+        return block.ToBlockDetailsVm();
+    }
 
-    public async Task<Response<Guid>> CreateBlockAsync(CreateBlockVm block)
+    public async Task<Response<Guid>> CreateBlockAsync(BlockCreateVm block)
     {
         try
         {
-            // AddBearerToken();
-
-            await _client.BlocksPOSTAsync(block.ToCreateBlockCommand());
+            AddBearerToken();
+            await _client.BlockCreateAsync(block.ToCreateBlockCommand());
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)
         {
-            Console.WriteLine("CBA EX");
-            Console.WriteLine(ex.Message);
+            return ConvertApiExceptions<Guid>(ex);
+        }
+    }
+
+    public async Task<Response<Guid>> UpdateBlockAsync(BlockEditVm block)
+    {
+        try
+        {
+            AddBearerToken();
+            await _client.BlockUpdateAsync(block.Id.ToString(), block.ToUpdateBlockCommand());
+            return new Response<Guid>() { Success = true };
+        }
+        catch (ApiException ex)
+        {
             return ConvertApiExceptions<Guid>(ex);
         }
     }
@@ -58,7 +69,8 @@ public class BlockService(IClient client, ILocalStorageService localStorageServi
     {
         try
         {
-            await _client.BlocksDELETEAsync(id);
+            AddBearerToken();
+            await _client.BlockDeleteAsync(id);
             return new Response<Guid>() { Success = true };
         }
         catch (ApiException ex)

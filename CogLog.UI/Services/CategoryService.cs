@@ -28,6 +28,7 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
     {
         try
         {
+            AddBearerToken();
             var cmd = category.ToCreateCategoryCommand();
             await _client.CategoryCreateAsync(cmd);
             return new Response<Guid>() { Success = true };
@@ -42,6 +43,7 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
     {
         try
         {
+            AddBearerToken();
             var cmd = category.ToUpdateCategoryCommand();
             await _client.CategoryUpdateAsync(category.Id.ToString(), cmd);
             return new Response<Guid>() { Success = true };
@@ -56,6 +58,7 @@ public class CategoryService(IClient client, ILocalStorageService localStorageSe
     {
         try
         {
+            AddBearerToken();
             await _client.CategoryDeleteAsync(id);
             return new Response<Guid>() { Success = true };
         }

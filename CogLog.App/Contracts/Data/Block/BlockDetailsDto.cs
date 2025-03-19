@@ -4,7 +4,7 @@ using CogLog.App.Contracts.Data.Topic;
 
 namespace CogLog.App.Contracts.Data.Block;
 
-public record BlockDto(
+public record BlockDetailsDto(
     int Id,
     DateTime DateAdded,
     string Title,

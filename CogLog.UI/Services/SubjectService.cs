@@ -40,6 +40,7 @@ public class SubjectService(IClient client, ILocalStorageService localStorageSer
     {
         try
         {
+            AddBearerToken();
             var cmd = subject.ToCreateSubjectCommand();
             await _client.SubjectCreateAsync(cmd);
             return new Response<Guid>() { Success = true };
@@ -55,6 +56,7 @@ public class SubjectService(IClient client, ILocalStorageService localStorageSer
     {
         try
         {
+            AddBearerToken();
             var cmd = subject.ToUpdateSubjectCommand();
             await _client.SubjectUpdateAsync(subject.Id.ToString(), cmd);
             return new Response<Guid>() { Success = true };
@@ -69,6 +71,7 @@ public class SubjectService(IClient client, ILocalStorageService localStorageSer
     {
         try
         {
+            AddBearerToken();
             await _client.SubjectDeleteAsync(id);
             return new Response<Guid>() { Success = true };
         }

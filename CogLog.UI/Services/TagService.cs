@@ -36,8 +36,7 @@ public class TagService(IClient client, ILocalStorageService localStorageService
     {
         try
         {
-            // AddBearerToken();
-
+            AddBearerToken();
             await _client.TagCreateAsync(tag.ToCreateTagCommand());
             return new Response<Guid>() { Success = true };
         }
@@ -51,6 +50,7 @@ public class TagService(IClient client, ILocalStorageService localStorageService
     {
         try
         {
+            AddBearerToken();
             var cmd = tag.ToUpdateTagCommand();
             await _client.TagUpdateAsync(tag.Id.ToString(), cmd);
             return new Response<Guid>() { Success = true };
@@ -65,6 +65,7 @@ public class TagService(IClient client, ILocalStorageService localStorageService
     {
         try
         {
+            AddBearerToken();
             await _client.TagDeleteAsync(id);
             return new Response<Guid>() { Success = true };
         }

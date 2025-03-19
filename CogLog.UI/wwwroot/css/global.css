@@ -158,6 +158,7 @@ button {
 a {
     text-decoration: none;
     line-height: normal;
+    cursor: pointer;
 }
 
 

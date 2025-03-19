@@ -2,6 +2,7 @@ using CogLog.App.Contracts.Data.Tag;
 using CogLog.App.Features.Tag.Commands;
 using CogLog.App.Features.Tag.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.API.Controllers;
@@ -31,6 +32,7 @@ public class TagController(IMediator mediator) : ControllerBase
     }
 
     // POST
+    [Authorize]
     [HttpPost(Name = "TagCreate")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
@@ -41,6 +43,7 @@ public class TagController(IMediator mediator) : ControllerBase
     }
 
     // PUT
+    [Authorize]
     [HttpPut("{id:int}", Name = "TagUpdate")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(400)]
@@ -53,6 +56,7 @@ public class TagController(IMediator mediator) : ControllerBase
     }
 
     // DELETE
+    [Authorize]
     [HttpDelete(Name = "TagDelete")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -37,8 +37,7 @@ public class TopicService(IClient client, ILocalStorageService localStorageServi
     {
         try
         {
-            // AddBearerToken();
-
+            AddBearerToken();
             var cmd = topic.ToCreateTopicCommand();
             await _client.TopicCreateAsync(cmd);
             return new Response<Guid>() { Success = true };
@@ -53,6 +52,7 @@ public class TopicService(IClient client, ILocalStorageService localStorageServi
     {
         try
         {
+            AddBearerToken();
             var updateCommand = topic.ToUpdateTopicCommand();
             await _client.TopicUpdateAsync(topic.Id.ToString(), updateCommand);
             return new Response<Guid>() { Success = true };
@@ -67,6 +67,7 @@ public class TopicService(IClient client, ILocalStorageService localStorageServi
     {
         try
         {
+            AddBearerToken();
             await _client.TopicDeleteAsync(id);
             return new Response<Guid>() { Success = true };
         }

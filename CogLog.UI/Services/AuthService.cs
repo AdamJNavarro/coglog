@@ -1,6 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using AutoMapper;
 using CogLog.UI.Contracts;
 using CogLog.UI.Services.Base;
 using Microsoft.AspNetCore.Authentication;

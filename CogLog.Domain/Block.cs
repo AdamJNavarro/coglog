@@ -6,12 +6,12 @@ public class Block : BaseEntity
 {
     public DateTime? DateAdded { get; set; }
 
-    public required string Title { get; init; }
-    public required string Content { get; init; }
+    public required string Title { get; set; }
+    public required string Content { get; set; }
 
-    public string? ExtraContent { get; init; }
+    public string? ExtraContent { get; set; }
 
-    public string? Url { get; init; }
+    public string? Url { get; set; }
 
     public Subject? Subject { get; init; }
 

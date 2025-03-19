@@ -2,6 +2,7 @@ using CogLog.App.Contracts.Data.Category;
 using CogLog.App.Features.Category.Commands;
 using CogLog.App.Features.Category.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.API.Controllers;
@@ -24,6 +25,7 @@ public class CategoryController(IMediator mediator) : ControllerBase
     }
 
     // POST
+    [Authorize]
     [HttpPost(Name = "CategoryCreate")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
@@ -34,6 +36,7 @@ public class CategoryController(IMediator mediator) : ControllerBase
     }
 
     // PUT
+    [Authorize]
     [HttpPut("{id:int}", Name = "CategoryUpdate")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(400)]
@@ -46,6 +49,7 @@ public class CategoryController(IMediator mediator) : ControllerBase
     }
 
     // DELETE
+    [Authorize]
     [HttpDelete(Name = "CategoryDelete")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

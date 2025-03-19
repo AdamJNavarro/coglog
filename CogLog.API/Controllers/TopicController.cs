@@ -3,6 +3,7 @@ using CogLog.App.Contracts.Data.Topic;
 using CogLog.App.Features.Topic.Commands;
 using CogLog.App.Features.Topic.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.API.Controllers;
@@ -32,6 +33,7 @@ public class TopicController(IMediator mediator) : ControllerBase
     }
 
     // POST
+    [Authorize]
     [HttpPost(Name = "TopicCreate")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
@@ -42,6 +44,7 @@ public class TopicController(IMediator mediator) : ControllerBase
     }
 
     // PUT
+    [Authorize]
     [HttpPut("{id:int}", Name = "TopicUpdate")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(400)]
@@ -54,6 +57,7 @@ public class TopicController(IMediator mediator) : ControllerBase
     }
 
     // DELETE
+    [Authorize]
     [HttpDelete(Name = "TopicDelete")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

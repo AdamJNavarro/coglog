@@ -23,6 +23,23 @@ public static class BlockViewMapper
         };
     }
 
+    public static BlockDetailsVm ToBlockDetailsVm(this BlockDetailsDto block)
+    {
+        return new BlockDetailsVm()
+        {
+            Id = block.Id,
+            DateAdded = block.DateAdded,
+            Title = block.Title,
+            Content = block.Content,
+            ExtraContent = block.ExtraContent,
+            Url = block.Url,
+            SubjectId = block.SubjectId,
+            Subject = block.Subject?.ToSubjectMinimalVm(),
+            Topics = block.Topics.Select(x => x.ToTopicMinimalVm()).ToList(),
+            Tags = block.Tags.Select(x => x.ToTagMinimalVm()).ToList(),
+        };
+    }
+
     public static BlockPaginationVm ToPaginationBlockVm(this BlockDtoPaginationResponse resp)
     {
         return new BlockPaginationVm
@@ -44,10 +61,25 @@ public static class BlockViewMapper
             .ToList();
     }
 
-    public static CreateBlockCommand ToCreateBlockCommand(this CreateBlockVm block)
+    public static CreateBlockCommand ToCreateBlockCommand(this BlockCreateVm block)
     {
         return new CreateBlockCommand
         {
+            Title = block.Title,
+            Content = block.Content,
+            ExtraContent = block.ExtraContent,
+            Url = block.Url,
+            SubjectId = block.SubjectId,
+            TopicIds = block.SelectedTopicIds,
+            TagIds = block.SelectedTagIds,
+        };
+    }
+
+    public static UpdateBlockCommand ToUpdateBlockCommand(this BlockEditVm block)
+    {
+        return new UpdateBlockCommand()
+        {
+            Id = block.Id,
             Title = block.Title,
             Content = block.Content,
             ExtraContent = block.ExtraContent,

@@ -63,12 +63,7 @@
     padding: var(--spacing-xs) var(--spacing-s);
     border-radius: var(--border-radius-max);
     font-size: var(--font-size-xs);
-    cursor: pointer;
     transition: background-color 0.2s;
-}
-
-.badge:hover {
-    background-color: #e2e8f0;
 }
 
 .collapsible-container {

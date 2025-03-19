@@ -25,4 +25,20 @@ public static class BlockMapper
     {
         return blocks.Select(x => x.ToBlockDto()).ToList();
     }
+
+    public static BlockDetailsDto ToBlockDetailsDto(this Block block)
+    {
+        return new BlockDetailsDto(
+            block.Id,
+            block.DateAdded ?? DateTime.MinValue,
+            block.Title,
+            block.Content,
+            block.ExtraContent,
+            block.Url,
+            block.SubjectId,
+            block.Subject?.ToSubjectMinimalDto(),
+            block.BlockTopics.Select(x => x.Topic.ToTopicMinimalDto()).ToList(),
+            block.BlockTags.Select(x => x.Tag.ToTagMinimalDto()).ToList()
+        );
+    }
 }
