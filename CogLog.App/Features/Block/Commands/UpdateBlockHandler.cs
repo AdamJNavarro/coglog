@@ -16,6 +16,7 @@ public class UpdateBlockHandler(IBlockRepo blockRepo) : IRequestHandler<UpdateBl
             throw new NotFoundException(nameof(Block), request.Id);
         }
 
+        block.LearnedAt = request.LearnedAt;
         block.Title = request.Title;
         block.Content = request.Content;
         block.ExtraContent = request.ExtraContent;

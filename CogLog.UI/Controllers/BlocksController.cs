@@ -37,6 +37,8 @@ public class BlocksController(IBlockService blockService) : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(BlockCreateVm vm)
     {
+        Console.WriteLine("Block Learned At");
+        Console.WriteLine(vm.LearnedAt);
         await blockService.CreateBlockAsync(vm);
         return RedirectToAction(nameof(Index));
     }

@@ -4,17 +4,13 @@ using MediatR;
 
 namespace CogLog.App.Features.Block.Commands;
 
-public class CreateBlockHandler(
-    IBlockRepo blockRepo,
-    ICategoryRepo categoryRepo,
-    ISubjectRepo subjectRepo,
-    ITopicRepo topicRepo
-) : IRequestHandler<CreateBlockCommand, int>
+public class CreateBlockHandler(IBlockRepo blockRepo) : IRequestHandler<CreateBlockCommand, int>
 {
     public async Task<int> Handle(CreateBlockCommand request, CancellationToken cancellationToken)
     {
         var block = new Domain.Block
         {
+            LearnedAt = request.LearnedAt,
             Title = request.Title,
             Content = request.Content,
             ExtraContent = request.ExtraContent,
