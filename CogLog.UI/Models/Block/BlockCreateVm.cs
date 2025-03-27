@@ -1,15 +1,8 @@
 namespace CogLog.UI.Models.Block;
 
-public class BlockCreateVm
+public class BlockCreateVm : BlockBaseWriteVm
 {
-    public string Title { get; set; }
-
-    public string Content { get; set; }
-
-    public string? ExtraContent { get; set; }
-
-    public string? Url { get; set; }
-
+    public DateTime? DateAdded { get; set; }
     public int? CategoryId { get; set; }
 
     public int? SubjectId { get; set; }

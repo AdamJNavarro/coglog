@@ -22,21 +22,25 @@ public class UpdateBlockHandler(IBlockRepo blockRepo) : IRequestHandler<UpdateBl
         block.Url = request.Url;
         block.SubjectId = request.SubjectId;
 
+        var selectedIds = string.Join(", ", request.TopicIds);
+        Console.WriteLine($"Handler Selected IDs: {selectedIds}");
+
         // clear topics and tags
         block.BlockTopics.Clear();
         block.BlockTags.Clear();
 
-        if (request.TopicIds.Count != 0)
+        if (request.TopicIds.Count > 0)
         {
+            List<BlockTopic> blockTopics = [];
+
             foreach (var topicId in request.TopicIds)
             {
-                block.BlockTopics.Add(
-                    new BlockTopic { BlockId = block.Id, TopicId = (int)topicId }
-                );
+                blockTopics.Add(new BlockTopic { BlockId = block.Id, TopicId = (int)topicId });
             }
+            block.BlockTopics = blockTopics;
         }
 
-        if (request.TagIds.Count != 0)
+        if (request.TagIds.Count > 0)
         {
             foreach (var tagId in request.TagIds)
             {
