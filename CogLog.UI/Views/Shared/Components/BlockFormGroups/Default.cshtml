@@ -1,0 +1,27 @@
+@model BlockBaseWriteVm
+
+@* <div class="form-group"> *@
+@*     <label asp-for="DateAdded" class="form-label">Date</label> *@
+@*     <input asp-for="DateAdded" class="form-control" type="datetime-local" /> *@
+@* </div> *@
+
+<div class="form-group">
+    <label asp-for="Title" class="form-label"></label>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="validation-helper-text"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Content" class="form-label"></label>
+    <textarea asp-for="Content" class="form-control"></textarea>
+    <span asp-validation-for="Content" class="validation-helper-text"></span>
+</div>
+<div class="form-group">
+    <label asp-for="ExtraContent" class="form-label">Additional Context</label>
+    <textarea asp-for="ExtraContent" class="form-control"></textarea>
+    <span asp-validation-for="ExtraContent" class="validation-helper-text"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Url" class="form-label"></label>
+    <input asp-for="Url" class="form-control" type="url" />
+    <span asp-validation-for="Url" class="validation-helper-text"></span>
+</div>

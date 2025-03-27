@@ -19,7 +19,8 @@ public class BlockRepo(AppDbContext ctx) : BaseRepo<Block>(ctx), IBlockRepo
 
     public async Task UpdateBlockAsync(Block block)
     {
-        _ctx.Entry(block).State = EntityState.Modified;
+        // _ctx.Entry(block).State = EntityState.Modified;
+        _ctx.Blocks.Update(block);
         await _ctx.SaveChangesAsync();
     }
 

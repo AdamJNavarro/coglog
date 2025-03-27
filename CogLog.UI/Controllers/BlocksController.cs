@@ -28,7 +28,8 @@ public class BlocksController(IBlockService blockService) : Controller
     // CREATE - GET
     public async Task<IActionResult> Create()
     {
-        return View();
+        var vm = new BlockCreateVm();
+        return View(vm);
     }
 
     // CREATE - POST
@@ -44,6 +45,8 @@ public class BlocksController(IBlockService blockService) : Controller
     public async Task<IActionResult> Edit(int id)
     {
         var block = await blockService.GetBlockDetailsAsync(id);
+        Console.WriteLine("STI");
+        Console.WriteLine(block.Topics.Select(x => x.Id).ToList()[0]);
 
         var vm = new BlockEditVm()
         {
@@ -68,6 +71,9 @@ public class BlocksController(IBlockService blockService) : Controller
         {
             return NotFound();
         }
+
+        var selectedIds = string.Join(", ", block.SelectedTopicIds);
+        Console.WriteLine($"Selected IDs: {selectedIds}");
 
         var resp = await blockService.UpdateBlockAsync(block);
 

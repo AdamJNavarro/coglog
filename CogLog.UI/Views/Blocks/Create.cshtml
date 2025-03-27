@@ -6,27 +6,8 @@
 <div class="form-wrapper">
     <h1 class="form-title">New Block</h1>
     <form asp-controller="Blocks" asp-action="Create">
-        @* <div asp-validation-summary="ModelOnly" class="validation-helper-text"></div> *@
-        <div class="form-group">
-            <label asp-for="Title" class="form-label"></label>
-            <input asp-for="Title" class="form-control" />
-            <span asp-validation-for="Title" class="validation-helper-text"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Content" class="form-label"></label>
-            <textarea asp-for="Content" class="form-control"></textarea>
-            <span asp-validation-for="Content" class="validation-helper-text"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ExtraContent" class="form-label">Additional Context</label>
-            <textarea asp-for="ExtraContent" class="form-control"></textarea>
-            <span asp-validation-for="ExtraContent" class="validation-helper-text"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Url" class="form-label"></label>
-            <input asp-for="Url" class="form-control" type="url" />
-            <span asp-validation-for="Url" class="validation-helper-text"></span>
-        </div>
+        
+        @await Component.InvokeAsync("BlockFormGroups", Model)
 
         @await Component.InvokeAsync("SubjectSelector", new {subjectId = Model.SubjectId})
         
@@ -61,11 +42,6 @@
 
     <script>
         $(document).ready(function() {
-            
-            // Trigger change event if a category is already selected (e.g., on form validation failure)
-            //if ($('#category-select').val()) {
-              //  $('#category-select').trigger('change');
-            //}
     
             // Handle subject selection change
             $('#subject-select').change(function() {
@@ -78,7 +54,7 @@
                     $('#tags-form-group').show();
                     $('#tags-select').empty()
                     
-                    // Load tags via AJAX
+                    // Load Topics
                     $.getJSON('@Url.Action("GetTopicsBySubject", "Topics")?subjectId=' + subjectId, function(topics) {
 
                         $.each(topics, function(index, topic) {
@@ -90,11 +66,12 @@
                         
     
                         // Reselect any previously selected topics
+                        const selectedTopics = @Html.Raw(Json.Serialize(Model.SelectedTopicIds));
+                        $('#topics-select').val(selectedTopics);
     
                     });
 
                     $.getJSON('@Url.Action("GetTagsBySubject", "Tags")?subjectId=' + subjectId, function(tags) {
-                        console.log("tags data", tags);
                         $.each(tags, function (index, tag) {
                             $('#tags-select').append($('<option></option>')
                                 .attr('value', tag.value)
