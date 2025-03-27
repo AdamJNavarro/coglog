@@ -11,7 +11,7 @@ public static class BlockViewMapper
         return new BlockVm
         {
             Id = block.Id,
-            DateAdded = block.DateAdded,
+            LearnedAt = block.LearnedAt,
             Title = block.Title,
             Content = block.Content,
             ExtraContent = block.ExtraContent,
@@ -28,7 +28,7 @@ public static class BlockViewMapper
         return new BlockDetailsVm()
         {
             Id = block.Id,
-            DateAdded = block.DateAdded,
+            LearnedAt = block.LearnedAt,
             Title = block.Title,
             Content = block.Content,
             ExtraContent = block.ExtraContent,
@@ -65,6 +65,7 @@ public static class BlockViewMapper
     {
         return new CreateBlockCommand
         {
+            LearnedAt = block.LearnedAt,
             Title = block.Title,
             Content = block.Content,
             ExtraContent = block.ExtraContent,
@@ -80,6 +81,7 @@ public static class BlockViewMapper
         return new UpdateBlockCommand()
         {
             Id = block.Id,
+            LearnedAt = block.LearnedAt,
             Title = block.Title,
             Content = block.Content,
             ExtraContent = block.ExtraContent,

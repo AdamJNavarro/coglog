@@ -5,6 +5,9 @@ namespace CogLog.UI.Models.Block;
 public abstract class BlockBaseWriteVm
 {
     [Required]
+    public DateTime LearnedAt { get; set; }
+
+    [Required]
     public string Title { get; set; }
 
     [Required]
