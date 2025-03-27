@@ -3225,8 +3225,14 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("dateAdded")]
-        public System.DateTime DateAdded { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTime CreatedAt { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("updatedAt")]
+        public System.DateTime UpdatedAt { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("learnedAt")]
+        public System.DateTime LearnedAt { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("title")]
         public string Title { get; set; }
@@ -3261,8 +3267,14 @@ namespace CogLog.UI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("dateAdded")]
-        public System.DateTime DateAdded { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("createdAt")]
+        public System.DateTime CreatedAt { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("updatedAt")]
+        public System.DateTime UpdatedAt { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("learnedAt")]
+        public System.DateTime LearnedAt { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("title")]
         public string Title { get; set; }
@@ -3356,6 +3368,9 @@ namespace CogLog.UI.Services.Base
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.2.0.0 (NJsonSchema v11.1.0.0 (Newtonsoft.Json v13.0.0.0))")]
     public partial record CreateBlockCommand
     {
+
+        [System.Text.Json.Serialization.JsonPropertyName("learnedAt")]
+        public System.DateTime LearnedAt { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("title")]
         public string Title { get; set; }
@@ -3698,6 +3713,9 @@ namespace CogLog.UI.Services.Base
 
         [System.Text.Json.Serialization.JsonPropertyName("id")]
         public int Id { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("learnedAt")]
+        public System.DateTime LearnedAt { get; set; }
 
         [System.Text.Json.Serialization.JsonPropertyName("title")]
         public string Title { get; set; }

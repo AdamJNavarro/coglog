@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using CogLog.UI.Models.Subject;
 using CogLog.UI.Models.Tag;
 using CogLog.UI.Models.Topic;
@@ -9,7 +8,7 @@ public class BlockDetailsVm
 {
     public int Id { get; init; }
 
-    public DateTime DateAdded { get; init; }
+    public DateTime LearnedAt { get; init; }
 
     public string Title { get; init; }
 

@@ -2,7 +2,6 @@ namespace CogLog.UI.Models.Block;
 
 public class BlockCreateVm : BlockBaseWriteVm
 {
-    public DateTime? DateAdded { get; set; }
     public int? CategoryId { get; set; }
 
     public int? SubjectId { get; set; }
