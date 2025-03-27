@@ -30,6 +30,6 @@ public class AppDbContextTests
         await _dbContext.Blocks.AddAsync(block);
         await _dbContext.SaveChangesAsync();
 
-        block.DateAdded.ShouldBeOfType<DateTime>();
+        block.CreatedAt.ShouldBeOfType<DateTime>();
     }
 }

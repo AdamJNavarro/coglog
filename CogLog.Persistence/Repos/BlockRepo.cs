@@ -35,7 +35,7 @@ public class BlockRepo(AppDbContext ctx) : BaseRepo<Block>(ctx), IBlockRepo
         var blocks = await _ctx.Blocks.AsNoTracking().ToListAsync();
 
         var blocksByDay = blocks
-            .GroupBy(b => b.DateAdded?.Date)
+            .GroupBy(b => b.LearnedAt.Date)
             .Select(group => new BlocksByDayDto(
                 (DateTime)group.Key!,
                 group.Count(),

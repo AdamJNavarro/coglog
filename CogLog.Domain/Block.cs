@@ -4,7 +4,11 @@ namespace CogLog.Domain;
 
 public class Block : BaseEntity
 {
-    public DateTime? DateAdded { get; set; }
+    public DateTime? CreatedAt { get; set; }
+
+    public DateTime? UpdatedAt { get; set; }
+
+    public DateTime LearnedAt { get; set; }
 
     public required string Title { get; set; }
     public required string Content { get; set; }

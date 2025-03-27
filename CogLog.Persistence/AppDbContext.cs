@@ -1,4 +1,5 @@
 using CogLog.Domain;
+using CogLog.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace CogLog.Persistence;
@@ -25,10 +26,15 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         foreach (
             var entry in base
                 .ChangeTracker.Entries<Block>()
-                .Where(q => q.State == EntityState.Added)
+                .Where(q => q.State is EntityState.Added or EntityState.Modified)
         )
         {
-            entry.Entity.DateAdded = DateTime.Now;
+            entry.Entity.UpdatedAt = DateTime.Now;
+
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.CreatedAt = DateTime.Now;
+            }
         }
 
         return base.SaveChangesAsync(cancellationToken);

@@ -4,6 +4,7 @@ namespace CogLog.App.Features.Block.Commands;
 
 public record UpdateBlockCommand(
     int Id,
+    DateTime LearnedAt,
     string Title,
     string Content,
     string? ExtraContent,

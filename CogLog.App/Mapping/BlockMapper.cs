@@ -9,7 +9,9 @@ public static class BlockMapper
     {
         return new BlockDto(
             block.Id,
-            block.DateAdded ?? DateTime.MinValue,
+            block.CreatedAt ?? DateTime.MinValue,
+            block.UpdatedAt ?? DateTime.MinValue,
+            block.LearnedAt,
             block.Title,
             block.Content,
             block.ExtraContent,
@@ -30,7 +32,9 @@ public static class BlockMapper
     {
         return new BlockDetailsDto(
             block.Id,
-            block.DateAdded ?? DateTime.MinValue,
+            block.CreatedAt ?? DateTime.MinValue,
+            block.UpdatedAt ?? DateTime.MinValue,
+            block.LearnedAt,
             block.Title,
             block.Content,
             block.ExtraContent,

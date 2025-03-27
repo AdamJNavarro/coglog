@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CogLog.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250314223826_FirstMig")]
+    [Migration("20250327154818_FirstMig")]
     partial class FirstMig
     {
         /// <inheritdoc />
@@ -37,11 +37,14 @@ namespace CogLog.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DateAdded")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ExtraContent")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LearnedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("SubjectId")
                         .HasColumnType("int");
@@ -49,6 +52,9 @@ namespace CogLog.Persistence.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");

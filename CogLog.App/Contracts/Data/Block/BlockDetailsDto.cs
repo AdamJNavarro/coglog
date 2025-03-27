@@ -6,7 +6,9 @@ namespace CogLog.App.Contracts.Data.Block;
 
 public record BlockDetailsDto(
     int Id,
-    DateTime DateAdded,
+    DateTime CreatedAt,
+    DateTime UpdatedAt,
+    DateTime LearnedAt,
     string Title,
     string Content,
     string? ExtraContent,
