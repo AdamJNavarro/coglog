@@ -3,6 +3,7 @@ using MediatR;
 namespace CogLog.App.Features.Block.Commands;
 
 public record CreateBlockCommand(
+    DateTime LearnedAt,
     string Title,
     string Content,
     string? ExtraContent,

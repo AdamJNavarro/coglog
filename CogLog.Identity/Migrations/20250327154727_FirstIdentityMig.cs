@@ -164,7 +164,7 @@ namespace CogLog.Identity.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "6dc915bb-ab98-4ede-9147-f874089750c7", "adamjnav@gmail.com", true, false, null, "ADAMJNAV@GMAIL.COM", "ADAMJNAV@GMAIL.COM", "AQAAAAIAAYagAAAAEFu+NbnNz4CCd0cVz3Rb2bTNxSp1HEJx25A+kqYJ5332C9e/AM4SMHjenEU0GePcuQ==", null, false, "232c1b2d-53f1-4260-bddf-c333420d7dbd", false, "adamjnav@gmail.com" });
+                values: new object[] { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "0e998b10-615b-449a-be4b-9951141c37e8", "adamjnav@gmail.com", true, false, null, "ADAMJNAV@GMAIL.COM", "ADAMJNAV@GMAIL.COM", "AQAAAAIAAYagAAAAENm0Zo2jeGYCemGFOIsouweMr51VQliRj55HI95k5jYBHrS7JMekQpYYLoerv6n2rw==", null, false, "d111db10-706d-49ac-9b12-2593827e0997", false, "adamjnav@gmail.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

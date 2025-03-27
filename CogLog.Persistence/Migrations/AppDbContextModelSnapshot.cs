@@ -34,11 +34,14 @@ namespace CogLog.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("DateAdded")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ExtraContent")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LearnedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("SubjectId")
                         .HasColumnType("int");
@@ -46,6 +49,9 @@ namespace CogLog.Persistence.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
