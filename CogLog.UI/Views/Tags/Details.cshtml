@@ -1,11 +1,11 @@
 @model TagDetailsVm
-@{
-    ViewData["Title"] = "Tag Details";
-}
 
-<header>
+<div class="page-header">
     <h1>@Model.CapitalizedName</h1>
-</header>
+    <a asp-action="Edit" asp-route-id="@Model.Id">(edit)</a>
+</div>
 
-@await Component.InvokeAsync("FloatingActionButton", new {actionName = "Edit", routeId = Model.Id})
-
+@if (!string.IsNullOrWhiteSpace(Model.Description))
+{
+    <div class="page-description">@Model.Description</div>
+}

@@ -8,8 +8,12 @@ namespace CogLog.UI.Controllers;
 public class SubjectsController(ISubjectService subjectService, ICategoryService categoryService)
     : Controller
 {
+    [ViewData]
+    public string Title { get; set; }
+
     public async Task<IActionResult> Index([FromQuery] SubjectQueryParameters? parameters)
     {
+        Title = "Subjects";
         parameters ??= new SubjectQueryParameters();
 
         var data = await subjectService.GetPaginatedSubjectsAsync(parameters);
@@ -26,6 +30,7 @@ public class SubjectsController(ISubjectService subjectService, ICategoryService
 
     public async Task<IActionResult> Create([FromQuery] string? categoryId)
     {
+        Title = "New Subject";
         var vm = new SubjectCreateVm() { };
 
         if (!string.IsNullOrWhiteSpace(categoryId))
@@ -47,6 +52,7 @@ public class SubjectsController(ISubjectService subjectService, ICategoryService
     [Route("subjects/{id:int}")]
     public async Task<IActionResult> Details(int id)
     {
+        Title = "Subject Details";
         var data = await subjectService.GetSubjectDetailsAsync(id);
         return View(data);
     }
@@ -54,6 +60,7 @@ public class SubjectsController(ISubjectService subjectService, ICategoryService
     [Route("subjects/{id:int}/edit", Name = "EditSubject")]
     public async Task<IActionResult> Edit(int id)
     {
+        Title = "Edit Subject";
         var subject = await subjectService.GetSubjectDetailsAsync(id);
 
         var vm = new SubjectEditVm()

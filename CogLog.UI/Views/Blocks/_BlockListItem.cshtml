@@ -4,21 +4,40 @@
 
 <div class="card">
     <div class="card-header">
-        <div class="title-container">
-
-            <div class="card-title">@Model.Title</div>
+        <div class="card-header-top">
+            <div class="title-container">
+                @if (User.IsInRole(Roles.Administrator))
+                {
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="card-title">@Model.Title</a>
+                }
+                else
+                {
+                    <div class="card-title">@Model.Title</div>
+                }
+            </div>
+            @if (User.IsInRole(Roles.Administrator) && !string.IsNullOrEmpty(@Model.Url))
+            {
+                <a href="@Model.Url" class="external-link" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </a>
+            }
         </div>
-        @if (User.IsInRole(Roles.Administrator) && !string.IsNullOrEmpty(@Model.Url))
-        {
-            <a href="@Model.Url" class="external-link" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-            </a>
-        }
+        <div class="card-header-bottom">
+            <div class="card-date">@DateOnly.FromDateTime(@Model.LearnedAt).ToString("M/d/yy")</div>
+    @if (!string.IsNullOrEmpty(@Model.Subject?.Name))
+            {
+                <div class="card-subject">#@Model.Subject.Name</div>
+            }
+        </div>
+    </div>
+
+    <div class="card-content">
+        @Model.Content
     </div>
 
 
@@ -56,29 +75,8 @@
             }
         }
     </div>
-
-    <div class="card-content">
-        @Model.Content
-    </div>
-
-    @if (User.IsInRole(Roles.Administrator) && !string.IsNullOrEmpty(@Model.ExtraContent))
-    {
-        <div class="collapsible-container">
-            <input type="checkbox" id="collapsible-checkbox">
-            <label for="collapsible-checkbox" class="collapsible-toggle">
-                <span>Show more</span>
-                <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-            </label>
-            <div class="collapsible-content">
-                <div class="card-content">
-                    @Model.ExtraContent
-                </div>
-            </div>
-        </div>
-    }
+    
+    
 
 
 </div>

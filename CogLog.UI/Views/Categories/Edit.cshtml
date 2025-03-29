@@ -6,12 +6,10 @@
 
     <form asp-action="Edit">
         <input type="hidden" asp-for="Id" />
-
         @await Component.InvokeAsync("HierarchyFormGroups", Model)
-
         <div class="form-button-group">
-            <input type="submit" value="Update" class="btn btn-primary" />
-            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+            <input type="submit" value="Update" class="btn" />
+            <a asp-action="Details" asp-route-id="@Model.Id" class="btn ghost">Cancel</a>
         </div>
 
     </form>
@@ -19,11 +17,10 @@
 
 <form asp-action="Delete" class="delete-form">
     <input type="hidden" asp-for="Id" />
-    <input type="submit" value="Delete" class="btn btn-danger" />
+    <input type="submit" value="Delete" class="btn danger" />
 </form>
 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
 }

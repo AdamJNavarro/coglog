@@ -1,0 +1,46 @@
+button,
+input.btn,
+a.btn {
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: none;
+    border: none;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--fs-base);
+    border-radius: var(--border-radius);
+    transition: background 0.2s ease-in-out;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+}
+
+:is(button, .btn).ghost {
+    --btn-bg: transparent;
+    --btn-fg: var(--primary);
+
+    &:hover {
+        --btn-bg: var(--primary);
+        --btn-fg: var(--white);
+    }
+}
+
+:is(button, .btn).danger {
+    --btn-bg: var(--danger);
+    --btn-fg: var(--white);
+}
+
+.btn:focus {
+    outline: none;
+    /*box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);*/
+}
+
+.fab {
+    position: absolute;
+    right: var(--space-16);
+    bottom: var(--space-16);
+    border-radius: var(--border-radius-half);
+    height: var(--space-14);
+    z-index: 100;
+    overflow: hidden;
+    background-color: var(--blue-700);
+    border: none;
+}

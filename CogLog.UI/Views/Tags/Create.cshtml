@@ -1,23 +1,14 @@
 @model TagCreateVm
-@{
-    ViewData["Title"] = "New Tag";
-}
 
 <div class="form-wrapper">
     <h1 class="form-title">New Tag</h1>
-
     <form asp-action="Create">
-        
-        @await Component.InvokeAsync("HierarchyFormGroups", Model)
-        
         @await Component.InvokeAsync("SubjectSelector", new {subjectId = Model.SubjectId})
-
-        
+        @await Component.InvokeAsync("HierarchyFormGroups", Model)
         <div class="form-button-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
-            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            <input type="submit" value="Create" class="btn" />
+            <a asp-action="Index" class="btn ghost">Cancel</a>
         </div>
-
     </form>
 </div>
 

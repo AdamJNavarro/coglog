@@ -8,9 +8,13 @@ namespace CogLog.UI.Controllers;
 
 public class BlocksController(IBlockService blockService) : Controller
 {
+    [ViewData]
+    public string Title { get; set; }
+
     // INDEX - GET
     public async Task<IActionResult> Index([FromQuery] BlocksQueryParameters? parameters)
     {
+        Title = "Cog Log";
         parameters ??= new BlocksQueryParameters();
 
         var data = await blockService.GetBlocksAsync(parameters);
@@ -21,6 +25,7 @@ public class BlocksController(IBlockService blockService) : Controller
     [Route("blocks/{id:int}")]
     public async Task<IActionResult> Details(int id)
     {
+        Title = "Block Details";
         var data = await blockService.GetBlockDetailsAsync(id);
         return View(data);
     }
@@ -28,6 +33,7 @@ public class BlocksController(IBlockService blockService) : Controller
     // CREATE - GET
     public async Task<IActionResult> Create()
     {
+        Title = "New Block";
         var vm = new BlockCreateVm();
         return View(vm);
     }
@@ -37,8 +43,6 @@ public class BlocksController(IBlockService blockService) : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(BlockCreateVm vm)
     {
-        Console.WriteLine("Block Learned At");
-        Console.WriteLine(vm.LearnedAt);
         await blockService.CreateBlockAsync(vm);
         return RedirectToAction(nameof(Index));
     }
@@ -46,6 +50,7 @@ public class BlocksController(IBlockService blockService) : Controller
     [Route("blocks/{id:int}/edit", Name = "EditBlock")]
     public async Task<IActionResult> Edit(int id)
     {
+        Title = "Edit Block";
         var block = await blockService.GetBlockDetailsAsync(id);
         Console.WriteLine("STI");
         Console.WriteLine(block.Topics.Select(x => x.Id).ToList()[0]);

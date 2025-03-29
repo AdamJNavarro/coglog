@@ -1,23 +1,16 @@
 @model IEnumerable<CategoryMinimalVm>    
-@{
-    ViewData["Title"] = "Categories";
-}
-    
-<header>
-    <h1>Categories</h1>
-</header>
 
-<ul class="hierarchy-list">
+<ul class="inline-list">
+    <li class="special-item">
+        <a asp-action="Create" class="special-link">Create New</a>
+    </li>
     @foreach (var item in Model)
     {
-        <li class="hierarchy-item">
-            <a class="hierarchy-link" asp-action="Details" asp-route-id="@item.Id">
+        <li>
+            <a asp-action="Details" asp-route-id="@item.Id">
                 @item.Name
-            </a>
-        </li>
+            </a></li>
     }
 </ul>
-
-@await Component.InvokeAsync("FloatingActionButton", new {actionName = "Create"})
 
 
