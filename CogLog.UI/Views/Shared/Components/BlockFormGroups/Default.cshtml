@@ -15,13 +15,13 @@
     <textarea asp-for="Content" class="form-control"></textarea>
     <span asp-validation-for="Content" class="validation-helper-text"></span>
 </div>
-<div class="form-group">
+<div class="form-group" style="display: none;">
     <label asp-for="ExtraContent" class="form-label">Additional Context</label>
     <textarea asp-for="ExtraContent" class="form-control"></textarea>
     <span asp-validation-for="ExtraContent" class="validation-helper-text"></span>
 </div>
 <div class="form-group">
-    <label asp-for="Url" class="form-label"></label>
+    <label asp-for="Url" class="form-label">URL</label>
     <input asp-for="Url" class="form-control" type="url" />
     <span asp-validation-for="Url" class="validation-helper-text"></span>
 </div>

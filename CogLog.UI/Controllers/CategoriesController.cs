@@ -6,14 +6,19 @@ namespace CogLog.UI.Controllers;
 
 public class CategoriesController(ICategoryService categoryService) : Controller
 {
+    [ViewData]
+    public string Title { get; set; }
+
     public async Task<IActionResult> Index()
     {
+        Title = "Categories";
         var data = await categoryService.GetCategoriesAsync();
         return View(data);
     }
 
     public IActionResult Create()
     {
+        Title = "New Category";
         return View();
     }
 
@@ -29,6 +34,7 @@ public class CategoriesController(ICategoryService categoryService) : Controller
     public async Task<IActionResult> Details(int id)
     {
         var data = await categoryService.GetCategoryDetailsAsync(id);
+        Title = "Category Details";
         return View(data);
     }
 
@@ -41,6 +47,8 @@ public class CategoriesController(ICategoryService categoryService) : Controller
         {
             return NotFound();
         }
+
+        Title = "Edit Category";
 
         var vm = new CategoryEditVm()
         {

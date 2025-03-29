@@ -1,22 +1,16 @@
 @model PaginationResponseVm<BlockVm>
 
-@{
-    ViewData["Title"] = "Cog Log";
-
-}
-
-<header>
-    <h1>Blocks</h1>
-</header>
-
 
 <div class="card-list">
-    
     @foreach (var block in Model.Data)
     {
         @await Html.PartialAsync("_BlockListItem", block)
     }
-    
 </div>
+
+@await Component.InvokeAsync("Pagination", new
+{
+    pagination = Model.Pagination,
+})
 
 @await Component.InvokeAsync("FloatingActionButton", new {actionName = "Create"})

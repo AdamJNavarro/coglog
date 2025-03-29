@@ -102,6 +102,7 @@ public class BlockRepo(AppDbContext ctx) : BaseRepo<Block>(ctx), IBlockRepo
             .ThenInclude(bt => bt.Tag)
             .Skip((parameters.Page - 1) * parameters.PerPage)
             .Take(parameters.PerPage)
+            .OrderByDescending(b => b.LearnedAt.Date)
             .ToListAsync();
 
         var paginationMetadata = new PaginationMetadata

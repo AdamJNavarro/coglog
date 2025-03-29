@@ -1,34 +1,26 @@
 @model CategoryDetailsVm
 
-@{
-    ViewData["Title"] = "Category Details";
-}
-    
-<header>
+<div class="page-header">
     <h1>@Model.CapitalizedName</h1>
-    @if (!string.IsNullOrWhiteSpace(Model.Description))
-    {
-        <p>@Model.Description</p>
-    }
-</header>
+    <a asp-action="Edit" asp-route-id="@Model.Id">(edit)</a>
+</div>
 
+@if (!string.IsNullOrWhiteSpace(Model.Description))
+{
+    <div class="page-description">@Model.Description</div>
+}
 
 
 <div class="section-header">
     <h2>Subjects</h2>
-    @* <a asp-controller="Subjects" asp-action="Create" asp-route-categoryId="@Model.Id">+</a> *@
+    <a asp-controller="Subjects" asp-action="Create" asp-route-categoryId="@Model.Id">+</a>
 </div>
 
-<ul class="hierarchy-list">
+<ul class="inline-list">
     @foreach (var item in Model.Subjects)
     {
-        <li class="hierarchy-item">
-            <a class="hierarchy-link" asp-controller="Subjects" asp-action="Details" asp-route-id="@item.Id">
+        <li><a asp-controller="Subjects" asp-action="Details" asp-route-id="@item.Id">
                 @item.Name
-            </a>
-        </li>
+            </a></li>
     }
 </ul>
-
-
-@await Component.InvokeAsync("FloatingActionButton", new {actionName = "Edit", routeId = Model.Id})

@@ -1,91 +1,100 @@
 .form-wrapper {
+    background-color: var(--surface-bg);
     width: 100%;
-    margin: 0 auto;
-    background-color: white;
-    padding: var(--spacing-lg);
+    margin: 0;
+    padding: var(--space-4);
     border-radius: var(--border-radius);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    line-height: normal;
 }
 
 .form-title {
-    margin-bottom: var(--spacing-lg);
-    color: #2c3e50;
-    font-size: var(--font-size-md);
+    color: var(--surface-text);
+    font-size: var(--fs-md);
     font-weight: 600;
+    margin: 0 0 var(--space-5);
 }
 
-/* Form group */
 .form-group {
-    margin-bottom: var(--spacing-m);
+    margin-bottom: var(--space-5);
+    /* background-color: lightgoldenrodyellow; */
 }
 
 .form-button-group {
-    padding-top: var(--spacing-m);
+    margin-top: var(--space-8);
     display: flex;
-    gap: var(--spacing-m);
+    align-items: center;
+    gap: var(--space-4);
+    /* background-color: lightgreen; */
 }
 
 .form-label {
     display: block;
-    margin-bottom: var(--spacing-s);
     font-weight: 500;
-    color: #2c3e50;
+    font-size: var(--fs-sm);
+    color: var(--surface-text-secondary);
 }
 
 /* Form controls */
 .form-control {
+    background-color: var(--white-1);
+    height: var(--bg-lines-space);
     width: 100%;
-    padding: var(--spacing-s) var(--spacing-m);
-    border: var(--border-size) solid #ddd;
+    padding: var(--space-1) var(--space-4);
+    margin: var(--space-2) 0;
+    border: var(--border-size) solid var(--line);
     border-radius: var(--border-radius);
-    font-size: var(--font-size-base);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: var(--fs-base);
+    transition:
+            border-color 0.2s,
+            box-shadow 0.2s;
 }
 
 .form-control:focus {
-    border-color: #3498db;
+    border-color: var(--bg-horz-lines);
     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
     outline: none;
 }
 
 textarea.form-control {
-    min-height: 120px;
+    font-size: var(--fs-sm);
+    padding: var(--space-2) var(--space-4);
+    min-height: calc(var(--bg-lines-space) * 3);
+    vertical-align: bottom;
     resize: vertical;
 }
 
 select.form-control {
+    font-size: var(--fs-sm);
     appearance: none;
     background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right var(--spacing-m) center;
-    background-size: var(--spacing-m);
-    padding-right: var(--spacing-lg);
+    background-position: right var(--space-4) center;
+    background-size: var(--space-4);
+    padding-right: var(--space-8);
 }
 
 select[multiple].form-control {
     height: auto;
     min-height: 120px;
     background-image: none;
-    padding-right: var(--spacing-m);
+    padding-right: var(--space-4);
 }
 
-/* Helper text */
 .helper-text {
     display: block;
-    margin-top: var(--spacing-xs);
-    font-size: var(--font-size-sm);
-    color: #7f8c8d;
+    font-size: var(--fs-xs);
+    color: var(--surface-text-subtle);
 }
 
 .validation-helper-text {
     display: block;
-    margin-top: var(--spacing-xs);
-    font-size: var(--font-size-sm);
-    color: red;
+    font-size: var(--fs-sm);
+    color: var(--danger);
 }
 
 .delete-form {
-    margin-top: var(--spacing-m);
+    margin-top: var(--space-6);
     display: flex;
     justify-content: flex-end;
     align-items: center;

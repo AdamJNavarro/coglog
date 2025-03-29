@@ -8,9 +8,13 @@ namespace CogLog.UI.Controllers;
 
 public class TopicsController(ITopicService topicService) : Controller
 {
+    [ViewData]
+    public string Title { get; set; }
+
     // INDEX
     public async Task<IActionResult> Index()
     {
+        Title = "Topics";
         var data = await topicService.GetTopicsAsync();
         return View(data);
     }
@@ -18,12 +22,14 @@ public class TopicsController(ITopicService topicService) : Controller
     [Route("topics/{id:int}")]
     public async Task<IActionResult> Details(int id)
     {
+        Title = "Topic Details";
         var data = await topicService.GetTopicDetailsAsync(id);
         return View(data);
     }
 
     public async Task<IActionResult> Create([FromQuery] string? subjectId)
     {
+        Title = "New Topic";
         var vm = new TopicCreateVm();
 
         if (!string.IsNullOrWhiteSpace(subjectId))
@@ -45,6 +51,7 @@ public class TopicsController(ITopicService topicService) : Controller
     [Route("topics/{id:int}/edit", Name = "EditTopic")]
     public async Task<IActionResult> Edit(int id)
     {
+        Title = "Edit Topic";
         var topic = await topicService.GetTopicDetailsAsync(id);
 
         var vm = new TopicEditVm()

@@ -6,8 +6,12 @@ namespace CogLog.UI.Controllers;
 
 public class TagsController(ITagService tagService) : Controller
 {
+    [ViewData]
+    public string Title { get; set; }
+
     public async Task<IActionResult> Index()
     {
+        Title = "Tags";
         var data = await tagService.GetTagsAsync();
         return View(data);
     }
@@ -15,12 +19,14 @@ public class TagsController(ITagService tagService) : Controller
     [Route("tags/{id:int}")]
     public async Task<IActionResult> Details(int id)
     {
+        Title = "Tag Details";
         var data = await tagService.GetTagDetailsAsync(id);
         return View(data);
     }
 
     public async Task<IActionResult> Create([FromQuery] string? subjectId)
     {
+        Title = "New Tag";
         var vm = new TagCreateVm();
 
         if (!string.IsNullOrWhiteSpace(subjectId))
@@ -42,6 +48,7 @@ public class TagsController(ITagService tagService) : Controller
     [Route("tags/{id:int}/edit", Name = "EditTag")]
     public async Task<IActionResult> Edit(int id)
     {
+        Title = "Edit Tag";
         var tag = await tagService.GetTagDetailsAsync(id);
 
         var vm = new TagEditVm()

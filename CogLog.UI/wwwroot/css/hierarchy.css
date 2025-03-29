@@ -4,7 +4,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    gap: var(--spacing-m);
+    gap: var(--space-4);
 }
 
 .hierarchy-item {
@@ -13,13 +13,13 @@
 
 .hierarchy-link {
     display: inline-block;
-    padding: var(--spacing-s) var(--spacing-m);
+    padding: var(--space-2) var(--space-4);
     background-color: #f0f0f0;
     color: #333;
     text-decoration: none;
     border-radius: var(--border-radius);
     font-family: Arial, sans-serif;
-    font-size: var(--font-size-sm);
+    font-size: var(--fs-sm);
     transition: all 0.2s ease;
 }
 
@@ -31,4 +31,61 @@
 
 .hierarchy-link:active {
     transform: translateY(0);
+}
+
+.inline-list {
+    --lines: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: var(--space-7);
+    line-height: calc(var(--bg-space-1) * var(--lines)); /* Match the ruled lines */
+}
+
+.inline-list li {
+    display: inline-flex;
+    align-items: center;
+    height: calc(var(--bg-space-1) * var(--lines)); /* Match the ruled lines */
+}
+
+/* Custom bullet */
+.inline-list li::before {
+    content: '•';
+    display: inline-block;
+    margin-right: var(--space-2);
+    color: var(--text-secondary);
+    /*font-weight: bold;*/
+}
+
+/* Link styling */
+.inline-list a {
+    color: var(--text-subtle);
+    position: relative;
+    transition: color 0.3s;
+}
+
+.inline-list a:hover {
+    color: var(--primary);
+}
+
+/* Special first item styling */
+.special-item {
+    /*margin-right: 30px !important;*/
+    position: relative;
+}
+
+/* Remove the bullet from the special item */
+/*.special-item::before {*/
+/*    display: none !important;*/
+/*}*/
+
+/* Special styling for the first item's link */
+.special-link {
+    color: var(--primary) !important; /* Different text color (red) */
+    /*font-weight: bold;*/
+    position: relative;
+    padding-left: 0;
 }
