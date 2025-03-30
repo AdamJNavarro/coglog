@@ -6,15 +6,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"]</title>
-    @* <link rel="stylesheet" href="~/css/variables.css" asp-append-version="true"/> *@
     <link rel="stylesheet" href="~/css/global.css" asp-append-version="true"/>
-    @* <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true"/> *@
-    @* <link rel="stylesheet" href="~/css/buttons.css" asp-append-version="true"/> *@
-    @* <link rel="stylesheet" href="~/css/navbar.css" asp-append-version="true"/> *@
-    @* <link rel="stylesheet" href="~/css/forms.css" asp-append-version="true"/> *@
-    @* <link rel="stylesheet" href="~/css/pagination.css" asp-append-version="true"/> *@
-    @* <link rel="stylesheet" href="~/css/blocks.css" asp-append-version="true"/> *@
-    @* <link rel="stylesheet" href="~/css/hierarchy.css" asp-append-version="true"/> *@
+  
 </head>
 <body>
 <div style="display: none;">
@@ -23,7 +16,7 @@
 
 <div class="content-container">
     <main role="main">
-        @if (User.IsInRole(Roles.Administrator))
+        @if (User.IsInRole(AuthConstants.Roles.Administrator))
         {
             <header>
                 <nav class="navbar">

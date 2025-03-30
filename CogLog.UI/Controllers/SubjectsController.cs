@@ -1,10 +1,13 @@
+using CogLog.App.Constants;
 using CogLog.App.Contracts.Data.Subject;
 using CogLog.UI.Contracts;
 using CogLog.UI.Models.Subject;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.UI.Controllers;
 
+[Authorize(Roles = AuthConstants.Roles.Administrator)]
 public class SubjectsController(ISubjectService subjectService, ICategoryService categoryService)
     : Controller
 {

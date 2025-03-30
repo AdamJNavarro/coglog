@@ -1,11 +1,12 @@
+using CogLog.App.Constants;
 using CogLog.UI.Contracts;
-using CogLog.UI.Models.Subject;
 using CogLog.UI.Models.Topic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CogLog.UI.Controllers;
 
+[Authorize(Roles = AuthConstants.Roles.Administrator)]
 public class TopicsController(ITopicService topicService) : Controller
 {
     [ViewData]

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.UI.Controllers;
 
-public class AdminController(IAuthService _authService) : Controller
+public class AuthController(IAuthService _authService) : Controller
 {
     public IActionResult Login()
     {
@@ -31,5 +31,10 @@ public class AdminController(IAuthService _authService) : Controller
     {
         await _authService.Logout();
         return LocalRedirect("~/");
+    }
+
+    public IActionResult Forbidden()
+    {
+        return View();
     }
 }

@@ -25,6 +25,8 @@ public class SubjectRepo(AppDbContext ctx) : BaseRepo<Subject>(ctx), ISubjectRep
     {
         var query = _ctx.Subjects.AsNoTracking();
 
+        query = query.OrderBy(q => q.Name);
+
         if (categoryId.HasValue)
         {
             query = query.Where(x => x.CategoryId == categoryId.Value);
@@ -47,6 +49,8 @@ public class SubjectRepo(AppDbContext ctx) : BaseRepo<Subject>(ctx), ISubjectRep
         var query = _ctx.Subjects.AsNoTracking();
 
         query = ApplyFilters(query, parameters);
+
+        query = query.OrderBy(q => q.Name);
 
         var totalItems = await query.CountAsync();
         var totalPages = (int)Math.Ceiling(totalItems / (double)parameters.PerPage);

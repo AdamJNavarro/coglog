@@ -39,6 +39,8 @@ public class TopicRepo(AppDbContext ctx) : BaseRepo<Topic>(ctx), ITopicRepo
     {
         var query = _ctx.Topics.AsNoTracking();
 
+        query = query.OrderBy(q => q.Name);
+
         if (subjectId.HasValue)
         {
             query = query.Where(x => x.SubjectId == subjectId.Value);

@@ -1,4 +1,6 @@
+using CogLog.App.Constants;
 using CogLog.UI.Contracts;
+using CogLog.UI.Middleware;
 using CogLog.UI.Services;
 using CogLog.UI.Services.Base;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -17,10 +19,17 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 });
 
 builder
+    .Services.AddAuthorizationBuilder()
+    .AddPolicy(
+        AuthConstants.Policies.AdminOnly,
+        policy => policy.RequireRole(AuthConstants.Roles.Administrator)
+    );
+
+builder
     .Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = new PathString("/admin/login");
+        options.LoginPath = new PathString("/auth/login");
     });
 
 builder.Services.AddTransient<IAuthService, AuthService>();
@@ -41,7 +50,6 @@ builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
 
 // builder.Services.AddScoped<IHierarchyIconService, HierarchyIconService>();
 
-// builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
@@ -68,11 +76,13 @@ app.UseStaticFiles(
     }
 );
 
-app.UseRouting();
-
-app.UseAuthorization();
 app.UseCookiePolicy();
 app.UseAuthentication();
+
+app.UseRouting();
+app.UseMiddleware<RequestMiddleware>();
+
+app.UseAuthorization();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Blocks}/{action=Index}/{id?}");
 app.Run();

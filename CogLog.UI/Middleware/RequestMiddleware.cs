@@ -16,10 +16,14 @@ public class RequestMiddleware(RequestDelegate next, ILocalStorageService localS
         try
         {
             var ep = httpContext.Features.Get<IEndpointFeature>()?.Endpoint;
+
             var authAttr = ep?.Metadata?.GetMetadata<AuthorizeAttribute>();
+
             if (authAttr != null)
             {
                 var tokenExists = localStorageService.Exists("token");
+                // Console.WriteLine("Exists");
+                // Console.WriteLine(tokenExists);
                 var tokenIsValid = true;
                 if (tokenExists)
                 {
@@ -40,11 +44,17 @@ public class RequestMiddleware(RequestDelegate next, ILocalStorageService localS
                 }
                 if (authAttr.Roles != null)
                 {
+                    const string forbiddenPath = "/auth/forbidden";
                     var userRole = httpContext.User.FindFirst(ClaimTypes.Role)?.Value;
-                    if (authAttr.Roles.Contains("Administrator") == false)
+                    if (userRole == null)
                     {
-                        var path = $"/home/notauthorized";
-                        httpContext.Response.Redirect(path);
+                        httpContext.Response.Redirect(forbiddenPath);
+                        return;
+                    }
+
+                    if (authAttr.Roles.Contains(userRole) == false)
+                    {
+                        httpContext.Response.Redirect(forbiddenPath);
                         return;
                     }
                 }
@@ -59,13 +69,15 @@ public class RequestMiddleware(RequestDelegate next, ILocalStorageService localS
 
     private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
+        Console.WriteLine("HEA called");
+        Console.WriteLine(exception.Message);
         switch (exception)
         {
-            case ApiException apiException:
+            case ApiException:
                 await SignOutAndRedirect(context);
                 break;
             default:
-                var path = $"/Home/Error";
+                const string path = "/Home/Error";
                 context.Response.Redirect(path);
                 break;
         }
@@ -74,7 +86,7 @@ public class RequestMiddleware(RequestDelegate next, ILocalStorageService localS
     private static async Task SignOutAndRedirect(HttpContext httpContext)
     {
         await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        var path = $"/admin/login";
+        const string path = "/auth/login";
         httpContext.Response.Redirect(path);
     }
 }

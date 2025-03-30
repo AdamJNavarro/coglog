@@ -1,4 +1,5 @@
 using System.Text;
+using CogLog.App.Constants;
 using CogLog.App.Contracts.Identity;
 using CogLog.App.Models.Identity;
 using CogLog.Identity.Models;

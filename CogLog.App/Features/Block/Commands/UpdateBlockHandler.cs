@@ -26,20 +26,41 @@ public class UpdateBlockHandler(IBlockRepo blockRepo) : IRequestHandler<UpdateBl
         var selectedIds = string.Join(", ", request.TopicIds);
         Console.WriteLine($"Handler Selected IDs: {selectedIds}");
 
+        var topicsToRemove = block
+            .BlockTopics.Where(bt => !request.TopicIds.Contains(bt.TopicId))
+            .ToList();
+
+        foreach (var blockTopic in topicsToRemove)
+        {
+            block.BlockTopics.Remove(blockTopic);
+        }
+
+        // Add new topics that aren't already associated with the book
+        var existingTopicIds = block.BlockTopics.Select(bt => bt.TopicId).ToList();
+        var topicsToAdd = request
+            .TopicIds.Where(id => !existingTopicIds.Contains(id))
+            .Select(id => new BlockTopic { BlockId = request.Id, TopicId = id })
+            .ToList();
+
+        foreach (var blockTopic in topicsToAdd)
+        {
+            block.BlockTopics.Add(blockTopic);
+        }
+
         // clear topics and tags
-        block.BlockTopics.Clear();
+        // block.BlockTopics.Clear();
         block.BlockTags.Clear();
 
-        if (request.TopicIds.Count > 0)
-        {
-            List<BlockTopic> blockTopics = [];
-
-            foreach (var topicId in request.TopicIds)
-            {
-                blockTopics.Add(new BlockTopic { BlockId = block.Id, TopicId = (int)topicId });
-            }
-            block.BlockTopics = blockTopics;
-        }
+        // if (request.TopicIds.Count > 0)
+        // {
+        //     List<BlockTopic> blockTopics = [];
+        //
+        //     foreach (var topicId in request.TopicIds)
+        //     {
+        //         blockTopics.Add(new BlockTopic { BlockId = block.Id, TopicId = (int)topicId });
+        //     }
+        //     block.BlockTopics = blockTopics;
+        // }
 
         if (request.TagIds.Count > 0)
         {

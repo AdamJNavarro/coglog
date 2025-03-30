@@ -1,7 +1,9 @@
+using CogLog.App.Constants;
 using CogLog.App.Contracts.Data.Block;
 using CogLog.Domain;
 using CogLog.UI.Contracts;
 using CogLog.UI.Models.Block;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.UI.Controllers;
@@ -12,6 +14,7 @@ public class BlocksController(IBlockService blockService) : Controller
     public string Title { get; set; }
 
     // INDEX - GET
+    [AllowAnonymous]
     public async Task<IActionResult> Index([FromQuery] BlocksQueryParameters? parameters)
     {
         Title = "Cog Log";
@@ -22,6 +25,7 @@ public class BlocksController(IBlockService blockService) : Controller
         return View(data);
     }
 
+    [Authorize(Roles = AuthConstants.Roles.Administrator)]
     [Route("blocks/{id:int}")]
     public async Task<IActionResult> Details(int id)
     {
@@ -31,6 +35,7 @@ public class BlocksController(IBlockService blockService) : Controller
     }
 
     // CREATE - GET
+    [Authorize(Roles = AuthConstants.Roles.Administrator)]
     public async Task<IActionResult> Create()
     {
         Title = "New Block";
@@ -39,6 +44,7 @@ public class BlocksController(IBlockService blockService) : Controller
     }
 
     // CREATE - POST
+    [Authorize(Roles = AuthConstants.Roles.Administrator)]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(BlockCreateVm vm)
@@ -47,13 +53,12 @@ public class BlocksController(IBlockService blockService) : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = AuthConstants.Roles.Administrator)]
     [Route("blocks/{id:int}/edit", Name = "EditBlock")]
     public async Task<IActionResult> Edit(int id)
     {
         Title = "Edit Block";
         var block = await blockService.GetBlockDetailsAsync(id);
-        Console.WriteLine("STI");
-        Console.WriteLine(block.Topics.Select(x => x.Id).ToList()[0]);
 
         var vm = new BlockEditVm()
         {
@@ -69,6 +74,7 @@ public class BlocksController(IBlockService blockService) : Controller
         return View(vm);
     }
 
+    [Authorize(Roles = AuthConstants.Roles.Administrator)]
     [HttpPost]
     [Route("blocks/{id:int}/edit", Name = "EditBlock")]
     [ValidateAntiForgeryToken]
@@ -80,13 +86,13 @@ public class BlocksController(IBlockService blockService) : Controller
         }
 
         var selectedIds = string.Join(", ", block.SelectedTopicIds);
-        Console.WriteLine($"Selected IDs: {selectedIds}");
 
         var resp = await blockService.UpdateBlockAsync(block);
 
         return resp.Success ? RedirectToAction(nameof(Index)) : View(block);
     }
 
+    [Authorize(Roles = AuthConstants.Roles.Administrator)]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int id)
@@ -95,17 +101,4 @@ public class BlocksController(IBlockService blockService) : Controller
 
         return RedirectToAction(response.Success ? nameof(Index) : nameof(Edit));
     }
-
-    // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    // public IActionResult Error()
-    // {
-    //     return View(
-    //         new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier }
-    //     );
-    // }
-    //
-    // public IActionResult NotAuthorized()
-    // {
-    //     return View();
-    // }
 }
