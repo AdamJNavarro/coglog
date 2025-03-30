@@ -38,6 +38,8 @@ public class TagRepo(AppDbContext ctx) : BaseRepo<Tag>(ctx), ITagRepo
     {
         var query = _ctx.Tags.AsNoTracking();
 
+        query = query.OrderBy(q => q.Name);
+
         if (subjectId.HasValue)
         {
             query = query.Where(x => x.SubjectId == subjectId.Value);

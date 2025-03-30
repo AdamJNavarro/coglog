@@ -1,9 +1,12 @@
+using CogLog.App.Constants;
 using CogLog.UI.Contracts;
 using CogLog.UI.Models.Category;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.UI.Controllers;
 
+[Authorize(Roles = AuthConstants.Roles.Administrator)]
 public class CategoriesController(ICategoryService categoryService) : Controller
 {
     [ViewData]

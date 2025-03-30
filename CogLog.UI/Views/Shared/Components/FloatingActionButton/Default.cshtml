@@ -1,7 +1,8 @@
 @using CogLog.App.Constants
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model CogLog.UI.Models.Shared.Components.FloatingActionButtonVm
 
-@if (User.IsInRole(Roles.Administrator))
+@if (User.IsInRole(AuthConstants.Roles.Administrator))
 {
     @if (Model.RouteId.HasValue)
     {

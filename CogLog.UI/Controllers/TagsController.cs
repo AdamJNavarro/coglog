@@ -1,9 +1,12 @@
+using CogLog.App.Constants;
 using CogLog.UI.Contracts;
 using CogLog.UI.Models.Tag;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CogLog.UI.Controllers;
 
+[Authorize(Roles = AuthConstants.Roles.Administrator)]
 public class TagsController(ITagService tagService) : Controller
 {
     [ViewData]

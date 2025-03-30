@@ -1,5 +1,13 @@
+@using CogLog.App.Constants
 @model PaginationResponseVm<BlockVm>
 
+
+@if (!User.IsInRole(AuthConstants.Roles.Administrator))
+{
+    <div class="guest-header">
+        <h1>The Cog Log</h1>
+    </div>    
+}
 
 <div class="card-list">
     @foreach (var block in Model.Data)

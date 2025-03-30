@@ -79,6 +79,8 @@ public class AuthService(
     {
         var userClaims = await userManager.GetClaimsAsync(user);
         var roles = await userManager.GetRolesAsync(user);
+        Console.WriteLine("Generate Token JWT ROLES");
+        Console.WriteLine(roles[0]);
 
         var roleClaims = roles.Select(q => new Claim(ClaimTypes.Role, q)).ToList();
 

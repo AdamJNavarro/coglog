@@ -23,23 +23,24 @@ public class AuthService(
             AuthRequest authenticationRequest = new() { Email = email, Password = password };
             var authenticationResponse = await _client.LoginAsync(authenticationRequest);
 
-            if (authenticationResponse.Token != string.Empty)
+            if (authenticationResponse.Token == string.Empty)
             {
-                //Get Claims from token and Build auth user object
-                var tokenContent = _tokenHandler.ReadJwtToken(authenticationResponse.Token);
-                var claims = ParseClaims(tokenContent);
-                var user = new ClaimsPrincipal(
-                    new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)
-                );
-                var login = httpContextAccessor.HttpContext!.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    user
-                );
-                _localStorage.SetStorageValue("token", authenticationResponse.Token);
-
-                return true;
+                return false;
             }
-            return false;
+
+            var tokenContent = _tokenHandler.ReadJwtToken(authenticationResponse.Token);
+            var claims = ParseClaims(tokenContent);
+            var user = new ClaimsPrincipal(
+                new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)
+            );
+
+            await httpContextAccessor.HttpContext!.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                user
+            );
+            _localStorage.SetStorageValue("token", authenticationResponse.Token);
+
+            return true;
         }
         catch
         {
