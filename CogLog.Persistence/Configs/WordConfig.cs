@@ -22,7 +22,7 @@ public class WordConfig : IEntityTypeConfiguration<Word>
         builder
             .Property(w => w.PartOfSpeech)
             .HasConversion(
-                v => v.ToString().ToLowerInvariant(),
+                v => v.ToString()!.ToLowerInvariant(),
                 v => (PartOfSpeech)Enum.Parse(typeof(PartOfSpeech), v, true)
             );
     }

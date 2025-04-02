@@ -1,7 +1,9 @@
+using CogLog.App.Constants;
 using CogLog.App.Contracts.Data.Word;
 using CogLog.Domain;
 using CogLog.UI.Contracts;
 using CogLog.UI.Models.Word;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -24,6 +26,7 @@ public class WordsController(IWordService wordService) : Controller
         return View(vm);
     }
 
+    [Authorize(Roles = AuthConstants.Roles.Administrator)]
     public IActionResult Create()
     {
         Title = "New Word";
@@ -34,6 +37,7 @@ public class WordsController(IWordService wordService) : Controller
         return View();
     }
 
+    [Authorize(Roles = AuthConstants.Roles.Administrator)]
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(WordCreateVm word)
@@ -42,6 +46,7 @@ public class WordsController(IWordService wordService) : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(Roles = AuthConstants.Roles.Administrator)]
     [Route("words/{id:int}/edit", Name = "EditWord")]
     public async Task<IActionResult> Edit(int id)
     {
@@ -65,6 +70,7 @@ public class WordsController(IWordService wordService) : Controller
         return View(vm);
     }
 
+    [Authorize(Roles = AuthConstants.Roles.Administrator)]
     [HttpPost]
     [Route("words/{id:int}/edit", Name = "EditWord")]
     [ValidateAntiForgeryToken]
@@ -78,6 +84,16 @@ public class WordsController(IWordService wordService) : Controller
         var resp = await wordService.UpdateWordAsync(word);
 
         return resp.Success ? RedirectToAction(nameof(Index)) : View(word);
+    }
+
+    [Authorize(Roles = AuthConstants.Roles.Administrator)]
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var response = await wordService.DeleteWordAsync(id);
+
+        return RedirectToAction(response.Success ? nameof(Index) : nameof(Edit));
     }
 
     private void PrepareLanguageDropdown(Language selectedLanguage = Language.English)
