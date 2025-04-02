@@ -1,10 +1,8 @@
 @import "./variables.css";
-@import "./navbar.css";
 @import "./layout.css";
 @import "./forms.css";
 @import "./buttons.css";
-@import "./blocks.css";
-@import "./hierarchy.css";
+@import "./cards.css";
 @import "./pagination.css";
 
 html {
@@ -34,10 +32,10 @@ body {
             linear-gradient(
                     to right,
                     transparent,
-                    transparent 35px,
-                    var(--bg-vert-line) 35px,
-                    var(--bg-vert-line) 36px,
-                    transparent 36px
+                    transparent 47px,
+                    var(--bg-vert-line) 47px,
+                    var(--bg-vert-line) 48px,
+                    transparent 48px
             ),
             linear-gradient(var(--bg-horz-lines) var(--bg-line-size), transparent var(--bg-line-size));
     background-size:
@@ -69,7 +67,7 @@ body::before {
     align-items: center;
     justify-content: space-between;
     color: var(--fg);
-    padding-bottom: var(--bg-space-2);
+    padding: var(--bg-space-2) 0;
 }
 
 main {
