@@ -5,7 +5,7 @@ namespace CogLog.UI.Helpers;
 
 public class ValidIconAttribute : ValidationAttribute
 {
-    protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
+    protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
         var iconService = validationContext.GetService<IHierarchyIconService>();
         var iconName = value as string;

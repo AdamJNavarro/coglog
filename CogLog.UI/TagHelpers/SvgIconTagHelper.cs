@@ -1,3 +1,4 @@
+using CogLog.UI.Contracts;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace CogLog.UI.TagHelpers;
@@ -5,6 +6,13 @@ namespace CogLog.UI.TagHelpers;
 [HtmlTargetElement("svg-icon")]
 public class SvgIconTagHelper : TagHelper
 {
+    private readonly IHierarchyIconService _iconService;
+
+    public SvgIconTagHelper(IHierarchyIconService iconService)
+    {
+        _iconService = iconService;
+    }
+
     [HtmlAttributeName("name")]
     public string IconName { get; set; }
 
@@ -19,13 +27,7 @@ public class SvgIconTagHelper : TagHelper
 
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
-        // If no icon name or invalid icon, suppress output completely
-        // if (string.IsNullOrEmpty(IconName) || !iconService.IsValidIcon(IconName))
-        // {
-        //     output.SuppressOutput();
-        //     return;
-        // }
-
+        var iconToUse = _iconService.GetIcon(IconName);
 
         output.TagName = "svg";
         output.Attributes.SetAttribute("class", CssClass ?? "icon");
@@ -33,7 +35,7 @@ public class SvgIconTagHelper : TagHelper
         output.Attributes.SetAttribute("height", Height);
         output.Attributes.SetAttribute("aria-hidden", "true");
 
-        output.Content.AppendHtml($"<use href=\"/svg/sprite.svg#icon-{IconName}\"></use>");
+        output.Content.AppendHtml($"<use href=\"/svg/sprite.svg#icon-{iconToUse}\"></use>");
 
         // Make self-closing
         output.TagMode = TagMode.StartTagAndEndTag;

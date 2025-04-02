@@ -20,6 +20,7 @@
       <_ContentIncludedByDefault Remove="Views\Shared\Components\BlockClassificationSelector\Default.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Blocks\Create\Classify.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Shared\Components\BlockClassificationCircle\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\FloatingActionButton\Default.cshtml" />
     </ItemGroup>
     
     <ItemGroup>

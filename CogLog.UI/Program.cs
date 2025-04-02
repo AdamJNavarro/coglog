@@ -1,4 +1,3 @@
-using CogLog.App.Constants;
 using CogLog.UI.Contracts;
 using CogLog.UI.Middleware;
 using CogLog.UI.Services;
@@ -14,22 +13,15 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddRouting(opts => opts.LowercaseUrls = true);
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
-{
-    options.MinimumSameSitePolicy = SameSiteMode.None;
-});
-
-builder
-    .Services.AddAuthorizationBuilder()
-    .AddPolicy(
-        AuthConstants.Policies.AdminOnly,
-        policy => policy.RequireRole(AuthConstants.Roles.Administrator)
-    );
+    options.MinimumSameSitePolicy = SameSiteMode.None
+);
 
 builder
     .Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
         options.LoginPath = new PathString("/auth/login");
+        options.AccessDeniedPath = new PathString("/auth/forbidden");
     });
 
 builder.Services.AddTransient<IAuthService, AuthService>();
@@ -48,8 +40,7 @@ builder.Services.AddScoped<ITopicService, TopicService>();
 builder.Services.AddScoped<ITagService, TagService>();
 builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
 
-// builder.Services.AddScoped<IHierarchyIconService, HierarchyIconService>();
-
+builder.Services.AddScoped<IHierarchyIconService, HierarchyIconService>();
 
 var app = builder.Build();
 

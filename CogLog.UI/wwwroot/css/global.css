@@ -6,7 +6,6 @@
 @import "./blocks.css";
 @import "./hierarchy.css";
 @import "./pagination.css";
-@import "./tiles.css";
 
 html {
     box-sizing: border-box;

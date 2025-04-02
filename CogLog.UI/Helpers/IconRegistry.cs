@@ -16,4 +16,9 @@ public static class IconRegistry
     {
         return !string.IsNullOrEmpty(iconName) && AvailableIcons.Contains(iconName);
     }
+
+    public static string GetFallbackIcon(string iconType)
+    {
+        return "settings";
+    }
 }
