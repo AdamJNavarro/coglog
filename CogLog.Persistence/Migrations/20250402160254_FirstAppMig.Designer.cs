@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CogLog.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250327154818_FirstMig")]
-    partial class FirstMig
+    [Migration("20250402160254_FirstAppMig")]
+    partial class FirstAppMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -207,6 +207,46 @@ namespace CogLog.Persistence.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Topics");
+                });
+
+            modelBuilder.Entity("CogLog.Domain.Word", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Definition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExtraInfo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Language")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LearnedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PartOfSpeech")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Spelling")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Words");
                 });
 
             modelBuilder.Entity("CogLog.Domain.Block", b =>

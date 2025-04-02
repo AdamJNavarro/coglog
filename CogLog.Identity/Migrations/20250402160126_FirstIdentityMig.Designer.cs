@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CogLog.Identity.Migrations
 {
     [DbContext(typeof(CogLogIdentityDbContext))]
-    [Migration("20250327154727_FirstIdentityMig")]
+    [Migration("20250402160126_FirstIdentityMig")]
     partial class FirstIdentityMig
     {
         /// <inheritdoc />
@@ -94,15 +94,15 @@ namespace CogLog.Identity.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0e998b10-615b-449a-be4b-9951141c37e8",
+                            ConcurrencyStamp = "a79d3905-bd9b-4260-a6cb-e23052aeb385",
                             Email = "adamjnav@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADAMJNAV@GMAIL.COM",
                             NormalizedUserName = "ADAMJNAV@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENm0Zo2jeGYCemGFOIsouweMr51VQliRj55HI95k5jYBHrS7JMekQpYYLoerv6n2rw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED9srveh7p3D2G+Aby1+E/xCK6z6ndv5Kd3VmCc+LhHvbFYXj16YUB7bhXCPSuJIXQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d111db10-706d-49ac-9b12-2593827e0997",
+                            SecurityStamp = "58b78fe5-4cbf-4cc4-a0a8-d38fcb9f1025",
                             TwoFactorEnabled = false,
                             UserName = "adamjnav@gmail.com"
                         });

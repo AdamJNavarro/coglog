@@ -17,9 +17,10 @@ public static class PersistenceServiceRegistration
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
         );
 
+        services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));
+        services.AddScoped<IWordRepo, WordRepo>();
         services.AddScoped<IBlockRepo, BlockRepo>();
         services.AddScoped<ITopicRepo, TopicRepo>();
-        services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));
         services.AddScoped<ICategoryRepo, CategoryRepo>();
         services.AddScoped<ISubjectRepo, SubjectRepo>();
         services.AddScoped<ITagRepo, TagRepo>();
