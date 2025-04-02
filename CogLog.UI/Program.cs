@@ -27,10 +27,12 @@ builder
 builder.Services.AddTransient<IAuthService, AuthService>();
 
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddHttpClient<IClient, Client>(client =>
     client.BaseAddress = new Uri(builder.Configuration.GetSection("ApiUrl").Value ?? string.Empty)
 );
 builder.Services.AddScoped<IBlockService, BlockService>();
+builder.Services.AddScoped<IWordService, WordService>();
 
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
@@ -75,5 +77,5 @@ app.UseMiddleware<RequestMiddleware>();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(name: "default", pattern: "{controller=Blocks}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Words}/{action=Index}/{id?}");
 app.Run();

@@ -14,6 +14,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<BlockTopic> BlockTopics { get; set; }
     public DbSet<BlockTag> BlockTags { get; set; }
 
+    public DbSet<Word> Words { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
@@ -26,6 +28,20 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         foreach (
             var entry in base
                 .ChangeTracker.Entries<Block>()
+                .Where(q => q.State is EntityState.Added or EntityState.Modified)
+        )
+        {
+            entry.Entity.UpdatedAt = DateTime.Now;
+
+            if (entry.State == EntityState.Added)
+            {
+                entry.Entity.CreatedAt = DateTime.Now;
+            }
+        }
+
+        foreach (
+            var entry in base
+                .ChangeTracker.Entries<Word>()
                 .Where(q => q.State is EntityState.Added or EntityState.Modified)
         )
         {

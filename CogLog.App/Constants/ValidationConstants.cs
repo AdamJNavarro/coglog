@@ -6,4 +6,9 @@ public static class ValidationConstants
     {
         public const int NameMinLength = 2;
     }
+
+    public static class Word
+    {
+        public const int SpellingMinLength = 2;
+    }
 }

@@ -1,0 +1,14 @@
+@model WordPaginationVm
+
+
+<div class="card-list">
+    @foreach (var word in Model.Data)
+    {
+        @await Html.PartialAsync("_WordListItem", word)
+    }
+</div>
+
+@await Component.InvokeAsync("Pagination", new
+{
+    pagination = Model.Pagination,
+})
