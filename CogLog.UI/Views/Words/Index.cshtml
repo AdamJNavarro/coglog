@@ -1,4 +1,15 @@
+@using CogLog.App.Constants
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model WordPaginationVm
+
+
+<div class="page-header">
+    <h1>Vocabulary</h1>
+    @if (User.IsInRole(AuthConstants.Roles.Administrator))
+    {
+        <a asp-action="Create">Add</a>
+    }
+</div>
 
 
 <div class="card-list">

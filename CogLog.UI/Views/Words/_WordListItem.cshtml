@@ -14,11 +14,12 @@
                 {
                     <div class="card-title">@Model.CapitalizedSpelling</div>
                 }
-                <span class="card-language">@Model.LanguageDisplay</span>
+                @* <span class="card-language">@Model.LanguageDisplay</span> *@
             </div>
         </div>
         <div class="card-header-bottom">
             <div class="card-date">@DateOnly.FromDateTime(@Model.LearnedAt).ToString("M/d/yy")</div>
+            <div>•</div>
             <div class="card-subject">@Model.PartOfSpeechDisplay</div>
         </div>
     </div>

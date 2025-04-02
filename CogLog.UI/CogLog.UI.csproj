@@ -47,6 +47,7 @@
       <_ContentIncludedByDefault Remove="Views\Shared\Components\HierarchyFormGroups\Default.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Shared\Components\SubjectSelector\Default.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Shared\Components\SvgIcon\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\svg\sprite.svg" />
     </ItemGroup>
     
     <ItemGroup>
