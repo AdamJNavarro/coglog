@@ -29,4 +29,8 @@
       <ProjectReference Include="..\CogLog.App\CogLog.App.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Word\" />
+    </ItemGroup>
+
 </Project>

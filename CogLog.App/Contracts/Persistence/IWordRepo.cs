@@ -10,4 +10,6 @@ public interface IWordRepo : IBaseRepo<Word>
     Task UpdateWordAsync(Word word);
     Task DeleteWordAsync(Word word);
     Task<PaginationResponse<WordDto>> GetWordsAsync(WordsQueryParameters parameters);
+
+    Task<bool> IsWordUnique(string spelling);
 }

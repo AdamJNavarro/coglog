@@ -66,6 +66,11 @@ public class WordRepo(AppDbContext ctx) : BaseRepo<Word>(ctx), IWordRepo
         };
     }
 
+    public async Task<bool> IsWordUnique(string spelling)
+    {
+        return await _ctx.Words.AnyAsync(w => w.Spelling == spelling) == false;
+    }
+
     private static IQueryable<Word> ApplyFilters(
         IQueryable<Word> query,
         WordsQueryParameters parameters

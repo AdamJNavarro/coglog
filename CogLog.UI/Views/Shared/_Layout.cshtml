@@ -1,5 +1,4 @@
-﻿@using CogLog.App.Constants
-@using Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,51 +9,10 @@
   
 </head>
 <body>
-<div style="display: none;">
-    @await Component.InvokeAsync("SvgIcon")
-</div>
+
 
 <div class="content-container">
     <main role="main">
-        @if (User.IsInRole(AuthConstants.Roles.Administrator))
-        {
-            <header>
-                <nav class="navbar">
-                    <div class="navbar-container">
-                        <div class="navbar-toggle" id="navbar-toggle">
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                            <span class="bar"></span>
-                        </div>
-                        <div class="navbar-menu-container" id="navbar-menu-container">
-
-                            <ul class="navbar-menu" id="navbar-menu">
-                                <li class="navbar-item">
-                                    <a class="navbar-link @(ViewContext.RouteData.Values["controller"].ToString() == "Blocks" ? "active" : "")"
-                                       asp-controller="Blocks" asp-action="Index">Blocks</a>
-                                </li>
-                                <li class="navbar-item">
-                                    <a class="navbar-link @(ViewContext.RouteData.Values["controller"].ToString() == "Categories" ? "active" : "")"
-                                       asp-controller="Categories" asp-action="Index">Categories</a>
-                                </li>
-                                <li class="navbar-item">
-                                    <a class="navbar-link @(ViewContext.RouteData.Values["controller"].ToString() == "Subjects" ? "active" : "")"
-                                       asp-controller="Subjects" asp-action="Index">Subjects</a>
-                                </li>
-                                <li class="navbar-item">
-                                    <a class="navbar-link @(ViewContext.RouteData.Values["controller"].ToString() == "Topics" ? "active" : "")"
-                                       asp-controller="Topics" asp-action="Index">Topics</a>
-                                </li>
-                                <li class="navbar-item">
-                                    <a class="navbar-link @(ViewContext.RouteData.Values["controller"].ToString() == "Tags" ? "active" : "")"
-                                       asp-controller="Tags" asp-action="Index">Tags</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </header>
-        }
         @RenderBody()
     </main>
 </div>

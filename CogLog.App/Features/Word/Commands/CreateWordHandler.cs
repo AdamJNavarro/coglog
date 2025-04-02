@@ -9,7 +9,7 @@ public class CreateWordHandler(IWordRepo wordRepo) : IRequestHandler<CreateWordC
 {
     public async Task<int> Handle(CreateWordCommand request, CancellationToken cancellationToken)
     {
-        var validator = new CreateWordValidator();
+        var validator = new CreateWordValidator(wordRepo);
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (validationResult.Errors.Count != 0)

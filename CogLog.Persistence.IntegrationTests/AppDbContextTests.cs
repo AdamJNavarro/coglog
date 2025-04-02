@@ -18,18 +18,18 @@ public class AppDbContextTests
     }
 
     [Fact]
-    public async void DateAdded_Set_DuringSave()
+    public async void CreatedAt_Set_DuringSave()
     {
-        var block = new Block
+        var word = new Word()
         {
             Id = 1,
-            Title = "Hello World",
-            Content = "Hello World",
+            Spelling = "Hello World",
+            Definition = "Hello World",
         };
 
-        await _dbContext.Blocks.AddAsync(block);
+        await _dbContext.Words.AddAsync(word);
         await _dbContext.SaveChangesAsync();
 
-        block.CreatedAt.ShouldBeOfType<DateTime>();
+        word.CreatedAt.ShouldBeOfType<DateTime>();
     }
 }
