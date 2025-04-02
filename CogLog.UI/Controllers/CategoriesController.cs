@@ -46,11 +46,6 @@ public class CategoriesController(ICategoryService categoryService) : Controller
     {
         var category = await categoryService.GetCategoryDetailsAsync(id);
 
-        if (category == null)
-        {
-            return NotFound();
-        }
-
         Title = "Edit Category";
 
         var vm = new CategoryEditVm()

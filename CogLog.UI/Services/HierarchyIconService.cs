@@ -7,7 +7,16 @@ public class HierarchyIconService : IHierarchyIconService
 {
     public string GetIcon(string iconName)
     {
-        return iconName;
+        if (!string.IsNullOrEmpty(iconName) && IconRegistry.IconExists(iconName))
+            return iconName;
+
+        var normalizedName = iconName.ToLower().Replace(" ", "-");
+        if (IconRegistry.IconExists(normalizedName))
+        {
+            return normalizedName;
+        }
+
+        return IconRegistry.GetFallbackIcon("custom");
     }
 
     public bool IsValidIcon(string iconName)
