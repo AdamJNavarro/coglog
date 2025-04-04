@@ -1,0 +1,139 @@
+:root {
+    --body-font-family: 'Operator Mono', consolas, menlo, monaco, 'Courier New', monospace;
+    --heading-font-family: 'Operator Mono', consolas, menlo, monaco, 'Courier New', monospace;
+
+    --fs-xs: clamp(0.6rem, 0.17vw + 0.76rem, 0.7rem);
+    --fs-sm: clamp(0.85rem, 0.17vw + 0.86rem, 0.94rem);
+    --fs-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
+    --fs-md: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
+    --fs-lg: clamp(1.56rem, 1vw + 1.31rem, 2.11rem);
+    --fs-xl: clamp(1.95rem, 1.56vw + 1.56rem, 3rem);
+
+    --purple-50: #f5f3ff;
+    --purple-100: #eee9fe;
+    --purple-200: #ded6fe;
+    --purple-300: #c6b4fe;
+    --purple-400: #aa8afb;
+    --purple-500: #8f5af8;
+    --purple-600: #8138ef;
+    --purple-700: #7326db;
+    --purple-800: #601fb8;
+    --purple-900: #501c96;
+    --purple-950: #34106d;
+    --purple: var(--purple-500);
+
+    --green-50: #f4f9f5;
+    --green-100: #e5f3e9;
+    --green-200: #cde5d3;
+    --green-300: #a5d0b2;
+    --green-400: #76b288;
+    --green-500: #529566;
+    --green-600: #407951;
+    --green-700: #3b6c4a;
+    --green-800: #2d4e38;
+    --green-900: #27402f;
+    --green-950: #112217;
+    --green: var(--green-500);
+
+    --blue-50: #f2f9fd;
+    --blue-100: #e4f1fa;
+    --blue-200: #c4e3f3;
+    --blue-300: #90cde9;
+    --blue-400: #3ea9d7;
+    --blue-500: #2e9ac9;
+    --blue-600: #1f7caa;
+    --blue-700: #1a638a;
+    --blue-800: #1a5472;
+    --blue-900: #1a4660;
+    --blue-950: #122d3f;
+
+    /* --red: #eb5757; */
+    --red-hue: 23.68;
+    --red-1: oklch(99% 0.05 var(--red-hue));
+    --red-2: oklch(90% 0.1 var(--red-hue));
+    --red-3: oklch(83% 0.221 var(--red-hue));
+    --red-4: oklch(72% 0.221 var(--red-hue));
+    --red-5: oklch(67% 0.221 var(--red-hue));
+    --red-6: oklch(50% 0.221 var(--red-hue));
+    --red-7: oklch(35% 0.221 var(--red-hue));
+    --red-8: oklch(25% 0.221 var(--red-hue));
+    --red-9: oklch(13% 0.221 var(--red-hue));
+    --red-10: oklch(5% 0.221 var(--red-hue));
+    --red: var(--red-6);
+
+    --white: oklch(100% none none);
+    --white-1: oklch(98.7% none none);
+    --white-2: oklch(97% none none);
+    
+    --gray: #f5f5f5;
+
+    --black-hue: none;
+    --blacklch: 0% none var(--black-hue);
+    --black-1: oklch(97% 0 var(--black-hue));
+    --black-2: oklch(90% 0 var(--black-hue));
+    --black-3: oklch(83% 0 var(--black-hue));
+    --black-4: oklch(72% 0 var(--black-hue));
+    --black-5: oklch(67% 0 var(--black-hue));
+    --black-6: oklch(50% 0 var(--black-hue));
+    --black-7: oklch(35% 0 var(--black-hue));
+    --black-8: oklch(23.08% 0 var(--black-hue));
+    --black-9: oklch(13% 0 var(--black-hue));
+    --black-10: oklch(var(--blacklch));
+    --black: var(--black-10);
+    --blackish: var(--black-8);
+
+    --border-radius: 4px;
+    --border-radius-max: 9999px;
+    --border-radius-half: 50%;
+    --border-size: 1px;
+
+    --space-unit: 4px;
+    --space-1: calc(var(--space-unit) * 1);
+    --space-2: calc(var(--space-unit) * 2);
+    --space-3: calc(var(--space-unit) * 3);
+    --space-4: calc(var(--space-unit) * 4);
+    --space-5: calc(var(--space-unit) * 5);
+    --space-6: calc(var(--space-unit) * 6);
+    --space-7: calc(var(--space-unit) * 7);
+    --space-8: calc(var(--space-unit) * 8);
+    --space-9: calc(var(--space-unit) * 9);
+    --space-10: calc(var(--space-unit) * 10);
+    --space-11: calc(var(--space-unit) * 11);
+    --space-12: calc(var(--space-unit) * 12);
+    --space-13: calc(var(--space-unit) * 13);
+    --space-14: calc(var(--space-unit) * 14);
+    --space-15: calc(var(--space-unit) * 15);
+    --space-16: calc(var(--space-unit) * 16);
+
+    --bg-line-size: 1px;
+    --bg-lines-space: 2rem;
+
+    --bg-space-1: calc(var(--bg-lines-space) * 1);
+    --bg-space-2: calc(var(--bg-lines-space) * 2);
+    --bg-space-3: calc(var(--bg-lines-space) * 3);
+
+    /* Color Roles */
+    --bg: var(--white-2);
+    --bg-horz-lines: var(--blue-200);
+    --bg-vert-line: var(--red-2);
+
+    --fg: var(--black);
+
+    --text: var(--black-9);
+    --text-secondary: var(--black-8);
+    --text-subtle: var(--black-7);
+
+    --surface-bg: var(--gray);
+    --surface-text: var(--black-8);
+    --surface-text-secondary: var(--black-7);
+    --surface-text-subtle: var(--black-6);
+
+    --btn-bg: var(--primary);
+    --btn-fg: var(--white);
+
+    /*    Interfaces*/
+    --primary: var(--purple);
+    --danger: var(--red);
+    --success: var(--green);
+    --line: var(--black-2);
+}
