@@ -1,0 +1,28 @@
+@using Vonavulary.App.Constants
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model WordPaginationVm
+
+
+
+
+<div class="page-header">
+    <h1>Vocabulary</h1>
+    @if (User.IsInRole(AuthConstants.Roles.Administrator))
+    {
+        <a asp-action="Create">Add</a>
+    }
+</div>
+
+
+
+<div class="card-list">
+    @foreach (var word in Model.Data)
+    {
+        @await Html.PartialAsync("_WordListItem", word)
+    }
+</div>
+
+@await Component.InvokeAsync("Pagination", new
+{
+    pagination = Model.Pagination,
+})
