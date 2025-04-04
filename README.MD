@@ -1,7 +1,6 @@
-# My Cog Log
+# Vonavulary
 
-A collection of learnings, questions or thoughts to be used during my daily 
-reviews.
+A collection of words I want to add to my vocabulary.
 
 ## Why?
 

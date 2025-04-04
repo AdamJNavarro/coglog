@@ -20,19 +20,11 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish UI
-        run: dotnet publish CogLog.UI -c Release -o "${{env.DOTNET_ROOT}}/ui-app"
+        run: dotnet publish Vonavulary.UI -c Release -o "${{env.DOTNET_ROOT}}/ui-app"
 
-      - name: dotnet publish API
-        run: dotnet publish CogLog.API -c Release -o "${{env.DOTNET_ROOT}}/api-app"
 
       - name: Upload UI artifact
         uses: actions/upload-artifact@v4
         with:
           name: .net-ui-app
           path: ${{env.DOTNET_ROOT}}/ui-app
-
-      - name: Upload API artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: .net-api-app
-          path: ${{env.DOTNET_ROOT}}/api-app
