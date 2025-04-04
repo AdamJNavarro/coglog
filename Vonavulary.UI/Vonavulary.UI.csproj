@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="LocalStorage" Version="2.1.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.3.0" />
+
+        <!--        FROM API-->
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Shared\Hierarchy\_SubjectSelectPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\BlockClassificationSelector\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Blocks\Create\Classify.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\BlockClassificationCircle\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\FloatingActionButton\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Blocks\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Blocks\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Blocks\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Blocks\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Blocks\_BlockListItem.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Categories\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Categories\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Categories\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Categories\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Subjects\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Subjects\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Subjects\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Subjects\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Tags\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Tags\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Tags\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Tags\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Topics\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Topics\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Topics\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Topics\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\BlockFormGroups\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\CategorySelector\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\HierarchyFormGroups\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\SubjectSelector\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\Components\SvgIcon\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\svg\sprite.svg" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Vonavulary.App\Vonavulary.App.csproj" />
+<!--        FROM API-->
+        <ProjectReference Include="..\Vonavulary.Identity\Vonavulary.Identity.csproj" />
+        <ProjectReference Include="..\Vonavulary.Persistence\Vonavulary.Persistence.csproj" />
+    </ItemGroup>
+    
+
+</Project>

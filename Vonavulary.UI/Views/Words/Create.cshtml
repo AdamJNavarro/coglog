@@ -1,0 +1,21 @@
+@model WordCreateVm;
+
+<div class="form-wrapper">
+    <h1 class="form-title">New Word</h1>
+    <form asp-controller="Words" asp-action="Create">
+
+        @await Component.InvokeAsync("WordFormGroups", Model)
+        
+
+        <div class="form-button-group">
+            <input type="submit" value="Create" class="btn"/>
+            <a asp-action="Index" class="btn ghost">Cancel</a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

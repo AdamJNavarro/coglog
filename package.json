@@ -1,21 +1,24 @@
 {
-  "name": "Cog Log",
+  "name": "Vonavulary",
   "version": "1.0.0",
-  "description": "A collection of learnings, thoughts and questions.",
+  "description": "A collection of words.",
   "config": {
-    "APP_EF_ARGS": "--startup-project ./CogLog.API --project ./CogLog.Persistence --context AppDbContext",
-    "ID_EF_ARGS": "--startup-project ./CogLog.API --project ./CogLog.Identity --context CogLogIdentityDbContext"
+    "APP_EF_ARGS": "--startup-project ./Vonavulary.API --project ./Vonavulary.Persistence --context AppDbContext",
+    "ID_EF_ARGS": "--startup-project ./Vonavulary.API --project ./Vonavulary.Identity --context VonavularyIdentityDbContext"
   },
   "scripts": {
     "test": "dotnet build && dotnet test --no-build --verbosity normal",
+    "db:drop": "dotnet ef database drop $npm_package_config_APP_EF_ARGS",
+    "db:app:update": "dotnet ef database update $npm_package_config_APP_EF_ARGS",
     "db:identity:update": "dotnet ef database update $npm_package_config_ID_EF_ARGS",
     "mig:identity:add": "dotnet ef migrations add $npm_package_config_ID_EF_ARGS",
     "mig:identity:remove": "dotnet ef migrations remove $npm_package_config_ID_EF_ARGS",
-    "db:app:update": "dotnet ef database update $npm_package_config_APP_EF_ARGS",
+    "mig:app:script": "dotnet ef migrations script --idempotent $npm_package_config_APP_EF_ARGS",
     "mig:app:add": "dotnet ef migrations add $npm_package_config_APP_EF_ARGS",
     "mig:app:remove": "dotnet ef migrations remove $npm_package_config_APP_EF_ARGS",
-    "client:generate": "dotnet run --project CogLog.ClientGenerator/CogLog.ClientGenerator.csproj",
-    "api:dev": "dotnet run --project CogLog.API/CogLog.API.csproj --launch-profile https"
+    "mig:identity:script": "dotnet ef migrations script --idempotent $npm_package_config_ID_EF_ARGS",
+    "client:generate": "dotnet run --project Vonavulary.ClientGenerator/Vonavulary.ClientGenerator.csproj",
+    "api:dev": "dotnet run --project Vonavulary.API/Vonavulary.API.csproj --launch-profile https"
     
   },
   "author": "Adam Navarro",

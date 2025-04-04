@@ -1,0 +1,131 @@
+@model PaginationVm
+
+@if (Model.Pagination.TotalPages > 1)
+{
+    <nav>
+        <ul class="pagination">
+            @if (Model.Options.ShowPrevNext)
+            {
+                <li class="page-item @(Model.Pagination.HasPrevious ? "" : "disabled")">
+                    @if (Model.Pagination.HasPrevious)
+                    {
+                        <a class="page-link" 
+                           asp-controller="@Model.Options.Controller" 
+                           asp-action="@Model.Options.Action"
+                           asp-all-route-data="@GetRouteData(Model.Pagination.Page - 1)">
+                            ←
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="page-link" aria-disabled="true">←</span>
+                    }
+                </li>
+            }
+
+            @{
+                int startPage = Math.Max(1, Model.Pagination.Page - (Model.Options.MaxDisplayedPages / 2));
+                int endPage = Math.Min(Model.Pagination.TotalPages, startPage + Model.Options.MaxDisplayedPages - 1);
+
+                // Adjust start page if we're near the end
+                if (endPage - startPage + 1 < Model.Options.MaxDisplayedPages && startPage > 1)
+                {
+                    startPage = Math.Max(1, endPage - Model.Options.MaxDisplayedPages + 1);
+                }
+
+                // First page link if not in range
+                if (Model.Options.ShowFirstLast && startPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" 
+                           asp-controller="@Model.Options.Controller" 
+                           asp-action="@Model.Options.Action"
+                           asp-all-route-data="@GetRouteData(1)">←←</a>
+                    </li>
+                    
+                    if (startPage > 2)
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    }
+                }
+
+                // Page numbers
+                for (int i = startPage; i <= endPage; i++)
+                {
+                    <li class="page-item @(i == Model.Pagination.Page ? "active" : "")">
+                        @if (i == Model.Pagination.Page)
+                        {
+                            <span class="page-link">@i</span>
+                        }
+                        else
+                        {
+                            <a class="page-link" 
+                               asp-controller="@Model.Options.Controller" 
+                               asp-action="@Model.Options.Action"
+                               asp-all-route-data="@GetRouteData(i)">@i</a>
+                        }
+                    </li>
+                }
+
+                // Last page link if not in range
+                if (Model.Options.ShowFirstLast && endPage < Model.Pagination.TotalPages)
+                {
+                    if (endPage < Model.Pagination.TotalPages - 1)
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    }
+                    
+                    <li class="page-item">
+                        <a class="page-link" 
+                           asp-controller="@Model.Options.Controller" 
+                           asp-action="@Model.Options.Action"
+                           asp-all-route-data="@GetRouteData(Model.Pagination.TotalPages)">
+                            →→
+                        </a>
+                    </li>
+                }
+            }
+
+            @if (Model.Options.ShowPrevNext)
+            {
+                <li class="page-item @(Model.Pagination.HasNext ? "" : "disabled")">
+                    @if (Model.Pagination.HasNext)
+                    {
+                        <a class="page-link" 
+                           asp-controller="@Model.Options.Controller" 
+                           asp-action="@Model.Options.Action"
+                           asp-all-route-data="@GetRouteData(Model.Pagination.Page + 1)">
+                            →
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="page-link" aria-disabled="true">→</span>
+                    }
+                </li>
+            }
+        </ul>
+    </nav>
+}
+
+@functions {
+    private Dictionary<string, string> GetRouteData(int pageNumber)
+    {
+        var routeData = new Dictionary<string, string>();
+        
+        // Add all existing route values
+        foreach (var kvp in Model.Options.RouteValues)
+        {
+            routeData[kvp.Key] = kvp.Value?.ToString();
+        }
+        
+        // Add or update the page parameter
+        routeData["page"] = pageNumber.ToString();
+        
+        return routeData;
+    }
+}

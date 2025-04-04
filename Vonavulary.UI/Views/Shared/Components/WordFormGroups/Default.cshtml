@@ -1,0 +1,38 @@
+@model WordBaseWriteVm;
+
+<div class="form-group">
+    <label asp-for="LearnedAt" class="form-label">Date Learned</label>
+    <input asp-for="LearnedAt" class="form-control" type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+</div>
+
+<div class="form-group">
+    <label asp-for="Spelling" class="form-label"></label>
+    <input asp-for="Spelling" class="form-control" />
+    <span asp-validation-for="Spelling" class="validation-helper-text"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Definition" class="form-label"></label>
+    <textarea asp-for="Definition" class="form-control"></textarea>
+    <span asp-validation-for="Definition" class="validation-helper-text"></span>
+</div>
+
+<div class="form-group" style="display: none;">
+    <label asp-for="ExtraInfo" class="form-label">Extra Info</label>
+    <textarea asp-for="ExtraInfo" class="form-control"></textarea>
+    <span asp-validation-for="ExtraInfo" class="validation-helper-text"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Language" class="form-label"></label>
+    <select asp-for="Language" asp-items="ViewBag.LanguageOptions" class="form-control">
+    </select>
+    <span asp-validation-for="Language" class="validation-helper-text"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="PartOfSpeech" class="form-label">Part of Speech</label>
+    <select asp-for="PartOfSpeech" asp-items="ViewBag.PartOfSpeechOptions" class="form-control">
+    </select>
+    <span asp-validation-for="PartOfSpeech" class="validation-helper-text"></span>
+</div>
