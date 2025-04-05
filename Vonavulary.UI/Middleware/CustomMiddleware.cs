@@ -100,7 +100,7 @@ public class CustomMiddleware(RequestDelegate next, ILocalStorageService localSt
     private static async Task SignOutAndRedirect(HttpContext httpContext)
     {
         await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        const string path = "/auth/login";
+        const string path = "/";
         httpContext.Response.Redirect(path);
     }
 
