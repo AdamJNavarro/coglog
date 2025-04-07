@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vonavulary.App.Contracts.Data.Word;
 using Vonavulary.App.Features.Word.Commands;
@@ -26,6 +27,7 @@ public class WordsApiController(IMediator mediator) : ControllerBase
         return Ok(data);
     }
 
+    [Authorize(Policy = "ApiPolicy")]
     [HttpPost(Name = "WordCreate")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
@@ -36,6 +38,7 @@ public class WordsApiController(IMediator mediator) : ControllerBase
     }
 
     // PUT
+    [Authorize(Policy = "ApiPolicy")]
     [HttpPut("{id:int}", Name = "WordUpdate")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(400)]
@@ -48,6 +51,7 @@ public class WordsApiController(IMediator mediator) : ControllerBase
     }
 
     // DELETE
+    [Authorize(Policy = "ApiPolicy")]
     [HttpDelete(Name = "WordDelete")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -61,10 +61,10 @@ builder
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero,
-                ValidIssuer = jwtConfig["JwtSettings:Issuer"],
-                ValidAudience = jwtConfig["JwtSettings:Audience"],
+                ValidIssuer = jwtConfig["Issuer"],
+                ValidAudience = jwtConfig["Audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(jwtConfig["JwtSettings:Key"]!)
+                    Encoding.UTF8.GetBytes(jwtConfig["Key"]!)
                 ),
             }
     );

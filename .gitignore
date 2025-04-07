@@ -268,9 +268,12 @@ paket-files/
 __pycache__/
 *.pyc
 
-# Coglog Prod Settings
-CogLog.API/appsettings.Production.json
-CogLog.UI/appsettings.Production.json
+#  Prod Settings
+Vonavulary.API/appsettings.Production.json
+Vonavulary.UI/appsettings.Production.json
 
 # PNPM
 node_modules
+
+# Cursor
+.cursor/
