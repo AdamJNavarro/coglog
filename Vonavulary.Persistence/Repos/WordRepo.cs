@@ -46,9 +46,9 @@ public class WordRepo(AppDbContext ctx) : BaseRepo<Word>(ctx), IWordRepo
         var totalPages = (int)Math.Ceiling(totalItems / (double)parameters.PerPage);
 
         var words = await query
+            .OrderByDescending(b => b.LearnedAt.Date)
             .Skip((parameters.Page - 1) * parameters.PerPage)
             .Take(parameters.PerPage)
-            .OrderByDescending(b => b.LearnedAt.Date)
             .ToListAsync();
 
         var paginationMetadata = new PaginationMetadata()
