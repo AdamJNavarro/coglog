@@ -4,24 +4,23 @@
 <div class="card">
     <div class="card-header">
         <div class="card-header-top">
-            <div class="title-container">
 
                 @if (User.IsInRole(AuthConstants.Roles.Administrator))
                 {
-                    <a asp-action="Edit" asp-route-id="@Model.Id" class="card-title">@Model.CapitalizedSpelling</a>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="card-title">@Model.Spelling</a>
                 }
                 else
                 {
-                    <div class="card-title">@Model.CapitalizedSpelling</div>
+                    <div class="card-title">@Model.Spelling</div>
                 }
-                @* <span class="card-language">@Model.LanguageDisplay</span> *@
-            </div>
+                <div class="card-info-container">
+                    <div>•</div>
+                    <div >@Model.PartOfSpeechDisplay</div>
+                    <div>•</div>
+                    <div >@DateOnly.FromDateTime(@Model.LearnedAt).ToString("M/d/yy")</div>
+                </div>
         </div>
-        <div class="card-header-bottom">
-            <div class="card-date">@DateOnly.FromDateTime(@Model.LearnedAt).ToString("M/d/yy")</div>
-            <div>•</div>
-            <div class="card-subject">@Model.PartOfSpeechDisplay</div>
-        </div>
+      
     </div>
 
     <div class="card-content">
