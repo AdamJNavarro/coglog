@@ -43,12 +43,6 @@
                            asp-all-route-data="@GetRouteData(1)">←←</a>
                     </li>
                     
-                    if (startPage > 2)
-                    {
-                        <li class="page-item disabled">
-                            <span class="page-link">...</span>
-                        </li>
-                    }
                 }
 
                 // Page numbers
@@ -72,12 +66,12 @@
                 // Last page link if not in range
                 if (Model.Options.ShowFirstLast && endPage < Model.Pagination.TotalPages)
                 {
-                    if (endPage < Model.Pagination.TotalPages - 1)
-                    {
-                        <li class="page-item disabled">
-                            <span class="page-link">...</span>
-                        </li>
-                    }
+                    @* if (endPage < Model.Pagination.TotalPages - 1) *@
+                    @* { *@
+                    @*     <li class="page-item disabled"> *@
+                    @*         <span class="page-link">...</span> *@
+                    @*     </li> *@
+                    @* } *@
                     
                     <li class="page-item">
                         <a class="page-link" 

@@ -5,10 +5,9 @@
     align-items: center;
     list-style: none;
     padding: 0;
-    margin: var(--space-9) 0;
+    margin: 0 var(--bg-space-2) 0;
     gap: var(--space-6);
-    line-height: normal;
-    /*background-color: lightcyan;*/
+    height: var(--bg-space-1);
 }
 
 .pagination .page-item {
@@ -19,8 +18,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: var(--space-9);
-    height: var(--space-9);
+    min-width: var(--bg-space-1);
+    height: var(--bg-space-1);
     font-size: var(--fs-base);
     background-color: var(--surface-bg);
     border-radius: var(--border-radius);

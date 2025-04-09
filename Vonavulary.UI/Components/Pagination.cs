@@ -10,8 +10,8 @@ public class Pagination : ViewComponent
         string controller = null,
         string action = null,
         Dictionary<string, object> routeValues = null,
-        int maxDisplayedPages = 5,
-        bool showFirstLast = true,
+        int maxDisplayedPages = 3,
+        bool showFirstLast = false,
         bool showPrevNext = true
     )
     {
