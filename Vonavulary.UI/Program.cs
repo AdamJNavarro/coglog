@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Vonavulary.App;
-using Vonavulary.App.Models.Identity;
 using Vonavulary.Identity;
 using Vonavulary.Persistence;
 using Vonavulary.UI.Contracts;
@@ -36,6 +35,7 @@ builder.Services.AddHttpClient<IClient, Client>(client =>
 
 // AUTH
 var jwtConfig = builder.Configuration.GetSection("JwtSettings");
+
 builder
     .Services.AddAuthentication(options =>
     {

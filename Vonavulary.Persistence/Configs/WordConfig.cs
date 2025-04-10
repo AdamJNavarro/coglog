@@ -12,6 +12,10 @@ public class WordConfig : IEntityTypeConfiguration<Word>
 
         builder.HasIndex(x => x.Spelling).IsUnique();
 
+        builder.Property(x => x.CreatedAt).HasColumnType("timestamptz");
+        builder.Property(x => x.UpdatedAt).HasColumnType("timestamptz");
+        builder.Property(x => x.LearnedAt).HasColumnType("timestamptz");
+
         builder
             .Property(w => w.Language)
             .HasConversion(

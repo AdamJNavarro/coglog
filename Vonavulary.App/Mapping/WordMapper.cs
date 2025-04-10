@@ -30,7 +30,7 @@ public static class WordMapper
     {
         return new Word
         {
-            LearnedAt = request.LearnedAt,
+            LearnedAt = request.LearnedAt.ToUniversalTime(),
             Spelling = request.Spelling,
             Definition = request.Definition,
             ExtraInfo = request.ExtraInfo,
@@ -44,7 +44,7 @@ public static class WordMapper
         return new Word
         {
             Id = request.Id,
-            LearnedAt = request.LearnedAt,
+            LearnedAt = request.LearnedAt.ToUniversalTime(),
             Spelling = request.Spelling,
             Definition = request.Definition,
             ExtraInfo = request.ExtraInfo,

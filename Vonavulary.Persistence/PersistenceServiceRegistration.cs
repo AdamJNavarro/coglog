@@ -14,7 +14,7 @@ public static class PersistenceServiceRegistration
     )
     {
         services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
         );
 
         services.AddScoped(typeof(IBaseRepo<>), typeof(BaseRepo<>));

@@ -27,7 +27,7 @@ public static class IdentityServicesRegistration
         services.AddTransient<IUserService, UserService>();
 
         services.AddDbContext<VonavularyIdentityDbContext>(opts =>
-            opts.UseSqlServer(config.GetConnectionString("DefaultConnection"))
+            opts.UseNpgsql(config.GetConnectionString("DefaultConnection"))
         );
 
         return services;

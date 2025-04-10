@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "A collection of words.",
   "config": {
-    "APP_EF_ARGS": "--startup-project ./Vonavulary.API --project ./Vonavulary.Persistence --context AppDbContext",
-    "ID_EF_ARGS": "--startup-project ./Vonavulary.API --project ./Vonavulary.Identity --context VonavularyIdentityDbContext"
+    "APP_EF_ARGS": "--startup-project ./Vonavulary.UI --project ./Vonavulary.Persistence --context AppDbContext",
+    "ID_EF_ARGS": "--startup-project ./Vonavulary.UI --project ./Vonavulary.Identity --context VonavularyIdentityDbContext"
   },
   "scripts": {
     "test": "dotnet build && dotnet test --no-build --verbosity normal",
@@ -13,10 +13,10 @@
     "db:identity:update": "dotnet ef database update $npm_package_config_ID_EF_ARGS",
     "mig:identity:add": "dotnet ef migrations add $npm_package_config_ID_EF_ARGS",
     "mig:identity:remove": "dotnet ef migrations remove $npm_package_config_ID_EF_ARGS",
-    "mig:app:script": "dotnet ef migrations script --idempotent $npm_package_config_APP_EF_ARGS",
+    "mig:app:script": "dotnet ef migrations script --idempotent $npm_package_config_APP_EF_ARGS | pbcopy",
     "mig:app:add": "dotnet ef migrations add $npm_package_config_APP_EF_ARGS",
     "mig:app:remove": "dotnet ef migrations remove $npm_package_config_APP_EF_ARGS",
-    "mig:identity:script": "dotnet ef migrations script --idempotent $npm_package_config_ID_EF_ARGS",
+    "mig:identity:script": "dotnet ef migrations script --idempotent $npm_package_config_ID_EF_ARGS | pbcopy",
     "client:generate": "dotnet run --project Vonavulary.ClientGenerator/Vonavulary.ClientGenerator.csproj",
     "ui:dev": "dotnet run --project Vonavulary.UI/Vonavulary.UI.csproj --launch-profile https & sleep 5 && open https://localhost:7057"
   },

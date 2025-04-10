@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -15,16 +16,16 @@ namespace Vonavulary.Persistence.Migrations
                 name: "Words",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LearnedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Spelling = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Definition = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExtraInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PartOfSpeech = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CreatedAt = table.Column<DateTime>(type: "timestamptz", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamptz", nullable: true),
+                    LearnedAt = table.Column<DateTime>(type: "timestamptz", nullable: false),
+                    Spelling = table.Column<string>(type: "text", nullable: false),
+                    Definition = table.Column<string>(type: "text", nullable: false),
+                    ExtraInfo = table.Column<string>(type: "text", nullable: true),
+                    Language = table.Column<string>(type: "text", nullable: false),
+                    PartOfSpeech = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
