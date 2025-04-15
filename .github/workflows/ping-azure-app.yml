@@ -1,11 +1,11 @@
 name: Ping Azure App
 on:
   schedule:
-    - cron: '0/19 7-15 * * 1-5'
+    - cron: "0/18 7-15 * * 1-5"
 jobs:
   ping_app:
     runs-on: ubuntu-latest
     steps:
       - name: Run curl command
         run: |
-          curl https://adamjnav-coglog.azurewebsites.net/
+          curl https://vonavulary.azurewebsites.net/
