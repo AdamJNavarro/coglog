@@ -8,6 +8,7 @@ public class WordConfig : IEntityTypeConfiguration<Word>
 {
     public void Configure(EntityTypeBuilder<Word> builder)
     {
+        builder.Property(b => b.Id).UseIdentityAlwaysColumn().HasIdentityOptions(startValue: 280);
         builder.HasIndex(x => x.Spelling).IsUnique();
 
         builder.Property(x => x.CreatedAt).HasColumnType("timestamptz");
