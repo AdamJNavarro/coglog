@@ -222,6 +222,9 @@ UpgradeLog*.htm
 *.mdf
 *.ldf
 
+# Production settings
+Vonavulary.UI/appsettings.Production.json
+
 # Business Intelligence projects
 *.rdl.data
 *.bim.layout
@@ -273,7 +276,7 @@ Vonavulary.API/appsettings.Production.json
 Vonavulary.UI/appsettings.Production.json
 
 # PNPM
-node_modules
+node_modules/
 
 # Cursor
 .cursor/
