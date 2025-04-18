@@ -37,6 +37,7 @@ builder.Services.AddHttpClient<IClient, Client>(client =>
 
 // AUTH
 var jwtConfig = builder.Configuration.GetSection("JwtSettings");
+var jwtKey = jwtConfig["Key"];
 
 builder
     .Services.AddAuthentication(options =>
@@ -65,9 +66,7 @@ builder
                 ClockSkew = TimeSpan.Zero,
                 ValidIssuer = jwtConfig["Issuer"],
                 ValidAudience = jwtConfig["Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(jwtConfig["Key"]!)
-                ),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey ?? throw new InvalidOperationException("JWT Key is not configured"))),
             }
     );
 

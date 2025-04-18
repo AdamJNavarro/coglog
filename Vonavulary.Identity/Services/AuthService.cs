@@ -1,9 +1,11 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+
 using Vonavulary.App.Contracts.Identity;
 using Vonavulary.App.Exceptions;
 using Vonavulary.App.Models.Identity;
@@ -92,9 +94,7 @@ public class AuthService(
             .Union(userClaims)
             .Union(roleClaims);
 
-        var symmetricSecurityKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(_jwtSettings.Key)
-        );
+        var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
 
         var signingCredentials = new SigningCredentials(
             symmetricSecurityKey,
