@@ -1,0 +1,36 @@
+name: Deploy UI to Azure
+
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    runs-on: windows-latest
+    environment:
+      name: "Production"
+      url: ${{ steps.deploy-ui-app.outputs.webapp-url }}
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-ui-app
+          github-token: ${{ secrets.GH_PAT }}
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A6AEA10707DD43B49F6399863D6A953C }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6B8C489AC4AE40ABB919E2EE40DFF224 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_09EF1AC56F4B46B8A5378F4706EC0FDD }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: "vonavulary"
+          slot-name: "Production"
+          package: .

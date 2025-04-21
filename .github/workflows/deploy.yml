@@ -1,4 +1,4 @@
-name: Build, Publish and Deploy
+name: Deploy to Azure
 
 on:
   workflow_dispatch:
@@ -6,8 +6,8 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'README.MD'
-    
+      - "README.MD"
+
 permissions:
   contents: read
   id-token: write
@@ -15,4 +15,8 @@ permissions:
 jobs:
   build-and-publish:
     uses: ./.github/workflows/build-and-publish.yml
+    secrets: inherit
+  deploy-ui:
+    uses: ./.github/workflows/deploy-ui.yml
+    needs: build-and-publish
     secrets: inherit
