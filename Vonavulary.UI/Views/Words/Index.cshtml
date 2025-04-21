@@ -1,12 +1,12 @@
 @using Vonavulary.App.Constants
-@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model WordPaginationVm
 
 
 
 
 <div class="page-header">
-    <h1>Vonavulary</h1>
+    <h1 style="background: url(https://s2.svgbox.net/pen-brushes.svg?ic=brush-5&color=c6b4fe);margin: -2px -6px;
+        padding:  2px  6px;">Vonavulary</h1>
     @if (User.IsInRole(AuthConstants.Roles.Administrator))
     {
         <a asp-action="Create">Add</a>
