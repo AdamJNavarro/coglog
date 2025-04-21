@@ -31,10 +31,10 @@ body {
   background-image: linear-gradient(
       to right,
       transparent,
-      transparent 47px,
-      var(--bg-vert-line) 47px,
-      var(--bg-vert-line) 48px,
-      transparent 48px
+      transparent 41px,
+      var(--bg-vert-line) 41px,
+      var(--bg-vert-line) 42px,
+      transparent 42px
     ),
     linear-gradient(
       var(--bg-horz-lines) var(--bg-line-size),
@@ -89,23 +89,8 @@ a:hover {
 }
 
 @media screen and (max-width: 768px) {
-  body {
-    background-image: linear-gradient(
-        to right,
-        transparent,
-        transparent 24px,
-        var(--bg-vert-line) 24px,
-        var(--bg-vert-line) 25px,
-        transparent 25px
-      ),
-      linear-gradient(
-        var(--bg-horz-lines) var(--bg-line-size),
-        transparent var(--bg-line-size)
-      );
-  }
-
   main {
     padding: 0 var(--space-7);
-    padding-left: calc(25px + var(--space-4));
+    padding-left: calc(40px + var(--space-4));
   }
 }
