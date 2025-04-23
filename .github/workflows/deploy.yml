@@ -2,11 +2,11 @@ name: Deploy to Azure
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - "README.MD"
+  # push:
+  #   branches:
+  #     - main
+  #   paths-ignore:
+  #     - "README.MD"
 
 permissions:
   contents: read
