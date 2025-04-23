@@ -9,9 +9,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Nswag.AspNetCore" Version="14.2.0" />
-      <PackageReference Include="Nswag.CodeGeneration.CSharp" Version="14.2.0" />
-      <PackageReference Include="NSwag.MSBuild" Version="14.2.0">
+      <PackageReference Include="Nswag.AspNetCore" Version="14.3.0" />
+      <PackageReference Include="Nswag.CodeGeneration.CSharp" Version="14.3.0" />
+      <PackageReference Include="NSwag.MSBuild" Version="14.3.0">
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         <PrivateAssets>all</PrivateAssets>
       </PackageReference>

@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Vonavulary.Domain;
-using Vonavulary.Domain.Shared;
 
 namespace Vonavulary.Persistence;
 
