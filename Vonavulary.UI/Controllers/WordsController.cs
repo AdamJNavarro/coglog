@@ -1,7 +1,9 @@
 using System.Diagnostics;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+
 using Vonavulary.App.Constants;
 using Vonavulary.App.Contracts.Data.Word;
 using Vonavulary.Domain;
@@ -18,7 +20,7 @@ public class WordsController(IWordService wordService) : Controller
 
     public async Task<IActionResult> Index([FromQuery] WordsQueryParameters? parameters)
     {
-        Title = "Words";
+        Title = "Vonavulary";
         parameters ??= new WordsQueryParameters();
 
         var data = await wordService.GetWordsAsync(parameters);
