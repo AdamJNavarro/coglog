@@ -7,6 +7,7 @@
     "ID_EF_ARGS": "--startup-project ./Vonavulary.UI --project ./Vonavulary.Identity --context VonavularyIdentityDbContext"
   },
   "scripts": {
+    "check:pkgs": "dotnet list package --outdated",
     "test": "dotnet build && dotnet test --no-build --verbosity normal",
     "db:drop": "dotnet ef database drop $npm_package_config_APP_EF_ARGS",
     "db:app:update": "dotnet ef database update $npm_package_config_APP_EF_ARGS",
