@@ -1,40 +1,40 @@
 .pagination {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin: 0 var(--bg-space-2) 0;
-    gap: var(--space-6);
-    height: var(--bg-space-1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0 var(--bg-space-2) 0;
+  gap: var(--space-4);
+  height: var(--bg-space-1);
 }
 
 .pagination .page-item {
-    margin: 0;
+  margin: 0;
 }
 
 .pagination .page-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: var(--bg-space-1);
-    height: var(--bg-space-1);
-    font-size: var(--fs-base);
-    background-color: var(--surface-bg);
-    border-radius: var(--border-radius);
-    border: var(--border-size) solid var(--line);
-    color: var(--blue-600);
-    transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--bg-space-1);
+  height: var(--bg-space-1);
+  font-size: var(--fs-base);
+  background-color: var(--surface-bg);
+  border-radius: var(--border-radius);
+  border: var(--border-size) solid var(--line);
+  color: var(--blue-600);
+  transition: all 0.2s ease-in-out;
 }
 
 .pagination .page-item.active .page-link {
-    background-color: var(--blue-600);
-    border-color: var(--blue-600);
-    color: var(--white);
-    z-index: 1;
+  background-color: var(--blue-600);
+  border-color: var(--blue-600);
+  color: var(--white);
+  z-index: 1;
 }
 
 .pagination .page-item.disabled .page-link {
-    pointer-events: none;
+  pointer-events: none;
 }

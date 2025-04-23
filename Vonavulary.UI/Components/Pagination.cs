@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+
 using Vonavulary.UI.Models.Shared.Pagination;
 
 namespace Vonavulary.UI.Components;
@@ -10,7 +11,7 @@ public class Pagination : ViewComponent
         string controller = null,
         string action = null,
         Dictionary<string, object> routeValues = null,
-        int maxDisplayedPages = 3,
+        int maxDisplayedPages = 1,
         bool showFirstLast = false,
         bool showPrevNext = true
     )
