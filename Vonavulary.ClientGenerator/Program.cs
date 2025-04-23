@@ -1,18 +1,16 @@
 ﻿using System.Runtime.CompilerServices;
-using System.Text.Json.Serialization;
+
 using NJsonSchema.CodeGeneration.CSharp;
+
 using NSwag;
 using NSwag.CodeGeneration.CSharp;
 
-System.Net.WebClient wclient = new System.Net.WebClient();
-
+using var httpClient = new HttpClient();
 var document = await OpenApiDocument.FromJsonAsync(
-    wclient.DownloadString("https://localhost:7195/swagger/v1/swagger.json")
+    await httpClient.GetStringAsync("https://localhost:7057/swagger/v1/swagger.json")
 );
 
 Console.WriteLine("Generating CSharp Client");
-
-wclient.Dispose();
 
 var settings = new CSharpClientGeneratorSettings
 {
@@ -58,7 +56,10 @@ internal static class ProjectSourcePath
 
     private static string Calculate([CallerFilePath] string? path = null)
     {
-        // Assert(path!.EndsWith(myRelativePath, StringComparison.Ordinal));
-        return path.Substring(0, path.Length - MyRelativePath.Length);
+        if (path is null)
+        {
+            throw new InvalidOperationException("Could not determine the source path.");
+        }
+        return path[..^MyRelativePath.Length];
     }
 }
