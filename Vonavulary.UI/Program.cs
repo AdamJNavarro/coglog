@@ -1,4 +1,5 @@
 using System.Text;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,6 +14,7 @@ using Vonavulary.UI.Middleware;
 using Vonavulary.UI.Services;
 using Vonavulary.UI.Services.Base;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // FROM API
@@ -24,10 +26,10 @@ builder.Services.AddCors(opts =>
     opts.AddPolicy("All", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader())
 );
 
-// CUSTOM.
-builder.Services.AddTransient<IAuthService, AuthService>();
-builder.Services.AddScoped<IWordService, WordService>();
-builder.Services.AddSingleton<ILocalStorageService, LocalStorageService>();
+
+builder.Services.TryAddTransient<IAuthService, AuthService>();
+builder.Services.TryAddScoped<IWordService, WordService>();
+builder.Services.TryAddSingleton<ILocalStorageService, LocalStorageService>();
 
 // HTTP
 builder.Services.AddHttpContextAccessor();
@@ -96,14 +98,19 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 builder.Services.AddRouting(opts => opts.LowercaseUrls = true);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddEndpointsApiExplorer(); // API
-builder.Services.AddSwaggerGen(opts =>
-    opts.DocInclusionPredicate(
-        (docName, apiDesc) =>
-            apiDesc.RelativePath != null
-            && apiDesc.RelativePath.StartsWith("api", StringComparison.InvariantCultureIgnoreCase)
-    )
-); // API
+
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen(opts =>
+        opts.DocInclusionPredicate(
+            (docName, apiDesc) =>
+                apiDesc.RelativePath != null
+                && apiDesc.RelativePath.StartsWith("api", StringComparison.InvariantCultureIgnoreCase)
+        )
+    );
+}
 
 var app = builder.Build();
 
@@ -125,15 +132,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseCookiePolicy();
-app.UseAuthentication();
-
 app.UseRouting();
-
-app.UseMiddleware<CustomMiddleware>();
-
+app.UseCors("All");
+app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseCors("All"); //  API
+app.UseMiddleware<CustomMiddleware>();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Words}/{action=Index}/{id?}");
 
